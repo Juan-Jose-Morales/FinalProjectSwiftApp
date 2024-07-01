@@ -13,6 +13,7 @@
 		90E79ED22C2B39C400133583 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E79ED12C2B39C400133583 /* ContentView.swift */; };
 		90E79ED42C2B39C600133583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED32C2B39C600133583 /* Assets.xcassets */; };
 		90E79ED72C2B39C600133583 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED62C2B39C600133583 /* Preview Assets.xcassets */; };
+		A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D9E5E42C330F2E0039843A /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		90E79ED12C2B39C400133583 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		90E79ED32C2B39C600133583 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90E79ED62C2B39C600133583 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A9D9E5E42C330F2E0039843A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +43,7 @@
 			children = (
 				90E79ED12C2B39C400133583 /* ContentView.swift */,
 				9040AE772C32F60900D550AD /* RegisterView.swift */,
+				A9D9E5E42C330F2E0039843A /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 				9040AE782C32F60900D550AD /* RegisterView.swift in Sources */,
 				90E79ED22C2B39C400133583 /* ContentView.swift in Sources */,
 				90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */,
+				A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */,
 				9040AE7A2C32F6A200D550AD /* CustomTexFields.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
