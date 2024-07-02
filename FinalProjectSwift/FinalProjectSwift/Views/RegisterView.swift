@@ -8,29 +8,32 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @State private var username: String = ""
-    @State private var password: String = ""
-    @State private var confirmPassword: String = ""
+    
+   @StateObject private var viewModel = RegisterViewModel()
     
     var body: some View {
-        
         ScrollView {
             VStack() {
-                
                 CustomLogo(widht: 240, height: 220)
                 Spacer().frame(height: 50)
                 
-                CustomTextField(imageName: "person" , placeholder: "Usuario", text: $username)
+                CustomTextField(imageName: "person" , placeholder: "Usuario", text: $viewModel.username)
                     .padding(.bottom, 36)
-                CustomTextField(imageName: "lock" , placeholder: "Contraseña", text: $password, isSecure: true)
+                CustomTextField(imageName: "lock" , placeholder: "Contraseña", text: $viewModel.password, isSecure: true)
                     .padding(.bottom, 36)
-                CustomTextField(imageName: "lock", placeholder: "Repetir Contraseña", text: $confirmPassword, isSecure: true)
+                CustomTextField(imageName: "lock", placeholder: "Repetir Contraseña", text: $viewModel.confirmPassword, isSecure: true)
                     .padding(.bottom, 36)
                 
                 CustomButton(title: "Registarse") {
-                    
+                    viewModel.register()
                 }
                 .padding(.bottom, 55)
+                .alert(isPresented: $viewModel.showAlert) {
+                    Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error Desconocido"), dismissButton: .default(Text("Aceptar")))
+                }
+                .alert(isPresented: $viewModel.showSuccessAlert){
+                    Alert(title: Text("Exito"), message: Text("Usuario registrado correctamente"), dismissButton: .default(Text("Aceptar")))
+                }
                 HStack {
                     Text("¿Ya tienes cuenta?")
                         .foregroundColor(.black)
