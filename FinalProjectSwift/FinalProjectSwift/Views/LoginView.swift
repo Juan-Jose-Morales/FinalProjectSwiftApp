@@ -20,11 +20,11 @@ struct LoginView: View {
                 
                 CustomTextField(imageName: "person" , placeholder: "Usuario", text: $loginUsername)
                     .padding(.bottom, 36)
-                SecureFields(title: "Contraseña", binding: $loginPassword, imageName: "lock")
+                SecureFields(title: "Contraseña", text: $loginPassword, imageName: "lock")
                     .padding(.bottom, 36)
-                byometricButton(action: {
+                BiometricButton(action: {
                     
-                }, imageName: "facemask")
+                }, imageName: "person.fill.viewfinder")
                 HStack{
                     CheckBoxView(checked: $isChecked)
                     Text("Mantener Sesión Iniciada")
