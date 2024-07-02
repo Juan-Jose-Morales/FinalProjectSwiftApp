@@ -50,7 +50,9 @@ struct LoginView: View {
         .padding(.horizontal, 16)
     }
 }
-
-#Preview {
-    LoginView()
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView()
+    }
 }
+
