@@ -17,15 +17,11 @@ struct CustomButton: View {
         Button(action: action) {
             Text(title)
                 .foregroundColor(.black)
-                .frame(maxWidth: .infinity)
-                .padding()
+                .frame(width: 300, height: 43)
                 .background(RoundedRectangle(cornerRadius: 15)
                     .fill(Color("Blue"))
                     .shadow(color: Color.black.opacity(0.2), radius: 15, x: 0, y: 15))
-            
-            
         }
-        .padding(.horizontal, 16)
     }
 }
 
@@ -42,13 +38,11 @@ struct BiometricButton: View {
                     .foregroundColor(.black)
                     .padding(.leading, 8)
                 Text("Inicia Sesion con Biometria")
-                    .foregroundColor(.black)
             }
-            .frame(height: 50)
+            .frame(width: 300, height: 43)
             .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.black, lineWidth: 1)
-                .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 4))
-            .padding(.horizontal, 16)
+                .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 15))
         }
     }
 }

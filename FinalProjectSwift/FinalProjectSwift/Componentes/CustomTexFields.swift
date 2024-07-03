@@ -22,19 +22,14 @@ struct CustomTextField: View {
                 .foregroundColor(.black)
                 .padding(.leading, 8)
 
-            if isSecure {
-                SecureField(placeholder, text: $text)
-                    .padding()
-            } else {
                 TextField(placeholder, text: $text)
                     .padding()
-            }
+            
         }
-        .frame(height: 50)
+        .frame(width: 300, height: 43)
         .background(RoundedRectangle(cornerRadius: 15)
             .stroke(Color.black, lineWidth: 1)
-            .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 4))
-        .padding(.horizontal, 16)
+            .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 15))
     }
 }
 struct SecureFields: View {
@@ -67,11 +62,10 @@ struct SecureFields: View {
                     .padding(.horizontal, 8)
             }
         }
-        .frame(height: 50)
+        .frame(width: 300, height: 43)
         .background(RoundedRectangle(cornerRadius: 15)
             .stroke(Color.black, lineWidth: 1)
-            .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 4))
-        .padding(.horizontal, 16)
+            .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 15))
     }
 }
 struct CustomLogo: View {

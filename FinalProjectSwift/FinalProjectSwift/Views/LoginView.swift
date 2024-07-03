@@ -31,23 +31,28 @@ struct LoginView: View {
                 } .padding()
                 CustomButton(title: "Iniciar Sesión") {
                     
-                }.padding(.bottom, 55)
-                HStack {
-                    Text("¿No tienes Cuenta?")
-                        .foregroundColor(.black)
-                    Button(action: {
-                        
-                    }) {
-                        Text("Regístrate")
-                            .foregroundColor(Color("Blue"))
-                    }
                 }
+                
+                .padding(.bottom, 55)
+               navigateToRegister()
             }
             .padding(.horizontal, 16)
             .padding(.bottom,30)
             .frame(maxWidth: .infinity, alignment: .center)
         }
         .padding(.horizontal, 16)
+    }
+    private func navigateToRegister ()  -> some View {
+        HStack {
+            Text("¿No tienes Cuenta?")
+                .foregroundColor(.black)
+            Button(action: {
+                
+            }) {
+                Text("Regístrate")
+                    .foregroundColor(Color("Blue"))
+            }
+        }
     }
 }
 struct LoginView_Previews: PreviewProvider {

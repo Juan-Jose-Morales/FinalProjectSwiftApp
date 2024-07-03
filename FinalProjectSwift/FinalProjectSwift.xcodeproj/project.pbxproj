@@ -102,6 +102,7 @@
 		9040AEA42C345F8700D550AD /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				90E79ED52C2B39C600133583 /* Preview Content */,
 				90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */,
 				9040AE762C32F5D100D550AD /* Resources */,
 			);
@@ -132,7 +133,6 @@
 				9040AE742C32F5B900D550AD /* Data */,
 				9040AE732C32F5AF00D550AD /* ViewModels */,
 				9040AE722C32F5A100D550AD /* Views */,
-				90E79ED52C2B39C600133583 /* Preview Content */,
 				9040AEA42C345F8700D550AD /* Common */,
 			);
 			path = FinalProjectSwift;

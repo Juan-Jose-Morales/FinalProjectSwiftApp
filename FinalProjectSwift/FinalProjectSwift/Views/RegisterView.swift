@@ -19,9 +19,9 @@ struct RegisterView: View {
                 
                 CustomTextField(imageName: "person" , placeholder: "Usuario", text: $viewModel.username)
                     .padding(.bottom, 36)
-                CustomTextField(imageName: "lock" , placeholder: "Contraseña", text: $viewModel.password, isSecure: true)
+                SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "lock")
                     .padding(.bottom, 36)
-                CustomTextField(imageName: "lock", placeholder: "Repetir Contraseña", text: $viewModel.confirmPassword, isSecure: true)
+                SecureFields(title: "Repetir Contraseña", text: $viewModel.confirmPassword, imageName: "lock")
                     .padding(.bottom, 36)
                 
                 CustomButton(title: "Registarse") {
