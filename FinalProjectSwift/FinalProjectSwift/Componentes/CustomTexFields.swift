@@ -13,7 +13,7 @@ struct CustomTextField: View {
     var placeholder: String
     @Binding var text: String
     var isSecure: Bool = false
-
+    
     var body: some View {
         HStack {
             Image(systemName: imageName)
@@ -21,10 +21,11 @@ struct CustomTextField: View {
                 .frame(width: 20, height: 20)
                 .foregroundColor(.black)
                 .padding(.leading, 8)
-
-                TextField(placeholder, text: $text)
-                    .padding()
             
+            TextField(placeholder, text: $text)
+                .padding()
+            
+            Spacer()
         }
         .frame(width: 300, height: 43)
         .background(RoundedRectangle(cornerRadius: 15)
@@ -37,7 +38,7 @@ struct SecureFields: View {
     @Binding var text: String
     @State private var visible = false
     var imageName: String
-
+    
     var body: some View {
         HStack {
             Image(systemName: imageName)
@@ -45,7 +46,7 @@ struct SecureFields: View {
                 .frame(width: 20, height: 20)
                 .foregroundColor(.black)
                 .padding(.leading, 8)
-
+            
             if self.visible {
                 TextField(title, text: $text)
                     .padding()
@@ -53,7 +54,7 @@ struct SecureFields: View {
                 SecureField(title, text: $text)
                     .padding()
             }
-
+            
             Button(action: {
                 self.visible.toggle()
             }) {
@@ -69,13 +70,13 @@ struct SecureFields: View {
     }
 }
 struct CustomLogo: View {
-    var widht: CGFloat
+    var width: CGFloat
     var height: CGFloat
     var body: some View {
         VStack{
             Image("appLogo")
                 .resizable()
-                .frame(width: widht, height: height)
+                .frame(width: width, height: height)
                 .padding(.top, 50)
                 .scaledToFit()
         }

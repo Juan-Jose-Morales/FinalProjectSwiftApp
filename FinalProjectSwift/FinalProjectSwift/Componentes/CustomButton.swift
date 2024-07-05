@@ -20,7 +20,7 @@ struct CustomButton: View {
                 .frame(width: 300, height: 43)
                 .background(RoundedRectangle(cornerRadius: 15)
                     .fill(Color("Blue"))
-                    .shadow(color: Color.black.opacity(0.2), radius: 15, x: 0, y: 15))
+                    .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10))
         }
     }
 }
@@ -38,23 +38,15 @@ struct BiometricButton: View {
                     .foregroundColor(.black)
                     .padding(.leading, 8)
                 Text("Inicia Sesion con Biometria")
+                    .foregroundColor(.black)
+                    .padding(.leading, 15)
+                Spacer()
             }
             .frame(width: 300, height: 43)
             .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.black, lineWidth: 1)
-                .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 15))
+                .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 10))
         }
     }
 }
 
-struct CheckBoxView: View {
-    @Binding var checked: Bool
-
-    var body: some View {
-        Image(systemName: checked ? "checkmark.square.fill" : "square")
-            .foregroundColor(checked ? Color(UIColor.systemBlue) : Color.secondary)
-            .onTapGesture {
-                self.checked.toggle()
-            }
-    }
-}

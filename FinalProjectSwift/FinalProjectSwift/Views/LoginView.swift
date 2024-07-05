@@ -8,56 +8,71 @@
 import SwiftUI
 
 struct LoginView: View {
+    @StateObject private var viewModel = LoginViewModel()
     
-    @State private var loginUsername: String = ""
-    @State private var loginPassword: String = ""
-    @State private var isChecked = false
     var body: some View {
-        ScrollView{
-            VStack(){
-                CustomLogo(widht: 240, height: 220)
-                Spacer().frame(height: 50)
-                
-                CustomTextField(imageName: "person" , placeholder: "Usuario", text: $loginUsername)
-                    .padding(.bottom, 36)
-                SecureFields(title: "Contraseña", text: $loginPassword, imageName: "lock")
-                    .padding(.bottom, 36)
-                BiometricButton(action: {
+        NavigationView {
+            ScrollView {
+                VStack {
+                    CustomLogo(width: 240, height: 220)
+                        .padding(.top, 50)
+                    Spacer().frame(height: 45)
                     
-                }, imageName: "person.fill.viewfinder")
-                HStack{
-                    CheckBoxView(checked: $isChecked)
-                    Text("Mantener Sesión Iniciada")
-                } .padding()
-                CustomButton(title: "Iniciar Sesión") {
+                    CustomTextField(imageName: "person", placeholder: "Usuario", text: $viewModel.username)
+                        .padding(.bottom, 36)
                     
+                    SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "lock")
+                        .padding(.bottom, 36)
+                    
+                    BiometricButton(action: {
+                        
+                    }, imageName: "person.fill.viewfinder")
+                    .padding(.bottom, 36)
+                    
+                    CustomButton(title: "Iniciar Sesión") {
+                        viewModel.login()
+                    }
+                    .padding(.bottom, 55)
+                    
+                    navigateToRegister()
                 }
                 
-                .padding(.bottom, 55)
-               navigateToRegister()
+                Spacer()
             }
             .padding(.horizontal, 16)
-            .padding(.bottom,30)
-            .frame(maxWidth: .infinity, alignment: .center)
+            .frame(maxWidth: .infinity)
         }
-        .padding(.horizontal, 16)
+        .background(Color.white)
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarHidden(true)
+        .alert(isPresented: $viewModel.showAlert, content: alert)
     }
-    private func navigateToRegister ()  -> some View {
+    
+    private func alert() -> Alert {
+        Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: {
+            viewModel.resetAlerts()
+        }))
+    }
+    
+    private func navigateToRegister() -> some View {
         HStack {
-            Text("¿No tienes Cuenta?")
+            Text("¿No tienes cuenta?")
                 .foregroundColor(.black)
-            Button(action: {
-                
-            }) {
+            NavigationLink(destination: RegisterView()) {
                 Text("Regístrate")
                     .foregroundColor(Color("Blue"))
             }
         }
     }
 }
+
+
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
     }
 }
+
+
+
 

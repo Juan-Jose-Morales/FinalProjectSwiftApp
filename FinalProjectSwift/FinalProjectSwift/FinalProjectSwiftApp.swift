@@ -11,7 +11,10 @@ import SwiftUI
 struct FinalProjectSwiftApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            NavigationStack {
+                LoginView()
+                    .environmentObject(SessionManager())
+            }
         }
     }
 }
