@@ -14,7 +14,7 @@ class LoginViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var showAlert: Bool = false
     @Published var isLoginSuccessful: Bool = false
-    @Published var authToken: String?
+    @Published var authToken: String? 
 
     private var userService: UserService
 
@@ -23,6 +23,7 @@ class LoginViewModel: ObservableObject {
     }
 
     func login() {
+        
         guard !username.isEmpty, !password.isEmpty else {
             self.errorMessage = "Rellena todos los campos"
             self.showAlert = true
@@ -32,8 +33,8 @@ class LoginViewModel: ObservableObject {
         userService.login(username: username, password: password) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let userResponse):
-                    self?.handleLoggedInUser(userResponse.user)
+                case .success(let user):
+                    self?.handleLoggedInUser(user)
                 case .failure(let error):
                     self?.errorMessage = "Error al iniciar sesión: \(error.localizedDescription)"
                     self?.showAlert = true
@@ -43,13 +44,18 @@ class LoginViewModel: ObservableObject {
     }
 
     private func handleLoggedInUser(_ user: User) {
+        
         if let token = user.token {
             self.authToken = token
             UserDefaults.standard.set(token, forKey: "AuthToken")
+        } else {
+            self.errorMessage = "Error: Token missing in response."
+            self.showAlert = true
         }
 
         self.isLoginSuccessful = true
     }
+
 
     func resetAlerts() {
         self.errorMessage = nil

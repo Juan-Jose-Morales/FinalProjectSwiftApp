@@ -28,6 +28,7 @@ struct RegisterView: View {
                         viewModel.register()
                     }
                     .padding(.bottom, 55)
+                    navigateToLogin()
                     Spacer()
                 }
                 .padding(.horizontal, 16)
@@ -37,8 +38,7 @@ struct RegisterView: View {
                 }
                 .onReceive(viewModel.$showSuccessAlert) { success in
                     if success {
-                        presentationMode.wrappedValue.dismiss() // Dismiss RegisterView on success
-                        // Navigate to LoginView here (explained below)
+                        presentationMode.wrappedValue.dismiss()
                     }
                 }
             }
@@ -47,27 +47,28 @@ struct RegisterView: View {
         }
         .navigationBarBackButtonHidden(true)
     }
-
-
-private func alert() -> Alert {
-    Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: {
-        viewModel.resetAlerts()
-    }))
-}
-
-private func navigateToLogin() -> some View {
-    HStack {
-        Text("¿Ya tienes cuenta?")
-            .foregroundColor(.black)
-        Button(action: {
-            presentationMode.wrappedValue.dismiss()
-        }) {
-            Text("Iniciar Sesión")
-                .foregroundColor(Color("Blue"))
+    
+    
+    private func alert() -> Alert {
+        Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: {
+            viewModel.resetAlerts()
+        }))
+    }
+    private func navigateToLogin() -> some View {
+        HStack {
+            Text("¿Ya tienes cuenta?")
+                .foregroundColor(.black)
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Iniciar Sesión")
+                    .foregroundColor(Color("Blue"))
+            }
         }
     }
+
 }
-}
+
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {

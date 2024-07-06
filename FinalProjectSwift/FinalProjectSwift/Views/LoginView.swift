@@ -11,7 +11,7 @@ struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack {
                     CustomLogo(width: 240, height: 220)
@@ -27,13 +27,17 @@ struct LoginView: View {
                     BiometricButton(action: {
                         
                     }, imageName: "person.fill.viewfinder")
-                    .padding(.bottom, 36)
+                        .padding(.bottom, 36)
                     
                     CustomButton(title: "Iniciar Sesión") {
                         viewModel.login()
                     }
                     .padding(.bottom, 55)
                     
+                    NavigationLink(destination: ChatsView(), isActive: $viewModel.isLoginSuccessful) {
+                        EmptyView()
+                    }
+
                     navigateToRegister()
                 }
                 
@@ -67,10 +71,11 @@ struct LoginView: View {
 }
 
 
+
 struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
+  static var previews: some View {
+    LoginView()
+  }
 }
 
 

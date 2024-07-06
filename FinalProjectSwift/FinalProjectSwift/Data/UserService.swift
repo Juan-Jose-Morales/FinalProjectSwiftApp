@@ -12,23 +12,26 @@ class UserService {
     private let baseURL = "https://mock-movilidad.vass.es/chatvass/api"
     let USER_EXISTENCE_STATUS_CODE = 409
     
-    func login(username: String, password: String, completion: @escaping (Result<UserResponse, AFError>) -> Void) {
-        let parameters: [String: Any] = [
-            "password": password,
-            "login": username
-        ]
+    func login(username: String, password: String, completion: @escaping (Result<User, AFError>) -> Void) {
         
-        AF.request("\(baseURL)/users/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .responseDecodable(of: UserResponse.self) { response in
-                completion(response.result)
-            }
-    }
+            let parameters: [String: Any] = [
+                "password": password,
+                "login": username
+            ]
+
+            AF.request("\(baseURL)/users/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+                .responseDecodable(of: User.self) { response in
+                    
+                    completion(response.result)
+                }
+        }
+
     
     func register(user: User, completion: @escaping (Result<User, Error>) -> Void) {
         let url = "\(baseURL)/users/register"
         let parameters: [String: Any] = [
-            "login": user.login,
-            "password": user.password,
+            "login": user.login ?? "",
+            "password": user.password ?? "",
             "nick": user.nick ?? "",
             "avatar": user.avatar ?? "",
             "platform": user.platform ?? "",
@@ -57,19 +60,20 @@ class UserService {
     }
     
     func getUsers(completion: @escaping (Result<[User], Error>) -> Void) {
-        let url = "\(baseURL)/users"
-        
-        AF.request(url, method: .get)
-            .responseDecodable(of: [User].self) { response in
-                switch response.result {
-                case .success(let users):
-                    completion(.success(users))
-                case .failure(let error):
-                    completion(.failure(error))
+            let url = "\(baseURL)/users"
+
+            AF.request(url, method: .get)
+                .responseDecodable(of: [User].self) { response in
+                    switch response.result {
+                    case .success(let users):
+                        completion(.success(users))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
                 }
-            }
+        }
     }
-}
+
     struct UserResponse: Codable {
         let success: Bool
         let user: User
