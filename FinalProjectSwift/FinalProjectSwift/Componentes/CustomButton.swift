@@ -65,26 +65,19 @@ struct CheckBoxView: View {
     }
 }
 
-struct TopBar: View {
-    var body: some View {
-        HStack{
-            Image(systemName: "person.circle.fill")
-                .resizable()
-                .clipShape(Circle())
-                .frame(width: 40, height: 40)
-                .padding()
-            Image("logoFinalGrande")
-                .resizable()
-                .frame(width: 100, height: 75)
-                .padding()
-            Image(systemName: "gearshape.fill")
-                .resizable()
-                .clipShape(Circle())
-                .frame(width: 40, height: 40)
-                .padding()
-        }
-        .background(Color("Blue"))
-        .frame(maxWidth: .infinity)
-        .position(x: 193, y: 30)
+
+struct NavBarModifier: ViewModifier {
+
+    init() {
+        let coloredAppearance = UINavigationBarAppearance()
+        coloredAppearance.configureWithOpaqueBackground()
+        coloredAppearance.backgroundColor = UIColor(resource: .blue)
+        
+        UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+
+    }
+
+    func body(content: Content) -> some View {
+        content
     }
 }

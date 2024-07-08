@@ -10,7 +10,6 @@ import DotLottie
 
 struct LaunchScreen: View {
     var body: some View {
-        Text("Hola")
         DotLottieAnimation(fileName: "main_splash", config: AnimationConfig(autoplay: true, loop: true)).view()
     }
 }

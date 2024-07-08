@@ -17,7 +17,7 @@ struct FinalProjectSwiftApp: App {
             
             VStack {
                 if isActive {
-                    LoginView()
+                    HomeView()
                 } else {
                     LaunchScreen()
                 }
