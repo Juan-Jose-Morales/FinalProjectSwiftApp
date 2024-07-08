@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		90294B472C34AD150030E04C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B462C34AD150030E04C /* CustomButton.swift */; };
+		90294B492C36D60C0030E04C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B482C36D60C0030E04C /* LoginViewModel.swift */; };
+		90294B4B2C36E1AA0030E04C /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B4A2C36E1AA0030E04C /* ChatsView.swift */; };
+		90294B4D2C36EA620030E04C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B4C2C36EA620030E04C /* SessionManager.swift */; };
 		9040AE782C32F60900D550AD /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040AE772C32F60900D550AD /* RegisterView.swift */; };
 		9040AE7A2C32F6A200D550AD /* CustomTexFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040AE792C32F6A200D550AD /* CustomTexFields.swift */; };
 		9040AEA62C345FB400D550AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040AEA52C345FB400D550AD /* User.swift */; };
@@ -15,7 +18,6 @@
 		9040AEAB2C34608200D550AD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9040AEAA2C34608200D550AD /* Alamofire */; };
 		9040AEAD2C346E2000D550AD /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040AEAC2C346E2000D550AD /* RegisterViewModel.swift */; };
 		90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */; };
-		90E79ED22C2B39C400133583 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E79ED12C2B39C400133583 /* ContentView.swift */; };
 		90E79ED42C2B39C600133583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED32C2B39C600133583 /* Assets.xcassets */; };
 		90E79ED72C2B39C600133583 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED62C2B39C600133583 /* Preview Assets.xcassets */; };
 		A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D9E5E42C330F2E0039843A /* LoginView.swift */; };
@@ -23,6 +25,9 @@
 
 /* Begin PBXFileReference section */
 		90294B462C34AD150030E04C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		90294B482C36D60C0030E04C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		90294B4A2C36E1AA0030E04C /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
+		90294B4C2C36EA620030E04C /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		9040AE772C32F60900D550AD /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		9040AE792C32F6A200D550AD /* CustomTexFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTexFields.swift; sourceTree = "<group>"; };
 		9040AEA52C345FB400D550AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -30,7 +35,6 @@
 		9040AEAC2C346E2000D550AD /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		90E79ECC2C2B39C400133583 /* FinalProjectSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProjectSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectSwiftApp.swift; sourceTree = "<group>"; };
-		90E79ED12C2B39C400133583 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		90E79ED32C2B39C600133583 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90E79ED62C2B39C600133583 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A9D9E5E42C330F2E0039843A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -48,12 +52,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		90294B4E2C36EAB90030E04C /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				90294B4C2C36EA620030E04C /* SessionManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		9040AE722C32F5A100D550AD /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				90E79ED12C2B39C400133583 /* ContentView.swift */,
 				9040AE772C32F60900D550AD /* RegisterView.swift */,
 				A9D9E5E42C330F2E0039843A /* LoginView.swift */,
+				90294B4A2C36E1AA0030E04C /* ChatsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -62,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				9040AEAC2C346E2000D550AD /* RegisterViewModel.swift */,
+				90294B482C36D60C0030E04C /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -102,7 +115,6 @@
 		9040AEA42C345F8700D550AD /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */,
 				9040AE762C32F5D100D550AD /* Resources */,
 			);
 			path = Common;
@@ -127,6 +139,8 @@
 		90E79ECE2C2B39C400133583 /* FinalProjectSwift */ = {
 			isa = PBXGroup;
 			children = (
+				90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */,
+				90294B4E2C36EAB90030E04C /* Managers */,
 				9040AEA32C345F5E00D550AD /* Models */,
 				9040AE752C32F5C000D550AD /* Componentes */,
 				9040AE742C32F5B900D550AD /* Data */,
@@ -223,14 +237,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9040AE782C32F60900D550AD /* RegisterView.swift in Sources */,
-				90E79ED22C2B39C400133583 /* ContentView.swift in Sources */,
+				90294B4B2C36E1AA0030E04C /* ChatsView.swift in Sources */,
 				90294B472C34AD150030E04C /* CustomButton.swift in Sources */,
 				9040AEAD2C346E2000D550AD /* RegisterViewModel.swift in Sources */,
 				9040AEA82C34606100D550AD /* UserService.swift in Sources */,
 				90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */,
 				9040AEA62C345FB400D550AD /* User.swift in Sources */,
 				A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */,
+				90294B492C36D60C0030E04C /* LoginViewModel.swift in Sources */,
 				9040AE7A2C32F6A200D550AD /* CustomTexFields.swift in Sources */,
+				90294B4D2C36EA620030E04C /* SessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

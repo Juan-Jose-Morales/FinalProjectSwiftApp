@@ -8,15 +8,15 @@
 import Foundation
 
 struct User: Codable {
-    
-    let id: String?
-    let login: String
-    let password: String
-    let nick: String
-    let avatar: String?
-    let uuid: String?
-    let token: String?
-    let online: Bool
-    let created: String?
-    let updated: String?
+  var id: String?
+  var login: String?
+  var password: String?
+  var nick: String?
+  var avatar: String?
+  var platform: String?
+  var uuid: String? 
+  var online: Bool?
+  var created: String?
+  var updated: String?
+  var token: String?
 }

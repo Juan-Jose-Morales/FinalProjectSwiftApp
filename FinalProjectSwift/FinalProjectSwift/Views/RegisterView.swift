@@ -8,53 +8,66 @@
 import SwiftUI
 
 struct RegisterView: View {
-    
-   @StateObject private var viewModel = RegisterViewModel()
+    @StateObject private var viewModel = RegisterViewModel()
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        ScrollView {
-            VStack() {
-                CustomLogo(widht: 240, height: 220)
-                Spacer().frame(height: 50)
-                
-                CustomTextField(imageName: "person" , placeholder: "Usuario", text: $viewModel.username)
-                    .padding(.bottom, 36)
-                CustomTextField(imageName: "lock" , placeholder: "Contraseña", text: $viewModel.password, isSecure: true)
-                    .padding(.bottom, 36)
-                CustomTextField(imageName: "lock", placeholder: "Repetir Contraseña", text: $viewModel.confirmPassword, isSecure: true)
-                    .padding(.bottom, 36)
-                
-                CustomButton(title: "Registarse") {
-                    viewModel.register()
+        NavigationView {
+            ScrollView {
+                VStack {
+                    CustomLogo(width: 240, height: 220)
+                        .padding(.top, 50)
+                    Spacer().frame(height: 45)
+                    CustomTextField(imageName: "person", placeholder: "Usuario", text: $viewModel.username)
+                        .padding(.bottom, 36)
+                    SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "lock")
+                        .padding(.bottom, 36)
+                    SecureFields(title: "Confirmar Contraseña", text: $viewModel.confirmPassword, imageName: "lock")
+                        .padding(.bottom, 36)
+                    CustomButton(title: "Registrar") {
+                        viewModel.register()
+                    }
+                    .padding(.bottom, 55)
+                    navigateToLogin()
+                    Spacer()
                 }
-                .padding(.bottom, 55)
+                .padding(.horizontal, 16)
+                .frame(maxWidth: .infinity)
                 .alert(isPresented: $viewModel.showAlert) {
-                    Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error Desconocido"), dismissButton: .default(Text("Aceptar")))
+                    Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: { viewModel.resetAlerts() }))
                 }
-                .alert(isPresented: $viewModel.showSuccessAlert){
-                    Alert(title: Text("Exito"), message: Text("Usuario registrado correctamente"), dismissButton: .default(Text("Aceptar")))
-                }
-                HStack {
-                    Text("¿Ya tienes cuenta?")
-                        .foregroundColor(.black)
-                    Button(action: {
-                        
-                    }) {
-                        Text("Iniciar Sesión")
-                            .foregroundColor(Color("Blue"))
+                .onReceive(viewModel.$showSuccessAlert) { success in
+                    if success {
+                        presentationMode.wrappedValue.dismiss()
                     }
                 }
-                
             }
-            .padding(.horizontal, 16)
-            .padding(.bottom,30)
-            .frame(maxWidth: .infinity, alignment: .center)
+            .background(Color.white)
+            .edgesIgnoringSafeArea(.all)
         }
-        .padding(.horizontal, 16)
-        
+        .navigationBarBackButtonHidden(true)
     }
-}
+    
+    
+    private func alert() -> Alert {
+        Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: {
+            viewModel.resetAlerts()
+        }))
+    }
+    private func navigateToLogin() -> some View {
+        HStack {
+            Text("¿Ya tienes cuenta?")
+                .foregroundColor(.black)
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Text("Iniciar Sesión")
+                    .foregroundColor(Color("Blue"))
+            }
+        }
+    }
 
+}
 
 
 struct RegisterView_Previews: PreviewProvider {
