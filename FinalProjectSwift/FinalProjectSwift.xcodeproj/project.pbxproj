@@ -21,6 +21,8 @@
 		A95B84292C38270D00F12190 /* DotLottie in Frameworks */ = {isa = PBXBuildFile; productRef = A95B84282C38270D00F12190 /* DotLottie */; };
 		A95B842B2C38275200F12190 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B842A2C38275200F12190 /* LaunchScreen.swift */; };
 		A95B842E2C3828A600F12190 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B842D2C3828A600F12190 /* HomeView.swift */; };
+		A9A4497B2C3C31AB0085838B /* main_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = A9A4497A2C3C31AB0085838B /* main_splash.json */; };
+		A9A4497D2C3C32090085838B /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = A9A4497C2C3C32090085838B /* AlamofireDynamic */; };
 		A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D9E5E42C330F2E0039843A /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,7 @@
 		90E79ED62C2B39C600133583 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A95B842A2C38275200F12190 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		A95B842D2C3828A600F12190 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A9A4497A2C3C31AB0085838B /* main_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = main_splash.json; sourceTree = "<group>"; };
 		A9D9E5E42C330F2E0039843A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +50,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9040AEAB2C34608200D550AD /* Alamofire in Frameworks */,
+				A9A4497D2C3C32090085838B /* AlamofireDynamic in Frameworks */,
 				A95B84292C38270D00F12190 /* DotLottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +162,7 @@
 		A95B842C2C3827FE00F12190 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				A9A4497A2C3C31AB0085838B /* main_splash.json */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 			packageProductDependencies = (
 				9040AEAA2C34608200D550AD /* Alamofire */,
 				A95B84282C38270D00F12190 /* DotLottie */,
+				A9A4497C2C3C32090085838B /* AlamofireDynamic */,
 			);
 			productName = FinalProjectSwift;
 			productReference = 90E79ECC2C2B39C400133583 /* FinalProjectSwift.app */;
@@ -230,6 +236,7 @@
 			files = (
 				90E79ED72C2B39C600133583 /* Preview Assets.xcassets in Resources */,
 				90E79ED42C2B39C600133583 /* Assets.xcassets in Resources */,
+				A9A4497B2C3C31AB0085838B /* main_splash.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +490,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A95B84272C38270D00F12190 /* XCRemoteSwiftPackageReference "dotlottie-ios" */;
 			productName = DotLottie;
+		};
+		A9A4497C2C3C32090085838B /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AlamofireDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
