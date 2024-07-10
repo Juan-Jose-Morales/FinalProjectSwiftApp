@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct FinalProjectSwiftApp: App {
+    
+    @State private var isActive = false
+    
     var body: some Scene {
         WindowGroup {
             NavigationStack {
