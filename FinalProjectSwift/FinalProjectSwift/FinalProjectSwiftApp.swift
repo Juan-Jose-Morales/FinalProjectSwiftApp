@@ -15,7 +15,7 @@ struct FinalProjectSwiftApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                LoginView()
+                LaunchScreen()
                     .environmentObject(SessionManager())
             }
         }

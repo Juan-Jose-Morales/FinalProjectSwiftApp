@@ -34,7 +34,7 @@ struct LoginView: View {
                     }
                     .padding(.bottom, 55)
                     
-                    NavigationLink(destination: ChatsView(), isActive: $viewModel.isLoginSuccessful) {
+                    NavigationLink(destination: HomeView(), isActive: $viewModel.isLoginSuccessful) {
                         EmptyView()
                     }
 
