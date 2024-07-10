@@ -14,20 +14,8 @@ struct FinalProjectSwiftApp: App {
     
     var body: some Scene {
         WindowGroup {
-            
-            VStack {
-                if isActive {
-                    HomeView()
-                } else {
-                    LaunchScreen()
-                }
-            }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    withAnimation {
-                        self.isActive = true
-                    }
-                }
+            NavigationView {
+                LaunchScreen()
             }
         }
     }

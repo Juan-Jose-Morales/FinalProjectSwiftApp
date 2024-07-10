@@ -9,8 +9,18 @@ import SwiftUI
 import DotLottie
 
 struct LaunchScreen: View {
+    @State private var showInitialView = true
     var body: some View {
-        DotLottieAnimation(fileName: "main_splash", config: AnimationConfig(autoplay: true, loop: true)).view()
+        VStack {
+            if showInitialView == true{
+                DotLottieAnimation(fileName: "main_splash", config: AnimationConfig(autoplay: true, loop: true)).view()
+            }else {
+                LoginView()
+            }
+       
+        }.onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                showInitialView = false}}
     }
 }
 

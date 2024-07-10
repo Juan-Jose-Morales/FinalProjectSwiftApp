@@ -88,3 +88,36 @@ struct CustomLogo: View {
     }
 }
 
+struct SearcField: View {
+    var imageName: String
+    var placeholder: String
+    @Binding var text: String
+    var isSecure: Bool = false
+
+    var body: some View {
+        VStack(alignment: .trailing){
+            HStack {
+                Image(systemName: imageName)
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.black)
+                    .padding(.leading, 8)
+
+                if isSecure {
+                    SecureField(placeholder, text: $text)
+                        .padding()
+                } else {
+                    TextField(placeholder, text: $text)
+                        .padding()
+                }
+            }
+            .frame(height: 50)
+            .background(RoundedRectangle(cornerRadius: 15)
+                .stroke(Color.black, lineWidth: 1)
+                .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 4))
+            .padding(.horizontal, 16)
+        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        Spacer()
+    }
+
+}

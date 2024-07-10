@@ -9,49 +9,38 @@ import SwiftUI
 
 struct HomeView: View {
     let chatList: [String] = []
-    @State private var showingSheet = false
+    @State private var hola = ""
     var body: some View {
         NavigationStack {
             ZStack (alignment: .bottomTrailing){
                 VStack{
+                    SearcField(imageName:  "magnifyingglass", placeholder: "", text: $hola)
                     if chatList.isEmpty{
                         CustomListChat()
                     }
-                }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                Button {
-                    showingSheet.toggle()
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.title.weight(.semibold))
-                        .padding()
-                        .background(Color("Blue"))
-                        .foregroundColor(.white)
-                        .clipShape(Circle())
                 }
-                .padding(35)
-                .sheet(isPresented: $showingSheet) {
-                    Text("Hola")
-                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                FloatButton()
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Image("logoFinalGrande")
                         .resizable()
-                        .frame(width: 100, height: 75)
+                        .frame(width: 70, height: 70)
                         .padding()
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     Image(systemName: "person.circle.fill")
                         .resizable()
                         .clipShape(Circle())
-                        .frame(width: 40, height: 40)
+                        .frame(width: 42, height: 42)
                         .padding()
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Image(systemName: "gearshape.fill")
                         .resizable()
                         .clipShape(Circle())
-                        .frame(width: 40, height: 40)
+                        .frame(width: 42, height: 42)
                         .padding()
                 }
             }.modifier(NavBarModifier())

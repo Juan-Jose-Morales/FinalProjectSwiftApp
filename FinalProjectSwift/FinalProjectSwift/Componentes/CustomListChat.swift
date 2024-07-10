@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomListChat: View {
     var body: some View {
         VStack{
+            
             Image(.iconoChatList)
             Text("Empieza un nuevo chat")
         }

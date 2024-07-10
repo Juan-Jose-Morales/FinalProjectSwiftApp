@@ -65,16 +65,40 @@ struct CheckBoxView: View {
     }
 }
 
+struct FloatButton: View {
+    @State private var showingSheet = false
+    var body: some View {
+        Button {
+            showingSheet.toggle()
+        } label: {
+            Image(systemName: "plus")
+                .font(.title.weight(.semibold))
+                .frame(width: 35, height: 35)
+                .padding()
+                .background(Color("Blue"))
+                .foregroundColor(.white)
+                .clipShape(Circle())
+        }
+        .padding(35)
+        .sheet(isPresented: $showingSheet) {
+            Text("Hola")
+        }
+    }
+}
+
 
 struct NavBarModifier: ViewModifier {
 
     init() {
+        let sizeHeight: CGFloat = 55
         let coloredAppearance = UINavigationBarAppearance()
         coloredAppearance.configureWithOpaqueBackground()
         coloredAppearance.backgroundColor = UIColor(resource: .blue)
-        
         UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
-
+        let navigationBar = UINavigationBar()
+        
+        navigationBar.sizeToFit()
+//        navigationBar.frame.size.height(sizeHeight)
     }
 
     func body(content: Content) -> some View {
