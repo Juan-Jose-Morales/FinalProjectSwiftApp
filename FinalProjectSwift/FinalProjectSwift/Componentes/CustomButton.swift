@@ -9,20 +9,20 @@ import Foundation
 import SwiftUI
 
 struct CustomButton: View {
-    var title: String
-    var action: () -> Void
-    
-    var body: some View {
-        
-        Button(action: action) {
-            Text(title)
-                .foregroundColor(.black)
-                .frame(width: 300, height: 43)
-                .background(RoundedRectangle(cornerRadius: 15)
-                    .fill(Color("Blue"))
-                    .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10))
-        }
+  var title: String
+  var action: () -> Void
+
+  var body: some View {
+    Button(action: action) {
+      Text(title)
+        .foregroundColor(.black)
+        .frame(maxWidth: .infinity)
+        .frame(height: 43)
+        .background(RoundedRectangle(cornerRadius: 15)
+          .fill(Color("Blue"))
+          .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10))
     }
+  }
 }
 
 struct BiometricButton: View {
@@ -42,7 +42,9 @@ struct BiometricButton: View {
                     .padding(.leading, 15)
                 Spacer()
             }
-            .frame(width: 300, height: 43)
+            .padding(.horizontal)
+            .frame(maxWidth: .infinity)
+            .frame(height: 43)
             .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.black, lineWidth: 1)
                 .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 10))

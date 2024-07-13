@@ -27,12 +27,15 @@ struct CustomTextField: View {
             
             Spacer()
         }
-        .frame(width: 300, height: 43)
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity)
+        .frame(height: 43)
         .background(RoundedRectangle(cornerRadius: 15)
             .stroke(Color.black, lineWidth: 1)
             .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 15))
     }
 }
+
 struct SecureFields: View {
     var title: String
     @Binding var text: String
@@ -63,23 +66,12 @@ struct SecureFields: View {
                     .padding(.horizontal, 8)
             }
         }
-        .frame(width: 300, height: 43)
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity)
+        .frame(height: 43)
         .background(RoundedRectangle(cornerRadius: 15)
             .stroke(Color.black, lineWidth: 1)
             .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 15))
-    }
-}
-struct CustomLogo: View {
-    var width: CGFloat
-    var height: CGFloat
-    var body: some View {
-        VStack{
-            Image("appLogo")
-                .resizable()
-                .frame(width: width, height: height)
-                .padding(.top, 50)
-                .scaledToFit()
-        }
     }
 }
 

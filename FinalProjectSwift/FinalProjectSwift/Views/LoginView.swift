@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
@@ -25,7 +26,7 @@ struct LoginView: View {
                         .padding(.bottom, 36)
                     
                     BiometricButton(action: {
-                        
+                        viewModel.authenticateWithBiometrics()
                     }, imageName: "person.fill.viewfinder")
                         .padding(.bottom, 36)
                     
@@ -40,16 +41,14 @@ struct LoginView: View {
 
                     navigateToRegister()
                 }
-                
-                Spacer()
+                .padding(.horizontal, 40)
+                .frame(maxWidth: .infinity)
             }
-            .padding(.horizontal, 16)
-            .frame(maxWidth: .infinity)
+            .background(Color.white)
+            .edgesIgnoringSafeArea(.all)
+            .navigationBarHidden(true)
+            .alert(isPresented: $viewModel.showAlert, content: alert)
         }
-        .background(Color.white)
-        .edgesIgnoringSafeArea(.all)
-        .navigationBarHidden(true)
-        .alert(isPresented: $viewModel.showAlert, content: alert)
     }
     
     private func alert() -> Alert {

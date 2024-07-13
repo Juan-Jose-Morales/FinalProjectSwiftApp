@@ -22,8 +22,9 @@ struct RegisterView: View {
                         .padding(.bottom, 36)
                     SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "lock")
                         .padding(.bottom, 36)
-                    SecureFields(title: "Confirmar Contraseña", text: $viewModel.confirmPassword, imageName: "lock")
+                    SecureFields(title: "Repetir Contraseña", text: $viewModel.confirmPassword, imageName: "lock")
                         .padding(.bottom, 36)
+                        
                     CustomButton(title: "Registrar") {
                         viewModel.register()
                     }
@@ -31,7 +32,7 @@ struct RegisterView: View {
                     navigateToLogin()
                     Spacer()
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, 40)
                 .frame(maxWidth: .infinity)
                 .alert(isPresented: $viewModel.showAlert) {
                     Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: { viewModel.resetAlerts() }))
