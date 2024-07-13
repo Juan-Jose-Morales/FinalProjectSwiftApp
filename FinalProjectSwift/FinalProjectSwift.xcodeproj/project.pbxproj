@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9003E10D2C3EAAC7006CD269 /* CustomObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003E10C2C3EAAC7006CD269 /* CustomObjects.swift */; };
+		9003E10F2C3EB142006CD269 /* LoginUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003E10E2C3EB142006CD269 /* LoginUserResponse.swift */; };
 		90294B472C34AD150030E04C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B462C34AD150030E04C /* CustomButton.swift */; };
 		90294B492C36D60C0030E04C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B482C36D60C0030E04C /* LoginViewModel.swift */; };
 		90294B4B2C36E1AA0030E04C /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B4A2C36E1AA0030E04C /* ChatsView.swift */; };
@@ -20,10 +22,13 @@
 		90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */; };
 		90E79ED42C2B39C600133583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED32C2B39C600133583 /* Assets.xcassets */; };
 		90E79ED72C2B39C600133583 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED62C2B39C600133583 /* Preview Assets.xcassets */; };
+		90F68BE82C3DB8E700793B4B /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F68BE72C3DB8E700793B4B /* UserResponse.swift */; };
 		A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D9E5E42C330F2E0039843A /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9003E10C2C3EAAC7006CD269 /* CustomObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomObjects.swift; sourceTree = "<group>"; };
+		9003E10E2C3EB142006CD269 /* LoginUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserResponse.swift; sourceTree = "<group>"; };
 		90294B462C34AD150030E04C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		90294B482C36D60C0030E04C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		90294B4A2C36E1AA0030E04C /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
@@ -37,6 +42,7 @@
 		90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectSwiftApp.swift; sourceTree = "<group>"; };
 		90E79ED32C2B39C600133583 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90E79ED62C2B39C600133583 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		90F68BE72C3DB8E700793B4B /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		A9D9E5E42C330F2E0039843A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +98,7 @@
 			children = (
 				9040AE792C32F6A200D550AD /* CustomTexFields.swift */,
 				90294B462C34AD150030E04C /* CustomButton.swift */,
+				9003E10C2C3EAAC7006CD269 /* CustomObjects.swift */,
 			);
 			path = Componentes;
 			sourceTree = "<group>";
@@ -108,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				9040AEA52C345FB400D550AD /* User.swift */,
+				90F68BE72C3DB8E700793B4B /* UserResponse.swift */,
+				9003E10E2C3EB142006CD269 /* LoginUserResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -237,16 +246,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				9040AE782C32F60900D550AD /* RegisterView.swift in Sources */,
+				9003E10F2C3EB142006CD269 /* LoginUserResponse.swift in Sources */,
 				90294B4B2C36E1AA0030E04C /* ChatsView.swift in Sources */,
 				90294B472C34AD150030E04C /* CustomButton.swift in Sources */,
 				9040AEAD2C346E2000D550AD /* RegisterViewModel.swift in Sources */,
 				9040AEA82C34606100D550AD /* UserService.swift in Sources */,
 				90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */,
 				9040AEA62C345FB400D550AD /* User.swift in Sources */,
+				9003E10D2C3EAAC7006CD269 /* CustomObjects.swift in Sources */,
 				A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */,
 				90294B492C36D60C0030E04C /* LoginViewModel.swift in Sources */,
 				9040AE7A2C32F6A200D550AD /* CustomTexFields.swift in Sources */,
 				90294B4D2C36EA620030E04C /* SessionManager.swift in Sources */,
+				90F68BE82C3DB8E700793B4B /* UserResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +390,9 @@
 				DEVELOPMENT_TEAM = H8ZVN55RGH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Utilizamos Face ID para autenticar tu identidad de manera segura";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "Para ofrecerte una experiencia segura, utilizamos la autenticación biométrica para autenticar tu identidad";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -407,6 +422,9 @@
 				DEVELOPMENT_TEAM = H8ZVN55RGH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Utilizamos Face ID para autenticar tu identidad de manera segura";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "Para ofrecerte una experiencia segura, utilizamos la autenticación biométrica para autenticar tu identidad";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -12,20 +12,72 @@ class UserService {
     private let baseURL = "https://mock-movilidad.vass.es/chatvass/api"
     let USER_EXISTENCE_STATUS_CODE = 409
     
-    func login(username: String, password: String, completion: @escaping (Result<User, AFError>) -> Void) {
+    func login(username: String, password: String, completion: @escaping (Result<(String, User), AFError>) -> Void) {
+        let parameters: [String: Any] = [
+            "password": password,
+            "login": username
+        ]
         
-            let parameters: [String: Any] = [
-                "password": password,
-                "login": username
-            ]
-
-            AF.request("\(baseURL)/users/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
-                .responseDecodable(of: User.self) { response in
-                    
-                    completion(response.result)
+        AF.request("\(baseURL)/users/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseDecodable(of: LoginUserResponse.self) { response in
+                switch response.result {
+                case .success(let loginResponse):
+                    UserDefaults.standard.set(loginResponse.token, forKey: "AuthToken")
+                    completion(.success((loginResponse.token, loginResponse.user)))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
+            }
+    }
+    
+    func loginWithBiometrics(completion: @escaping (Result<(String, User), AFError>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            print("Error: Missing AuthToken")
+            completion(.failure(AFError.explicitlyCancelled))
+            return
         }
-
+        
+        print("Using token: \(token)")
+        
+        let headers: HTTPHeaders = ["Authorization": token]
+        
+        AF.request("\(baseURL)/users/biometric", method: .post, headers: headers)
+            .responseDecodable(of: LoginUserResponse.self) { response in
+                print("Response status code: \(String(describing: response.response?.statusCode))")
+                if let data = response.data {
+                    print("Response data: \(String(data: data, encoding: .utf8) ?? "No se pudo decodificar los datos")")
+                }
+                
+                guard let statusCode = response.response?.statusCode else {
+                    completion(.failure(AFError.responseSerializationFailed(reason: .inputFileNil)))
+                    return
+                }
+                
+                switch statusCode {
+                case 200:
+                    guard let loginResponse = response.value else {
+                        completion(.failure(AFError.responseSerializationFailed(reason: .inputFileNil)))
+                        return
+                    }
+                    UserDefaults.standard.set(loginResponse.token, forKey: "AuthToken")
+                    completion(.success((loginResponse.token, loginResponse.user)))
+                default:
+                    if let data = response.data {
+                        do {
+                            let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: data)
+                            print("Error message: \(errorResponse.message)")
+                        } catch {
+                            print("Error decoding error response: \(error)")
+                        }
+                    }
+                    completion(.failure(AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: statusCode))))
+                }
+            }
+    }
+    
+    
+    
+    
     
     func register(user: User, completion: @escaping (Result<User, Error>) -> Void) {
         let url = "\(baseURL)/users/register"
@@ -41,10 +93,6 @@ class UserService {
         
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseDecodable(of: UserResponse.self) { response in
-                if let data = response.data {
-                    print("Datos del servidor: \(String(data: data, encoding: .utf8) ?? "No se pudo decodificar los datos")")
-                }
-                
                 switch response.result {
                 case .success(let userResponse):
                     completion(.success(userResponse.user))
@@ -60,21 +108,16 @@ class UserService {
     }
     
     func getUsers(completion: @escaping (Result<[User], Error>) -> Void) {
-            let url = "\(baseURL)/users"
-
-            AF.request(url, method: .get)
-                .responseDecodable(of: [User].self) { response in
-                    switch response.result {
-                    case .success(let users):
-                        completion(.success(users))
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
+        let url = "\(baseURL)/users"
+        
+        AF.request(url, method: .get)
+            .responseDecodable(of: [User].self) { response in
+                switch response.result {
+                case .success(let users):
+                    completion(.success(users))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-        }
+            }
     }
-
-    struct UserResponse: Codable {
-        let success: Bool
-        let user: User
-    }
+}
