@@ -11,7 +11,6 @@
 		9003E10F2C3EB142006CD269 /* LoginUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003E10E2C3EB142006CD269 /* LoginUserResponse.swift */; };
 		90294B472C34AD150030E04C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B462C34AD150030E04C /* CustomButton.swift */; };
 		90294B492C36D60C0030E04C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B482C36D60C0030E04C /* LoginViewModel.swift */; };
-		90294B4B2C36E1AA0030E04C /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B4A2C36E1AA0030E04C /* ChatsView.swift */; };
 		90294B4D2C36EA620030E04C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B4C2C36EA620030E04C /* SessionManager.swift */; };
 		9040AE782C32F60900D550AD /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040AE772C32F60900D550AD /* RegisterView.swift */; };
 		9040AE7A2C32F6A200D550AD /* CustomTexFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040AE792C32F6A200D550AD /* CustomTexFields.swift */; };
@@ -21,6 +20,7 @@
 		90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */; };
 		90E79ED42C2B39C600133583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED32C2B39C600133583 /* Assets.xcassets */; };
 		90E79ED72C2B39C600133583 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED62C2B39C600133583 /* Preview Assets.xcassets */; };
+		90F68BE82C3DB8E700793B4B /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F68BE72C3DB8E700793B4B /* UserResponse.swift */; };
 		A95B842B2C38275200F12190 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B842A2C38275200F12190 /* LaunchScreen.swift */; };
 		A95B842E2C3828A600F12190 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B842D2C3828A600F12190 /* HomeView.swift */; };
 		A9A4497B2C3C31AB0085838B /* main_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = A9A4497A2C3C31AB0085838B /* main_splash.json */; };
@@ -29,7 +29,6 @@
 		A9A449922C3C35A60085838B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A9A449912C3C35A60085838B /* Alamofire */; };
 		A9A449942C3C39470085838B /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A449932C3C39470085838B /* ApiManager.swift */; };
 		A9A449962C3C44750085838B /* CustomListChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A449952C3C44750085838B /* CustomListChat.swift */; };
-		90F68BE82C3DB8E700793B4B /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F68BE72C3DB8E700793B4B /* UserResponse.swift */; };
 		A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D9E5E42C330F2E0039843A /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,13 +48,13 @@
 		90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectSwiftApp.swift; sourceTree = "<group>"; };
 		90E79ED32C2B39C600133583 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90E79ED62C2B39C600133583 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		90F68BE72C3DB8E700793B4B /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		A95B842A2C38275200F12190 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		A95B842D2C3828A600F12190 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A9A4497A2C3C31AB0085838B /* main_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = main_splash.json; sourceTree = "<group>"; };
 		A9A4497E2C3C32BB0085838B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A9A449932C3C39470085838B /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		A9A449952C3C44750085838B /* CustomListChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListChat.swift; sourceTree = "<group>"; };
-		90F68BE72C3DB8E700793B4B /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		A9D9E5E42C330F2E0039843A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9003E1112C420549006CD269 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				90294B4A2C36E1AA0030E04C /* ChatsView.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		90294B4E2C36EAB90030E04C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +159,7 @@
 				90E79ECE2C2B39C400133583 /* FinalProjectSwift */,
 				90E79ECD2C2B39C400133583 /* Products */,
 				A9A4498E2C3C345C0085838B /* Frameworks */,
+				9003E1112C420549006CD269 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,10 +293,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9040AE782C32F60900D550AD /* RegisterView.swift in Sources */,
-				90E79ED22C2B39C400133583 /* ContentView.swift in Sources */,
 				A95B842B2C38275200F12190 /* LaunchScreen.swift in Sources */,
 				9003E10F2C3EB142006CD269 /* LoginUserResponse.swift in Sources */,
-				90294B4B2C36E1AA0030E04C /* ChatsView.swift in Sources */,
 				90294B472C34AD150030E04C /* CustomButton.swift in Sources */,
 				A9A449942C3C39470085838B /* ApiManager.swift in Sources */,
 				9040AEAD2C346E2000D550AD /* RegisterViewModel.swift in Sources */,
