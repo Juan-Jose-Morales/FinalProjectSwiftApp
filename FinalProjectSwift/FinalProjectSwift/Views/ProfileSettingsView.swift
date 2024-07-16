@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileSettingsView: View {
     
-    @StateObject private var viewModel = ProfileViewModel()
+    @StateObject private var viewModel = ProfileSettingsViewModel()
     
     var body: some View {
         VStack {
@@ -97,7 +97,7 @@ struct ProfileSettingsView: View {
         }) {
             Text("Cerrar Sesion")
                 .foregroundColor(Color("Red"))
-                .frame(width: 305, height: 27)
+                .frame(width: 305, height: 30)
                 .background(RoundedRectangle(cornerRadius: 15)
                     .stroke(Color("Gray"), lineWidth: 1)
                     .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10))
