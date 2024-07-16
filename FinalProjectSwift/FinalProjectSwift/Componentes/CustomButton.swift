@@ -9,26 +9,26 @@ import Foundation
 import SwiftUI
 
 struct CustomButton: View {
-  var title: String
-  var action: () -> Void
-
-  var body: some View {
-    Button(action: action) {
-      Text(title)
-        .foregroundColor(.black)
-        .frame(maxWidth: .infinity)
-        .frame(height: 43)
-        .background(RoundedRectangle(cornerRadius: 15)
-          .fill(Color("Blue"))
-          .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10))
+    var title: String
+    var action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity)
+                .frame(height: 43)
+                .background(RoundedRectangle(cornerRadius: 15)
+                    .fill(Color("Blue"))
+                    .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10))
+        }
     }
-  }
 }
 
 struct BiometricButton: View {
     var action: () -> Void
     var imageName: String
-
+    
     var body: some View {
         Button(action: action) {
             HStack {
@@ -77,7 +77,7 @@ struct FloatButton: View {
 
 
 struct NavBarModifier: ViewModifier {
-
+    
     init() {
         let sizeHeight: CGFloat = 55
         let coloredAppearance = UINavigationBarAppearance()
@@ -87,10 +87,40 @@ struct NavBarModifier: ViewModifier {
         let navigationBar = UINavigationBar()
         
         navigationBar.sizeToFit()
-//        navigationBar.frame.size.height(sizeHeight)
+        //        navigationBar.frame.size.height(sizeHeight)
     }
-
+    
     func body(content: Content) -> some View {
         content
+    }
+}
+struct CustomProfileButton: View {
+    var title: String
+    var iconName: String
+    var action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            HStack {
+                Image(iconName)
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.black)
+                Spacer()
+                Text(title)
+                    .font(.system(size: 18))
+                    .foregroundColor(.black)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .resizable()
+                    .frame(width: 15, height: 15)
+                    .foregroundColor(.black)
+            }
+            .padding()
+            .frame(width: 305, height: 27)
+            .background(RoundedRectangle(cornerRadius: 15)
+                .stroke(Color("Gray"), lineWidth: 1)
+                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10))
+        }
     }
 }
