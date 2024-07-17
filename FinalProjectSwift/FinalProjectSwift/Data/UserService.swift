@@ -9,8 +9,14 @@ import Foundation
 import Alamofire
 
 class UserService {
+    private var session: Session
     private let baseURL = "https://mock-movilidad.vass.es/chatvass/api"
     let USER_EXISTENCE_STATUS_CODE = 409
+    
+    init() {
+        let interceptor = AuthInterceptor()
+            session = Session(interceptor: interceptor)
+        }
     
     func login(username: String, password: String, completion: @escaping (Result<(String, User), AFError>) -> Void) {
         let parameters: [String: Any] = [
@@ -119,5 +125,48 @@ class UserService {
                     completion(.failure(error))
                 }
             }
+    }
+    func getChatList(){
+        
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            print("Error: Missing AuthToken")
+            return
+        }
+        
+        let headers: HTTPHeaders = ["Authorization": token]
+        
+        AF.request("\(baseURL)/chats/list", encoding: JSONEncoding.default, headers: headers)
+            .validate()
+            .responseDecodable(of: ChatList.self) {
+                response in
+                switch response.result {
+                            case .success(let data):
+                                  print(data)
+                              case .failure(let error):
+                                 print(error)
+                }
+            }
+    }
+    func deletechat(id: String){
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            print("Error: Missing AuthToken")
+            return
+        }
+        
+        let headers: HTTPHeaders = ["Authorization": token]
+        
+        let parameters: [String: Any] = [
+            "id": "\(id)"
+        ]
+        AF.request("\(baseURL)/chats/\(id)", method: .delete, parameters: parameters, headers: headers)
+            .validate()
+            .responseDecodable(of: User.self) { response in
+                switch response.result {
+                case .success(let data):
+                    print(data)
+                case .failure(let error):
+                    print(error)
+                }
+        }
     }
 }

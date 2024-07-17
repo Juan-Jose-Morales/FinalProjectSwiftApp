@@ -21,13 +21,15 @@
 		90E79ED42C2B39C600133583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED32C2B39C600133583 /* Assets.xcassets */; };
 		90E79ED72C2B39C600133583 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED62C2B39C600133583 /* Preview Assets.xcassets */; };
 		90F68BE82C3DB8E700793B4B /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F68BE72C3DB8E700793B4B /* UserResponse.swift */; };
+		A94EC23E2C46CAE500E85D63 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */; };
+		A94EC2802C48333E00E85D63 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC27F2C48333E00E85D63 /* AuthInterceptor.swift */; };
+		A94EC2822C48374C00E85D63 /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC2812C48374C00E85D63 /* ChatList.swift */; };
 		A95B842B2C38275200F12190 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B842A2C38275200F12190 /* LaunchScreen.swift */; };
 		A95B842E2C3828A600F12190 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B842D2C3828A600F12190 /* HomeView.swift */; };
 		A9A4497B2C3C31AB0085838B /* main_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = A9A4497A2C3C31AB0085838B /* main_splash.json */; };
 		A9A4497F2C3C32BB0085838B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9A4497E2C3C32BB0085838B /* Launch Screen.storyboard */; };
 		A9A449902C3C34620085838B /* DotLottie in Frameworks */ = {isa = PBXBuildFile; productRef = A9A4498F2C3C34620085838B /* DotLottie */; };
 		A9A449922C3C35A60085838B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A9A449912C3C35A60085838B /* Alamofire */; };
-		A9A449942C3C39470085838B /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A449932C3C39470085838B /* ApiManager.swift */; };
 		A9A449962C3C44750085838B /* CustomListChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A449952C3C44750085838B /* CustomListChat.swift */; };
 		A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D9E5E42C330F2E0039843A /* LoginView.swift */; };
 /* End PBXBuildFile section */
@@ -49,11 +51,13 @@
 		90E79ED32C2B39C600133583 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90E79ED62C2B39C600133583 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		90F68BE72C3DB8E700793B4B /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		A94EC27F2C48333E00E85D63 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
+		A94EC2812C48374C00E85D63 /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		A95B842A2C38275200F12190 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		A95B842D2C3828A600F12190 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A9A4497A2C3C31AB0085838B /* main_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = main_splash.json; sourceTree = "<group>"; };
 		A9A4497E2C3C32BB0085838B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		A9A449932C3C39470085838B /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		A9A449952C3C44750085838B /* CustomListChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListChat.swift; sourceTree = "<group>"; };
 		A9D9E5E42C330F2E0039843A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +106,7 @@
 			children = (
 				9040AEAC2C346E2000D550AD /* RegisterViewModel.swift */,
 				90294B482C36D60C0030E04C /* LoginViewModel.swift */,
+				A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -110,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				9040AEA72C34606100D550AD /* UserService.swift */,
-				A9A449932C3C39470085838B /* ApiManager.swift */,
+				A94EC27F2C48333E00E85D63 /* AuthInterceptor.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 				9040AEA52C345FB400D550AD /* User.swift */,
 				90F68BE72C3DB8E700793B4B /* UserResponse.swift */,
 				9003E10E2C3EB142006CD269 /* LoginUserResponse.swift */,
+				A94EC2812C48374C00E85D63 /* ChatList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,10 +299,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9040AE782C32F60900D550AD /* RegisterView.swift in Sources */,
+				A94EC2802C48333E00E85D63 /* AuthInterceptor.swift in Sources */,
+				A94EC23E2C46CAE500E85D63 /* HomeViewModel.swift in Sources */,
 				A95B842B2C38275200F12190 /* LaunchScreen.swift in Sources */,
 				9003E10F2C3EB142006CD269 /* LoginUserResponse.swift in Sources */,
 				90294B472C34AD150030E04C /* CustomButton.swift in Sources */,
-				A9A449942C3C39470085838B /* ApiManager.swift in Sources */,
 				9040AEAD2C346E2000D550AD /* RegisterViewModel.swift in Sources */,
 				A95B842E2C3828A600F12190 /* HomeView.swift in Sources */,
 				A9A449962C3C44750085838B /* CustomListChat.swift in Sources */,
@@ -305,6 +312,7 @@
 				9040AEA62C345FB400D550AD /* User.swift in Sources */,
 				9003E10D2C3EAAC7006CD269 /* CustomObjects.swift in Sources */,
 				A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */,
+				A94EC2822C48374C00E85D63 /* ChatList.swift in Sources */,
 				90294B492C36D60C0030E04C /* LoginViewModel.swift in Sources */,
 				9040AE7A2C32F6A200D550AD /* CustomTexFields.swift in Sources */,
 				90294B4D2C36EA620030E04C /* SessionManager.swift in Sources */,

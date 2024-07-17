@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     let chatList: [String] = []
     @State private var hola = ""
+    @StateObject private var homeViewModel = HomeViewModel()
     var body: some View {
         NavigationStack {
             ZStack (alignment: .bottomTrailing){
@@ -18,6 +19,17 @@ struct HomeView: View {
                     if chatList.isEmpty{
                         CustomListChat()
                     }
+                    Button {
+                        homeViewModel.deleteChat(id: "1455")
+                    } label: {
+                        Text("Prueba")
+                    }
+                    Button {
+                        homeViewModel.getChatlist()
+                    } label: {
+                        Text("chat")
+                    }
+
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 FloatButton()
