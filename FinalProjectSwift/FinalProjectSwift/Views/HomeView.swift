@@ -33,14 +33,14 @@ struct HomeView: View {
                     Image(systemName: "person.circle.fill")
                         .resizable()
                         .clipShape(Circle())
-                        .frame(width: 42, height: 42)
+                        .frame(width: 35, height: 35)
                         .padding()
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Image(systemName: "gearshape.fill")
                         .resizable()
                         .clipShape(Circle())
-                        .frame(width: 42, height: 42)
+                        .frame(width: 35, height: 35)
                         .padding()
                 }
             }.modifier(NavBarModifier())
