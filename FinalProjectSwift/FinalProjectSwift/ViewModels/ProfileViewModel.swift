@@ -9,37 +9,27 @@ import Foundation
 
 class ProfileViewModel: ObservableObject {
     
-    @Published var user = User()
-    var userService = UserService()
+    @Published var userName: String = "Usuario"
+    @Published var isLoading: Bool = false
     
-    var buttons: [ButtonInfo] {
-        [
-            ButtonInfo(title: "Ajustes de perfil", iconName: "ProfileSettings", action: {}),
-            ButtonInfo(title: "Almacenamiento", iconName: "Storage", action: {}),ButtonInfo(title: "Ajustes de idioma", iconName: "LanguageSettings", action: {})
-            
-        ]
+    private let userService: UserService
+    
+    init(userService: UserService) {
+        self.userService = userService
+        fetchUserName()
     }
     
-    func fetchUserData() {
-        userService.getUsers { result in
-            switch result {
-            case.success(let users):
-                if let user = users.first {
-                    DispatchQueue.main.async {
-                        self.user = user
-                    }
+    func fetchUserName(){
+        isLoading = true
+        
+        let username = UserDefaults.standard.string(forKey: "username") ?? ""
+        let userNick = UserDefaults.standard.string(forKey: "userNick") ?? username
+
+        DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.userName = userNick.isEmpty ? "Usuario" : userNick
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
             }
         }
-    }
-}
 
-struct ButtonInfo: Identifiable {
-    var id = UUID()
-    var title: String
-    var iconName: String
-    var action: () -> Void
-}
 

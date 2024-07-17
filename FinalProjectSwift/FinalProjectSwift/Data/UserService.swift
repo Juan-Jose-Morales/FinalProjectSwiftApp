@@ -120,4 +120,26 @@ class UserService {
                 }
             }
     }
-}
+    
+    func uploadProfilePhoto(userId: String, imageData: Data, completion: @escaping (Result<User, Error>) -> Void) {
+            let url = "\(baseURL)/users/upload?id=\(userId)"
+            guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+                completion(.failure(AFError.explicitlyCancelled))
+                return
+            }
+
+            let headers: HTTPHeaders = ["Authorization": token]
+
+            AF.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData, withName: "file", fileName: "profile.jpg", mimeType: "image/jpeg")
+            }, to: url, headers: headers).responseDecodable(of: User.self) { response in
+                switch response.result {
+                case .success(let user):
+                    completion(.success(user))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+

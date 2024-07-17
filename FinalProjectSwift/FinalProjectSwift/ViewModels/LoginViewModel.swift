@@ -36,6 +36,9 @@ class LoginViewModel: ObservableObject {
                 switch result {
                 case .success(let (token, user)):
                     UserDefaults.standard.set(token, forKey: "AuthToken")
+                    UserDefaults.standard.set(user.login, forKey: "username")
+                    UserDefaults.standard.set(user.nick, forKey: "userNick")
+                    UserDefaults.standard.set(user.avatar, forKey: "userAvatar")
                     UserDefaults.standard.synchronize()
                     self?.handleLoggedInUser(user, token: token)
                 case .failure(let error):
