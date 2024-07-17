@@ -135,9 +135,9 @@ class UserService {
         
         let headers: HTTPHeaders = ["Authorization": token]
         
-        AF.request("\(baseURL)/chats/view", encoding: JSONEncoding.default, headers: headers)
+        AF.request("\(baseURL)/chats/view/", encoding: JSONEncoding.default, headers: headers)
             .validate()
-            .responseDecodable(of: ChatList.self) {
+            .responseDecodable(of: [ChatList].self) {
                 response in
                 switch response.result {
                             case .success(let data):
