@@ -46,9 +46,9 @@ struct ChangeProfileView: View {
             if let profileImage = viewModel.profileImage {
                 Image(uiImage: profileImage)
                     .resizable()
-                    .frame(width: 270, height: 280)
+                    .frame(width: 280, height: 280)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
-                    .padding()
+                    .padding(.top,20)
             } else {
                 Image(systemName: "person.crop.circle")
                     .resizable()

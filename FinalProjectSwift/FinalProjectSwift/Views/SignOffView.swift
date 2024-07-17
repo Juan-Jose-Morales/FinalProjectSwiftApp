@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SignOffView: View {
+    @StateObject private var viewModel = SignOffViewModel()
+    @Environment(\.presentationMode) var presentationMode
+    @State private var navigateToLogin = false
+    
     var body: some View {
         
         NavigationView {
@@ -20,11 +24,19 @@ struct SignOffView: View {
             .navigationTitle("Cerrar sesión")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
-                
+                presentationMode.wrappedValue.dismiss()
             }){
                 Image(systemName: "arrow.left")
                     .foregroundColor(.red)
             })
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK")))
+            }
+            .background(
+                NavigationLink(destination: LoginView(), isActive: $navigateToLogin) {
+                    EmptyView()
+                }
+            )
         }
     }
     private var messageToUser: some View {
@@ -56,10 +68,28 @@ struct SignOffView: View {
                 .background(Color("GrayText"))
                 .cornerRadius(16)
                 .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-                
+            
         }
     }
-    
+    private var tapBar: some View{
+        HStack{
+            Button(action: {
+                
+            }){
+                Image(systemName: "arrow.left")
+                    .foregroundColor(.black)
+            }
+            Spacer()
+            Text("Ajustes de perfil")
+                .font(.headline)
+                .bold()
+                .foregroundColor(.black)
+            Spacer()
+            
+            Image(systemName: "arrow.left")
+                .opacity(0)
+        }
+    }
 }
 
 #Preview {

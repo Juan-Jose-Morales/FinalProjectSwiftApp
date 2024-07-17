@@ -122,24 +122,43 @@ class UserService {
     }
     
     func uploadProfilePhoto(userId: String, imageData: Data, completion: @escaping (Result<User, Error>) -> Void) {
-            let url = "\(baseURL)/users/upload?id=\(userId)"
-            guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
-                completion(.failure(AFError.explicitlyCancelled))
-                return
+        let url = "\(baseURL)/users/upload?id=\(userId)"
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            completion(.failure(AFError.explicitlyCancelled))
+            return
+        }
+        
+        let headers: HTTPHeaders = ["Authorization": token]
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(imageData, withName: "file", fileName: "profile.jpg", mimeType: "image/jpeg")
+        }, to: url, headers: headers).responseDecodable(of: User.self) { response in
+            switch response.result {
+            case .success(let user):
+                completion(.success(user))
+            case .failure(let error):
+                completion(.failure(error))
             }
-
-            let headers: HTTPHeaders = ["Authorization": token]
-
-            AF.upload(multipartFormData: { multipartFormData in
-                multipartFormData.append(imageData, withName: "file", fileName: "profile.jpg", mimeType: "image/jpeg")
-            }, to: url, headers: headers).responseDecodable(of: User.self) { response in
+        }
+    }
+    
+    func logout(completion: @escaping (Result<Void, AFError>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            completion(.failure(AFError.explicitlyCancelled))
+            return
+        }
+        let headers: HTTPHeaders = ["Authorization": token]
+        AF.request("\(baseURL)/users/logout", method: .post, headers: headers)
+            .response { response in
                 switch response.result {
-                case .success(let user):
-                    completion(.success(user))
+                case.success:
+                    UserDefaults.standard.removeObject(forKey: "AuthToken")
+                    completion(.success(()))
                 case .failure(let error):
                     completion(.failure(error))
                 }
             }
-        }
     }
+    
+}
 
