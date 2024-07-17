@@ -8,6 +8,11 @@
 import Foundation
 
 struct ChatList: Codable {
-    var id: String
-    var created: String
+    var chat: String
+    var source: String
+    var sourceonline: Bool
+    var target: String
+    var targetnick: String
+    var targetonline: Bool
+    var chatcreated: String
 }
