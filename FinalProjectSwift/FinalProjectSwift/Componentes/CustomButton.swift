@@ -124,3 +124,29 @@ struct CustomProfileButton: View {
         }
     }
 }
+
+struct CustomButtonProfileImage: View {
+    var title: String
+    var action: () -> Void
+    var iconName: String
+    var textColor: Color
+    var iconColor: Color
+    var body: some View {
+        Button(action: action) {
+            HStack {
+                Text(title)
+                    .foregroundColor(textColor)
+                Spacer()
+                Image(systemName: iconName)
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(iconColor)
+            }
+            .padding()
+            .frame(width: 335, height: 41)
+            .background(RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.gray, lineWidth: 1)
+                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10))
+        }
+    }
+}
