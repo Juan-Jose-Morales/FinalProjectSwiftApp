@@ -11,6 +11,7 @@ struct ProfileView: View {
     @StateObject private var viewModel: ProfileViewModel
     @State private var isNavigateToChangeProfile = false
     @State private var isNavigateToProfileSettings = false
+    @State private var isEditingUserName = false
     
     init(userService: UserService) {
         _viewModel = StateObject(wrappedValue: ProfileViewModel(userService: userService))
@@ -74,9 +75,9 @@ struct ProfileView: View {
                     }) {
                         Text("Editar")
                             .foregroundColor(Color("Blue"))
-                            .font(.caption)
+                        
                     }
-                    .padding(.top, 10)
+                    .padding(.top,5)
                     .padding(.leading, 2)
                 }
                 
@@ -91,7 +92,7 @@ struct ProfileView: View {
                 }
                 .padding(.leading, 10)
                 .padding(.top, 10)
-                .padding(.bottom, 20)
+                .padding(.bottom, 30)
                 
                 Spacer()
             }
@@ -101,15 +102,23 @@ struct ProfileView: View {
                 .padding(.vertical, 8)
             
             HStack {
-                Text(viewModel.userName.isEmpty ? "Usuario" : viewModel.userName)
+                if isEditingUserName {
+                    TextField("Usuario", text: $viewModel.userName, onCommit: {
+                        isEditingUserName = false
+                        viewModel.saveUserName()
+                    })
                     .foregroundColor(.black)
+                } else {
+                    Text(viewModel.userName.isEmpty ? "Usuario" : viewModel.userName)
+                        .foregroundColor(.black)
+                }
                 
                 Spacer()
                 
                 Button(action: {
-                    
+                    isEditingUserName.toggle()
                 }) {
-                    Text("Editar")
+                    Text(isEditingUserName ? "Guardar" : "Editar")
                         .foregroundColor(Color("Blue"))
                 }
             }
