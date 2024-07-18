@@ -21,11 +21,11 @@
 		904A89BA2C4695C9005F2DC8 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A89B92C4695C9005F2DC8 /* ProfileViewModel.swift */; };
 		904A89BC2C46CD2C005F2DC8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A89BB2C46CD2C005F2DC8 /* ProfileView.swift */; };
 		904A89BE2C46D114005F2DC8 /* ProfileSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A89BD2C46D114005F2DC8 /* ProfileSettingsViewModel.swift */; };
-		904A89C02C46F527005F2DC8 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A89BF2C46F527005F2DC8 /* EditProfileView.swift */; };
 		904A89C22C47D719005F2DC8 /* ChangeProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A89C12C47D719005F2DC8 /* ChangeProfileViewModel.swift */; };
 		904A89C42C47DA3E005F2DC8 /* ChangeProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A89C32C47DA3E005F2DC8 /* ChangeProfileView.swift */; };
 		904A89C62C47DEC9005F2DC8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A89C52C47DEC9005F2DC8 /* ImagePicker.swift */; };
 		904A89C82C47EE49005F2DC8 /* SignOffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A89C72C47EE49005F2DC8 /* SignOffView.swift */; };
+		904A89CA2C483AA0005F2DC8 /* SignOffViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904A89C92C483AA0005F2DC8 /* SignOffViewModel.swift */; };
 		90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */; };
 		90E79ED42C2B39C600133583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED32C2B39C600133583 /* Assets.xcassets */; };
 		90E79ED72C2B39C600133583 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED62C2B39C600133583 /* Preview Assets.xcassets */; };
@@ -57,11 +57,11 @@
 		904A89B92C4695C9005F2DC8 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		904A89BB2C46CD2C005F2DC8 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		904A89BD2C46D114005F2DC8 /* ProfileSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewModel.swift; sourceTree = "<group>"; };
-		904A89BF2C46F527005F2DC8 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		904A89C12C47D719005F2DC8 /* ChangeProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileViewModel.swift; sourceTree = "<group>"; };
 		904A89C32C47DA3E005F2DC8 /* ChangeProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileView.swift; sourceTree = "<group>"; };
 		904A89C52C47DEC9005F2DC8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		904A89C72C47EE49005F2DC8 /* SignOffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOffView.swift; sourceTree = "<group>"; };
+		904A89C92C483AA0005F2DC8 /* SignOffViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOffViewModel.swift; sourceTree = "<group>"; };
 		90E79ECC2C2B39C400133583 /* FinalProjectSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProjectSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectSwiftApp.swift; sourceTree = "<group>"; };
 		90E79ED32C2B39C600133583 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,7 +113,6 @@
 				A95B842D2C3828A600F12190 /* HomeView.swift */,
 				904A89B72C4692F9005F2DC8 /* ProfileSettingsView.swift */,
 				904A89BB2C46CD2C005F2DC8 /* ProfileView.swift */,
-				904A89BF2C46F527005F2DC8 /* EditProfileView.swift */,
 				904A89C32C47DA3E005F2DC8 /* ChangeProfileView.swift */,
 				904A89C72C47EE49005F2DC8 /* SignOffView.swift */,
 			);
@@ -128,6 +127,7 @@
 				904A89B92C4695C9005F2DC8 /* ProfileViewModel.swift */,
 				904A89BD2C46D114005F2DC8 /* ProfileSettingsViewModel.swift */,
 				904A89C12C47D719005F2DC8 /* ChangeProfileViewModel.swift */,
+				904A89C92C483AA0005F2DC8 /* SignOffViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -329,6 +329,7 @@
 				A95B842B2C38275200F12190 /* LaunchScreen.swift in Sources */,
 				9003E10F2C3EB142006CD269 /* LoginUserResponse.swift in Sources */,
 				90294B472C34AD150030E04C /* CustomButton.swift in Sources */,
+				904A89CA2C483AA0005F2DC8 /* SignOffViewModel.swift in Sources */,
 				A9A449942C3C39470085838B /* ApiManager.swift in Sources */,
 				9040AEAD2C346E2000D550AD /* RegisterViewModel.swift in Sources */,
 				A95B842E2C3828A600F12190 /* HomeView.swift in Sources */,
@@ -337,7 +338,6 @@
 				90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */,
 				9040AEA62C345FB400D550AD /* User.swift in Sources */,
 				904A89BC2C46CD2C005F2DC8 /* ProfileView.swift in Sources */,
-				904A89C02C46F527005F2DC8 /* EditProfileView.swift in Sources */,
 				9003E10D2C3EAAC7006CD269 /* CustomObjects.swift in Sources */,
 				A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */,
 				90294B492C36D60C0030E04C /* LoginViewModel.swift in Sources */,
@@ -476,6 +476,7 @@
 				DEVELOPMENT_TEAM = H8ZVN55RGH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Utilizamos Face ID para autenticar tu identidad de manera segura";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "Para ofrecerte una experiencia segura, utilizamos la autenticación biométrica para autenticar tu identidad";
@@ -509,6 +510,7 @@
 				DEVELOPMENT_TEAM = H8ZVN55RGH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Utilizamos Face ID para autenticar tu identidad de manera segura";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "Para ofrecerte una experiencia segura, utilizamos la autenticación biométrica para autenticar tu identidad";

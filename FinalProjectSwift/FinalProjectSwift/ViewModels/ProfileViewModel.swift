@@ -24,12 +24,16 @@ class ProfileViewModel: ObservableObject {
         
         let username = UserDefaults.standard.string(forKey: "username") ?? ""
         let userNick = UserDefaults.standard.string(forKey: "userNick") ?? username
-
+        
         DispatchQueue.main.async {
-                    self.isLoading = false
-                    self.userName = userNick.isEmpty ? "Usuario" : userNick
-                }
-            }
+            self.isLoading = false
+            self.userName = userNick.isEmpty ? "Usuario" : userNick
         }
+    }
+    func saveUserName() {
+        UserDefaults.standard.set(userName, forKey: "userNick")
+    }
+    
+}
 
 

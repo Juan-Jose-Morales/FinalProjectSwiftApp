@@ -131,11 +131,13 @@ struct CustomButtonProfileImage: View {
     var iconName: String
     var textColor: Color
     var iconColor: Color
+    
     var body: some View {
         Button(action: action) {
             HStack {
                 Text(title)
                     .foregroundColor(textColor)
+                    .font(.system(size: 18))
                 Spacer()
                 Image(systemName: iconName)
                     .resizable()
@@ -144,7 +146,7 @@ struct CustomButtonProfileImage: View {
             }
             .padding()
             .frame(width: 335, height: 41)
-            .background(RoundedRectangle(cornerRadius: 10)
+            .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.gray, lineWidth: 1)
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10))
         }

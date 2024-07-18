@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ChangeProfileView: View {
     @ObservedObject var viewModel = ChangeProfileViewModel()
+    @State private var isNavigateToProfileView = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
-                
                 userAvatar
                 
                 Divider()
-                    
+                
                 buttonsToChangePhoto()
                 
                 Spacer()
@@ -31,24 +31,29 @@ struct ChangeProfileView: View {
             .alert(isPresented: $viewModel.showAlert) {
                 Alert(title: Text("Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
             }
+            .navigationBarBackButtonHidden(true)
             .navigationTitle("Foto de perfil")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
-                
-            }){
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.black)
-            })
-        }
-    }
+                            isNavigateToProfileView = true
+                        }) {
+                            Image(systemName: "arrow.left")
+                                .foregroundColor(.black)
+                        })
+                        .navigationDestination(isPresented: $isNavigateToProfileView) {
+                            ProfileView(userService: UserService())
+                        }
+                    }
+                }
+    
     private var userAvatar: some View {
         VStack {
             if let profileImage = viewModel.profileImage {
                 Image(uiImage: profileImage)
                     .resizable()
-                    .frame(width: 270, height: 280)
+                    .frame(width: 280, height: 280)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
-                    .padding()
+                    .padding(.top, 20)
             } else {
                 Image(systemName: "person.crop.circle")
                     .resizable()
@@ -58,7 +63,8 @@ struct ChangeProfileView: View {
             }
         }
     }
-    private func buttonsToChangePhoto () -> some View {
+    
+    private func buttonsToChangePhoto() -> some View {
         VStack(spacing: 25) {
             Spacer().frame(height: 25)
             CustomButtonProfileImage(
@@ -86,8 +92,7 @@ struct ChangeProfileView: View {
             )
         }
     }
-    
-    }
+}
 
 #Preview {
     ChangeProfileView()

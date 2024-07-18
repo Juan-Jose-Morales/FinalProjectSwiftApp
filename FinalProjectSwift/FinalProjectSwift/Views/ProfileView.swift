@@ -9,107 +9,130 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject private var viewModel: ProfileViewModel
+    @State private var isNavigateToChangeProfile = false
+    @State private var isNavigateToProfileSettings = false
+    @State private var isEditingUserName = false
     
     init(userService: UserService) {
         _viewModel = StateObject(wrappedValue: ProfileViewModel(userService: userService))
     }
     
     var body: some View {
-        VStack{
-            tapBar
-                .padding()
-            
-            if viewModel.isLoading {
-                progressView
-            }else{
+        NavigationStack {
+            VStack{
                 
-                editProfile()
-
+                if viewModel.isLoading {
+                    progressView
+                }else{
+                    editProfile()
+                }
+                
+                Spacer().frame(height: 40)
+                
+                Divider()
+                    .padding(.horizontal)
+                
+                Spacer().frame(height: 40)
+                
+                
+                blocked
+                
+                
+                Spacer()
             }
-            
-            Spacer().frame(height: 40)
-            
-            Divider()
-                .padding(.horizontal)
-            
-            Spacer().frame(height: 40)
-            
-            blocked
-            
-            Spacer()
-        }
-        .navigationBarHidden(true)
-    }
-    private var tapBar: some View{
-        HStack{
-            Button(action: {
-                
+            .navigationTitle("Ajustes de perfil")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading: Button(action: {
+                isNavigateToProfileSettings = true
             }){
                 Image(systemName: "arrow.left")
                     .foregroundColor(.black)
+            })
+            .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isNavigateToChangeProfile) {
+                ChangeProfileView()
             }
-            Spacer()
-            Text("Ajustes de perfil")
-                .font(.headline)
-                .bold()
-                .foregroundColor(.black)
-            Spacer()
+            .navigationDestination(isPresented: $isNavigateToProfileSettings) {
+                ProfileSettingsView()
+            }
             
-            Image(systemName: "arrow.left")
-                .opacity(0)
         }
+        
     }
+    
     private func editProfile() -> some View {
         VStack {
             HStack(alignment: .top, spacing: 0) {
                 VStack {
                     Image(systemName: "person.circle")
                         .resizable()
-                        .frame(width: 40, height: 40)
-                        .padding(.leading, 16)
+                        .frame(width: 60, height: 55)
+                        .padding(.leading, 2)
+                        .padding(.top, 10)
                     
                     Button(action: {
-                        
+                        isNavigateToChangeProfile = true
                     }) {
                         Text("Editar")
                             .foregroundColor(Color("Blue"))
-                            .font(.caption)
+                        
                     }
-                    .padding(.top, 5)
-                    .padding(.leading, 16)
+                    .padding(.top,5)
+                    .padding(.leading, 2)
                 }
                 
-                VStack() {
+                VStack(alignment: .leading, spacing: 4) {
                     Text("Ingresa tu nombre y añade una foto de perfil (Opcional)")
                         .foregroundColor(.black)
-                        .padding(.bottom, 30)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 10)
                     
-                    Divider()
-                        .frame(maxWidth: .infinity)
-    
-                    HStack {
-                        Text(viewModel.userName.isEmpty ? "Usuario" : viewModel.userName)
-                            .foregroundColor(.black)
-                        Spacer()
-                        Button(action: {
-                            
-                        }) {
-                            Text("Editar")
-                                .foregroundColor(Color("Blue"))
-                        }
-                       
-                    }
                     
                 }
-                .padding(.trailing, 16)
+                .padding(.leading, 10)
+                .padding(.top, 10)
+                .padding(.bottom, 30)
+                
+                Spacer()
             }
+            .padding(.horizontal, 16)
+            
+            Divider()
+                .padding(.vertical, 8)
+            
+            HStack {
+                if isEditingUserName {
+                    TextField("Usuario", text: $viewModel.userName, onCommit: {
+                        isEditingUserName = false
+                        viewModel.saveUserName()
+                    })
+                    .foregroundColor(.black)
+                } else {
+                    Text(viewModel.userName.isEmpty ? "Usuario" : viewModel.userName)
+                        .foregroundColor(.black)
+                }
+                
+                Spacer()
+                
+                Button(action: {
+                    isEditingUserName.toggle()
+                }) {
+                    Text(isEditingUserName ? "Guardar" : "Editar")
+                        .foregroundColor(Color("Blue"))
+                }
+            }
+            .padding(.horizontal, 16)
+            
+            Spacer()
         }
-        .frame(width: 335, height: 150)
+        .frame(width: 335, height: 160)
         .background(Color.white)
         .cornerRadius(15)
         .shadow(radius: 5)
-        .padding(.top, 16)
+        .padding(.top, 30)
     }
+    
     private var progressView: some View {
         ProgressView()
             .frame(width: 335, height: 133)
@@ -118,6 +141,7 @@ struct ProfileView: View {
             .shadow(radius: 5)
             .padding(.top, 16)
     }
+    
     private var blocked: some View {
         Button(action: {
             
@@ -137,6 +161,9 @@ struct ProfileView: View {
         }
         .padding(.horizontal)
     }
+    
+    
+    
 }
 
 #Preview {

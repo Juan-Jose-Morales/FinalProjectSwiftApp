@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct SignOffView: View {
+    @StateObject private var viewModel = SignOffViewModel()
+    @Environment(\.presentationMode) var presentationMode
+    @State private var isNavigateToLogin = false
+    @State private var isNavigateToProfileSettingsView = false
+    
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             VStack {
                 messageToUser
                 Spacer().frame(height: 60)
@@ -20,11 +25,21 @@ struct SignOffView: View {
             .navigationTitle("Cerrar sesión")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
-                
+                isNavigateToProfileSettingsView = true
             }){
                 Image(systemName: "arrow.left")
                     .foregroundColor(.red)
             })
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK")))
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isNavigateToLogin) {
+                LoginView()
+            }
+            .navigationDestination(isPresented: $isNavigateToProfileSettingsView) {
+                ProfileSettingsView()
+            }
         }
     }
     private var messageToUser: some View {
@@ -48,7 +63,7 @@ struct SignOffView: View {
     }
     private var signOffButton: some View {
         Button(action: {
-            
+            isNavigateToLogin = true
         }) {
             Text("Cerrar sesión")
                 .foregroundColor(.red)
@@ -56,7 +71,7 @@ struct SignOffView: View {
                 .background(Color("GrayText"))
                 .cornerRadius(16)
                 .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-                
+            
         }
     }
     
