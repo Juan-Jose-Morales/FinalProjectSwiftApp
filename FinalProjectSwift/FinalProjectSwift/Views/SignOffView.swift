@@ -10,11 +10,12 @@ import SwiftUI
 struct SignOffView: View {
     @StateObject private var viewModel = SignOffViewModel()
     @Environment(\.presentationMode) var presentationMode
-    @State private var navigateToLogin = false
+    @State private var isNavigateToLogin = false
+    @State private var isNavigateToProfileSettingsView = false
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             VStack {
                 messageToUser
                 Spacer().frame(height: 60)
@@ -24,7 +25,7 @@ struct SignOffView: View {
             .navigationTitle("Cerrar sesión")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
-                presentationMode.wrappedValue.dismiss()
+                isNavigateToProfileSettingsView = true
             }){
                 Image(systemName: "arrow.left")
                     .foregroundColor(.red)
@@ -32,11 +33,13 @@ struct SignOffView: View {
             .alert(isPresented: $viewModel.showAlert) {
                 Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK")))
             }
-            .background(
-                NavigationLink(destination: LoginView(), isActive: $navigateToLogin) {
-                    EmptyView()
-                }
-            )
+            .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isNavigateToLogin) {
+                LoginView()
+            }
+            .navigationDestination(isPresented: $isNavigateToProfileSettingsView) {
+                ProfileSettingsView()
+            }
         }
     }
     private var messageToUser: some View {
@@ -60,7 +63,7 @@ struct SignOffView: View {
     }
     private var signOffButton: some View {
         Button(action: {
-            
+            isNavigateToLogin = true
         }) {
             Text("Cerrar sesión")
                 .foregroundColor(.red)
@@ -71,25 +74,7 @@ struct SignOffView: View {
             
         }
     }
-    private var tapBar: some View{
-        HStack{
-            Button(action: {
-                
-            }){
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.black)
-            }
-            Spacer()
-            Text("Ajustes de perfil")
-                .font(.headline)
-                .bold()
-                .foregroundColor(.black)
-            Spacer()
-            
-            Image(systemName: "arrow.left")
-                .opacity(0)
-        }
-    }
+    
 }
 
 #Preview {

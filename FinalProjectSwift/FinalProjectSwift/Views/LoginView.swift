@@ -10,7 +10,7 @@ import LocalAuthentication
 
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
-    
+    @State private var isNavigationToRegister = false
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -28,17 +28,17 @@ struct LoginView: View {
                     BiometricButton(action: {
                         viewModel.authenticateWithBiometrics()
                     }, imageName: "person.fill.viewfinder")
-                        .padding(.bottom, 36)
+                    .padding(.bottom, 36)
                     
                     CustomButton(title: "Iniciar Sesión") {
                         viewModel.login()
                     }
                     .padding(.bottom, 55)
                     
-                    NavigationLink(destination: HomeView(), isActive: $viewModel.isLoginSuccessful) {
-                        EmptyView()
+                    .navigationDestination(isPresented: $isNavigationToRegister) {
+                        RegisterView()
                     }
-
+                    
                     navigateToRegister()
                 }
                 .padding(.horizontal, 40)
@@ -61,7 +61,10 @@ struct LoginView: View {
         HStack {
             Text("¿No tienes cuenta?")
                 .foregroundColor(.black)
-            NavigationLink(destination: RegisterView()) {
+            
+            Button(action: {
+                isNavigationToRegister = true
+            }) {
                 Text("Regístrate")
                     .foregroundColor(Color("Blue"))
             }
@@ -72,9 +75,9 @@ struct LoginView: View {
 
 
 struct LoginView_Previews: PreviewProvider {
-  static var previews: some View {
-    LoginView()
-  }
+    static var previews: some View {
+        LoginView()
+    }
 }
 
 

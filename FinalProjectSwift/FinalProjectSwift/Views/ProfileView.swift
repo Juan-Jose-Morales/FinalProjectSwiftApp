@@ -9,13 +9,15 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject private var viewModel: ProfileViewModel
+    @State private var isNavigateToChangeProfile = false
+    @State private var isNavigateToProfileSettings = false
     
     init(userService: UserService) {
         _viewModel = StateObject(wrappedValue: ProfileViewModel(userService: userService))
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack{
                 
                 if viewModel.isLoading {
@@ -40,79 +42,87 @@ struct ProfileView: View {
             .navigationTitle("Ajustes de perfil")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
-                
+                isNavigateToProfileSettings = true
             }){
                 Image(systemName: "arrow.left")
                     .foregroundColor(.black)
             })
+            .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isNavigateToChangeProfile) {
+                ChangeProfileView()
+            }
+            .navigationDestination(isPresented: $isNavigateToProfileSettings) {
+                ProfileSettingsView()
+            }
+            
         }
         
     }
     
     private func editProfile() -> some View {
-            VStack {
-                HStack(alignment: .top, spacing: 0) {
-                    VStack {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 60, height: 55)
-                            .padding(.leading, 2)
-                            .padding(.top, 10)
-                        
-                        Button(action: {
-                            
-                        }) {
-                            Text("Editar")
-                                .foregroundColor(Color("Blue"))
-                                .font(.caption)
-                        }
-                        .padding(.top, 10)
+        VStack {
+            HStack(alignment: .top, spacing: 0) {
+                VStack {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .frame(width: 60, height: 55)
                         .padding(.leading, 2)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Ingresa tu nombre y añade una foto de perfil (Opcional)")
-                            .foregroundColor(.black)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.top, 10)
-                        
-                       
-                    }
-                    .padding(.leading, 10)
-                    .padding(.top, 10)
-                    .padding(.bottom, 20)
-                    
-                    Spacer()
-                }
-                .padding(.horizontal, 16)
-                
-                Divider()
-                    .padding(.vertical, 8)
-                
-                HStack {
-                    Text(viewModel.userName.isEmpty ? "Usuario" : viewModel.userName)
-                        .foregroundColor(.black)
-                    
-                    Spacer()
+                        .padding(.top, 10)
                     
                     Button(action: {
-                        
+                        isNavigateToChangeProfile = true
                     }) {
                         Text("Editar")
                             .foregroundColor(Color("Blue"))
+                            .font(.caption)
                     }
+                    .padding(.top, 10)
+                    .padding(.leading, 2)
                 }
-                .padding(.horizontal, 16)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Ingresa tu nombre y añade una foto de perfil (Opcional)")
+                        .foregroundColor(.black)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 10)
+                    
+                    
+                }
+                .padding(.leading, 10)
+                .padding(.top, 10)
+                .padding(.bottom, 20)
                 
                 Spacer()
             }
-            .frame(width: 335, height: 160)
-            .background(Color.white)
-            .cornerRadius(15)
-            .shadow(radius: 5)
-            .padding(.top, 30)
+            .padding(.horizontal, 16)
+            
+            Divider()
+                .padding(.vertical, 8)
+            
+            HStack {
+                Text(viewModel.userName.isEmpty ? "Usuario" : viewModel.userName)
+                    .foregroundColor(.black)
+                
+                Spacer()
+                
+                Button(action: {
+                    
+                }) {
+                    Text("Editar")
+                        .foregroundColor(Color("Blue"))
+                }
+            }
+            .padding(.horizontal, 16)
+            
+            Spacer()
         }
+        .frame(width: 335, height: 160)
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(radius: 5)
+        .padding(.top, 30)
+    }
     
     private var progressView: some View {
         ProgressView()

@@ -8,14 +8,20 @@
 import Foundation
 import Combine
 import Alamofire
+import SwiftUI
 
 class ProfileSettingsViewModel: ObservableObject {
     @Published var user = User()
+    @Published var profileImage: UIImage?
+    @Published var navigateToProfile = false
+    
     var userService = UserService()
     
     var buttons: [ButtonInfo] {
         [
-            ButtonInfo(title: "Ajustes de perfil", iconName: "ProfileSettings", action: {}),
+            ButtonInfo(title: "Ajustes de perfil", iconName: "ProfileSettings"){
+                self.navigateToProfile = true
+            },
             ButtonInfo(title: "Almacenamiento", iconName: "Storage", action: {}),ButtonInfo(title: "Ajustes de idioma", iconName: "LanguageSettings", action: {})
             
         ]
@@ -35,7 +41,15 @@ class ProfileSettingsViewModel: ObservableObject {
             }
         }
     }
+    
+    private func loadProfileImage() {
+        if let data = UserDefaults.standard.data(forKey: "profileImageKey"),
+           let image = UIImage(data: data) {
+            profileImage = image
+        }
+    }
 }
+
 struct ButtonInfo: Identifiable {
     var id = UUID()
     var title: String
