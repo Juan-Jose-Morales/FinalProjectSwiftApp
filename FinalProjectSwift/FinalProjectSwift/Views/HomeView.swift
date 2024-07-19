@@ -19,21 +19,23 @@ struct HomeView: View {
                     if homeViewModel.listChats.isEmpty{
                         CustomListChat()
                     }else {
-                        List(homeViewModel.listChats){chat in
-                            Text(chat.targetnick ?? "Usuario Desconocido")
-                        }
+                            List{
+                                ForEach(homeViewModel.listChats) { chat in
+                                    VStack{
+                                        HStack{
+                                            Image(systemName: "person.circle.fill")
+                                                .resizable()
+                                                .frame(width: 40, height: 40)
+                                            Text(chat.targetnick ?? "Usuario Desconocido")
+                                        }
+                                    }
+                                }.onDelete(perform: { indexSet in
+                                    
+                                })
+                            }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .scrollContentBackground(.hidden)
+                            
                     }
-                    Button {
-                        homeViewModel.deleteChat(id: "1455")
-                    } label: {
-                        Text("Prueba")
-                    }
-                    Button {
-                        homeViewModel.getChatlist()
-                    } label: {
-                        Text("chat")
-                    }
-
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 FloatButton()
