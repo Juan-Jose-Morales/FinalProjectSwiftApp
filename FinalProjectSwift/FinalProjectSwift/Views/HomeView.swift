@@ -21,6 +21,7 @@ struct HomeView: View {
                     }else {
                             List{
                                 ForEach(homeViewModel.listChats) { chat in
+                                   // NavigationLink(destination: ChatView(chat: chat)
                                     VStack{
                                         HStack{
                                             Image(systemName: "person.circle.fill")
@@ -32,6 +33,7 @@ struct HomeView: View {
                                 }.onDelete(perform: { indexSet in
                                     
                                 })
+                                .listRowSeparator(.hidden)
                             }.frame(maxWidth: .infinity, maxHeight: .infinity)
                             .scrollContentBackground(.hidden)
                             
@@ -45,24 +47,24 @@ struct HomeView: View {
                     Image("logoFinalGrande")
                         .resizable()
                         .frame(width: 70, height: 70)
-                        .padding()
+                        .padding(.top, 40)
                 }
                 ToolbarItem(placement: .topBarLeading) {
                     Image(systemName: "person.circle.fill")
                         .resizable()
                         .clipShape(Circle())
                         .frame(width: 42, height: 42)
-                        .padding()
+                        .padding(.top, 40)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Image(systemName: "gearshape.fill")
                         .resizable()
                         .clipShape(Circle())
                         .frame(width: 42, height: 42)
-                        .padding()
+                        .padding(.top , 40)
                 }
             }.modifier(NavBarModifier())
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
