@@ -126,7 +126,7 @@ class UserService {
                 }
             }
     }
-    func getChatList(){
+    func getChatList(completion: @escaping (_ chatList: [ChatList]) -> Void){
         
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -141,7 +141,7 @@ class UserService {
                 response in
                 switch response.result {
                             case .success(let data):
-                                  print(data)
+                                  completion(data)
                               case .failure(let error):
                                  print(error)
                 }

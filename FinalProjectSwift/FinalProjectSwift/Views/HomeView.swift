@@ -16,8 +16,12 @@ struct HomeView: View {
             ZStack (alignment: .bottomTrailing){
                 VStack{
                     SearcField(imageName:  "magnifyingglass", placeholder: "", text: $hola)
-                    if chatList.isEmpty{
+                    if homeViewModel.listChats.isEmpty{
                         CustomListChat()
+                    }else {
+                        List(homeViewModel.listChats){chat in
+                            Text(chat.targetnick ?? "Usuario Desconocido")
+                        }
                     }
                     Button {
                         homeViewModel.deleteChat(id: "1455")

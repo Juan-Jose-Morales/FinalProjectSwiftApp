@@ -80,7 +80,6 @@ struct FloatButton: View {
 struct NavBarModifier: ViewModifier {
 
     init() {
-        let sizeHeight: CGFloat = 55
         let coloredAppearance = UINavigationBarAppearance()
         coloredAppearance.configureWithOpaqueBackground()
         coloredAppearance.backgroundColor = UIColor(resource: .blue)

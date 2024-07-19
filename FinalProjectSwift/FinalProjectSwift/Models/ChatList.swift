@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct ChatList: Codable {
+struct ChatList: Identifiable ,Codable {
+    var id = UUID()
     var chat: String?
     var source: String?
     var sourceonline: Bool?
@@ -15,4 +16,14 @@ struct ChatList: Codable {
     var targetnick: String?
     var targetonline: Bool?
     var chatcreated: String?
+    
+    enum CodingKeys: CodingKey {
+        case chat
+        case source
+        case sourceonline
+        case target
+        case targetnick
+        case targetonline
+        case chatcreated
+    }
 }
