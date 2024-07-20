@@ -7,15 +7,17 @@
 
 import SwiftUI
 
+
 struct HomeView: View {
-    let chatList: [String] = []
-    @State private var hola = ""
     @StateObject private var homeViewModel = HomeViewModel()
     var body: some View {
         NavigationStack {
             ZStack (alignment: .bottomTrailing){
                 VStack{
-                    SearcField(imageName:  "magnifyingglass", placeholder: "", text: $hola)
+                    SearcField(imageName:  "magnifyingglass", placeholder: "", text: $homeViewModel.search)
+                        .onChange(of: homeViewModel.search) { newValue in
+                            homeViewModel.chatFilter()
+                        }
                     if homeViewModel.listChats.isEmpty{
                         CustomListChat()
                     }else {
