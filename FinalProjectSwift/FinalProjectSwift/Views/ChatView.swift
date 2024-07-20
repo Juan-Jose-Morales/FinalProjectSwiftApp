@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
+    @StateObject private var keyboardResponder = KeyboardResponder()
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             ChatHeaderView(user: chatViewModel.user, profileImage: chatViewModel.changeProfileViewModel.profileImage)
             
             ScrollView {
@@ -27,16 +28,24 @@ struct ChatView: View {
                 }
             }
             .padding(.top)
+            .background(Color.white)
+            
+            Spacer()
             
             ChatInputView(messageText: $chatViewModel.messageText, sendAction: {
                 chatViewModel.sendMessage()
             }, attachAction: {
                 chatViewModel.attachFile()
             })
-            
+            .padding(.bottom, keyboardResponder.currentHeight)
+            .background(Color.white)
+            .animation(.easeOut(duration: 0.3), value: keyboardResponder.currentHeight)
         }
-        .background(Color.white)
         .ignoresSafeArea(.keyboard, edges: .bottom)
+        .background(Color.white)
+        .onTapGesture {
+            UIApplication.shared.endEditing()
+        }
     }
 }
 

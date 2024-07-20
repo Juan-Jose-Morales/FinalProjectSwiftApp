@@ -9,40 +9,52 @@ import SwiftUI
 
 struct ChatInputView: View {
     @Binding var messageText: String
-    
     var sendAction: () -> Void
     var attachAction: () -> Void
     @StateObject private var keyboardResponder = KeyboardResponder()
 
     var body: some View {
-        HStack {
-            Button(action: attachAction) {
-                Image("Attach")
-                    .resizable()
-                    .frame(width: 20, height: 20)
+        VStack {
+            HStack {
+                Button(action: attachAction) {
+                    Image("attach")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                }
+                .padding(.leading, 15)
+
+                ZStack(alignment: .leading) {
+                    if messageText.isEmpty {
+                        Text("Envia un mensaje")
+                            .foregroundColor(.gray)
+                            .padding(.leading, 10)
+                            .padding(.vertical, 8)
+                    }
+                    TextField("", text: $messageText)
+                        .padding(10)
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .foregroundColor(.black)
+                }
+                .frame(height: 36)
+                .padding(.horizontal, 15)
+
+                Button(action: sendAction) {
+                    Image("send")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                }
+                .padding(.trailing, 8)
             }
-            .padding(.leading, 15)
-            
-            StyledTextField(placeholder: "Envia un mensaje", text: $messageText)
-            
-            Button(action: sendAction) {
-                Image("Send")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-            }
-            .padding(.trailing, 15)
+            .frame(maxWidth: .infinity)
+            .frame(height: 56)
+            .background(Color("Blue"))
+            .padding(.top, 5)
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: 56)
-        .background(Color("Blue"))
-        .offset(y: keyboardResponder.currentHeight > 0 ? -keyboardResponder.currentHeight : 0)
-        .animation(.easeOut(duration: 0.3), value: keyboardResponder.currentHeight)
-        .padding(.bottom, keyboardResponder.currentHeight > 0 ? keyboardResponder.currentHeight : 0)
-        .padding(.top, 15)
     }
 }
 
 #Preview("ChatInputView Preview") {
-    @State var messageText = ""
+    @State var messageText = "Mensaje de ejemplo"
     return ChatInputView(messageText: $messageText, sendAction: {}, attachAction: {})
 }

@@ -11,24 +11,35 @@ import Combine
 
 final class KeyboardResponder: ObservableObject {
     @Published var currentHeight: CGFloat = 0
-    
-    private var cancellable: AnyCancellable?
-    
+
+    private var cancellableSet: Set<AnyCancellable> = []
+
     init() {
-        cancellable = NotificationCenter.default
-            .publisher(for: UIResponder.keyboardWillChangeFrameNotification)
-            .sink { [weak self] notification in
-                guard let self = self,
-                      let info = notification.userInfo,
-                      let keyboardFrame = info[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-                let keyboardHeight = keyboardFrame.height
-                self.currentHeight = keyboardHeight
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+            .merge(with: NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification))
+            .sink { notification in
+                if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+                    withAnimation {
+                        self.currentHeight = keyboardFrame.height
+                    }
+                }
             }
+            .store(in: &cancellableSet)
+
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+            .sink { _ in
+                withAnimation {
+                    self.currentHeight = 0
+                }
+            }
+            .store(in: &cancellableSet)
     }
 }
 
 extension UIApplication {
     func endEditing() {
-        windows.forEach { $0.endEditing(true) }
+        if let windowScene = connectedScenes.first as? UIWindowScene {
+            windowScene.windows.forEach { $0.endEditing(true) }
+        }
     }
 }

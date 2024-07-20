@@ -15,7 +15,7 @@ struct LaunchScreen: View {
             if showInitialView == true{
                 DotLottieAnimation(fileName: "main_splash", config: AnimationConfig(autoplay: true, loop: true)).view()
             }else {
-               LoginView()
+                ChatView(chatViewModel: ChatViewModel(user: User()))
             }
        
         }.onAppear {
