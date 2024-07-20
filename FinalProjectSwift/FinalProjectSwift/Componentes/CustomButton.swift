@@ -87,7 +87,7 @@ struct NavBarModifier: ViewModifier {
         let navigationBar = UINavigationBar()
         
         navigationBar.sizeToFit()
-        //        navigationBar.frame.size.height(sizeHeight)
+        //navigationBar.frame.size.height(sizeHeight)
     }
     
     func body(content: Content) -> some View {
