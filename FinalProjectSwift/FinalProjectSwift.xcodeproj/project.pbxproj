@@ -105,8 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				9040AEAC2C346E2000D550AD /* RegisterViewModel.swift */,
-				90294B482C36D60C0030E04C /* LoginViewModel.swift */,
 				A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */,
+				90294B482C36D60C0030E04C /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

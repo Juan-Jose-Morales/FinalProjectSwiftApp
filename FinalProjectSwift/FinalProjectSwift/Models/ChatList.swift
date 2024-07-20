@@ -9,7 +9,7 @@ import Foundation
 
 struct ChatList: Identifiable ,Codable {
     var id = UUID()
-    var chat: String?
+    var chat: String
     var source: String?
     var sourceonline: Bool?
     var target: String?

@@ -13,7 +13,7 @@ struct CustomListChat: View {
             
             Image(.iconoChatList)
             Text("Empieza un nuevo chat")
-        }
+        }.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

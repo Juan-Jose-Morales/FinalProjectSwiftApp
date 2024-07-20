@@ -27,4 +27,10 @@ class HomeViewModel: ObservableObject {
     func deleteChat(id: String){
         userService.deletechat(id: id)
     }
+    func deleteItems(at offsets: IndexSet) {
+        for index in offsets {
+            let chat = listChats[index]
+            deleteChat(id: chat.chat)
+        }
+    }
 }

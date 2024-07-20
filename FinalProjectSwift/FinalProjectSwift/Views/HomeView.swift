@@ -31,7 +31,7 @@ struct HomeView: View {
                                         }
                                     }
                                 }.onDelete(perform: { indexSet in
-                                    
+                                    homeViewModel.deleteItems(at: indexSet)
                                 })
                                 .listRowSeparator(.hidden)
                             }.frame(maxWidth: .infinity, maxHeight: .infinity)
