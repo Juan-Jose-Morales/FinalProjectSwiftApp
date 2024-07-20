@@ -35,6 +35,27 @@ struct CustomTextField: View {
             .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 15))
     }
 }
+struct StyledTextField: View {
+    var placeholder: String
+    @Binding var text: String
+    
+    var body: some View {
+        ZStack(alignment: .leading) {
+            if text.isEmpty {
+                Text(placeholder)
+                    .foregroundColor(.gray)
+                    .padding(.leading, 8)
+            }
+            TextField("", text: $text)
+                .padding(8)
+                .background(Color.white)
+                .cornerRadius(15)
+                .foregroundColor(.black)
+                .frame(height: 36)
+        }
+        .padding(.horizontal, 8)
+    }
+}
 
 struct SecureFields: View {
     var title: String

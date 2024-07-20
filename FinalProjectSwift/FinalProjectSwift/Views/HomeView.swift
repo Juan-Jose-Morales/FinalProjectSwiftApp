@@ -44,7 +44,7 @@ struct HomeView: View {
                         .padding()
                 }
             }.modifier(NavBarModifier())
-                .navigationBarBackButtonHidden(true)
+                //.navigationBarBackButtonHidden(true)
         }
     }
 }
