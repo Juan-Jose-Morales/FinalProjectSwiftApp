@@ -59,6 +59,7 @@ struct FloatButton: View {
     var body: some View {
         Button {
             showingSheet.toggle()
+            
         } label: {
             Image(systemName: "plus")
                 .font(.title.weight(.semibold))
@@ -79,7 +80,6 @@ struct FloatButton: View {
 struct NavBarModifier: ViewModifier {
     
     init() {
-        let sizeHeight: CGFloat = 55
         let coloredAppearance = UINavigationBarAppearance()
         coloredAppearance.configureWithOpaqueBackground()
         coloredAppearance.backgroundColor = UIColor(resource: .blue)
