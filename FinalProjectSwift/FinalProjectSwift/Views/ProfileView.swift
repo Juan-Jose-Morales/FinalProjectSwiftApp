@@ -50,7 +50,7 @@ struct ProfileView: View {
             })
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $isNavigateToChangeProfile) {
-                ChangeProfileView()
+                ChangeProfileView(origin: .profile)
             }
             .navigationDestination(isPresented: $isNavigateToProfileSettings) {
                 ProfileSettingsView()
@@ -161,9 +161,6 @@ struct ProfileView: View {
         }
         .padding(.horizontal)
     }
-    
-    
-    
 }
 
 #Preview {

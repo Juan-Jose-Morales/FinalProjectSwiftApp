@@ -7,9 +7,16 @@
 
 import SwiftUI
 
+enum Origin {
+    case home
+    case profile
+}
+
 struct ChangeProfileView: View {
     @ObservedObject var viewModel = ChangeProfileViewModel()
-    @State private var isNavigateToProfileView = false
+    @State private var isNavigateBack = false
+    let origin: Origin
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -35,16 +42,20 @@ struct ChangeProfileView: View {
             .navigationTitle("Foto de perfil")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
-                            isNavigateToProfileView = true
-                        }) {
-                            Image(systemName: "arrow.left")
-                                .foregroundColor(.black)
-                        })
-                        .navigationDestination(isPresented: $isNavigateToProfileView) {
-                            ProfileView(userService: UserService())
-                        }
-                    }
+                isNavigateBack = true
+            }) {
+                Image(systemName: "arrow.left")
+                    .foregroundColor(.black)
+            })
+            .navigationDestination(isPresented: $isNavigateBack) {
+                if origin == .home {
+                    HomeView()
+                } else {
+                    ProfileView(userService: UserService())
                 }
+            }
+        }
+    }
     
     private var userAvatar: some View {
         VStack {
@@ -95,5 +106,6 @@ struct ChangeProfileView: View {
 }
 
 #Preview {
-    ChangeProfileView()
+    ChangeProfileView(origin: .home)
 }
+

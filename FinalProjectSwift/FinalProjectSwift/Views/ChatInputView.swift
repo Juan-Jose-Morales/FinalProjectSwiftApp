@@ -44,7 +44,7 @@ struct ChatInputView: View {
                         .resizable()
                         .frame(width: 24, height: 24)
                 }
-                .padding(.trailing, 8)
+                .padding(.trailing, 15)
             }
             .frame(maxWidth: .infinity)
             .frame(height: 56)

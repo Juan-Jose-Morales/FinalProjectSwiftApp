@@ -119,7 +119,7 @@ struct SearcField: View {
                         .padding()
                 }
             }
-            .frame(height: 50)
+            .frame(height: 45)
             .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.black, lineWidth: 1)
                 .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 4))

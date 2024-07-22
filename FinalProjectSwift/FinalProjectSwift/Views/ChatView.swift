@@ -13,17 +13,34 @@ struct ChatView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ChatHeaderView(user: chatViewModel.user, profileImage: chatViewModel.changeProfileViewModel.profileImage)
+            
+            ChatHeaderView(chatlist: chatViewModel.chatList)
             
             ScrollView {
                 VStack(alignment: .leading) {
-                    ForEach(chatViewModel.messages, id: \.self) { message in
-                        Text(message)
-                            .padding()
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                            .padding(.top, 5)
+                    ForEach(chatViewModel.messages, id: \.id) { message in
+                        HStack {
+                            if message.source == chatViewModel.chatList.source {
+                                Spacer()
+                                Text(message.message)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(22)
+                                    .foregroundColor(.black)
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                    .padding(.horizontal)
+                            } else {
+                                Text(message.message)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .cornerRadius(22)
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.horizontal)
+                                Spacer()
+                            }
+                        }
+                        .padding(.top, 5)
                     }
                 }
             }
@@ -32,11 +49,15 @@ struct ChatView: View {
             
             Spacer()
             
-            ChatInputView(messageText: $chatViewModel.messageText, sendAction: {
-                chatViewModel.sendMessage()
-            }, attachAction: {
-                chatViewModel.attachFile()
-            })
+            ChatInputView(
+                messageText: $chatViewModel.messageText,
+                sendAction: {
+                    chatViewModel.sendMessage()
+                },
+                attachAction: {
+                    chatViewModel.attachFile()
+                }
+            )
             .padding(.bottom, keyboardResponder.currentHeight)
             .background(Color.white)
             .animation(.easeOut(duration: 0.3), value: keyboardResponder.currentHeight)
@@ -50,7 +71,7 @@ struct ChatView: View {
 }
 
 #Preview("ChatView Preview") {
-    let user = User(id: "1", login: "Pepe", password: "password", nick: "Pepe", avatar: nil, platform: nil, uuid: nil, online: true, created: "2024-07-11", updated: "2024-07-11", token: nil)
-    let chatViewModel = ChatViewModel(user: user)
+    let chatList = ChatList(id: UUID(), chat: "123", source: "1", sourceonline: true, target: "2", targetnick: "Pepe", targetonline: true)
+    let chatViewModel = ChatViewModel(chatId: "someChatId", chatList: chatList)
     return ChatView(chatViewModel: chatViewModel)
 }
