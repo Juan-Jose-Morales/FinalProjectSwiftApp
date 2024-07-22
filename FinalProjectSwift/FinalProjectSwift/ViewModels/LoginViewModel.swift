@@ -95,9 +95,6 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    
-    
-    
     private func handleLoggedInUser(_ user: User, token: String? = nil) {
         if let token = token ?? user.token {
             self.authToken = token
@@ -110,8 +107,6 @@ class LoginViewModel: ObservableObject {
             self.showAlert = true
         }
     }
-    
-    
     
     func resetAlerts() {
         self.errorMessage = nil

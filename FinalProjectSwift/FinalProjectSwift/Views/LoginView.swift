@@ -11,7 +11,7 @@ import LocalAuthentication
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
     @State private var isNavigationToRegister = false
-    @State private var isNavigationToHome = false
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -33,14 +33,13 @@ struct LoginView: View {
                     
                     CustomButton(title: "Iniciar Sesión") {
                         viewModel.login()
-                        isNavigationToHome = true
                     }
                     .padding(.bottom, 55)
                     
                     .navigationDestination(isPresented: $isNavigationToRegister) {
                         RegisterView()
                     }
-                    .navigationDestination(isPresented: $isNavigationToHome) {
+                    .navigationDestination(isPresented: $viewModel.isLoginSuccessful) {
                         HomeView()
                     }
                     
@@ -84,7 +83,3 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-
-
-
-
