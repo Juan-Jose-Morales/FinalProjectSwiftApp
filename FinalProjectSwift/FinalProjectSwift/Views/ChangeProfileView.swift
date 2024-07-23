@@ -16,6 +16,7 @@ struct ChangeProfileView: View {
     @ObservedObject var viewModel = ChangeProfileViewModel()
     @State private var isNavigateBack = false
     let origin: Origin
+    @EnvironmentObject var profileViewModel: ProfileViewModel
 
     var body: some View {
         NavigationStack {
@@ -32,6 +33,7 @@ struct ChangeProfileView: View {
                 ImagePicker(sourceType: viewModel.imagePickerSource) { image in
                     if let image = image {
                         viewModel.updateProfilePhoto(image: image)
+                        
                     }
                 }
             }
