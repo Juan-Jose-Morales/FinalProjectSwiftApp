@@ -12,14 +12,12 @@ struct ChatHeaderView: View {
     
     var body: some View {
         HStack {
-            Button(action: {
-                
-            }) {
+              NavigationLink(destination: HomeView()) { 
                 Image("ArrowLeft")
-                    .resizable()
-                    .frame(width: 35, height: 25)
-                    .foregroundColor(.black)
-            }
+                  .resizable()
+                  .frame(width: 35, height: 25)
+                  .foregroundColor(.black)
+              }
             Spacer()
             VStack {
                 Text(chatlist.targetnick ?? "")

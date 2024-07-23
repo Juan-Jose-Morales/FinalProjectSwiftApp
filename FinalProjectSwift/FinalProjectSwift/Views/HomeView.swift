@@ -27,12 +27,14 @@ struct HomeView: View {
                     } else {
                         List {
                             ForEach(homeViewModel.listChats) { chat in
-                                VStack {
-                                    HStack {
-                                        Image(systemName: "person.circle.fill")
-                                            .resizable()
-                                            .frame(width: 40, height: 40)
-                                        Text(chat.targetnick ?? "Usuario Desconocido")
+                                NavigationLink(destination: ChatView(chatViewModel: ChatViewModel(chatId: chat.chat, chatList: chat))) {
+                                    VStack {
+                                        HStack {
+                                            Image(systemName: "person.circle.fill")
+                                                .resizable()
+                                                .frame(width: 40, height: 40)
+                                            Text(chat.targetnick ?? "Usuario Desconocido")
+                                        }
                                     }
                                 }
                             }

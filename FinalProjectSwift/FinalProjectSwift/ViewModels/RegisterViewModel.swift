@@ -37,19 +37,20 @@ class RegisterViewModel: ObservableObject {
             showAlert = true
             return
         }
-        
-        let user = User(login: username, password: password, nick: nickname, avatar: avatar, uuid: UUID().uuidString, online: true)
-        
-        userService.register(user: user) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let user):
-                    print("Usuario registrado correctamente: \(user)")
-                    self?.showSuccessAlert = true
-                case .failure(let error):
-                    print("Error al registrar usuario: \(error.localizedDescription)")
-                    self?.errorMessage = "Error al registrar usuario"
-                    self?.showAlert = true
+        let effectiveNick = nickname.isEmpty ? username : nickname
+
+            let user = User(login: username, password: password, nick: effectiveNick, avatar: avatar, uuid: UUID().uuidString, online: true)
+            
+            userService.register(user: user) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let user):
+                        print("Usuario registrado correctamente: \(user)")
+                        self?.showSuccessAlert = true
+                    case .failure(let error):
+                        print("Error al registrar usuario: \(error.localizedDescription)")
+                        self?.errorMessage = "Error al registrar usuario"
+                        self?.showAlert = true
                 }
             }
         }

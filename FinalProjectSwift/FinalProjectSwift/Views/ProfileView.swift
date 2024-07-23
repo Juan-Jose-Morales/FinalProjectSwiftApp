@@ -61,77 +61,84 @@ struct ProfileView: View {
     }
     
     private func editProfile() -> some View {
-        VStack {
-            HStack(alignment: .top, spacing: 0) {
-                VStack {
-                    Image(systemName: "person.circle")
-                        .resizable()
-                        .frame(width: 60, height: 55)
+            VStack {
+                HStack(alignment: .top, spacing: 0) {
+                    VStack {
+                        if let profileImage = viewModel.profileImage {
+                            Image(uiImage: profileImage)
+                                .resizable()
+                                .frame(width: 60, height: 55)
+                                .padding(.leading, 2)
+                                .padding(.top, 10)
+                                .clipShape(Circle())
+                        } else {
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .frame(width: 60, height: 55)
+                                .padding(.leading, 2)
+                                .padding(.top, 10)
+                        }
+                        
+                        Button(action: {
+                            isNavigateToChangeProfile = true
+                        }) {
+                            Text("Editar")
+                                .foregroundColor(Color("Blue"))
+                            
+                        }
+                        .padding(.top,5)
                         .padding(.leading, 2)
-                        .padding(.top, 10)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Ingresa tu nombre y añade una foto de perfil (Opcional)")
+                            .foregroundColor(.black)
+                            .lineLimit(nil)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.top, 10)
+                    }
+                    .padding(.leading, 10)
+                    .padding(.top, 10)
+                    .padding(.bottom, 30)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                
+                Divider()
+                    .padding(.vertical, 8)
+                
+                HStack {
+                    if isEditingUserName {
+                        TextField("Usuario", text: $viewModel.userName, onCommit: {
+                            isEditingUserName = false
+                            viewModel.saveUserName()
+                        })
+                        .foregroundColor(.black)
+                    } else {
+                        Text(viewModel.userName.isEmpty ? "Usuario" : viewModel.userName)
+                            .foregroundColor(.black)
+                    }
+                    
+                    Spacer()
                     
                     Button(action: {
-                        isNavigateToChangeProfile = true
+                        isEditingUserName.toggle()
                     }) {
-                        Text("Editar")
+                        Text(isEditingUserName ? "Guardar" : "Editar")
                             .foregroundColor(Color("Blue"))
-                        
                     }
-                    .padding(.top,5)
-                    .padding(.leading, 2)
                 }
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Ingresa tu nombre y añade una foto de perfil (Opcional)")
-                        .foregroundColor(.black)
-                        .lineLimit(nil)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.top, 10)
-                    
-                    
-                }
-                .padding(.leading, 10)
-                .padding(.top, 10)
-                .padding(.bottom, 30)
+                .padding(.horizontal, 16)
                 
                 Spacer()
             }
-            .padding(.horizontal, 16)
-            
-            Divider()
-                .padding(.vertical, 8)
-            
-            HStack {
-                if isEditingUserName {
-                    TextField("Usuario", text: $viewModel.userName, onCommit: {
-                        isEditingUserName = false
-                        viewModel.saveUserName()
-                    })
-                    .foregroundColor(.black)
-                } else {
-                    Text(viewModel.userName.isEmpty ? "Usuario" : viewModel.userName)
-                        .foregroundColor(.black)
-                }
-                
-                Spacer()
-                
-                Button(action: {
-                    isEditingUserName.toggle()
-                }) {
-                    Text(isEditingUserName ? "Guardar" : "Editar")
-                        .foregroundColor(Color("Blue"))
-                }
-            }
-            .padding(.horizontal, 16)
-            
-            Spacer()
+            .frame(width: 335, height: 160)
+            .background(Color.white)
+            .cornerRadius(15)
+            .shadow(radius: 5)
+            .padding(.top, 30)
         }
-        .frame(width: 335, height: 160)
-        .background(Color.white)
-        .cornerRadius(15)
-        .shadow(radius: 5)
-        .padding(.top, 30)
-    }
     
     private var progressView: some View {
         ProgressView()
