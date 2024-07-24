@@ -28,6 +28,10 @@ struct HomeView: View {
                         .padding(.top, 0)
                     
                     if homeViewModel.listChats.isEmpty {
+            ZStack (alignment: .bottomTrailing){
+                VStack{
+                    SearcField(imageName:  "magnifyingglass", placeholder: "Buscar", text: $homeViewModel.search)
+                    if homeViewModel.listChats.isEmpty{
                         CustomListChat()
                     } else {
                         List {
@@ -38,7 +42,7 @@ struct HomeView: View {
                                             Image(systemName: "person.circle.fill")
                                                 .resizable()
                                                 .frame(width: 40, height: 40)
-                                            Text(chat.targetnick ?? "Usuario Desconocido")
+                                            Text(homeViewModel.getNick(chatList: chat))
                                         }
                                     }
                                 }
@@ -51,10 +55,13 @@ struct HomeView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .scrollContentBackground(.hidden)
                     }
+                }.onAppear(){
+                    homeViewModel.getChatlist()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
-                FloatButton()
+                FloatButton(onUpdate: {
+                    homeViewModel.getChatlist()
+                })
             }
             .navigationDestination(isPresented: $isShowingChangeProfileView) {
                 ChangeProfileView(origin: .home)

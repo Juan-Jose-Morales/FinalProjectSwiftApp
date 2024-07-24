@@ -2,7 +2,7 @@
 //  Chat.swift
 //  FinalProjectSwift
 //
-//  Created by Juan jose Morales on 23/7/24.
+//  Created by Alejandro Vidal Gómez Alves on 23/7/24.
 //
 
 import Foundation
@@ -13,7 +13,7 @@ struct Chat: Identifiable, Decodable {
     let target: String
     let created: String
 
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: CodingKey {
         case id
         case source
         case target

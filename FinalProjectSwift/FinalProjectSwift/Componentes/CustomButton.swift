@@ -56,6 +56,7 @@ struct BiometricButton: View {
 
 struct FloatButton: View {
     @State private var showingSheet = false
+    var onUpdate: () -> Void
     var body: some View {
         Button {
             showingSheet.toggle()
@@ -71,7 +72,7 @@ struct FloatButton: View {
         }
         .padding(35)
         .sheet(isPresented: $showingSheet) {
-            Text("Hola")
+            NewChatView(onUpdate: onUpdate)
         }
     }
 }

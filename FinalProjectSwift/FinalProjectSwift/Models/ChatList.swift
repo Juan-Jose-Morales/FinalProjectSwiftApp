@@ -11,15 +11,17 @@ struct ChatList: Identifiable ,Codable {
     var id = UUID()
     var chat: String
     var source: String?
+    var sourceNick: String?
     var sourceonline: Bool?
     var target: String?
     var targetnick: String?
     var targetonline: Bool?
     var chatcreated: String?
     
-    enum CodingKeys: CodingKey {
+    enum CodingKeys: String, CodingKey {
         case chat
         case source
+        case sourceNick = "sourcenick"
         case sourceonline
         case target
         case targetnick
