@@ -7,66 +7,66 @@
 
 import SwiftUI
 
-
 struct HomeView: View {
     @StateObject private var homeViewModel = HomeViewModel()
+    @State private var isShowingChangeProfileView = false
+    @State private var isShowingProfileSettingsView = false
+    
     var body: some View {
         NavigationStack {
-            ZStack (alignment: .bottomTrailing){
-                VStack{
-                    SearcField(imageName:  "magnifyingglass", placeholder: "", text: $homeViewModel.search)
+            ZStack(alignment: .bottomTrailing) {
+                VStack (spacing: 0) {
+                    CustomToolbar(
+                        isShowingChangeProfileView: $isShowingChangeProfileView,
+                        isShowingProfileSettingsView: $isShowingProfileSettingsView,
+                        homeViewModel: homeViewModel
+                    )
+                    SearcField(imageName: "magnifyingglass", placeholder: "", text: $homeViewModel.search)
                         .onChange(of: homeViewModel.search) { newValue in
                             homeViewModel.chatFilter()
                         }
-                    if homeViewModel.listChats.isEmpty{
+                        .padding(.top, 0)
+                    
+                    if homeViewModel.listChats.isEmpty {
                         CustomListChat()
-                    }else {
-                            List{
-                                ForEach(homeViewModel.listChats) { chat in
-                                   // NavigationLink(destination: ChatView(chat: chat)
-                                    VStack{
-                                        HStack{
+                    } else {
+                        List {
+                            ForEach(homeViewModel.listChats) { chat in
+                                NavigationLink(destination: ChatView(chatViewModel: ChatViewModel(chatId: chat.chat, chatList: chat))) {
+                                    VStack {
+                                        HStack {
                                             Image(systemName: "person.circle.fill")
                                                 .resizable()
                                                 .frame(width: 40, height: 40)
                                             Text(chat.targetnick ?? "Usuario Desconocido")
                                         }
                                     }
-                                }.onDelete(perform: { indexSet in
-                                    homeViewModel.deleteItems(at: indexSet)
-                                })
-                                .listRowSeparator(.hidden)
-                            }.frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .scrollContentBackground(.hidden)
-                            
+                                }
+                            }
+                            .onDelete(perform: { indexSet in
+                                homeViewModel.deleteItems(at: indexSet)
+                            })
+                            .listRowSeparator(.hidden)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .scrollContentBackground(.hidden)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
                 FloatButton()
             }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Image("logoFinalGrande")
-                        .resizable()
-                        .frame(width: 70, height: 70)
-                        .padding(.top, 40)
-                }
-                ToolbarItem(placement: .topBarLeading) {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: 42, height: 42)
-                        .padding(.top, 40)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Image(systemName: "gearshape.fill")
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: 42, height: 42)
-                        .padding(.top , 40)
-                }
-            }.modifier(NavBarModifier())
-        }.navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $isShowingChangeProfileView) {
+                ChangeProfileView(origin: .home)
+            }
+            .navigationDestination(isPresented: $isShowingProfileSettingsView) {
+                ProfileSettingsView()
+            }
+            .navigationBarBackButtonHidden(true)
+        }
+        .onAppear {
+              UINavigationBar.appearance().backgroundColor = UIColor(named: "Blue")
+            }
     }
 }
 

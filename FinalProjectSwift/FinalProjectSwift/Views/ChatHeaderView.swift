@@ -8,25 +8,22 @@
 import SwiftUI
 
 struct ChatHeaderView: View {
-    let user: User
-    let profileImage: UIImage?
+    let chatlist: ChatList
     
     var body: some View {
         HStack {
-            Button(action: {
-               
-            }) {
+              NavigationLink(destination: HomeView()) { 
                 Image("ArrowLeft")
-                    .resizable()
-                    .frame(width: 35, height: 25)
-                    .foregroundColor(.black)
-            }
+                  .resizable()
+                  .frame(width: 35, height: 25)
+                  .foregroundColor(.black)
+              }
             Spacer()
             VStack {
-                Text(user.nick ?? "")
+                Text(chatlist.targetnick ?? "")
                     .font(.headline)
                     .foregroundColor(.white)
-                Text(user.online == true ? "En línea" : "Desconectado")
+                Text(chatlist.sourceonline == true ? "En línea" : "Desconectado")
                     .font(.subheadline)
                     .foregroundColor(.white)
             }
@@ -34,16 +31,9 @@ struct ChatHeaderView: View {
             Button(action: {
                 
             }) {
-                if let profileImage = profileImage {
-                    Image(uiImage: profileImage)
-                        .resizable()
-                        .frame(width: 45, height: 45)
-                        .clipShape(Circle())
-                } else {
-                    Circle()
-                        .fill(Color.gray)
-                        .frame(width: 45, height: 45)
-                }
+                Circle()
+                    .fill(Color.gray)
+                    .frame(width: 45, height: 45)
             }
         }
         .padding()
@@ -52,8 +42,6 @@ struct ChatHeaderView: View {
 }
 
 #Preview("ChatHeaderView Preview") {
-    let user = User(id: "1", login: "user1", password: "password", nick: "Juan", avatar: nil, platform: nil, uuid: nil, online: true, created: nil, updated: nil, token: nil)
-    let profileImage = UIImage(systemName: "person.fill") 
-    
-    return ChatHeaderView(user: user, profileImage: profileImage)
+    let chatList = ChatList(id: UUID(), chat: "123", source: "1", sourceonline: true, target: "2", targetnick: "Pepe", targetonline: true)
+    return ChatHeaderView(chatlist: chatList)
 }

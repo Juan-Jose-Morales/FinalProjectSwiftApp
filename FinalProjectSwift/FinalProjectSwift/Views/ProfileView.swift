@@ -12,6 +12,7 @@ struct ProfileView: View {
     @State private var isNavigateToChangeProfile = false
     @State private var isNavigateToProfileSettings = false
     @State private var isEditingUserName = false
+    @State private var keepSessionActive = false
     
     init(userService: UserService) {
         _viewModel = StateObject(wrappedValue: ProfileViewModel(userService: userService))
@@ -20,37 +21,44 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             VStack{
-                
+                CustomNavigationBar(title: "Ajustes de perfil", titleColor: .black, buttonColor: .black, onBack: {
+                    isNavigateToProfileSettings = true
+                })
                 if viewModel.isLoading {
                     progressView
                 }else{
                     editProfile()
                 }
+                Spacer().frame(height: 40)
                 
+                Toggle(isOn: $keepSessionActive) {
+                    Text("Mantener sesión iniciada")
+                        .foregroundColor(.black)
+                }
+                .padding(.horizontal, 40)
+                Spacer().frame(height: 40)
+                
+                
+                Toggle(isOn: $viewModel.isOnline) {
+                    Text("Mostrar estado en línea")
+                        .foregroundColor(.black)
+                }
+                .padding(.horizontal, 40)
+                .onChange(of: viewModel.isOnline) { isOnline in
+                    viewModel.updateOnlineStatus(isOnline: isOnline)
+                }
                 Spacer().frame(height: 40)
                 
                 Divider()
                     .padding(.horizontal)
                 
                 Spacer().frame(height: 40)
-                
-                
                 blocked
-                
-                
                 Spacer()
             }
-            .navigationTitle("Ajustes de perfil")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: Button(action: {
-                isNavigateToProfileSettings = true
-            }){
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.black)
-            })
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $isNavigateToChangeProfile) {
-                ChangeProfileView()
+                ChangeProfileView(origin: .profile)
             }
             .navigationDestination(isPresented: $isNavigateToProfileSettings) {
                 ProfileSettingsView()
@@ -64,11 +72,20 @@ struct ProfileView: View {
         VStack {
             HStack(alignment: .top, spacing: 0) {
                 VStack {
-                    Image(systemName: "person.circle")
-                        .resizable()
-                        .frame(width: 60, height: 55)
-                        .padding(.leading, 2)
-                        .padding(.top, 10)
+                    if let profileImage = viewModel.profileImage {
+                        Image(uiImage: profileImage)
+                            .resizable()
+                            .frame(width: 60, height: 55)
+                            .padding(.leading, 2)
+                            .padding(.top, 10)
+                            .clipShape(Circle())
+                    } else {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .frame(width: 60, height: 55)
+                            .padding(.leading, 2)
+                            .padding(.top, 10)
+                    }
                     
                     Button(action: {
                         isNavigateToChangeProfile = true
@@ -87,8 +104,6 @@ struct ProfileView: View {
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 10)
-                    
-                    
                 }
                 .padding(.leading, 10)
                 .padding(.top, 10)
@@ -160,10 +175,8 @@ struct ProfileView: View {
             .shadow(radius: 2)
         }
         .padding(.horizontal)
+        .shadow(radius: 5)
     }
-    
-    
-    
 }
 
 #Preview {

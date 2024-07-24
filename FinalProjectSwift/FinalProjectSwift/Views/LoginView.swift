@@ -11,7 +11,7 @@ import LocalAuthentication
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
     @State private var isNavigationToRegister = false
-    @State private var isNavigationToHome = false
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -20,27 +20,26 @@ struct LoginView: View {
                         .padding(.top, 50)
                     Spacer().frame(height: 45)
                     
-                    CustomTextField(imageName: "person", placeholder: "Usuario", text: $viewModel.username)
+                    CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
                         .padding(.bottom, 36)
                     
-                    SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "lock")
+                    SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "padlock")
                         .padding(.bottom, 36)
                     
                     BiometricButton(action: {
                         viewModel.authenticateWithBiometrics()
-                    }, imageName: "person.fill.viewfinder")
+                    }, imageName: "faceid")
                     .padding(.bottom, 36)
                     
                     CustomButton(title: "Iniciar Sesión") {
                         viewModel.login()
-                        isNavigationToHome = true
                     }
                     .padding(.bottom, 55)
                     
                     .navigationDestination(isPresented: $isNavigationToRegister) {
                         RegisterView()
                     }
-                    .navigationDestination(isPresented: $isNavigationToHome) {
+                    .navigationDestination(isPresented: $viewModel.isLoginSuccessful) {
                         HomeView()
                     }
                     
@@ -66,13 +65,14 @@ struct LoginView: View {
         HStack {
             Text("¿No tienes cuenta?")
                 .foregroundColor(.black)
-            
+                .padding(.horizontal, 10)
             Button(action: {
                 isNavigationToRegister = true
             }) {
                 Text("Regístrate")
                     .foregroundColor(Color("Blue"))
             }
+            .padding(.horizontal, 10)
         }
     }
 }
@@ -84,7 +84,3 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-
-
-
-

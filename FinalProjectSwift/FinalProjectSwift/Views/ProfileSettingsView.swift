@@ -28,12 +28,13 @@ struct ProfileSettingsView: View {
                             }
                         }
                         buttons()
-                            .padding(.top, 40)
+                            .padding(.top, 30)
                     }
                 }
+                Spacer()
                 
                 signOffButton
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 60)
             }
             .edgesIgnoringSafeArea(.top)
             .onAppear {
@@ -63,7 +64,7 @@ struct ProfileSettingsView: View {
             Button(action: {
                 isNavigatingToHome = true
             }) {
-                Image(systemName: "arrow.left")
+                Image("ArrowLeft")
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.black)

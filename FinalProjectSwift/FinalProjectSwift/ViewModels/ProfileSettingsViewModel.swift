@@ -26,28 +26,43 @@ class ProfileSettingsViewModel: ObservableObject {
             
         ]
     }
+    init() {
+          loadUserNick()
+        loadProfileImage()
+      }
+
     
     func fetchUserData() {
-        userService.getUsers { result in
-            switch result {
-            case.success(let users):
-                if let user = users.first {
-                    DispatchQueue.main.async {
-                        self.user = user
+            userService.getUsers { result in
+                switch result {
+                case .success(let users):
+                    if let user = users.first {
+                        DispatchQueue.main.async {
+                            self.user = user
+                            self.loadProfileImage()
+                        }
                     }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
             }
         }
-    }
     
     private func loadProfileImage() {
-        if let data = UserDefaults.standard.data(forKey: "profileImageKey"),
-           let image = UIImage(data: data) {
-            profileImage = image
+            if let data = UserDefaults.standard.data(forKey: "profileImageKey"),
+               let image = UIImage(data: data) {
+                profileImage = image
+            }
         }
-    }
+
+    
+    private func loadUserNick() {
+            if let userNick = UserDefaults.standard.string(forKey: "userNick") {
+                user.nick = userNick
+            } else {
+                user.nick = "Usuario"
+            }
+        }
 }
 
 struct ButtonInfo: Identifiable {

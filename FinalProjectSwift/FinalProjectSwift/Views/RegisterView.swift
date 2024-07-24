@@ -18,17 +18,19 @@ struct RegisterView: View {
                     CustomLogo(width: 240, height: 220)
                         .padding(.top, 50)
                     Spacer().frame(height: 45)
-                    CustomTextField(imageName: "person", placeholder: "Usuario", text: $viewModel.username)
-                        .padding(.bottom, 36)
-                    SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "lock")
-                        .padding(.bottom, 36)
-                    SecureFields(title: "Repetir Contraseña", text: $viewModel.confirmPassword, imageName: "lock")
-                        .padding(.bottom, 36)
-                        
+                    CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
+                        .padding(.bottom, 25)
+                    CustomTextField(imageName: "avatar", placeholder: "Nick", text: $viewModel.nickname)
+                        .padding(.bottom, 25)
+                    SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "padlock")
+                        .padding(.bottom, 25)
+                    SecureFields(title: "Repetir Contraseña", text: $viewModel.confirmPassword, imageName: "padlock")
+                        .padding(.bottom, 25)
+                    
                     CustomButton(title: "Registrar") {
                         viewModel.register()
                     }
-                    .padding(.bottom, 55)
+                    .padding(.bottom, 30)
                     navigateToLogin()
                     Spacer()
                 }
@@ -37,10 +39,11 @@ struct RegisterView: View {
                 .alert(isPresented: $viewModel.showAlert) {
                     Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: { viewModel.resetAlerts() }))
                 }
-                .onReceive(viewModel.$showSuccessAlert) { success in
-                    if success {
+                .alert(isPresented: $viewModel.showSuccessAlert) {
+                    Alert(title: Text("Registro Exitoso"), message: Text("El registro fue exitoso"), dismissButton: .default(Text("OK"), action: {
+                        viewModel.resetAlerts()
                         presentationMode.wrappedValue.dismiss()
-                    }
+                    }))
                 }
             }
             .background(Color.white)
@@ -59,15 +62,17 @@ struct RegisterView: View {
         HStack {
             Text("¿Ya tienes cuenta?")
                 .foregroundColor(.black)
+                .padding(.horizontal, 10)
             Button(action: {
                 presentationMode.wrappedValue.dismiss()
             }) {
                 Text("Iniciar Sesión")
                     .foregroundColor(Color("Blue"))
             }
+            
         }
     }
-
+    
 }
 
 

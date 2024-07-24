@@ -10,47 +10,36 @@ import SwiftUI
 struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
     @StateObject private var keyboardResponder = KeyboardResponder()
-    
+    @State private var isLoadingMoreMessages = false
+
     var body: some View {
-        VStack(spacing: 0) {
-            ChatHeaderView(user: chatViewModel.user, profileImage: chatViewModel.changeProfileViewModel.profileImage)
-            
-            ScrollView {
-                VStack(alignment: .leading) {
-                    ForEach(chatViewModel.messages, id: \.self) { message in
-                        Text(message)
-                            .padding()
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                            .padding(.top, 5)
-                    }
-                }
+        NavigationStack {
+            VStack(spacing: 0) {
+                ChatHeaderView(chatlist: chatViewModel.chatList)
+                
+                MessagesView(chatViewModel: chatViewModel, isLoadingMoreMessages: $isLoadingMoreMessages)
+                
+                Spacer()
+                
+                ChatInputView(
+                    messageText: $chatViewModel.messageText,
+                    sendAction: { chatViewModel.sendMessage() },
+                    attachAction: { chatViewModel.attachFile() }
+                )
+                .padding(.bottom, keyboardResponder.currentHeight)
+                .background(Color.white)
+                .animation(.easeOut(duration: 0.3), value: keyboardResponder.currentHeight)
             }
-            .padding(.top)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Color.white)
-            
-            Spacer()
-            
-            ChatInputView(messageText: $chatViewModel.messageText, sendAction: {
-                chatViewModel.sendMessage()
-            }, attachAction: {
-                chatViewModel.attachFile()
-            })
-            .padding(.bottom, keyboardResponder.currentHeight)
-            .background(Color.white)
-            .animation(.easeOut(duration: 0.3), value: keyboardResponder.currentHeight)
-        }
-        .ignoresSafeArea(.keyboard, edges: .bottom)
-        .background(Color.white)
-        .onTapGesture {
-            UIApplication.shared.endEditing()
+            .onAppear {
+                chatViewModel.loadMessages()
+            }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
 
-#Preview("ChatView Preview") {
-    let user = User(id: "1", login: "Pepe", password: "password", nick: "Pepe", avatar: nil, platform: nil, uuid: nil, online: true, created: "2024-07-11", updated: "2024-07-11", token: nil)
-    let chatViewModel = ChatViewModel(user: user)
-    return ChatView(chatViewModel: chatViewModel)
+#Preview {
+    ChatView(chatViewModel: ChatViewModel(chatId: "1", chatList: ChatList(chat: "1", source: "user1", chatcreated: "2024-07-22T16:03:44.798Z")))
 }

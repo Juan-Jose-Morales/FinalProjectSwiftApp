@@ -7,12 +7,23 @@
 
 import SwiftUI
 
+enum Origin {
+    case home
+    case profile
+}
+
 struct ChangeProfileView: View {
     @ObservedObject var viewModel = ChangeProfileViewModel()
-    @State private var isNavigateToProfileView = false
+    @State private var isNavigateBack = false
+    let origin: Origin
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+
     var body: some View {
         NavigationStack {
             VStack {
+                CustomNavigationBar(title: "Foto de perfil", titleColor: .black, buttonColor: .black, onBack: {
+                    isNavigateBack = true
+                })
                 userAvatar
                 
                 Divider()
@@ -25,6 +36,7 @@ struct ChangeProfileView: View {
                 ImagePicker(sourceType: viewModel.imagePickerSource) { image in
                     if let image = image {
                         viewModel.updateProfilePhoto(image: image)
+                        
                     }
                 }
             }
@@ -32,19 +44,16 @@ struct ChangeProfileView: View {
                 Alert(title: Text("Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
             }
             .navigationBarBackButtonHidden(true)
-            .navigationTitle("Foto de perfil")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: Button(action: {
-                            isNavigateToProfileView = true
-                        }) {
-                            Image(systemName: "arrow.left")
-                                .foregroundColor(.black)
-                        })
-                        .navigationDestination(isPresented: $isNavigateToProfileView) {
-                            ProfileView(userService: UserService())
-                        }
-                    }
+            .navigationDestination(isPresented: $isNavigateBack) {
+                if origin == .home {
+                    HomeView()
+                } else {
+                    ProfileView(userService: UserService())
                 }
+            }
+        }
+    }
+    
     
     private var userAvatar: some View {
         VStack {
@@ -95,5 +104,5 @@ struct ChangeProfileView: View {
 }
 
 #Preview {
-    ChangeProfileView()
+    ChangeProfileView(origin: .home)
 }

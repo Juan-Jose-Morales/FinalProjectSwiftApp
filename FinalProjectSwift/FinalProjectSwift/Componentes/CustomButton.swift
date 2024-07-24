@@ -42,7 +42,7 @@ struct BiometricButton: View {
                     .padding(.leading, 15)
                 Spacer()
             }
-            .padding(.horizontal)
+            .padding(.horizontal,20)
             .frame(maxWidth: .infinity)
             .frame(height: 43)
             .background(RoundedRectangle(cornerRadius: 15)
@@ -117,10 +117,10 @@ struct CustomProfileButton: View {
                     .foregroundColor(.black)
             }
             .padding()
-            .frame(width: 305, height: 30)
+            .frame(width: 305, height: 35)
             .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color("Gray"), lineWidth: 1)
-                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10))
+                .shadow(radius: 5))
         }
     }
 }

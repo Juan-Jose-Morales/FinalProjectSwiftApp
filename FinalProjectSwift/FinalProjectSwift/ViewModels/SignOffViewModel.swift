@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import Alamofire
 
 class SignOffViewModel: ObservableObject {
     
@@ -16,10 +15,10 @@ class SignOffViewModel: ObservableObject {
     @Published var isSignOffSucessful: Bool = false
     
     private var userService: UserService
-        
+    
     init(userService: UserService = UserService()) {
-            self.userService = userService
-        }
+        self.userService = userService
+    }
     
     func signOff() {
         userService.logout { [weak self] result in
@@ -28,12 +27,10 @@ class SignOffViewModel: ObservableObject {
                 case .success:
                     self?.isSignOffSucessful = true
                 case .failure(let error):
-                    self?.errorMessage = "Error al cerrar sesion \(error.localizedDescription)"
+                    self?.errorMessage = "Error al cerrar sesión \(error.localizedDescription)"
                     self?.showAlert = true
                 }
             }
-            
         }
     }
-    
 }

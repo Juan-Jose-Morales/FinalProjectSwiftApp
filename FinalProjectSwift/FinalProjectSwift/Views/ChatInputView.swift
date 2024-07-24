@@ -17,7 +17,7 @@ struct ChatInputView: View {
         VStack {
             HStack {
                 Button(action: attachAction) {
-                    Image("attach")
+                    Image("Attach")
                         .resizable()
                         .frame(width: 24, height: 24)
                 }
@@ -40,11 +40,11 @@ struct ChatInputView: View {
                 .padding(.horizontal, 15)
 
                 Button(action: sendAction) {
-                    Image("send")
+                    Image("Send")
                         .resizable()
                         .frame(width: 24, height: 24)
                 }
-                .padding(.trailing, 8)
+                .padding(.trailing, 15)
             }
             .frame(maxWidth: .infinity)
             .frame(height: 56)
@@ -55,6 +55,6 @@ struct ChatInputView: View {
 }
 
 #Preview("ChatInputView Preview") {
-    @State var messageText = "Mensaje de ejemplo"
+    @State var messageText = ""
     return ChatInputView(messageText: $messageText, sendAction: {}, attachAction: {})
 }

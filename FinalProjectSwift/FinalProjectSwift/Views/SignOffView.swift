@@ -12,26 +12,34 @@ struct SignOffView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isNavigateToLogin = false
     @State private var isNavigateToProfileSettingsView = false
-    
+    @State private var showConfirmationAlert = false
+
     var body: some View {
-        
         NavigationStack {
             VStack {
+                CustomNavigationBar(title: "Cerrar Sesion", titleColor: .red, buttonColor: .red, onBack: {
+                    isNavigateToProfileSettingsView = true
+                })
                 messageToUser
                 Spacer().frame(height: 60)
                 signOffButton
                 Spacer()
             }
-            .navigationTitle("Cerrar sesión")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: Button(action: {
-                isNavigateToProfileSettingsView = true
-            }){
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.red)
-            })
             .alert(isPresented: $viewModel.showAlert) {
                 Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK")))
+            }
+            .alert(isPresented: $showConfirmationAlert) {
+                Alert(
+                    title: Text("Confirmación"),
+                    message: Text("¿Estás seguro que quieres cerrar sesión?"),
+                    primaryButton: .default(Text("Sí"), action: {
+                        viewModel.signOff()
+                        if viewModel.isSignOffSucessful {
+                            isNavigateToLogin = true
+                        }
+                    }),
+                    secondaryButton: .cancel(Text("No"))
+                )
             }
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $isNavigateToLogin) {
@@ -42,18 +50,20 @@ struct SignOffView: View {
             }
         }
     }
+
     private var messageToUser: some View {
-        HStack{
+        HStack(alignment: .top) {
             Image("Warning")
                 .resizable()
                 .frame(width: 20, height: 20)
                 .padding(.leading)
             
-            Text("¿Deseas cerrar sesion en este dispositivo?")
-                .padding(.leading)
+            Text("¿Deseas cerrar sesión en este dispositivo?")
+                .font(.headline)
+                .multilineTextAlignment(.center)
+                .padding(.top, 4)
             
             Spacer()
-            
         }
         .frame(width: 335, height: 70)
         .background(Color("GrayText"))
@@ -61,20 +71,19 @@ struct SignOffView: View {
         .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
         .padding(.top, 20)
     }
+
     private var signOffButton: some View {
         Button(action: {
-            isNavigateToLogin = true
+            showConfirmationAlert = true
         }) {
             Text("Cerrar sesión")
                 .foregroundColor(.red)
                 .frame(width: 305, height: 30)
                 .background(Color("GrayText"))
                 .cornerRadius(16)
-                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
-            
+                .shadow(radius: 5)
         }
     }
-    
 }
 
 #Preview {
