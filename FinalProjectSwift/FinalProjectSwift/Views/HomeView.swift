@@ -14,22 +14,19 @@ struct HomeView: View {
         NavigationStack {
             ZStack (alignment: .bottomTrailing){
                 VStack{
-                    SearcField(imageName:  "magnifyingglass", placeholder: "", text: $homeViewModel.search)
-                        .onChange(of: homeViewModel.search) { newValue in
-                            homeViewModel.chatFilter()
-                        }
+                    SearcField(imageName:  "magnifyingglass", placeholder: "Buscar", text: $homeViewModel.search)
                     if homeViewModel.listChats.isEmpty{
                         CustomListChat()
                     }else {
                             List{
-                                ForEach(homeViewModel.listChats) { chat in
+                                ForEach(homeViewModel.filterChats) { chat in
                                    // NavigationLink(destination: ChatView(chat: chat)
                                     VStack{
                                         HStack{
                                             Image(systemName: "person.circle.fill")
                                                 .resizable()
                                                 .frame(width: 40, height: 40)
-                                            Text(chat.targetnick ?? "Usuario Desconocido")
+                                            Text(homeViewModel.getNick(chatList: chat))
                                         }
                                     }
                                 }.onDelete(perform: { indexSet in
@@ -38,11 +35,14 @@ struct HomeView: View {
                                 .listRowSeparator(.hidden)
                             }.frame(maxWidth: .infinity, maxHeight: .infinity)
                             .scrollContentBackground(.hidden)
-                            
                     }
+                }.onAppear(){
+                    homeViewModel.getChatlist()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                FloatButton()
+                FloatButton(onUpdate: {
+                    homeViewModel.getChatlist()
+                })
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {

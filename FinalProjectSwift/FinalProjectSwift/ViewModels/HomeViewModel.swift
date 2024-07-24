@@ -9,7 +9,11 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     @Published var listChats: [ChatList] = []
-    @Published var search = ""
+    @Published var search = "" {
+        didSet {
+            chatFilter()
+        }
+    }
     @Published var id = ""
     @Published var filterChats: [ChatList] = []
     
@@ -20,10 +24,10 @@ class HomeViewModel: ObservableObject {
         getChatlist()
     }
     
-    
     func getChatlist(){
         userService.getChatList { chatList in
             self.listChats = chatList
+            self.filterChats = chatList
         }
     }
     func deleteChat(id: String){
@@ -37,12 +41,26 @@ class HomeViewModel: ObservableObject {
     }
     
     func chatFilter() {
-            if search.isEmpty {
-                filterChats = listChats
-            } else {
-                filterChats = listChats.filter { chat in
-                    chat.targetnick!.lowercased().contains(search.lowercased())
-                }
+        if search.isEmpty {
+            filterChats = listChats
+        } else {
+            guard let id = UserDefaults.standard.string(forKey: "id") else {
+                print("Error: Missing id")
+                return
+            }
+            
+            filterChats = listChats.filter { chat in
+                chat.source == id ? chat.targetnick!.lowercased().contains(search.lowercased()) : chat.sourceNick!.lowercased().contains(search.lowercased())
             }
         }
+    }
+    func getNick(chatList: ChatList) -> String {
+        guard let id = UserDefaults.standard.string(forKey: "id") else {
+            print("Error: Missing id")
+            return ""
+        }
+        
+        return chatList.source == id ? chatList.targetnick! : chatList.sourceNick!
+    }
+    
 }

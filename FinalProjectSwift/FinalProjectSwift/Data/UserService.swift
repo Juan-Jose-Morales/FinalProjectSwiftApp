@@ -29,6 +29,7 @@ class UserService {
                 switch response.result {
                 case .success(let loginResponse):
                     UserDefaults.standard.set(loginResponse.token, forKey: "AuthToken")
+                    UserDefaults.standard.set(loginResponse.user.id, forKey: "id")
                     completion(.success((loginResponse.token, loginResponse.user)))
                 case .failure(let error):
                     completion(.failure(error))
@@ -208,6 +209,53 @@ class UserService {
                     print(error)
                 }
         }
+    }
+    func getNewChat(completion: @escaping (_ newcChatList: [NewChat]) -> Void){
+        
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            print("Error: Missing AuthToken")
+            return
+        }
+        
+        let headers: HTTPHeaders = ["Authorization": token]
+        
+        AF.request("\(baseURL)/users", encoding: JSONEncoding.default, headers: headers)
+            .validate()
+            .responseDecodable(of: [NewChat].self) {
+                response in
+                switch response.result {
+                            case .success(let data):
+                                  completion(data)
+                              case .failure(let error):
+                                 print(error)
+                }
+            }
+    }
+    
+    func CreatedChat(source: String,target: String) {
+        
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            print("Error: Missing AuthToken")
+            return
+        }
+        
+        let headers: HTTPHeaders = ["Authorization": token]
+        
+        let url = "\(baseURL)/chats"
+        let parameters: [String: Any] = [
+            "source": source,
+            "target": target
+        ]
+        
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseDecodable(of: NewChatResponse.self) { response in
+                switch response.result {
+                case .success(let response):
+                    print(response)
+                case .failure(let error):
+                   print(error)
+                }
+            }
     }
 }
 
