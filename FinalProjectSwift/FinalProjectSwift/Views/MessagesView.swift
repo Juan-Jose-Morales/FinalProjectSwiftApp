@@ -10,7 +10,7 @@ import SwiftUI
 struct MessagesView: View {
     @ObservedObject var chatViewModel: ChatViewModel
     @Binding var isLoadingMoreMessages: Bool
-    
+
     var body: some View {
         ScrollViewReader { scrollViewProxy in
             ScrollView {

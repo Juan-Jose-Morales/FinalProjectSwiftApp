@@ -10,7 +10,7 @@ import SwiftUI
 struct MessageView: View {
     let message: Message
     @ObservedObject var chatViewModel: ChatViewModel
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {

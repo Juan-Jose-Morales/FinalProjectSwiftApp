@@ -32,7 +32,6 @@ class ChatViewModel: ObservableObject {
             switch result {
             case .success(let messageListResponse):
                 DispatchQueue.main.async {
-                    
                     let newMessages = messageListResponse.rows.filter { newMessage in
                         !self!.messages.contains(where: { $0.id == newMessage.id })
                     }
@@ -47,11 +46,10 @@ class ChatViewModel: ObservableObject {
         }
     }
 
-
     func sendMessage() {
         guard !messageText.isEmpty else { return }
 
-        userService.sendMessage(text: messageText, to: chatId) { [weak self] result in
+        userService.sendMessage(message: messageText, to: chatId) { [weak self] result in
             switch result {
             case .success(let sendMessageResponse):
                 if sendMessageResponse.success {
@@ -72,8 +70,7 @@ class ChatViewModel: ObservableObject {
         }
     }
 
-
     func attachFile() {
-    
+        // Implement file attachment functionality
     }
 }

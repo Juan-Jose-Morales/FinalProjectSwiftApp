@@ -11,7 +11,7 @@ struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
     @StateObject private var keyboardResponder = KeyboardResponder()
     @State private var isLoadingMoreMessages = false
-    
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -32,20 +32,14 @@ struct ChatView: View {
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Color.white)
-            .onTapGesture {
-                UIApplication.shared.endEditing()
+            .onAppear {
+                chatViewModel.loadMessages()
             }
-            .navigationBarTitle("", displayMode: .inline)
             .navigationBarBackButtonHidden(true)
         }
     }
 }
 
 #Preview {
-    ChatView(
-        chatViewModel: ChatViewModel(
-            chatId: "1",
-            chatList: ChatList(chat: "1", source: "user1", chatcreated: "2024-07-22T16:03:44.798Z")
-        )
-    )
+    ChatView(chatViewModel: ChatViewModel(chatId: "1", chatList: ChatList(chat: "1", source: "user1", chatcreated: "2024-07-22T16:03:44.798Z")))
 }

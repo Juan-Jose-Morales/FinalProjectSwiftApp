@@ -169,7 +169,7 @@ class UserService {
             }
     }
     
-    func sendMessage(text: String, to chatId: String, completion: @escaping (Result<SendMessageResponse, AFError>) -> Void) {
+    func sendMessage(message: String, to chatId: String, completion: @escaping (Result<SendMessageResponse, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
             completion(.failure(AFError.explicitlyCancelled))
@@ -177,13 +177,14 @@ class UserService {
         }
         
         let headers: HTTPHeaders = ["Authorization": token]
-        let parameters: [String: Any] = ["text": text, "chatId": chatId]
+        let parameters: [String: Any] = ["message": message, "chat": chatId] 
         
         AF.request("\(baseURL)/api/messages/new", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: SendMessageResponse.self) { response in
                 completion(response.result)
             }
     }
+
     
     
     func uploadProfilePhoto(userId: String, imageData: Data, completion: @escaping (Result<User, Error>) -> Void) {

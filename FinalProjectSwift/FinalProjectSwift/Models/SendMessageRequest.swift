@@ -8,6 +8,6 @@
 import Foundation
 
 struct SendMessageRequest: Encodable {
-    let text: String
-    let chatId: String
+    let message: String
+    let chat: String
 }
