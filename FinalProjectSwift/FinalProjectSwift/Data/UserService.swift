@@ -12,18 +12,18 @@ class UserService {
     private var session: Session
     private let baseURL = "https://mock-movilidad.vass.es/chatvass/api"
     let USER_EXISTENCE_STATUS_CODE = 409
-
+    
     init() {
         let interceptor = AuthInterceptor()
         session = Session(interceptor: interceptor)
     }
-
+    
     func login(username: String, password: String, completion: @escaping (Result<(String, User), AFError>) -> Void) {
         let parameters: [String: Any] = [
             "password": password,
             "login": username
         ]
-
+        
         AF.request("\(baseURL)/users/login", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseDecodable(of: LoginUserResponse.self) { response in
                 switch response.result {
@@ -35,23 +35,23 @@ class UserService {
                 }
             }
     }
-
+    
     func loginWithBiometrics(completion: @escaping (Result<(String, User), AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
             completion(.failure(AFError.explicitlyCancelled))
             return
         }
-
+        
         let headers: HTTPHeaders = ["Authorization": token]
-
+        
         AF.request("\(baseURL)/users/biometric", method: .post, headers: headers)
             .responseDecodable(of: LoginUserResponse.self) { response in
                 guard let statusCode = response.response?.statusCode else {
                     completion(.failure(AFError.responseSerializationFailed(reason: .inputFileNil)))
                     return
                 }
-
+                
                 switch statusCode {
                 case 200:
                     guard let loginResponse = response.value else {
@@ -73,7 +73,7 @@ class UserService {
                 }
             }
     }
-
+    
     func register(user: User, completion: @escaping (Result<User, Error>) -> Void) {
         let url = "\(baseURL)/users/register"
         let parameters: [String: Any] = [
@@ -85,7 +85,7 @@ class UserService {
             "uuid": user.uuid ?? UUID().uuidString,
             "online": user.online ?? false
         ]
-
+        
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseDecodable(of: UserResponse.self) { response in
                 switch response.result {
@@ -101,10 +101,31 @@ class UserService {
                 }
             }
     }
-
+    
+    func updateOnlineStatus(isOnline: Bool, completion: @escaping (Result<Void, AFError>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            completion(.failure(AFError.explicitlyCancelled))
+            return
+        }
+        
+        let url = "\(baseURL)/users/online/\(isOnline)"
+        let headers: HTTPHeaders = ["Authorization": token]
+        
+        AF.request(url, method: .put, headers: headers)
+            .validate()
+            .response { response in
+                switch response.result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+    
     func getUsers(completion: @escaping (Result<[User], Error>) -> Void) {
         let url = "\(baseURL)/users"
-
+        
         AF.request(url, method: .get)
             .responseDecodable(of: [User].self) { response in
                 switch response.result {
@@ -115,65 +136,65 @@ class UserService {
                 }
             }
     }
-
+    
     func getMessages(for chatId: String, completion: @escaping (Result<MessageListResponse, Error>) -> Void) {
-            let urlString = "\(baseURL)/chats/\(chatId)/messages"
-            
-            AF.request(urlString, method: .get)
-                .validate()
-                .responseDecodable(of: MessageListResponse.self) { response in
-                    switch response.result {
-                    case .success(let messageListResponse):
-                        completion(.success(messageListResponse))
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
+        let urlString = "\(baseURL)/chats/\(chatId)/messages"
+        
+        AF.request(urlString, method: .get)
+            .validate()
+            .responseDecodable(of: MessageListResponse.self) { response in
+                switch response.result {
+                case .success(let messageListResponse):
+                    completion(.success(messageListResponse))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-        }
-
-
-    func getMessageList(chatId: String, offset: Int, limit: Int, completion: @escaping (Result<MessageListResponse, AFError>) -> Void) {
-            guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
-                print("Error: Missing AuthToken")
-                completion(.failure(AFError.explicitlyCancelled))
-                return
             }
-
-            let headers: HTTPHeaders = ["Authorization": token]
-            let url = "\(baseURL)/messages/list/\(chatId)?offset=\(offset)&limit=\(limit)"
-
-            AF.request(url, method: .get, headers: headers)
-                .responseDecodable(of: MessageListResponse.self) { response in
-                    completion(response.result)
-                }
+    }
+    
+    
+    func getMessageList(chatId: String, offset: Int, limit: Int, completion: @escaping (Result<MessageListResponse, AFError>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            print("Error: Missing AuthToken")
+            completion(.failure(AFError.explicitlyCancelled))
+            return
         }
-
+        
+        let headers: HTTPHeaders = ["Authorization": token]
+        let url = "\(baseURL)/messages/list/\(chatId)?offset=\(offset)&limit=\(limit)"
+        
+        AF.request(url, method: .get, headers: headers)
+            .responseDecodable(of: MessageListResponse.self) { response in
+                completion(response.result)
+            }
+    }
+    
     func sendMessage(text: String, to chatId: String, completion: @escaping (Result<SendMessageResponse, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
             completion(.failure(AFError.explicitlyCancelled))
             return
         }
-
+        
         let headers: HTTPHeaders = ["Authorization": token]
         let parameters: [String: Any] = ["text": text, "chatId": chatId]
-
+        
         AF.request("\(baseURL)/api/messages/new", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: SendMessageResponse.self) { response in
                 completion(response.result)
             }
     }
-
-
+    
+    
     func uploadProfilePhoto(userId: String, imageData: Data, completion: @escaping (Result<User, Error>) -> Void) {
         let url = "\(baseURL)/users/upload?id=\(userId)"
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             completion(.failure(AFError.explicitlyCancelled))
             return
         }
-
+        
         let headers: HTTPHeaders = ["Authorization": token]
-
+        
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imageData, withName: "file", fileName: "profile.jpg", mimeType: "image/jpeg")
         }, to: url, headers: headers).responseDecodable(of: User.self) { response in
@@ -185,67 +206,81 @@ class UserService {
             }
         }
     }
-
+    
     func logout(completion: @escaping (Result<Void, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             completion(.failure(AFError.explicitlyCancelled))
             return
         }
+
         let headers: HTTPHeaders = ["Authorization": token]
         AF.request("\(baseURL)/users/logout", method: .post, headers: headers)
-            .response { response in
+            .responseData { response in
                 switch response.result {
-                case .success:
-                    UserDefaults.standard.removeObject(forKey: "AuthToken")
-                    completion(.success(()))
+                case .success(let data):
+                    print("Logout response data: \(String(data: data, encoding: .utf8) ?? "No Data")")
+                    do {
+                        let logoutResponse = try JSONDecoder().decode(LogoutResponse.self, from: data)
+                        print("Logout message: \(logoutResponse.message)")
+                        UserDefaults.standard.removeObject(forKey: "AuthToken")
+                        completion(.success(()))
+                    } catch {
+                        print("Failed to decode logout response: \(error.localizedDescription)")
+                        completion(.failure(AFError.responseSerializationFailed(reason: .inputFileNil)))
+                    }
                 case .failure(let error):
+                    print("Logout error: \(error.localizedDescription)")
                     completion(.failure(error))
                 }
             }
     }
 
+
+
+    
     func getChatList(completion: @escaping (_ chatList: [ChatList]) -> Void){
-            
-            guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
-                print("Error: Missing AuthToken")
-                return
-            }
-            
-            let headers: HTTPHeaders = ["Authorization": token]
-            
-            AF.request("\(baseURL)/chats/view/", encoding: JSONEncoding.default, headers: headers)
-                .validate()
-                .responseDecodable(of: [ChatList].self) {
-                    response in
-                    switch response.result {
-                                case .success(let data):
-                                      completion(data)
-                                  case .failure(let error):
-                                     print(error)
-                    }
+        
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            print("Error: Missing AuthToken")
+            return
+        }
+        
+        let headers: HTTPHeaders = ["Authorization": token]
+        
+        AF.request("\(baseURL)/chats/view/", encoding: JSONEncoding.default, headers: headers)
+            .validate()
+            .responseDecodable(of: [ChatList].self) {
+                response in
+                switch response.result {
+                case .success(let data):
+                    completion(data)
+                case .failure(let error):
+                    print(error)
                 }
-        }
-        func deletechat(id: String){
-            guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
-                print("Error: Missing AuthToken")
-                return
             }
-            
-            let headers: HTTPHeaders = ["Authorization": token]
-            
-            let parameters: [String: Any] = [
-                "id": "\(id)"
-            ]
-            AF.request("\(baseURL)/chats/\(id)", method: .delete, parameters: parameters, headers: headers)
-                .validate()
-                .responseDecodable(of: User.self) { response in
-                    switch response.result {
-                    case .success(let data):
-                        print(data)
-                    case .failure(let error):
-                        print(error)
-                    }
-            }
-        }
     }
+    
+    func deletechat(id: String){
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            print("Error: Missing AuthToken")
+            return
+        }
+        
+        let headers: HTTPHeaders = ["Authorization": token]
+        
+        let parameters: [String: Any] = [
+            "id": "\(id)"
+        ]
+        AF.request("\(baseURL)/chats/\(id)", method: .delete, parameters: parameters, headers: headers)
+            .validate()
+            .responseDecodable(of: User.self) { response in
+                switch response.result {
+                case .success(let data):
+                    print(data)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+}
 

@@ -16,9 +16,9 @@ struct CustomTextField: View {
     
     var body: some View {
         HStack {
-            Image(systemName: imageName)
+            Image( imageName)
                 .resizable()
-                .frame(width: 20, height: 20)
+                .frame(width: 25, height: 25)
                 .foregroundColor(.black)
                 .padding(.leading, 8)
             
@@ -32,7 +32,7 @@ struct CustomTextField: View {
         .frame(height: 43)
         .background(RoundedRectangle(cornerRadius: 15)
             .stroke(Color.black, lineWidth: 1)
-            .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 15))
+            .shadow(radius: 5))
     }
 }
 struct StyledTextField: View {
@@ -54,6 +54,7 @@ struct StyledTextField: View {
                 .frame(height: 36)
         }
         .padding(.horizontal, 8)
+        .shadow(radius: 5)
     }
 }
 
@@ -65,7 +66,7 @@ struct SecureFields: View {
     
     var body: some View {
         HStack {
-            Image(systemName: imageName)
+            Image(imageName)
                 .resizable()
                 .frame(width: 20, height: 20)
                 .foregroundColor(.black)
@@ -92,7 +93,7 @@ struct SecureFields: View {
         .frame(height: 43)
         .background(RoundedRectangle(cornerRadius: 15)
             .stroke(Color.black, lineWidth: 1)
-            .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 15))
+            .shadow(radius: 5))
     }
 }
 
@@ -105,7 +106,7 @@ struct SearcField: View {
     var body: some View {
         VStack(alignment: .trailing){
             HStack {
-                Image(systemName: imageName)
+                Image(imageName)
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.black)
@@ -122,7 +123,7 @@ struct SearcField: View {
             .frame(height: 45)
             .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.black, lineWidth: 1)
-                .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 4))
+                .shadow(radius: 5))
             .padding(8)
         }
     }

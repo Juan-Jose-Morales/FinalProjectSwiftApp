@@ -2,55 +2,58 @@
 //  MessageView.swift
 //  FinalProjectSwift
 //
-//  Created by Juan jose Morales on 22/7/24.
+//  Created by Juan jose Morales on 24/7/24.
 //
 
 import SwiftUI
 
 struct MessageView: View {
-    @StateObject private var viewModel: MessageViewModel
-    @State private var messageText: String = ""
-    let chat: ChatList
-
-    init(chat: ChatList) {
-        _viewModel = StateObject(wrappedValue: MessageViewModel(chatId: chat.chat))
-        self.chat = chat
-    }
-
+    let message: Message
+    @ObservedObject var chatViewModel: ChatViewModel
+    
     var body: some View {
-        VStack {
-            List(viewModel.messages) { message in
-                VStack(alignment: .leading) {
-                    Text(message.message)
-                        .font(.body)
-                    Text(message.date)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-            }
-            
+        VStack(alignment: .leading) {
             HStack {
-                TextField("Enter your message", text: $messageText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                Button(action: {
-                    viewModel.sendMessage(text: messageText)
-                    messageText = ""
-                }) {
-                    Text("Send")
+                if message.source == chatViewModel.chatList.source {
+                    Spacer()
+                    VStack(alignment: .trailing) {
+                        Text(message.message)
+                            .padding()
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(22)
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.horizontal)
+                        Text(getTime(from: message.date))
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+                            .padding(.horizontal)
+                    }
+                } else {
+                    VStack(alignment: .leading) {
+                        Text(message.message)
+                            .padding()
+                            .background(Color("Blue"))
+                            .cornerRadius(22)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
+                        Text(getTime(from: message.date))
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+                            .padding(.horizontal)
+                    }
+                    Spacer()
                 }
             }
-            .padding()
-        }
-        .navigationTitle(chat.targetnick ?? "Chat")
-        .onAppear {
-            viewModel.loadMessages()
+            .padding(.top, 5)
         }
     }
 }
 
-struct MessageView_Previews: PreviewProvider {
-    static var previews: some View {
-        MessageView(chat: ChatList(id: UUID(), chat: "123", target: "Target", targetnick: "Target Nick"))
-    }
+#Preview {
+    MessageView(
+        message: Message(id: "1", chat: "1", source: "user1", message: "Test message", date: "2024-07-22T16:03:44.798Z"),
+        chatViewModel: ChatViewModel(chatId: "1", chatList: ChatList(chat: "1", source: "user1", chatcreated: "2024-07-22T16:03:44.798Z"))
+    )
 }

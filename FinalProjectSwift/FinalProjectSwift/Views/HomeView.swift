@@ -20,7 +20,7 @@ struct HomeView: View {
                         .onChange(of: homeViewModel.search) { newValue in
                             homeViewModel.chatFilter()
                         }
-                        .padding(.top, 20)
+                        .padding(.top, 15)
                     
                     if homeViewModel.listChats.isEmpty {
                         CustomListChat()
@@ -62,12 +62,21 @@ struct HomeView: View {
                     Button(action: {
                         isShowingChangeProfileView = true
                     }) {
-                        Image(systemName: "person.circle.fill")
-                            .resizable()
-                            .foregroundColor(.black)
-                            .clipShape(Circle())
-                            .frame(width: 35, height: 35)
-                            .padding(.top, 40)
+                        if let profileImage = homeViewModel.profileImage {
+                            Image(uiImage: profileImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                                .padding(.top, 40)
+                        } else {
+                            Image("defaultAvatar")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                                .padding(.top, 40)
+                        }
+
                     }
                     .navigationDestination(isPresented: $isShowingChangeProfileView) {
                         ChangeProfileView(origin: .home)

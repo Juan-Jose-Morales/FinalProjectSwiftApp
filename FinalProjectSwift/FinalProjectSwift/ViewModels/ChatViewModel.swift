@@ -32,8 +32,12 @@ class ChatViewModel: ObservableObject {
             switch result {
             case .success(let messageListResponse):
                 DispatchQueue.main.async {
-                    self?.messages.append(contentsOf: messageListResponse.rows)
-                    self?.offset += messageListResponse.rows.count
+                    
+                    let newMessages = messageListResponse.rows.filter { newMessage in
+                        !self!.messages.contains(where: { $0.id == newMessage.id })
+                    }
+                    self?.messages.append(contentsOf: newMessages)
+                    self?.offset += newMessages.count
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -43,6 +47,7 @@ class ChatViewModel: ObservableObject {
         }
     }
 
+
     func sendMessage() {
         guard !messageText.isEmpty else { return }
 
@@ -50,10 +55,10 @@ class ChatViewModel: ObservableObject {
             switch result {
             case .success(let sendMessageResponse):
                 if sendMessageResponse.success {
-                    self?.messageText = ""
-                    self?.offset = 0
-                    self?.messages.removeAll()
-                    self?.loadMessages()
+                    DispatchQueue.main.async {
+                        self?.messageText = ""
+                        self?.loadMessages()
+                    }
                 } else {
                     DispatchQueue.main.async {
                         self?.errorMessage = "Error sending message: Failed to send message."
@@ -67,16 +72,8 @@ class ChatViewModel: ObservableObject {
         }
     }
 
-    private func getCurrentDateTimeString() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        return dateFormatter.string(from: Date())
-    }
 
     func attachFile() {
     
     }
-    
-  
-
 }

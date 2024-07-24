@@ -12,6 +12,7 @@ class ProfileViewModel: ObservableObject {
     @Published var userName: String = "Usuario"
     @Published var profileImage: UIImage?
     @Published var isLoading: Bool = false
+    @Published var isOnline: Bool = false
     
     private let userService: UserService
     private let profileImageKey = "profileImageKey"
@@ -47,7 +48,22 @@ class ProfileViewModel: ObservableObject {
     func saveUserName() {
         UserDefaults.standard.set(userName, forKey: "userNick")
     }
-}
+    
+    func updateOnlineStatus(isOnline: Bool) {
+            self.isLoading = true
+            userService.updateOnlineStatus(isOnline: isOnline) { [weak self] result in
+                DispatchQueue.main.async {
+                    self?.isLoading = false
+                    switch result {
+                    case .success:
+                        self?.isOnline = isOnline
+                    case .failure(let error):
+                        print("Error updating online status: \(error)")
+                    }
+                }
+            }
+        }
+    }
 
 
 

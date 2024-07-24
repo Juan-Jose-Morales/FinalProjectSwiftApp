@@ -21,6 +21,9 @@ struct ChangeProfileView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                CustomNavigationBar(title: "Foto de perfil", titleColor: .black, buttonColor: .black, onBack: {
+                    isNavigateBack = true
+                })
                 userAvatar
                 
                 Divider()
@@ -41,14 +44,6 @@ struct ChangeProfileView: View {
                 Alert(title: Text("Error"), message: Text(viewModel.alertMessage), dismissButton: .default(Text("OK")))
             }
             .navigationBarBackButtonHidden(true)
-            .navigationTitle("Foto de perfil")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: Button(action: {
-                isNavigateBack = true
-            }) {
-                Image(systemName: "arrow.left")
-                    .foregroundColor(.black)
-            })
             .navigationDestination(isPresented: $isNavigateBack) {
                 if origin == .home {
                     HomeView()
@@ -58,6 +53,7 @@ struct ChangeProfileView: View {
             }
         }
     }
+    
     
     private var userAvatar: some View {
         VStack {
@@ -110,4 +106,3 @@ struct ChangeProfileView: View {
 #Preview {
     ChangeProfileView(origin: .home)
 }
-
