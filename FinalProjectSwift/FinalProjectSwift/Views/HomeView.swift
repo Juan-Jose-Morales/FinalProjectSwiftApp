@@ -15,12 +15,17 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
-                VStack {
+                VStack (spacing: 0) {
+                    CustomToolbar(
+                        isShowingChangeProfileView: $isShowingChangeProfileView,
+                        isShowingProfileSettingsView: $isShowingProfileSettingsView,
+                        homeViewModel: homeViewModel
+                    )
                     SearcField(imageName: "magnifyingglass", placeholder: "", text: $homeViewModel.search)
                         .onChange(of: homeViewModel.search) { newValue in
                             homeViewModel.chatFilter()
                         }
-                        .padding(.top, 15)
+                        .padding(.top, 0)
                     
                     if homeViewModel.listChats.isEmpty {
                         CustomListChat()
@@ -51,56 +56,17 @@ struct HomeView: View {
                 
                 FloatButton()
             }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Image("logoFinalGrande")
-                        .resizable()
-                        .frame(width: 70, height: 70)
-                        .padding(.top, 40)
-                }
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        isShowingChangeProfileView = true
-                    }) {
-                        if let profileImage = homeViewModel.profileImage {
-                            Image(uiImage: profileImage)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
-                                .padding(.top, 40)
-                        } else {
-                            Image("defaultAvatar")
-                                .resizable()
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
-                                .padding(.top, 40)
-                        }
-
-                    }
-                    .navigationDestination(isPresented: $isShowingChangeProfileView) {
-                        ChangeProfileView(origin: .home)
-                    }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        isShowingProfileSettingsView = true
-                    }) {
-                        Image(systemName: "gearshape.fill")
-                            .resizable()
-                            .foregroundColor(.black)
-                            .clipShape(Circle())
-                            .frame(width: 35, height: 35)
-                            .padding(.top, 40)
-                    }
-                    .navigationDestination(isPresented: $isShowingProfileSettingsView) {
-                        ProfileSettingsView()
-                    }
-                }
+            .navigationDestination(isPresented: $isShowingChangeProfileView) {
+                ChangeProfileView(origin: .home)
             }
-            .modifier(NavBarModifier())
+            .navigationDestination(isPresented: $isShowingProfileSettingsView) {
+                ProfileSettingsView()
+            }
             .navigationBarBackButtonHidden(true)
         }
+        .onAppear {
+              UINavigationBar.appearance().backgroundColor = UIColor(named: "Blue")
+            }
     }
 }
 

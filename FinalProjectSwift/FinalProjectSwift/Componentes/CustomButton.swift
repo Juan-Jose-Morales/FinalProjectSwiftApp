@@ -42,7 +42,7 @@ struct BiometricButton: View {
                     .padding(.leading, 15)
                 Spacer()
             }
-            .padding(.horizontal)
+            .padding(.horizontal,20)
             .frame(maxWidth: .infinity)
             .frame(height: 43)
             .background(RoundedRectangle(cornerRadius: 15)

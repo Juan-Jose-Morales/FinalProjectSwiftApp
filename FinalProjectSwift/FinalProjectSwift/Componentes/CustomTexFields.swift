@@ -35,6 +35,7 @@ struct CustomTextField: View {
             .shadow(radius: 5))
     }
 }
+
 struct StyledTextField: View {
     var placeholder: String
     @Binding var text: String
@@ -47,6 +48,9 @@ struct StyledTextField: View {
                     .padding(.leading, 8)
             }
             TextField("", text: $text)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .textFieldStyle(PlainTextFieldStyle())
                 .padding(8)
                 .background(Color.white)
                 .cornerRadius(15)
@@ -57,7 +61,6 @@ struct StyledTextField: View {
         .shadow(radius: 5)
     }
 }
-
 struct SecureFields: View {
     var title: String
     @Binding var text: String
@@ -65,53 +68,61 @@ struct SecureFields: View {
     var imageName: String
     
     var body: some View {
-        HStack {
-            Image(imageName)
-                .resizable()
-                .frame(width: 20, height: 20)
-                .foregroundColor(.black)
-                .padding(.leading, 8)
-            
-            if self.visible {
-                TextField(title, text: $text)
-                    .padding()
-            } else {
-                SecureField(title, text: $text)
-                    .padding()
-            }
-            
-            Button(action: {
-                self.visible.toggle()
-            }) {
-                Image(systemName: self.visible ? "eye.fill" : "eye.slash.fill")
-                    .foregroundColor((self.visible == true) ? .blue : .secondary)
-                    .padding(.horizontal, 8)
-            }
-        }
-        .padding(.horizontal)
-        .frame(maxWidth: .infinity)
-        .frame(height: 43)
-        .background(RoundedRectangle(cornerRadius: 15)
-            .stroke(Color.black, lineWidth: 1)
-            .shadow(radius: 5))
-    }
-}
-
-struct SearcField: View {
-    var imageName: String
-    var placeholder: String
-    @Binding var text: String
-    var isSecure: Bool = false
-
-    var body: some View {
-        VStack(alignment: .trailing){
+        VStack {
             HStack {
                 Image(imageName)
                     .resizable()
                     .frame(width: 20, height: 20)
                     .foregroundColor(.black)
                     .padding(.leading, 8)
-
+                
+                if self.visible {
+                    TextField(title, text: $text)
+                        .padding()
+                        .textInputAutocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .keyboardType(.asciiCapable)
+                } else {
+                    SecureField(title, text: $text)
+                        .padding()
+                        .textInputAutocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .keyboardType(.asciiCapable)
+                }
+                
+                Button(action: {
+                    self.visible.toggle()
+                }) {
+                    Image(systemName: self.visible ? "eye.fill" : "eye.slash.fill")
+                        .foregroundColor(self.visible ? .blue : .secondary)
+                        .padding(.horizontal, 8)
+                }
+            }
+            .padding(.horizontal)
+            .frame(maxWidth: .infinity)
+            .frame(height: 43)
+            .background(RoundedRectangle(cornerRadius: 15)
+                .stroke(Color.black, lineWidth: 1)
+                .shadow(radius: 5))
+        }
+        .background(DismissKeyboardGesture())
+    }
+}
+struct SearcField: View {
+    var imageName: String
+    var placeholder: String
+    @Binding var text: String
+    var isSecure: Bool = false
+    
+    var body: some View {
+        VStack(alignment: .trailing) {
+            HStack {
+                Image(imageName)
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.black)
+                    .padding(.leading, 8)
+                
                 if isSecure {
                     SecureField(placeholder, text: $text)
                         .padding()
@@ -124,8 +135,9 @@ struct SearcField: View {
             .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.black, lineWidth: 1)
                 .shadow(radius: 5))
-            .padding(8)
+            .padding(.top, 0)
+            .padding(.horizontal, 20)
+            
         }
     }
-
 }
