@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-
+ 
 struct HomeView: View {
     @StateObject private var homeViewModel = HomeViewModel()
     @State private var isShowingChangeProfileView = false
     @State private var isShowingProfileSettingsView = false
-    
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
@@ -21,28 +20,23 @@ struct HomeView: View {
                         isShowingProfileSettingsView: $isShowingProfileSettingsView,
                         homeViewModel: homeViewModel
                     )
-                    SearcField(imageName: "magnifyingglass", placeholder: "", text: $homeViewModel.search)
+                    SearcField(imageName: "magnifyingglass", placeholder: "Buscar", text: $homeViewModel.search)
                         .onChange(of: homeViewModel.search) { newValue in
                             homeViewModel.chatFilter()
                         }
                         .padding(.top, 0)
-                    
                     if homeViewModel.listChats.isEmpty {
-            ZStack (alignment: .bottomTrailing){
-                VStack{
-                    SearcField(imageName:  "magnifyingglass", placeholder: "Buscar", text: $homeViewModel.search)
-                    if homeViewModel.listChats.isEmpty{
                         CustomListChat()
                     } else {
                         List {
-                            ForEach(homeViewModel.listChats) { chat in
+                            ForEach(homeViewModel.filterChats) { chat in
                                 NavigationLink(destination: ChatView(chatViewModel: ChatViewModel(chatId: chat.chat, chatList: chat))) {
                                     VStack {
                                         HStack {
                                             Image(systemName: "person.circle.fill")
                                                 .resizable()
                                                 .frame(width: 40, height: 40)
-                                            Text(homeViewModel.getNick(chatList: chat))
+                                            Text(chat.targetnick ?? "Usuario Desconocido")
                                         }
                                     }
                                 }
@@ -55,8 +49,10 @@ struct HomeView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .scrollContentBackground(.hidden)
                     }
-                }.onAppear(){
+                }
+                .onAppear {
                     homeViewModel.getChatlist()
+                    UINavigationBar.appearance().backgroundColor = UIColor(named: "Blue")
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 FloatButton(onUpdate: {
@@ -70,13 +66,12 @@ struct HomeView: View {
                 ProfileSettingsView()
             }
             .navigationBarBackButtonHidden(true)
+            .modifier(NavBarModifier())
         }
-        .onAppear {
-              UINavigationBar.appearance().backgroundColor = UIColor(named: "Blue")
-            }
     }
 }
-
+ 
 #Preview {
     HomeView()
 }
+

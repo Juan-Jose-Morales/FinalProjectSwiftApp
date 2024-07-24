@@ -45,6 +45,11 @@
 		90FFDB082C4C26D500FFE3FE /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FFDB072C4C26D500FFE3FE /* ChatView.swift */; };
 		90FFDB0A2C4C26F100FFE3FE /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FFDB092C4C26F100FFE3FE /* ChatViewModel.swift */; };
 		90FFDB0C2C4C272600FFE3FE /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FFDB0B2C4C272600FFE3FE /* KeyboardResponder.swift */; };
+		A93922DE2C51ADE600533969 /* NewChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93922DD2C51ADE600533969 /* NewChat.swift */; };
+		A93922E02C51ADF700533969 /* NewChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93922DF2C51ADF700533969 /* NewChatResponse.swift */; };
+		A93922E22C51AE0E00533969 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93922E12C51AE0E00533969 /* Chat.swift */; };
+		A93922E42C51AEA000533969 /* NewChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93922E32C51AEA000533969 /* NewChatView.swift */; };
+		A93922E62C51AFD300533969 /* NewChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93922E52C51AFD300533969 /* NewChatViewModel.swift */; };
 		A94EC23E2C46CAE500E85D63 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */; };
 		A94EC2802C48333E00E85D63 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC27F2C48333E00E85D63 /* AuthInterceptor.swift */; };
 		A94EC2822C48374C00E85D63 /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC2812C48374C00E85D63 /* ChatList.swift */; };
@@ -99,6 +104,11 @@
 		90FFDB072C4C26D500FFE3FE /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		90FFDB092C4C26F100FFE3FE /* ChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		90FFDB0B2C4C272600FFE3FE /* KeyboardResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyboardResponder.swift; path = FinalProjectSwift/Componentes/KeyboardResponder.swift; sourceTree = SOURCE_ROOT; };
+		A93922DD2C51ADE600533969 /* NewChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChat.swift; sourceTree = "<group>"; };
+		A93922DF2C51ADF700533969 /* NewChatResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChatResponse.swift; sourceTree = "<group>"; };
+		A93922E12C51AE0E00533969 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		A93922E32C51AEA000533969 /* NewChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChatView.swift; sourceTree = "<group>"; };
+		A93922E52C51AFD300533969 /* NewChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChatViewModel.swift; sourceTree = "<group>"; };
 		A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A94EC27F2C48333E00E85D63 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		A94EC2812C48374C00E85D63 /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
@@ -142,6 +152,7 @@
 		9040AE722C32F5A100D550AD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A93922E32C51AEA000533969 /* NewChatView.swift */,
 				90FFDB0B2C4C272600FFE3FE /* KeyboardResponder.swift */,
 				90FFDB032C4C26BC00FFE3FE /* ChatHeaderView.swift */,
 				90FFDB052C4C26CB00FFE3FE /* ChatInputView.swift */,
@@ -162,6 +173,7 @@
 		9040AE732C32F5AF00D550AD /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				A93922E52C51AFD300533969 /* NewChatViewModel.swift */,
 				90FFDB092C4C26F100FFE3FE /* ChatViewModel.swift */,
 				9040AEAC2C346E2000D550AD /* RegisterViewModel.swift */,
 				A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */,
@@ -210,6 +222,9 @@
 		9040AEA32C345F5E00D550AD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A93922E12C51AE0E00533969 /* Chat.swift */,
+				A93922DF2C51ADF700533969 /* NewChatResponse.swift */,
+				A93922DD2C51ADE600533969 /* NewChat.swift */,
 				9040AEA52C345FB400D550AD /* User.swift */,
 				90F68BE72C3DB8E700793B4B /* UserResponse.swift */,
 				9003E10E2C3EB142006CD269 /* LoginUserResponse.swift */,
@@ -376,15 +391,19 @@
 				90FFDB082C4C26D500FFE3FE /* ChatView.swift in Sources */,
 				904A89C82C47EE49005F2DC8 /* SignOffView.swift in Sources */,
 				90A76BAA2C512D2D00AC2D6A /* MessageView.swift in Sources */,
+				A93922DE2C51ADE600533969 /* NewChat.swift in Sources */,
+				A93922E62C51AFD300533969 /* NewChatViewModel.swift in Sources */,
 				902B855E2C4EB5820095E972 /* Message.swift in Sources */,
 				902B85662C4EC5D30095E972 /* MessageListResponse.swift in Sources */,
 				904A89BE2C46D114005F2DC8 /* ProfileSettingsViewModel.swift in Sources */,
 				904A89C62C47DEC9005F2DC8 /* ImagePicker.swift in Sources */,
 				904A89C22C47D719005F2DC8 /* ChangeProfileViewModel.swift in Sources */,
 				904A89BA2C4695C9005F2DC8 /* ProfileViewModel.swift in Sources */,
+				A93922E22C51AE0E00533969 /* Chat.swift in Sources */,
 				90FFDB042C4C26BC00FFE3FE /* ChatHeaderView.swift in Sources */,
 				90A76BA82C512CCB00AC2D6A /* MessagesView.swift in Sources */,
 				904A89C42C47DA3E005F2DC8 /* ChangeProfileView.swift in Sources */,
+				A93922E42C51AEA000533969 /* NewChatView.swift in Sources */,
 				A94EC2802C48333E00E85D63 /* AuthInterceptor.swift in Sources */,
 				90A76BAC2C512D8300AC2D6A /* Utils.swift in Sources */,
 				A94EC23E2C46CAE500E85D63 /* HomeViewModel.swift in Sources */,
@@ -405,6 +424,7 @@
 				A94EC2822C48374C00E85D63 /* ChatList.swift in Sources */,
 				90294B492C36D60C0030E04C /* LoginViewModel.swift in Sources */,
 				9040AE7A2C32F6A200D550AD /* CustomTexFields.swift in Sources */,
+				A93922E02C51ADF700533969 /* NewChatResponse.swift in Sources */,
 				904A89B82C4692F9005F2DC8 /* ProfileSettingsView.swift in Sources */,
 				90294B4D2C36EA620030E04C /* SessionManager.swift in Sources */,
 				90FFDB0C2C4C272600FFE3FE /* KeyboardResponder.swift in Sources */,

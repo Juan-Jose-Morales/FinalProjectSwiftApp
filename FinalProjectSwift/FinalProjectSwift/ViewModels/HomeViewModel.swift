@@ -21,20 +21,21 @@ class HomeViewModel: ObservableObject {
     @Published var user = User()
     
     
+    
     private var userService = UserService()
     
-    init(){
+    init() {
         getChatlist()
         loadProfileImage()
     }
     
-    func getChatlist(){
+    func getChatlist() {
         userService.getChatList { chatList in
             self.listChats = chatList
             self.filterChats = chatList
         }
     }
-    func deleteChat(id: String){
+    func deleteChat(id: String) {
         userService.deletechat(id: id)
     }
     func deleteItems(at offsets: IndexSet) {
@@ -57,30 +58,27 @@ class HomeViewModel: ObservableObject {
                 chat.source == id ? chat.targetnick!.lowercased().contains(search.lowercased()) : chat.sourceNick!.lowercased().contains(search.lowercased())
             }
         }
+    }
     private func loadProfileImage() {
-            if let data = UserDefaults.standard.data(forKey: "profileImageKey"),
-               let image = UIImage(data: data) {
-                profileImage = image
-            }
+        if let data = UserDefaults.standard.data(forKey: "profileImageKey"),
+           let image = UIImage(data: data) {
+            profileImage = image
         }
+    }
     func fetchUserData() {
-            userService.getUsers { result in
-                switch result {
-                case .success(let users):
-                    if let user = users.first {
-                        DispatchQueue.main.async {
-                            self.user = user
-                            self.loadProfileImage()
-                        }
+        userService.getUsers { result in
+            switch result {
+            case .success(let users):
+                if let user = users.first {
+                    DispatchQueue.main.async {
+                        self.user = user
+                        self.loadProfileImage()
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
                 }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
-    
-    
-    
     }
     func getNick(chatList: ChatList) -> String {
         guard let id = UserDefaults.standard.string(forKey: "id") else {
