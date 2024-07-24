@@ -36,7 +36,7 @@ struct HomeView: View {
                                             Image(systemName: "person.circle.fill")
                                                 .resizable()
                                                 .frame(width: 40, height: 40)
-                                            Text(chat.targetnick ?? "Usuario Desconocido")
+                                            Text(homeViewModel.getNick(chatList: chat))
                                         }
                                     }
                                 }

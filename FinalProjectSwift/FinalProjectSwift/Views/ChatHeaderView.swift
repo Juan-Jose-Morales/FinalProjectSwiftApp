@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChatHeaderView: View {
     let chatlist: ChatList
+    @StateObject private var viewModel = ChatHeaderViewModel()
     
     var body: some View {
         HStack {
@@ -20,7 +21,7 @@ struct ChatHeaderView: View {
               }
             Spacer()
             VStack {
-                Text(chatlist.targetnick ?? "")
+                Text(viewModel.getNick(chatList: chatlist))
                     .font(.headline)
                     .foregroundColor(.white)
                 Text(chatlist.sourceonline == true ? "En línea" : "Desconectado")
