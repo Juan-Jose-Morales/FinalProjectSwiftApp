@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 class NewChatViewModel: ObservableObject{
     @Published var newListChats: [NewChat] = []
     @Published var scrollLetters = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     @Published var showAlert = false
+    @Published var alertNewChat: NewChat?
     @Published var chatFilter: [NewChat] = []
     @Published var search = "" {
         didSet {
