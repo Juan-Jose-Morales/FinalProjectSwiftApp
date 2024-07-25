@@ -33,11 +33,16 @@ struct HomeView: View {
                                 NavigationLink(destination: ChatView(chatViewModel: ChatViewModel(chatId: chat.chat, chatList: chat))) {
                                     VStack {
                                         HStack {
-                                            Image(systemName: "person.circle.fill")
-                                                .resizable()
-                                                .frame(width: 40, height: 40)
+                                            ZStack {
+                                                Circle()
+                                                    .foregroundColor(Color("Blue"))
+                                                    .frame(width: 40, height: 40)
+                                                Text(homeViewModel.getNick(chatList: chat).prefix(1))
+                                                    .foregroundStyle(.white)
+                                            }
                                             Text(homeViewModel.getNick(chatList: chat))
-                                        }
+                                        }//.frame(maxWidth: .infinity)
+                                        //.border(Color.black, width: 1)
                                     }
                                 }
                             }

@@ -18,10 +18,12 @@ struct NewChatView: View {
                         .padding(16)
 
                 }
-                SearcField(imageName: "magnifyingglass", placeholder: "Buscar", text: $newChatViewModel.search)
+                SearcField(imageName: "magnifyingglass", placeholder: "Buscar", text: $newChatViewModel.search).onChange(of: newChatViewModel.search) { newValue in
+                    newChatViewModel.getChatFilter()
+                }
                 ZStack {
                     List{
-                        ForEach(newChatViewModel.newListChats){ newChat in
+                        ForEach(newChatViewModel.chatFilter){ newChat in
                             Text(newChat.nick ?? "Usuario Desconocido")
                                 .onTapGesture {
                                     newChatViewModel.showAlert = true

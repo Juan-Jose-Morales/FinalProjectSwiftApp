@@ -9,9 +9,14 @@ import Foundation
 
 class NewChatViewModel: ObservableObject{
     @Published var newListChats: [NewChat] = []
-    @Published var search = ""
     @Published var scrollLetters = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     @Published var showAlert = false
+    @Published var chatFilter: [NewChat] = []
+    @Published var search = "" {
+        didSet {
+            getChatFilter()
+        }
+    }
     
     
     private var userService = UserService()
@@ -23,6 +28,7 @@ class NewChatViewModel: ObservableObject{
     func getNewChats(){
         userService.getNewChat { newChatList in
             self.newListChats = newChatList
+            self.chatFilter = newChatList
         }
     }
     func createdChat(target: String){
@@ -32,5 +38,16 @@ class NewChatViewModel: ObservableObject{
             return
         }
         userService.CreatedChat(source: id , target: target)
+    }
+    
+    func getChatFilter() {
+        if search.isEmpty {
+            chatFilter = newListChats
+        } else {
+            
+            chatFilter = newListChats.filter { chat in
+                chat.nick!.lowercased().contains(search.lowercased())
+            }
+        }
     }
 }
