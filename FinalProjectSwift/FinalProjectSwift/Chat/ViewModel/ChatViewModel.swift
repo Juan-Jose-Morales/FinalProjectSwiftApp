@@ -32,23 +32,23 @@ class ChatViewModel: ObservableObject {
     }
 
     func loadMessages() {
-        userService.getMessageList(chatId: chatId, offset: offset, limit: limit) { [weak self] result in
-            switch result {
-            case .success(let messageListResponse):
-                DispatchQueue.main.async {
-                    let newMessages = messageListResponse.rows.filter { newMessage in
-                        !self!.messages.contains(where: { $0.id == newMessage.id })
-                    }
-                    self?.messages.append(contentsOf: newMessages)
-                    self?.offset += newMessages.count
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self?.errorMessage = "Error loading messages: \(error.localizedDescription)"
-                }
-            }
-        }
-    }
+           userService.getMessageList(chatId: chatId, offset: offset, limit: limit) { [weak self] result in
+               switch result {
+               case .success(let messageListResponse):
+                   DispatchQueue.main.async {
+                       let newMessages = messageListResponse.rows.filter { newMessage in
+                           !self!.messages.contains(where: { $0.id == newMessage.id })
+                       }
+                       self?.messages.append(contentsOf: newMessages)
+                       self?.offset += newMessages.count
+                   }
+               case .failure(let error):
+                   DispatchQueue.main.async {
+                       self?.errorMessage = "Error loading messages: \(error.localizedDescription)"
+                   }
+               }
+           }
+       }
 
     func sendMessage() {
         guard !messageText.isEmpty else {
@@ -67,7 +67,7 @@ class ChatViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         print("sendMessage: Message successfully sent")
                         let newMessage = Message(id: UUID().uuidString, chat: self?.chatId ?? "", source: self?.source ?? "", message: self?.messageText ?? "", date: ISO8601DateFormatter().string(from: Date()))
-                        self?.messages.insert(newMessage, at: 0) 
+                        self?.messages.insert(newMessage, at: 0)
                         self?.messageText = ""
                     }
                 } else {
@@ -85,16 +85,14 @@ class ChatViewModel: ObservableObject {
         }
     }
 
-
     func getNick(chatList: ChatList) -> String {
         guard let id = UserDefaults.standard.string(forKey: "id") else {
             print("Error: Missing id")
             return ""
         }
-        
+
         return chatList.source == id ? chatList.targetnick! : chatList.sourceNick!
     }
-
 
     private func startMessagePolling() {
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
@@ -107,6 +105,6 @@ class ChatViewModel: ObservableObject {
     }
 
     func attachFile() {
-        // Implement file attachment functionality
+        
     }
 }

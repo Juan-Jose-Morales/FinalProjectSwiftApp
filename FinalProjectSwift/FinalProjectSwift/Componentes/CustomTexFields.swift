@@ -22,10 +22,13 @@ struct CustomTextField: View {
                 .padding(.leading, 8)
             
             TextField(placeholder, text: $text)
-                .autocapitalization(.none) 
+                .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .keyboardType(.default)
                 .padding()
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
             
             Spacer()
         }

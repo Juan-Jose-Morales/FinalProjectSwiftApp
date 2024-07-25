@@ -17,7 +17,7 @@ struct SignOffView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                CustomNavigationBar(title: "Cerrar Sesion", titleColor: .red, buttonColor: .red, onBack: {
+                CustomNavigationBar(title: "Cerrar Sesión", titleColor: .red, buttonColor: .red, onBack: {
                     isNavigateToProfileSettingsView = true
                 })
                 messageToUser
@@ -34,12 +34,14 @@ struct SignOffView: View {
                     message: Text("¿Estás seguro que quieres cerrar sesión?"),
                     primaryButton: .default(Text("Sí"), action: {
                         viewModel.signOff()
-                        if viewModel.isSignOffSucessful {
-                            isNavigateToLogin = true
-                        }
                     }),
                     secondaryButton: .cancel(Text("No"))
                 )
+            }
+            .onChange(of: viewModel.isSignOffSucessful) { isSignOff in
+                if isSignOff {
+                    isNavigateToLogin = true
+                }
             }
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $isNavigateToLogin) {

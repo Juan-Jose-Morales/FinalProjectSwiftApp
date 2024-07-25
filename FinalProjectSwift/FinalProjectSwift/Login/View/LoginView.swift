@@ -36,22 +36,26 @@ struct LoginView: View {
                     }
                     .padding(.bottom, 55)
                     
-                    .navigationDestination(isPresented: $isNavigationToRegister) {
-                        RegisterView()
-                    }
-                    .navigationDestination(isPresented: $viewModel.isLoginSuccessful) {
-                        HomeView()
-                    }
-                    
                     navigateToRegister()
                 }
                 .padding(.horizontal, 40)
                 .frame(maxWidth: .infinity)
             }
-            .background(Color.white)
-            .edgesIgnoringSafeArea(.all)
+            .background(
+                Color.white
+                    .edgesIgnoringSafeArea(.all)
+                    .overlay(
+                        DismissKeyboardGesture()
+                    )
+            )
             .navigationBarHidden(true)
             .alert(isPresented: $viewModel.showAlert, content: alert)
+            .navigationDestination(isPresented: $isNavigationToRegister) {
+                RegisterView()
+            }
+            .navigationDestination(isPresented: $viewModel.isLoginSuccessful) {
+                HomeView()
+            }
         }
     }
     
@@ -76,8 +80,6 @@ struct LoginView: View {
         }
     }
 }
-
-
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

@@ -17,7 +17,6 @@ class UserService {
         let interceptor = AuthInterceptor()
         session = Session(interceptor: interceptor)
     }
-    
     func login(username: String, password: String, completion: @escaping (Result<(String, User), AFError>) -> Void) {
         let parameters: [String: Any] = [
             "password": password,
@@ -36,7 +35,6 @@ class UserService {
                 }
             }
     }
-    
     func loginWithBiometrics(completion: @escaping (Result<(String, User), AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -74,7 +72,6 @@ class UserService {
                 }
             }
     }
-    
     func register(user: User, completion: @escaping (Result<User, Error>) -> Void) {
         let url = "\(baseURL)/users/register"
         let parameters: [String: Any] = [
@@ -102,7 +99,6 @@ class UserService {
                 }
             }
     }
-    
     func updateOnlineStatus(isOnline: Bool, completion: @escaping (Result<Void, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             completion(.failure(AFError.explicitlyCancelled))
@@ -123,7 +119,6 @@ class UserService {
                 }
             }
     }
-    
     func getUsers(completion: @escaping (Result<[User], Error>) -> Void) {
         let url = "\(baseURL)/users"
         
@@ -137,7 +132,6 @@ class UserService {
                 }
             }
     }
-    
     func getMessages(for chatId: String, completion: @escaping (Result<MessageListResponse, Error>) -> Void) {
         let urlString = "\(baseURL)/chats/\(chatId)/messages"
         
@@ -152,8 +146,6 @@ class UserService {
                 }
             }
     }
-    
-    
     func getMessageList(chatId: String, offset: Int, limit: Int, completion: @escaping (Result<MessageListResponse, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -169,7 +161,6 @@ class UserService {
                 completion(response.result)
             }
     }
-    
     func sendMessage(chatId: String, message: String, completion: @escaping (Result<SendMessageResponse, AFError>) -> Void) {
       guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
         print("sendMessage: Error: Missing AuthToken")
@@ -198,7 +189,6 @@ class UserService {
           completion(response.result)
         }
     }
- 
     func uploadProfilePhoto(userId: String, imageData: Data, completion: @escaping (Result<User, Error>) -> Void) {
         let url = "\(baseURL)/users/upload?id=\(userId)"
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
@@ -219,7 +209,6 @@ class UserService {
             }
         }
     }
-    
     func logout(completion: @escaping (Result<Void, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             completion(.failure(AFError.explicitlyCancelled))
@@ -247,10 +236,6 @@ class UserService {
                 }
             }
     }
-
-
-
-    
     func getChatList(completion: @escaping (_ chatList: [ChatList]) -> Void){
         
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
@@ -272,7 +257,6 @@ class UserService {
                 }
             }
     }
-    
     func deletechat(id: String){
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -316,7 +300,6 @@ class UserService {
                 }
             }
     }
-    
     func CreatedChat(source: String,target: String) {
         
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
