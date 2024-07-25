@@ -170,24 +170,35 @@ class UserService {
             }
     }
     
-    func sendMessage(message: String, to chatId: String, completion: @escaping (Result<SendMessageResponse, AFError>) -> Void) {
-        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
-            print("Error: Missing AuthToken")
-            completion(.failure(AFError.explicitlyCancelled))
-            return
-        }
-        
-        let headers: HTTPHeaders = ["Authorization": token]
-        let parameters: [String: Any] = ["message": message, "chat": chatId] 
-        
-        AF.request("\(baseURL)/api/messages/new", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
-            .responseDecodable(of: SendMessageResponse.self) { response in
-                completion(response.result)
-            }
-    }
+    func sendMessage(chatId: String, message: String, completion: @escaping (Result<SendMessageResponse, AFError>) -> Void) {
+      guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+        print("sendMessage: Error: Missing AuthToken")
+        completion(.failure(AFError.explicitlyCancelled))
+        return
+      }
 
-    
-    
+      print("sendMessage: AuthToken found")
+
+      let headers: HTTPHeaders = ["Authorization": token]
+
+      let source = UserDefaults.standard.string(forKey: "id") ?? ""
+
+      let parameters = SendMessageRequest(chat: chatId, source: source, message: message)
+
+      print("sendMessage: Sending request with parameters: \(parameters)")
+
+      AF.request("\(baseURL)/messages/new", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
+        .responseDecodable(of: SendMessageResponse.self) { response in
+          switch response.result {
+          case .success(let value):
+            print("sendMessage: Response received - success: \(value.success)")
+          case .failure(let error):
+            print("sendMessage: Error received: \(error.localizedDescription)")
+          }
+          completion(response.result)
+        }
+    }
+ 
     func uploadProfilePhoto(userId: String, imageData: Data, completion: @escaping (Result<User, Error>) -> Void) {
         let url = "\(baseURL)/users/upload?id=\(userId)"
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
