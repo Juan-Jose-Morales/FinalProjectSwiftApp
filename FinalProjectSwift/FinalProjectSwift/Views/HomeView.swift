@@ -41,7 +41,7 @@ struct HomeView: View {
                                                 HStack{
                                                     ZStack {
                                                         Circle()
-                                                            .foregroundColor(Color("Blue"))
+                                                            .foregroundColor(homeViewModel.randomColor())
                                                             .frame(width: 40, height: 40)
                                                         
                                                         Text(homeViewModel.getNick(chatList: chat).prefix(1).capitalized)
@@ -49,7 +49,7 @@ struct HomeView: View {
                                                     }.padding(.horizontal, 8)
                                                     Text(homeViewModel.getNick(chatList: chat))
                                                     Spacer()
-                                                }.padding(.vertical, 8)
+                                                }.padding(.vertical, 1)
                                             }.padding(.vertical, 5)
                                     }
                                 }

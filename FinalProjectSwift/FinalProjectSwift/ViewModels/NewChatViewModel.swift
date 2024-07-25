@@ -52,4 +52,29 @@ class NewChatViewModel: ObservableObject{
             }
         }
     }
+    func convertToChatList(newChat: NewChat) -> ChatList {
+        return ChatList(
+            chat: newChat.id,
+            source: newChat.id,
+            sourceNick: newChat.nick,
+            sourceonline: newChat.online,
+            target: newChat.uuid,
+            targetnick: newChat.login,
+            targetonline: newChat.online,
+            chatcreated: newChat.created
+        )
+    }
+    func randomColor() -> Color {
+        var red: Double
+        var green: Double
+        var blue: Double
+        
+        repeat {
+            red = Double.random(in: 0...1)
+            green = Double.random(in: 0...1)
+            blue = Double.random(in: 0...1)
+        } while (red > 0.9 && green > 0.9 && blue > 0.9)
+        
+        return Color(red: red, green: green, blue: blue)
+    }
 }
