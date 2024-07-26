@@ -71,7 +71,7 @@ struct FloatButton: View {
                 .clipShape(Circle())
         }
         .padding(35)
-        .sheet(isPresented: $showingSheet) {
+        .fullScreenCover(isPresented: $showingSheet) {
             NewChatView(onUpdate: onUpdate)
         }
     }

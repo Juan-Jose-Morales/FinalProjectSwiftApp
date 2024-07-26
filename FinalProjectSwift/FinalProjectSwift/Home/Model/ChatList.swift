@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatList: Identifiable ,Codable {
+struct ChatList: Identifiable ,Codable, Hashable {
     var id = UUID()
     var chat: String
     var source: String?
