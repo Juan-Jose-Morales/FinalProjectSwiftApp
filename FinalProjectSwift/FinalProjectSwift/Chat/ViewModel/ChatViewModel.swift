@@ -26,29 +26,28 @@ class ChatViewModel: ObservableObject {
     init(chatId: String, chatList: ChatList) {
         self.chatId = chatId
         self.chatList = chatList
-        loadMessages()
         self.source = UserDefaults.standard.string(forKey: "id") ?? ""
         startMessagePolling()
     }
 
     func loadMessages() {
-           userService.getMessageList(chatId: chatId, offset: offset, limit: limit) { [weak self] result in
-               switch result {
-               case .success(let messageListResponse):
-                   DispatchQueue.main.async {
-                       let newMessages = messageListResponse.rows.filter { newMessage in
-                           !self!.messages.contains(where: { $0.id == newMessage.id })
-                       }
-                       self?.messages.append(contentsOf: newMessages)
-                       self?.offset += newMessages.count
-                   }
-               case .failure(let error):
-                   DispatchQueue.main.async {
-                       self?.errorMessage = "Error loading messages: \(error.localizedDescription)"
-                   }
-               }
-           }
-       }
+        userService.getMessageList(chatId: chatId, offset: offset, limit: limit) { [weak self] result in
+            switch result {
+            case .success(let messageListResponse):
+                DispatchQueue.main.async {
+                    let newMessages = messageListResponse.rows.filter { newMessage in
+                        !self!.messages.contains(where: { $0.id == newMessage.id })
+                    }
+                    self?.messages.append(contentsOf: newMessages)
+                    self?.offset += newMessages.count
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.errorMessage = "Error loading messages: \(error.localizedDescription)"
+                }
+            }
+        }
+    }
 
     func sendMessage() {
         guard !messageText.isEmpty else {
@@ -90,7 +89,7 @@ class ChatViewModel: ObservableObject {
             print("Error: Missing id")
             return ""
         }
-
+        
         return chatList.source == id ? chatList.targetnick! : chatList.sourceNick!
     }
 
