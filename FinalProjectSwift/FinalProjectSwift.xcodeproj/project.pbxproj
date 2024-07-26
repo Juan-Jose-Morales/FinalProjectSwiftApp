@@ -101,6 +101,7 @@
 		90CE61022C53CEE3002B70D3 /* GetMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMessage.swift; sourceTree = "<group>"; };
 		90CE61042C53D37C002B70D3 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		90CE61062C53D3C5002B70D3 /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
+		90CE61082C53E3A3002B70D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		90E79ECC2C2B39C400133583 /* FinalProjectSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProjectSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectSwiftApp.swift; sourceTree = "<group>"; };
 		90E79ED32C2B39C600133583 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -632,6 +633,7 @@
 		90E79ECE2C2B39C400133583 /* FinalProjectSwift */ = {
 			isa = PBXGroup;
 			children = (
+				90CE61082C53E3A3002B70D3 /* Info.plist */,
 				9052E6FE2C53053D00670D9B /* ChangeProfile */,
 				9052E6F92C5304D100670D9B /* ProfileSettings */,
 				9052E6F42C5302EB00670D9B /* Profile */,
@@ -940,10 +942,13 @@
 				DEVELOPMENT_TEAM = H8ZVN55RGH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FinalProjectSwift/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Utilizamos Face ID para autenticar tu identidad de manera segura";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "Para ofrecerte una experiencia segura, utilizamos la autenticación biométrica para autenticar tu identidad";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -974,10 +979,13 @@
 				DEVELOPMENT_TEAM = H8ZVN55RGH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FinalProjectSwift/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Utilizamos Face ID para autenticar tu identidad de manera segura";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "Para ofrecerte una experiencia segura, utilizamos la autenticación biométrica para autenticar tu identidad";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
