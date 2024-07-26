@@ -31,6 +31,7 @@ class NewChatViewModel: ObservableObject{
         userService.getNewChat { newChatList in
             self.newListChats = newChatList
             self.chatFilter = newChatList
+            //self.chatFilter = self.newListChats.sorted { $0.nick ?? "" < $1.nick ?? "" }
         }
     }
     func createdChat(target: String){
@@ -45,6 +46,7 @@ class NewChatViewModel: ObservableObject{
     func getChatFilter() {
         if search.isEmpty {
             chatFilter = newListChats
+            
         } else {
             
             chatFilter = newListChats.filter { chat in
