@@ -258,12 +258,13 @@ class UserService {
             }
     }
     func deletechat(id: String){
+        
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
             return
         }
         
-        let headers: HTTPHeaders = ["Authorization": token]
+        let headers: HTTPHeaders = ["Authorization": token ]
         
         let parameters: [String: Any] = [
             "id": "\(id)"
@@ -300,7 +301,7 @@ class UserService {
                 }
             }
     }
-    func CreatedChat(source: String,target: String) {
+    func CreatedChat(source: String,target: String, completion: NewChatResponse?) {
         
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -318,8 +319,8 @@ class UserService {
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: NewChatResponse.self) { response in
                 switch response.result {
-                case .success(let response):
-                    print(response)
+                case .success(let completion):
+                    print(completion)
                 case .failure(let error):
                    print(error)
                 }

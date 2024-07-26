@@ -19,7 +19,7 @@ class NewChatViewModel: ObservableObject{
             getChatFilter()
         }
     }
-    
+    @Published var response: NewChatResponse?
     
     private var userService = UserService()
     
@@ -28,9 +28,14 @@ class NewChatViewModel: ObservableObject{
     }
     
     func getNewChats(){
+        
+        guard let id = UserDefaults.standard.string(forKey: "id") else {
+            print("Error: Missing id")
+            return
+        }
+        
         userService.getNewChat { newChatList in
-            self.newListChats = newChatList
-            self.chatFilter = newChatList
+            self.newListChats = newChatList.filter { $0.id != id }
             self.chatFilter = self.newListChats.sorted {
                        ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
                    }
@@ -42,7 +47,7 @@ class NewChatViewModel: ObservableObject{
             print("Error: Missing id")
             return
         }
-        userService.CreatedChat(source: id , target: target)
+        userService.CreatedChat(source: id , target: target, completion: response)
     }
     
     func getChatFilter() {
@@ -97,8 +102,4 @@ class NewChatViewModel: ObservableObject{
             return name.prefix(1).capitalized
         }
     }
-    func excludeSelfChat(){
-        
-    }
-    
 }

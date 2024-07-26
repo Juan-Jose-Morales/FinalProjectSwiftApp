@@ -15,14 +15,15 @@ struct NewChatView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            ZStack {
+                VStack {
                     HStack {
                         Spacer()
                         Text("Nuevo Chat")
                             .bold()
                             .padding(.leading, 60)
                             .padding(.vertical ,16)
-                            Spacer()
+                        Spacer()
                         Button(action: {
                             navigateHome = true
                         }, label: {
@@ -36,55 +37,56 @@ struct NewChatView: View {
                     SearcField(imageName: "magnifyingglass", placeholder: "Buscar", text: $newChatViewModel.search).onChange(of: newChatViewModel.search) { newValue in
                         newChatViewModel.getChatFilter()
                     }
-                    ZStack {
-                        List{
-                            ForEach(newChatViewModel.chatFilter){ newChat in
+                        ZStack {
+                            List{
+                                ForEach(newChatViewModel.chatFilter){ newChat in
+                                    VStack {
+                                            ZStack {
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .fill(Color.white)
+                                                    .shadow(radius: 5, x: 5, y: 5)
+                                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                                HStack{
+                                                    ZStack {
+                                                        Circle()
+                                                            .foregroundColor(newChatViewModel.randomColor())
+                                                            .frame(width: 40, height: 40)
+                                                        
+                                                        Text(newChatViewModel.capitalizedName(name: newChat.nick ?? "?"))
+                                                            .foregroundStyle(.white)
+                                                    }.padding(.horizontal, 8)
+                                                    Text(newChatViewModel.nameComprobation(newUser: newChat))
+                                                    Spacer()
+                                                }.padding(.vertical, 1)
+                                            }.padding(.vertical, 5)
+                                    }.onTapGesture {
+                                            newChatViewModel.showAlert = true
+                                            newChatViewModel.alertNewChat = newChat
+                                    }.alert(isPresented: $newChatViewModel.showAlert){
+                                        Alert(title: Text("Quieres crear un nuevo chat con \(newChatViewModel.alertNewChat?.nick ?? "Usuario Desconocido")"), primaryButton: .default(Text("Sí"), action: {
+                                            newChatViewModel.createdChat(target: newChatViewModel.alertNewChat?.id ?? "")
+                                            onUpdate()
+                                            navigateNewChat = true
+                                        }), secondaryButton: .cancel(Text("Cancelar")))
+                                    }
+                                }.listRowSeparator(.hidden)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            }.scrollContentBackground(.hidden)
                                 VStack {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 20)
-                                                .fill(Color.white)
-                                                .shadow(radius: 5, x: 5, y: 5)
-                                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                            HStack{
-                                                ZStack {
-                                                    Circle()
-                                                        .foregroundColor(newChatViewModel.randomColor())
-                                                        .frame(width: 40, height: 40)
-                                                    
-                                                    Text(newChatViewModel.capitalizedName(name: newChat.nick ?? "?"))
-                                                        .foregroundStyle(.white)
-                                                }.padding(.horizontal, 8)
-                                                Text(newChatViewModel.nameComprobation(newUser: newChat))
-                                                Spacer()
-                                            }.padding(.vertical, 1)
-                                        }.padding(.vertical, 5)
-                                }.onTapGesture {
-                                        newChatViewModel.showAlert = true
-                                        newChatViewModel.alertNewChat = newChat
-                                }.alert(isPresented: $newChatViewModel.showAlert){
-                                    Alert(title: Text("Quieres crear un nuevo chat con \(newChatViewModel.alertNewChat?.nick ?? "Usuario Desconocido")"), primaryButton: .default(Text("Sí"), action: {
-                                        newChatViewModel.createdChat(target: newChatViewModel.alertNewChat?.id ?? "")
-                                        onUpdate()
-                                        navigateNewChat = true
-                                    }), secondaryButton: .cancel(Text("Cancelar")))
+                                    ForEach(newChatViewModel.scrollLetters, id: \.self) { letter in
+                                        Text(String(letter))
+                                            .font(.system(size: 12))
+                                            .frame(height: 15)
+                                    }
                                 }
-                            }.listRowSeparator(.hidden)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        }.scrollContentBackground(.hidden)
-                            VStack {
-                                ForEach(newChatViewModel.scrollLetters, id: \.self) { letter in
-                                    Text(String(letter))
-                                        .font(.system(size: 12))
-                                        .frame(height: 15)
-                                }
-                            }
-                            .padding(.leading, 350)
-                    }
-            }.navigationDestination(isPresented: $navigateNewChat) {
-                ChatView(chatViewModel: ChatViewModel(chatId: newChatViewModel.alertNewChat?.id ?? "", chatList: newChatViewModel.convertToChatList(newChat: newChatViewModel.alertNewChat!)))
+                                .padding(.leading, 350)
+                        }
+                }.navigationDestination(isPresented: $navigateNewChat) {
+                    ChatView(chatViewModel: ChatViewModel(chatId: newChatViewModel.response?.chat.id ?? "", chatList: newChatViewModel.convertToChatList(newChat: newChatViewModel.alertNewChat!)))
+                }
+                .navigationDestination(isPresented: $navigateHome) {
+                    HomeView()
             }
-            .navigationDestination(isPresented: $navigateHome) {
-                HomeView()
             }
         }
     }
