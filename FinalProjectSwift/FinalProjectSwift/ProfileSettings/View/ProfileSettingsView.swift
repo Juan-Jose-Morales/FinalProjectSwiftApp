@@ -37,9 +37,6 @@ struct ProfileSettingsView: View {
                     .padding(.bottom, 60)
             }
             .edgesIgnoringSafeArea(.top)
-            .onAppear {
-                viewModel.fetchUserData()
-            }
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $isNavigatingToProfile) {
                 ProfileView(userService: UserService())

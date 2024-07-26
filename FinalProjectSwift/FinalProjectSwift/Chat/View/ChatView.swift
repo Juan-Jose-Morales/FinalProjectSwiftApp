@@ -5,14 +5,11 @@
 //  Created by Juan jose Morales on 18/7/24.
 //
 
-// ChatView.swift
-
 import SwiftUI
 
 struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
     @StateObject private var keyboardResponder = KeyboardResponder()
-    @State private var isLoadingMoreMessages = false
 
     var body: some View {
         NavigationStack {
@@ -44,7 +41,10 @@ struct ChatView: View {
         }
     }
 }
-
 #Preview {
-    ChatView(chatViewModel: ChatViewModel(chatId: "1", chatList: ChatList(chat: "1", source: "user1", chatcreated: "2024-07-22T16:03:44.798Z")))
+    ChatView(
+        chatViewModel: ChatViewModel(chatId: "1", chatList: ChatList(chat: "1", source: "user1", chatcreated: "2024-07-22T16:03:44.798Z"))
+    )
+    .environment(\.colorScheme, .light)
+    .previewLayout(.sizeThatFits)
 }

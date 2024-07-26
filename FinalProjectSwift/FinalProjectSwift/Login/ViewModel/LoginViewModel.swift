@@ -17,6 +17,7 @@ class LoginViewModel: ObservableObject {
     @Published var isLoginSuccessful: Bool = false
     @Published var authToken: String?
     @Published var user: User?
+    @Published var isShowingProgress: Bool = false
     
     private var userService: UserService
     
@@ -25,6 +26,7 @@ class LoginViewModel: ObservableObject {
     }
     
     func login() {
+        isShowingProgress = true
         guard !username.isEmpty, !password.isEmpty else {
             self.errorMessage = "Rellena todos los campos"
             self.showAlert = true
@@ -47,9 +49,11 @@ class LoginViewModel: ObservableObject {
                 }
             }
         }
+        isShowingProgress = false
     }
     
     func authenticateWithBiometrics() {
+        isShowingProgress = true
         let context = LAContext()
         var error: NSError?
         
@@ -70,6 +74,7 @@ class LoginViewModel: ObservableObject {
             self.errorMessage = "La autenticación no está disponible"
             self.showAlert = true
         }
+        isShowingProgress = false
     }
     
     func loginWithBiometrics() {

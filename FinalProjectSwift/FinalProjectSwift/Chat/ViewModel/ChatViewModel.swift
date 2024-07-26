@@ -12,18 +12,24 @@ class ChatViewModel: ObservableObject {
     @Published var messageText: String = ""
     @Published var source: String = ""
     @Published var errorMessage: String?
+    @Published var messages: [Message] = []
 
     private let userService = UserService()
     private var cancellables = Set<AnyCancellable>()
+    private var timer: Timer?
 
     var chatId: String
     var chatList: ChatList
-    @Published var messages: [Message] = []
 
     init(chatId: String, chatList: ChatList) {
         self.chatId = chatId
         self.chatList = chatList
         self.source = UserDefaults.standard.string(forKey: "id") ?? ""
+        startListeningForMessages()
+    }
+
+    deinit {
+        stopListeningForMessages()
     }
 
     func loadMessages() {
@@ -77,6 +83,36 @@ class ChatViewModel: ObservableObject {
     }
 
     func attachFile() {
-        // Implementación de adjuntar archivo
+    }
+
+    func startListeningForMessages() {
+        timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            self?.fetchNewMessages()
+        }
+    }
+
+    func stopListeningForMessages() {
+        timer?.invalidate()
+        timer = nil
+    }
+
+    private func fetchNewMessages() {
+        let currentMessageCount = messages.count
+        userService.getMessageList(chatId: chatId, offset: currentMessageCount, limit: 20) { [weak self] result in
+            switch result {
+            case .success(let messageListResponse):
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    let newMessages = messageListResponse.rows.filter { newMessage in
+                        !self.messages.contains(where: { $0.id == newMessage.id })
+                    }
+                    self.messages.append(contentsOf: newMessages)
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.errorMessage = "Error fetching new messages: \(error.localizedDescription)"
+                }
+            }
+        }
     }
 }
