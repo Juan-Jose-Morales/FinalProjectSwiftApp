@@ -14,7 +14,7 @@ struct MessageView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                if message.source == chatViewModel.chatList.source {
+                if message.source == chatViewModel.source {
                     Spacer()
                     VStack(alignment: .trailing) {
                         Text(message.message)

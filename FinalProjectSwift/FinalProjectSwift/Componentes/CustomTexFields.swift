@@ -12,18 +12,23 @@ struct CustomTextField: View {
     var imageName: String
     var placeholder: String
     @Binding var text: String
-    var isSecure: Bool = false
     
     var body: some View {
         HStack {
-            Image( imageName)
+            Image(imageName)
                 .resizable()
                 .frame(width: 25, height: 25)
                 .foregroundColor(.black)
                 .padding(.leading, 8)
             
             TextField(placeholder, text: $text)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .keyboardType(.default)
                 .padding()
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
             
             Spacer()
         }
@@ -35,6 +40,8 @@ struct CustomTextField: View {
             .shadow(radius: 5))
     }
 }
+
+
 
 struct StyledTextField: View {
     var placeholder: String
