@@ -31,7 +31,9 @@ class NewChatViewModel: ObservableObject{
         userService.getNewChat { newChatList in
             self.newListChats = newChatList
             self.chatFilter = newChatList
-            //self.chatFilter = self.newListChats.sorted { $0.nick ?? "" < $1.nick ?? "" }
+            self.chatFilter = self.newListChats.sorted {
+                       ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
+                   }
         }
     }
     func createdChat(target: String){
@@ -45,7 +47,9 @@ class NewChatViewModel: ObservableObject{
     
     func getChatFilter() {
         if search.isEmpty {
-            chatFilter = newListChats
+            chatFilter = newListChats.sorted {
+                       ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
+                   }
             
         } else {
             
@@ -79,4 +83,22 @@ class NewChatViewModel: ObservableObject{
         
         return Color(red: red, green: green, blue: blue)
     }
+    func nameComprobation(newUser: NewChat) -> String {
+        if newUser.nick == ""{
+            return "Usuario Desconocido \(newUser.id)"
+        }else {
+            return newUser.nick ?? "Usuario Desconocido"
+        }
+    }
+    func capitalizedName(name: String) -> String {
+        if name == ""{
+            return "?"
+        }else {
+            return name.prefix(1).capitalized
+        }
+    }
+    func excludeSelfChat(){
+        
+    }
+    
 }
