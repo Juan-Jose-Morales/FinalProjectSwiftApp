@@ -9,12 +9,12 @@ import SwiftUI
 
 struct MessageView: View {
     let message: Message
-    @ObservedObject var chatViewModel: ChatViewModel
+    let isCurrentUser: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                if message.source == chatViewModel.source {
+                if isCurrentUser {
                     Spacer()
                     VStack(alignment: .trailing) {
                         Text(message.message)
@@ -54,6 +54,6 @@ struct MessageView: View {
 #Preview {
     MessageView(
         message: Message(id: "1", chat: "1", source: "user1", message: "Test message", date: "2024-07-22T16:03:44.798Z"),
-        chatViewModel: ChatViewModel(chatId: "1", chatList: ChatList(chat: "1", source: "user1", chatcreated: "2024-07-22T16:03:44.798Z"))
+        isCurrentUser: true
     )
 }

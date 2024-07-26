@@ -9,14 +9,10 @@ import Foundation
 import Alamofire
 
 class UserService {
-    private var session: Session
+
     private let baseURL = "https://mock-movilidad.vass.es/chatvass/api"
     let USER_EXISTENCE_STATUS_CODE = 409
     
-    init() {
-        let interceptor = AuthInterceptor()
-        session = Session(interceptor: interceptor)
-    }
     func login(username: String, password: String, completion: @escaping (Result<(String, User), AFError>) -> Void) {
         let parameters: [String: Any] = [
             "password": password,
@@ -31,10 +27,19 @@ class UserService {
                     UserDefaults.standard.set(loginResponse.user.id, forKey: "id")
                     completion(.success((loginResponse.token, loginResponse.user)))
                 case .failure(let error):
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Login response data as string: \(jsonString)")
+                        } else {
+                            print("Login response data could not be converted to string")
+                        }
+                    }
+                    print("Login error: \(error.localizedDescription)")
                     completion(.failure(error))
                 }
             }
     }
+    
     func loginWithBiometrics(completion: @escaping (Result<(String, User), AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -61,17 +66,18 @@ class UserService {
                     completion(.success((loginResponse.token, loginResponse.user)))
                 default:
                     if let data = response.data {
-                        do {
-                            let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: data)
-                            print("Error message: \(errorResponse.message)")
-                        } catch {
-                            print("Error decoding error response: \(error)")
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Biometrics login response data as string: \(jsonString)")
+                        } else {
+                            print("Biometrics login response data could not be converted to string")
                         }
                     }
+                    print("Biometrics login error: \(AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: statusCode)).localizedDescription)")
                     completion(.failure(AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: statusCode))))
                 }
             }
     }
+    
     func register(user: User, completion: @escaping (Result<User, Error>) -> Void) {
         let url = "\(baseURL)/users/register"
         let parameters: [String: Any] = [
@@ -90,62 +96,111 @@ class UserService {
                 case .success(let userResponse):
                     completion(.success(userResponse.user))
                 case .failure(let error):
-                    if let statusCode = response.response?.statusCode,
-                       statusCode == self.USER_EXISTENCE_STATUS_CODE {
+                    if let statusCode = response.response?.statusCode, statusCode == self.USER_EXISTENCE_STATUS_CODE {
                         completion(.failure(NSError(domain: "UserAlreadyExists", code: 1, userInfo: ["message": "El usuario ya existe"])))
                     } else {
+                        if let data = response.data {
+                            if let jsonString = String(data: data, encoding: .utf8) {
+                                print("Register response data as string: \(jsonString)")
+                            } else {
+                                print("Register response data could not be converted to string")
+                            }
+                        }
+                        print("Register error: \(error.localizedDescription)")
                         completion(.failure(error))
                     }
                 }
             }
     }
+    
     func updateOnlineStatus(isOnline: Bool, completion: @escaping (Result<Void, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             completion(.failure(AFError.explicitlyCancelled))
             return
         }
         
-        let url = "\(baseURL)/users/online/\(isOnline)"
+        let url = "\(baseURL)/users/online/\(isOnline ? "true" : "false")"
         let headers: HTTPHeaders = ["Authorization": token]
         
         AF.request(url, method: .put, headers: headers)
             .validate()
-            .response { response in
+            .responseDecodable(of: OnlineStatusResponse.self) { response in
                 switch response.result {
-                case .success:
+                case .success(let responseData):
+                    print("Online status response message: \(responseData.message)")
                     completion(.success(()))
                 case .failure(let error):
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Update online status response data as string: \(jsonString)")
+                        } else {
+                            print("Update online status response data could not be converted to string")
+                        }
+                    }
+                    print("Update online status error: \(error.localizedDescription)")
                     completion(.failure(error))
                 }
             }
     }
-    func getUsers(completion: @escaping (Result<[User], Error>) -> Void) {
-        let url = "\(baseURL)/users"
-        
-        AF.request(url, method: .get)
-            .responseDecodable(of: [User].self) { response in
-                switch response.result {
-                case .success(let users):
-                    completion(.success(users))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-    }
-    func getMessages(for chatId: String, completion: @escaping (Result<MessageListResponse, Error>) -> Void) {
-        let urlString = "\(baseURL)/chats/\(chatId)/messages"
-        
-        AF.request(urlString, method: .get)
+
+    func getViewMessages(completion: @escaping (Result<[GetMessage], Error>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            completion(.failure(AFError.explicitlyCancelled))
+            return
+        }
+
+        let headers: HTTPHeaders = ["Authorization": token]
+        let url = "\(baseURL)/messages/view"
+
+        AF.request(url, method: .get, headers: headers)
             .validate()
-            .responseDecodable(of: MessageListResponse.self) { response in
+            .responseDecodable(of: [GetMessage].self) { response in
                 switch response.result {
-                case .success(let messageListResponse):
-                    completion(.success(messageListResponse))
+                case .success(let messages):
+                    completion(.success(messages))
                 case .failure(let error):
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Get view messages response data as string: \(jsonString)")
+                        } else {
+                            print("Get view messages response data could not be converted to string")
+                        }
+                    }
+                    print("Get view messages error: \(error.localizedDescription)")
                     completion(.failure(error))
                 }
             }
     }
+
+    func getMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            completion(.failure(AFError.explicitlyCancelled))
+            return
+        }
+
+        let headers: HTTPHeaders = ["Authorization": token]
+        let url = "\(baseURL)/messages"
+
+        AF.request(url, method: .get, headers: headers)
+            .validate()
+            .responseDecodable(of: [Message].self) { response in
+                switch response.result {
+                case .success(let messages):
+                    completion(.success(messages))
+                case .failure(let error):
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Get messages response data as string: \(jsonString)")
+                        } else {
+                            print("Get messages response data could not be converted to string")
+                        }
+                    }
+                    print("Get messages error: \(error.localizedDescription)")
+                    completion(.failure(error))
+                }
+            }
+    }
+ 
     func getMessageList(chatId: String, offset: Int, limit: Int, completion: @escaping (Result<MessageListResponse, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -158,57 +213,58 @@ class UserService {
         
         AF.request(url, method: .get, headers: headers)
             .responseDecodable(of: MessageListResponse.self) { response in
-                completion(response.result)
+                switch response.result {
+                case .success(let messageListResponse):
+                    completion(.success(messageListResponse))
+                case .failure(let error):
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Get message list response data as string: \(jsonString)")
+                        } else {
+                            print("Get message list response data could not be converted to string")
+                        }
+                    }
+                    print("Get message list error: \(error.localizedDescription)")
+                    completion(.failure(error))
+                }
             }
     }
+    
     func sendMessage(chatId: String, message: String, completion: @escaping (Result<SendMessageResponse, AFError>) -> Void) {
-      guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
-        print("sendMessage: Error: Missing AuthToken")
-        completion(.failure(AFError.explicitlyCancelled))
-        return
-      }
-
-      print("sendMessage: AuthToken found")
-
-      let headers: HTTPHeaders = ["Authorization": token]
-
-      let source = UserDefaults.standard.string(forKey: "id") ?? ""
-
-      let parameters = SendMessageRequest(chat: chatId, source: source, message: message)
-
-      print("sendMessage: Sending request with parameters: \(parameters)")
-
-      AF.request("\(baseURL)/messages/new", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
-        .responseDecodable(of: SendMessageResponse.self) { response in
-          switch response.result {
-          case .success(let value):
-            print("sendMessage: Response received - success: \(value.success)")
-          case .failure(let error):
-            print("sendMessage: Error received: \(error.localizedDescription)")
-          }
-          completion(response.result)
-        }
-    }
-    func uploadProfilePhoto(userId: String, imageData: Data, completion: @escaping (Result<User, Error>) -> Void) {
-        let url = "\(baseURL)/users/upload?id=\(userId)"
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            print("sendMessage: Error: Missing AuthToken")
             completion(.failure(AFError.explicitlyCancelled))
             return
         }
-        
+
         let headers: HTTPHeaders = ["Authorization": token]
-        
-        AF.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imageData, withName: "file", fileName: "profile.jpg", mimeType: "image/jpeg")
-        }, to: url, headers: headers).responseDecodable(of: User.self) { response in
-            switch response.result {
-            case .success(let user):
-                completion(.success(user))
-            case .failure(let error):
-                completion(.failure(error))
+
+        let source = UserDefaults.standard.string(forKey: "id") ?? ""
+
+        let parameters = SendMessageRequest(chat: chatId, source: source, message: message)
+
+        print("sendMessage: Sending request with parameters: \(parameters)")
+
+        AF.request("\(baseURL)/messages/new", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default, headers: headers)
+            .responseDecodable(of: SendMessageResponse.self) { response in
+                switch response.result {
+                case .success(let response):
+                    print("sendMessage: Response received - success: \(response.success)")
+                    completion(.success(response))
+                case .failure(let error):
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("sendMessage response data as string: \(jsonString)")
+                        } else {
+                            print("sendMessage response data could not be converted to string")
+                        }
+                    }
+                    print("sendMessage error: \(error.localizedDescription)")
+                    completion(.failure(error))
+                }
             }
-        }
     }
+    
     func logout(completion: @escaping (Result<Void, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             completion(.failure(AFError.explicitlyCancelled))
@@ -231,13 +287,20 @@ class UserService {
                         completion(.failure(AFError.responseSerializationFailed(reason: .inputFileNil)))
                     }
                 case .failure(let error):
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Logout response data as string: \(jsonString)")
+                        } else {
+                            print("Logout response data could not be converted to string")
+                        }
+                    }
                     print("Logout error: \(error.localizedDescription)")
                     completion(.failure(error))
                 }
             }
     }
-    func getChatList(completion: @escaping (_ chatList: [ChatList]) -> Void){
-        
+    
+    func getChatList(completion: @escaping (_ chatList: [ChatList]) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
             return
@@ -247,17 +310,24 @@ class UserService {
         
         AF.request("\(baseURL)/chats/view/", encoding: JSONEncoding.default, headers: headers)
             .validate()
-            .responseDecodable(of: [ChatList].self) {
-                response in
+            .responseDecodable(of: [ChatList].self) { response in
                 switch response.result {
                 case .success(let data):
                     completion(data)
                 case .failure(let error):
-                    print(error)
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Get chat list response data as string: \(jsonString)")
+                        } else {
+                            print("Get chat list response data could not be converted to string")
+                        }
+                    }
+                    print("Get chat list error: \(error.localizedDescription)")
                 }
             }
     }
-    func deletechat(id: String){
+    
+    func deletechat(id: String) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
             return
@@ -273,14 +343,21 @@ class UserService {
             .responseDecodable(of: User.self) { response in
                 switch response.result {
                 case .success(let data):
-                    print(data)
+                    print("Delete chat response: \(data)")
                 case .failure(let error):
-                    print(error)
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Delete chat response data as string: \(jsonString)")
+                        } else {
+                            print("Delete chat response data could not be converted to string")
+                        }
+                    }
+                    print("Delete chat error: \(error.localizedDescription)")
                 }
             }
     }
-    func getNewChat(completion: @escaping (_ newcChatList: [NewChat]) -> Void){
-        
+    
+    func getNewChat(completion: @escaping (_ newcChatList: [NewChat]) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
             return
@@ -290,18 +367,24 @@ class UserService {
         
         AF.request("\(baseURL)/users", encoding: JSONEncoding.default, headers: headers)
             .validate()
-            .responseDecodable(of: [NewChat].self) {
-                response in
+            .responseDecodable(of: [NewChat].self) { response in
                 switch response.result {
-                            case .success(let data):
-                                  completion(data)
-                              case .failure(let error):
-                                 print(error)
+                case .success(let data):
+                    completion(data)
+                case .failure(let error):
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Get new chat response data as string: \(jsonString)")
+                        } else {
+                            print("Get new chat response data could not be converted to string")
+                        }
+                    }
+                    print("Get new chat error: \(error.localizedDescription)")
                 }
             }
     }
-    func CreatedChat(source: String,target: String) {
-        
+    
+    func CreatedChat(source: String, target: String) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
             return
@@ -319,11 +402,17 @@ class UserService {
             .responseDecodable(of: NewChatResponse.self) { response in
                 switch response.result {
                 case .success(let response):
-                    print(response)
+                    print("Created chat response: \(response)")
                 case .failure(let error):
-                   print(error)
+                    if let data = response.data {
+                        if let jsonString = String(data: data, encoding: .utf8) {
+                            print("Created chat response data as string: \(jsonString)")
+                        } else {
+                            print("Created chat response data could not be converted to string")
+                        }
+                    }
+                    print("Created chat error: \(error.localizedDescription)")
                 }
             }
     }
 }
-

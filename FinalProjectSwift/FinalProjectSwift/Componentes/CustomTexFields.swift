@@ -41,33 +41,6 @@ struct CustomTextField: View {
     }
 }
 
-
-
-struct StyledTextField: View {
-    var placeholder: String
-    @Binding var text: String
-    
-    var body: some View {
-        ZStack(alignment: .leading) {
-            if text.isEmpty {
-                Text(placeholder)
-                    .foregroundColor(.gray)
-                    .padding(.leading, 8)
-            }
-            TextField("", text: $text)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .textFieldStyle(PlainTextFieldStyle())
-                .padding(8)
-                .background(Color.white)
-                .cornerRadius(15)
-                .foregroundColor(.black)
-                .frame(height: 36)
-        }
-        .padding(.horizontal, 8)
-        .shadow(radius: 5)
-    }
-}
 struct SecureFields: View {
     var title: String
     @Binding var text: String
@@ -89,12 +62,18 @@ struct SecureFields: View {
                         .textInputAutocapitalization(.none)
                         .disableAutocorrection(true)
                         .keyboardType(.asciiCapable)
+                        .onTapGesture {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
                 } else {
                     SecureField(title, text: $text)
                         .padding()
                         .textInputAutocapitalization(.none)
                         .disableAutocorrection(true)
                         .keyboardType(.asciiCapable)
+                        .onTapGesture {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
                 }
                 
                 Button(action: {
@@ -115,6 +94,7 @@ struct SecureFields: View {
         .background(DismissKeyboardGesture())
     }
 }
+
 struct SearcField: View {
     var imageName: String
     var placeholder: String

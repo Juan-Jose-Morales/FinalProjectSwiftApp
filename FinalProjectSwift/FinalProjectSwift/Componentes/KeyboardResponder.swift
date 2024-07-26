@@ -35,11 +35,3 @@ final class KeyboardResponder: ObservableObject {
             .store(in: &cancellableSet)
     }
 }
-
-extension UIApplication {
-    func endEditing() {
-        if let windowScene = connectedScenes.first as? UIWindowScene {
-            windowScene.windows.forEach { $0.endEditing(true) }
-        }
-    }
-}

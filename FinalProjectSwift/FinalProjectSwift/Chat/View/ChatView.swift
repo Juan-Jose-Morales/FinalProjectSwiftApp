@@ -10,14 +10,16 @@ import SwiftUI
 struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
     @StateObject private var keyboardResponder = KeyboardResponder()
-    @State private var isLoadingMoreMessages = false
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 ChatHeaderView(chatlist: chatViewModel.chatList)
                 
-                MessagesView(chatViewModel: chatViewModel, isLoadingMoreMessages: $isLoadingMoreMessages)
+                MessagesView(
+                    messagesViewModel: MessagesViewModel(chatId: chatViewModel.chatId),
+                    chatCreated: chatViewModel.chatList.chatcreated ?? ""
+                )
                 
                 Spacer()
                 
@@ -39,7 +41,10 @@ struct ChatView: View {
         }
     }
 }
-
 #Preview {
-    ChatView(chatViewModel: ChatViewModel(chatId: "1", chatList: ChatList(chat: "1", source: "user1", chatcreated: "2024-07-22T16:03:44.798Z")))
+    ChatView(
+        chatViewModel: ChatViewModel(chatId: "1", chatList: ChatList(chat: "1", source: "user1", chatcreated: "2024-07-22T16:03:44.798Z"))
+    )
+    .environment(\.colorScheme, .light)
+    .previewLayout(.sizeThatFits)
 }

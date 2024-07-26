@@ -36,6 +36,10 @@
 		90A76BAC2C512D8300AC2D6A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A76BAB2C512D8300AC2D6A /* Utils.swift */; };
 		90A76BAE2C512DAD00AC2D6A /* ScrollViewOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A76BAD2C512DAD00AC2D6A /* ScrollViewOffsetPreferenceKey.swift */; };
 		90A76BB02C517FC300AC2D6A /* KeyboardDismissView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A76BAF2C517FC300AC2D6A /* KeyboardDismissView.swift */; };
+		90CE61032C53CEE3002B70D3 /* GetMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CE61022C53CEE3002B70D3 /* GetMessage.swift */; };
+		90CE61052C53D37C002B70D3 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CE61042C53D37C002B70D3 /* MessageViewModel.swift */; };
+		90CE61072C53D3C5002B70D3 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CE61062C53D3C5002B70D3 /* MessagesViewModel.swift */; };
+		90CE610A2C53EF3E002B70D3 /* OnlineStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CE61092C53EF3E002B70D3 /* OnlineStatusResponse.swift */; };
 		90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */; };
 		90E79ED42C2B39C600133583 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED32C2B39C600133583 /* Assets.xcassets */; };
 		90E79ED72C2B39C600133583 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90E79ED62C2B39C600133583 /* Preview Assets.xcassets */; };
@@ -52,7 +56,6 @@
 		A93922E62C51AFD300533969 /* NewChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93922E52C51AFD300533969 /* NewChatViewModel.swift */; };
 		A93922E82C51C03200533969 /* ChatHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93922E72C51C03200533969 /* ChatHeaderViewModel.swift */; };
 		A94EC23E2C46CAE500E85D63 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */; };
-		A94EC2802C48333E00E85D63 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC27F2C48333E00E85D63 /* AuthInterceptor.swift */; };
 		A94EC2822C48374C00E85D63 /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC2812C48374C00E85D63 /* ChatList.swift */; };
 		A95B842B2C38275200F12190 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B842A2C38275200F12190 /* LaunchScreen.swift */; };
 		A95B842E2C3828A600F12190 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B842D2C3828A600F12190 /* HomeView.swift */; };
@@ -95,6 +98,11 @@
 		90A76BAB2C512D8300AC2D6A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		90A76BAD2C512DAD00AC2D6A /* ScrollViewOffsetPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewOffsetPreferenceKey.swift; sourceTree = "<group>"; };
 		90A76BAF2C517FC300AC2D6A /* KeyboardDismissView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDismissView.swift; sourceTree = "<group>"; };
+		90CE61022C53CEE3002B70D3 /* GetMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMessage.swift; sourceTree = "<group>"; };
+		90CE61042C53D37C002B70D3 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		90CE61062C53D3C5002B70D3 /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
+		90CE61082C53E3A3002B70D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		90CE61092C53EF3E002B70D3 /* OnlineStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineStatusResponse.swift; sourceTree = "<group>"; };
 		90E79ECC2C2B39C400133583 /* FinalProjectSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProjectSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectSwiftApp.swift; sourceTree = "<group>"; };
 		90E79ED32C2B39C600133583 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -112,7 +120,6 @@
 		A93922E52C51AFD300533969 /* NewChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChatViewModel.swift; sourceTree = "<group>"; };
 		A93922E72C51C03200533969 /* ChatHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeaderViewModel.swift; sourceTree = "<group>"; };
 		A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		A94EC27F2C48333E00E85D63 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		A94EC2812C48374C00E85D63 /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		A95B842A2C38275200F12190 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		A95B842D2C3828A600F12190 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -155,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				9040AEA72C34606100D550AD /* UserService.swift */,
-				A94EC27F2C48333E00E85D63 /* AuthInterceptor.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -473,6 +479,8 @@
 		9052E6F12C5302C800670D9B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				90CE61042C53D37C002B70D3 /* MessageViewModel.swift */,
+				90CE61062C53D3C5002B70D3 /* MessagesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -484,6 +492,7 @@
 				902B85652C4EC5D30095E972 /* MessageListResponse.swift */,
 				902B85632C4EC5B30095E972 /* SendMessageResponse.swift */,
 				902B855D2C4EB5820095E972 /* Message.swift */,
+				90CE61022C53CEE3002B70D3 /* GetMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -525,6 +534,7 @@
 		9052E6F72C53030000670D9B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				90CE61092C53EF3E002B70D3 /* OnlineStatusResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -623,6 +633,7 @@
 		90E79ECE2C2B39C400133583 /* FinalProjectSwift */ = {
 			isa = PBXGroup;
 			children = (
+				90CE61082C53E3A3002B70D3 /* Info.plist */,
 				9052E6FE2C53053D00670D9B /* ChangeProfile */,
 				9052E6F92C5304D100670D9B /* ProfileSettings */,
 				9052E6F42C5302EB00670D9B /* Profile */,
@@ -757,9 +768,11 @@
 				A93922DE2C51ADE600533969 /* NewChat.swift in Sources */,
 				A93922E62C51AFD300533969 /* NewChatViewModel.swift in Sources */,
 				902B855E2C4EB5820095E972 /* Message.swift in Sources */,
+				90CE610A2C53EF3E002B70D3 /* OnlineStatusResponse.swift in Sources */,
 				902B85662C4EC5D30095E972 /* MessageListResponse.swift in Sources */,
 				904A89BE2C46D114005F2DC8 /* ProfileSettingsViewModel.swift in Sources */,
 				904A89C62C47DEC9005F2DC8 /* ImagePicker.swift in Sources */,
+				90CE61032C53CEE3002B70D3 /* GetMessage.swift in Sources */,
 				904A89C22C47D719005F2DC8 /* ChangeProfileViewModel.swift in Sources */,
 				904A89BA2C4695C9005F2DC8 /* ProfileViewModel.swift in Sources */,
 				A93922E22C51AE0E00533969 /* Chat.swift in Sources */,
@@ -767,7 +780,6 @@
 				90A76BA82C512CCB00AC2D6A /* MessagesView.swift in Sources */,
 				904A89C42C47DA3E005F2DC8 /* ChangeProfileView.swift in Sources */,
 				A93922E42C51AEA000533969 /* NewChatView.swift in Sources */,
-				A94EC2802C48333E00E85D63 /* AuthInterceptor.swift in Sources */,
 				90A76BAC2C512D8300AC2D6A /* Utils.swift in Sources */,
 				A94EC23E2C46CAE500E85D63 /* HomeViewModel.swift in Sources */,
 				A95B842B2C38275200F12190 /* LaunchScreen.swift in Sources */,
@@ -781,6 +793,7 @@
 				9040AEA82C34606100D550AD /* UserService.swift in Sources */,
 				90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */,
 				9040AEA62C345FB400D550AD /* User.swift in Sources */,
+				90CE61072C53D3C5002B70D3 /* MessagesViewModel.swift in Sources */,
 				904A89BC2C46CD2C005F2DC8 /* ProfileView.swift in Sources */,
 				9003E10D2C3EAAC7006CD269 /* CustomObjects.swift in Sources */,
 				A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */,
@@ -790,6 +803,7 @@
 				9040AE7A2C32F6A200D550AD /* CustomTexFields.swift in Sources */,
 				A93922E02C51ADF700533969 /* NewChatResponse.swift in Sources */,
 				904A89B82C4692F9005F2DC8 /* ProfileSettingsView.swift in Sources */,
+				90CE61052C53D37C002B70D3 /* MessageViewModel.swift in Sources */,
 				90294B4D2C36EA620030E04C /* SessionManager.swift in Sources */,
 				90FFDB0C2C4C272600FFE3FE /* KeyboardResponder.swift in Sources */,
 				90FFDB0A2C4C26F100FFE3FE /* ChatViewModel.swift in Sources */,
@@ -928,10 +942,13 @@
 				DEVELOPMENT_TEAM = H8ZVN55RGH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FinalProjectSwift/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Utilizamos Face ID para autenticar tu identidad de manera segura";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "Para ofrecerte una experiencia segura, utilizamos la autenticación biométrica para autenticar tu identidad";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -962,10 +979,13 @@
 				DEVELOPMENT_TEAM = H8ZVN55RGH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FinalProjectSwift/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Utilizamos Face ID para autenticar tu identidad de manera segura";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "Para ofrecerte una experiencia segura, utilizamos la autenticación biométrica para autenticar tu identidad";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

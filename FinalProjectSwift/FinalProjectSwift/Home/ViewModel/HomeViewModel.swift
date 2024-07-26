@@ -65,21 +65,7 @@ class HomeViewModel: ObservableObject {
             profileImage = image
         }
     }
-    func fetchUserData() {
-        userService.getUsers { result in
-            switch result {
-            case .success(let users):
-                if let user = users.first {
-                    DispatchQueue.main.async {
-                        self.user = user
-                        self.loadProfileImage()
-                    }
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
+    
     func getNick(chatList: ChatList) -> String {
         guard let id = UserDefaults.standard.string(forKey: "id") else {
             print("Error: Missing id")

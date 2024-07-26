@@ -13,7 +13,8 @@ struct SignOffView: View {
     @State private var isNavigateToLogin = false
     @State private var isNavigateToProfileSettingsView = false
     @State private var showConfirmationAlert = false
-
+    @State private var showProgress = false
+    
     var body: some View {
         NavigationStack {
             VStack {

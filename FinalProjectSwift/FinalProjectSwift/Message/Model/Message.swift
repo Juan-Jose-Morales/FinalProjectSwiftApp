@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Message: Identifiable, Decodable {
+struct Message: Identifiable, Decodable, Equatable {
     let id: String
     let chat: String
     let source: String
@@ -22,5 +22,10 @@ struct Message: Identifiable, Decodable {
         case message
         case date
     }
+
+    static func ==(lhs: Message, rhs: Message) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
+
 

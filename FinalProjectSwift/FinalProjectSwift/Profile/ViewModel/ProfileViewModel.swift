@@ -12,13 +12,19 @@ class ProfileViewModel: ObservableObject {
     @Published var userName: String = "Usuario"
     @Published var profileImage: UIImage?
     @Published var isLoading: Bool = false
-    @Published var isOnline: Bool = false
+    @Published var isOnline: Bool
     
     private let userService: UserService
     private let profileImageKey = "profileImageKey"
+    private let onlineStatusKey = "onlineStatusKey"
     
     init(userService: UserService) {
         self.userService = userService
+        self.isOnline = UserDefaults.standard.bool(forKey: onlineStatusKey) 
+        if UserDefaults.standard.object(forKey: onlineStatusKey) == nil {
+            UserDefaults.standard.set(true, forKey: onlineStatusKey)
+            self.isOnline = true
+        }
         fetchUserName()
         fetchProfilePhoto()
         NotificationCenter.default.addObserver(self, selector: #selector(fetchUserName), name: UserDefaults.didChangeNotification, object: nil)
@@ -50,20 +56,18 @@ class ProfileViewModel: ObservableObject {
     }
     
     func updateOnlineStatus(isOnline: Bool) {
-            self.isLoading = true
-            userService.updateOnlineStatus(isOnline: isOnline) { [weak self] result in
-                DispatchQueue.main.async {
-                    self?.isLoading = false
-                    switch result {
-                    case .success:
-                        self?.isOnline = isOnline
-                    case .failure(let error):
-                        print("Error updating online status: \(error)")
-                    }
+        self.isLoading = true
+        userService.updateOnlineStatus(isOnline: isOnline) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                switch result {
+                case .success:
+                    self?.isOnline = isOnline
+                    UserDefaults.standard.set(isOnline, forKey: "onlineStatusKey")
+                case .failure(let error):
+                    print("Error updating online status: \(error.localizedDescription)")
                 }
             }
         }
     }
-
-
-
+}

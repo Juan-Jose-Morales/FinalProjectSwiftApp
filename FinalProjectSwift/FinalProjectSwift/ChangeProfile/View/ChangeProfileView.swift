@@ -36,7 +36,6 @@ struct ChangeProfileView: View {
                 ImagePicker(sourceType: viewModel.imagePickerSource) { image in
                     if let image = image {
                         viewModel.updateProfilePhoto(image: image)
-                        
                     }
                 }
             }
@@ -54,14 +53,14 @@ struct ChangeProfileView: View {
         }
     }
     
-    
     private var userAvatar: some View {
         VStack {
             if let profileImage = viewModel.profileImage {
                 Image(uiImage: profileImage)
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 280, height: 280)
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .clipShape(Circle())
                     .padding(.top, 20)
             } else {
                 Image(systemName: "person.crop.circle")

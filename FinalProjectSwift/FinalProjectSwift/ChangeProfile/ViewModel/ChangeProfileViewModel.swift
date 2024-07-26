@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import PhotosUI
+import SwiftUI
 
 class ChangeProfileViewModel: ObservableObject {
     @Published var profileImage: UIImage?
     @Published var showImagePicker: Bool = false
-    @Published var showCamera: Bool = false
     @Published var imagePickerSource: UIImagePickerController.SourceType = .photoLibrary
     @Published var showAlert: Bool = false
     @Published var alertMessage: String = ""
@@ -23,8 +22,13 @@ class ChangeProfileViewModel: ObservableObject {
     }
     
     func takePhoto() {
-        self.imagePickerSource = .camera
-        self.showImagePicker = true
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            self.imagePickerSource = .camera
+            self.showImagePicker = true
+        } else {
+            self.alertMessage = "La cámara no está disponible."
+            self.showAlert = true
+        }
     }
     
     func selectPhoto() {
