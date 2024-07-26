@@ -16,13 +16,6 @@ struct ChatInputView: View {
     var body: some View {
         VStack {
             HStack {
-                Button(action: attachAction) {
-                    Image("Attach")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                }
-                .padding(.leading, 15)
-
                 ZStack(alignment: .leading) {
                     if messageText.isEmpty {
                         Text("Envia un mensaje")

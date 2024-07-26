@@ -113,4 +113,7 @@ class MessagesViewModel: ObservableObject {
             }
         }
     }
+    func messageIdentifier(for message: Message, messageCount: Int) -> String {
+            return "\(message.id)-\(messageCount)"
+        }
 }

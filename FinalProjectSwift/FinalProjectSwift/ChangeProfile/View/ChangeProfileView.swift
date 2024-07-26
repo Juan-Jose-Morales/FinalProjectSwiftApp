@@ -63,7 +63,7 @@ struct ChangeProfileView: View {
                     .clipShape(Circle())
                     .padding(.top, 20)
             } else {
-                Image(systemName: "person.crop.circle")
+                Image("defaultAvatar")
                     .resizable()
                     .frame(width: 262, height: 284)
                     .foregroundColor(.gray)

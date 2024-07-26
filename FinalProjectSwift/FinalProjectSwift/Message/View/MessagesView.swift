@@ -10,7 +10,10 @@ import SwiftUI
 struct MessagesView: View {
     @ObservedObject var messagesViewModel: MessagesViewModel
     var chatCreated: String
-
+    
+    // Estado para controlar si estamos en el fondo del scroll
+    @State private var isAtBottom = true
+    
     var body: some View {
         ScrollViewReader { scrollViewProxy in
             ScrollView {
@@ -26,14 +29,12 @@ struct MessagesView: View {
                             message: message,
                             isCurrentUser: message.source == UserDefaults.standard.string(forKey: "id")
                         )
-                        .id(message.id)
+                        .id(messagesViewModel.messageIdentifier(for: message, messageCount: messagesViewModel.messages.count))
                     }
                 }
                 .onChange(of: messagesViewModel.messages.count) { _ in
-                    if let lastMessageId = messagesViewModel.messages.last?.id {
-                        withAnimation{
-                            scrollViewProxy.scrollTo(lastMessageId, anchor: .bottom)
-                        }
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        scrollViewProxy.scrollTo(messagesViewModel.messages.last?.id, anchor: .bottom)
                     }
                 }
                 .onAppear {
@@ -43,17 +44,24 @@ struct MessagesView: View {
                 }
                 .onReachBottom {
                     if !messagesViewModel.isLoadingMoreMessages {
-                        messagesViewModel.isLoadingMoreMessages = true
-                        messagesViewModel.loadMessages()
-                        messagesViewModel.isLoadingMoreMessages = false
+                        messagesViewModel.loadMoreMessages()
                     }
                 }
+                .background(GeometryReader { geo in
+                    Color.clear
+                        .onChange(of: geo.frame(in: .global).maxY) { newValue in
+                            let offset = geo.frame(in: .global).maxY - geo.size.height
+                            isAtBottom = offset <= 50
+                        }
+                })
             }
             .padding(.top)
             .background(Color.white)
         }
     }
 }
+
+
 
 #Preview {
     MessagesView(

@@ -13,6 +13,7 @@ struct ProfileSettingsView: View {
     @State private var isNavigatingToProfile = false
     @State private var isNavigatingToHome = false
     @State private var isNavigationToSignOff = false
+    @State private var showBlockedFunctionalityAlert = false
     
     var body: some View {
         NavigationStack {
@@ -47,6 +48,13 @@ struct ProfileSettingsView: View {
             .navigationDestination(isPresented: $isNavigationToSignOff) {
                 SignOffView()
             }
+            .alert(isPresented: $showBlockedFunctionalityAlert) {
+                  Alert(
+                    title: Text("Funcionalidad aun no disponible"),
+                    message: Text("Estamos trabajando en ello..."),
+                    dismissButton: .default(Text("Aceptar"))
+                  )
+                }
         }
     }
     
@@ -78,6 +86,9 @@ struct ProfileSettingsView: View {
                 CustomProfileButton(title: button.title, iconName: button.iconName) {
                     if button.title == "Ajustes de perfil" {
                         isNavigatingToProfile = true
+                    }
+                    else if button.title == "Almacenamiento" || button.title == "Ajustes de idioma" {
+                        showBlockedFunctionalityAlert.toggle()
                     }
                 }
             }

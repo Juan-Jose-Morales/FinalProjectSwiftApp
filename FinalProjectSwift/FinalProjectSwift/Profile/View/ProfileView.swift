@@ -13,6 +13,7 @@ struct ProfileView: View {
     @State private var isNavigateToProfileSettings = false
     @State private var isEditingUserName = false
     @State private var keepSessionActive = false
+    @State private var showBlockedFunctionalityAlert = false
     
     init(userService: UserService) {
         _viewModel = StateObject(wrappedValue: ProfileViewModel(userService: userService))
@@ -61,6 +62,16 @@ struct ProfileView: View {
             }
             .navigationDestination(isPresented: $isNavigateToProfileSettings) {
                 ProfileSettingsView()
+                
+            }
+            .alert(isPresented: $showBlockedFunctionalityAlert) {
+                Alert(
+                    title: Text("En este preciso instante estamos en la fase de desarrollo de este apartado en concreto."),
+                    message: Text("Disculpe las molestias."),
+                    dismissButton: .default(Text("Aceptar")) {
+                        
+                    }
+                )
             }
         }
     }
@@ -78,7 +89,7 @@ struct ProfileView: View {
                             .padding(.top, 10)
                             .clipShape(Circle())
                     } else {
-                        Image(systemName: "person.circle")
+                        Image("defaultAvatar")
                             .resizable()
                             .frame(width: 60, height: 55)
                             .padding(.leading, 2)
@@ -157,7 +168,7 @@ struct ProfileView: View {
     
     private var blocked: some View {
         Button(action: {
-            
+            showBlockedFunctionalityAlert.toggle()
         }) {
             HStack {
                 Text("Bloqueados")
@@ -166,6 +177,7 @@ struct ProfileView: View {
                 Image(systemName: "chevron.right")
                     .foregroundColor(.red)
             }
+            
             .frame(width: 300, height: 40)
             .padding(.horizontal)
             .background(Color.white)
