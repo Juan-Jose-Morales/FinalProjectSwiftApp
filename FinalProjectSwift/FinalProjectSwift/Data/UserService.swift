@@ -17,6 +17,7 @@ class UserService {
         let interceptor = AuthInterceptor()
         session = Session(interceptor: interceptor)
     }
+    
     func login(username: String, password: String, completion: @escaping (Result<(String, User), AFError>) -> Void) {
         let parameters: [String: Any] = [
             "password": password,
@@ -132,20 +133,49 @@ class UserService {
                 }
             }
     }
-    func getMessages(for chatId: String, completion: @escaping (Result<MessageListResponse, Error>) -> Void) {
-        let urlString = "\(baseURL)/chats/\(chatId)/messages"
-        
-        AF.request(urlString, method: .get)
+    
+    func getViewMessages(completion: @escaping (Result<[GetMessage], Error>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            completion(.failure(AFError.explicitlyCancelled))
+            return
+        }
+
+        let headers: HTTPHeaders = ["Authorization": token]
+        let url = "\(baseURL)/messages/view"
+
+        AF.request(url, method: .get, headers: headers)
             .validate()
-            .responseDecodable(of: MessageListResponse.self) { response in
+            .responseDecodable(of: [GetMessage].self) { response in
                 switch response.result {
-                case .success(let messageListResponse):
-                    completion(.success(messageListResponse))
+                case .success(let messages):
+                    completion(.success(messages))
                 case .failure(let error):
                     completion(.failure(error))
                 }
             }
     }
+
+    func getMessages(completion: @escaping (Result<[Message], Error>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+            completion(.failure(AFError.explicitlyCancelled))
+            return
+        }
+
+        let headers: HTTPHeaders = ["Authorization": token]
+        let url = "\(baseURL)/messages"
+
+        AF.request(url, method: .get, headers: headers)
+            .validate()
+            .responseDecodable(of: [Message].self) { response in
+                switch response.result {
+                case .success(let messages):
+                    completion(.success(messages))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+ 
     func getMessageList(chatId: String, offset: Int, limit: Int, completion: @escaping (Result<MessageListResponse, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -161,6 +191,7 @@ class UserService {
                 completion(response.result)
             }
     }
+    
     func sendMessage(chatId: String, message: String, completion: @escaping (Result<SendMessageResponse, AFError>) -> Void) {
       guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
         print("sendMessage: Error: Missing AuthToken")
@@ -189,6 +220,7 @@ class UserService {
           completion(response.result)
         }
     }
+    
     func uploadProfilePhoto(userId: String, imageData: Data, completion: @escaping (Result<User, Error>) -> Void) {
         let url = "\(baseURL)/users/upload?id=\(userId)"
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
@@ -209,6 +241,7 @@ class UserService {
             }
         }
     }
+    
     func logout(completion: @escaping (Result<Void, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             completion(.failure(AFError.explicitlyCancelled))
@@ -236,6 +269,7 @@ class UserService {
                 }
             }
     }
+    
     func getChatList(completion: @escaping (_ chatList: [ChatList]) -> Void){
         
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
@@ -257,6 +291,7 @@ class UserService {
                 }
             }
     }
+    
     func deletechat(id: String){
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -279,6 +314,7 @@ class UserService {
                 }
             }
     }
+    
     func getNewChat(completion: @escaping (_ newcChatList: [NewChat]) -> Void){
         
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
@@ -300,6 +336,7 @@ class UserService {
                 }
             }
     }
+    
     func CreatedChat(source: String,target: String) {
         
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {

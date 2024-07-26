@@ -8,39 +8,44 @@
 import SwiftUI
 
 struct MessagesView: View {
-    @ObservedObject var chatViewModel: ChatViewModel
-    @Binding var isLoadingMoreMessages: Bool
+    @ObservedObject var messagesViewModel: MessagesViewModel
+    var chatCreated: String
 
     var body: some View {
         ScrollViewReader { scrollViewProxy in
             ScrollView {
                 VStack(alignment: .leading) {
-                    Text(formatChatCreationDate(chatViewModel.chatList.chatcreated ?? ""))
+                    Text(formatChatCreationDate(chatCreated))
                         .padding(.horizontal)
                         .foregroundColor(.gray)
                         .font(.caption)
                         .frame(maxWidth: .infinity, alignment: .center)
                     
-                    ForEach(chatViewModel.messages.reversed(), id: \.id) { message in
-                        MessageView(message: message, chatViewModel: chatViewModel)
-                            .id(message.id)
+                    ForEach(messagesViewModel.messages.reversed(), id: \.id) { message in
+                        MessageView(
+                            message: message,
+                            isCurrentUser: message.source == UserDefaults.standard.string(forKey: "id")
+                        )
+                        .id(message.id)
                     }
                 }
-                .onChange(of: chatViewModel.messages.count) { _ in
-                    if let lastMessageId = chatViewModel.messages.last?.id {
-                        scrollViewProxy.scrollTo(lastMessageId, anchor: .bottom)
+                .onChange(of: messagesViewModel.messages.count) { _ in
+                    if let lastMessageId = messagesViewModel.messages.last?.id {
+                        withAnimation{
+                            scrollViewProxy.scrollTo(lastMessageId, anchor: .bottom)
+                        }
                     }
                 }
                 .onAppear {
-                    if chatViewModel.messages.isEmpty {
-                        chatViewModel.loadMessages()
+                    if messagesViewModel.messages.isEmpty {
+                        messagesViewModel.loadMessages()
                     }
                 }
                 .onReachBottom {
-                    if !isLoadingMoreMessages {
-                        isLoadingMoreMessages = true
-                        chatViewModel.loadMessages()
-                        isLoadingMoreMessages = false
+                    if !messagesViewModel.isLoadingMoreMessages {
+                        messagesViewModel.isLoadingMoreMessages = true
+                        messagesViewModel.loadMessages()
+                        messagesViewModel.isLoadingMoreMessages = false
                     }
                 }
             }
@@ -52,7 +57,7 @@ struct MessagesView: View {
 
 #Preview {
     MessagesView(
-        chatViewModel: ChatViewModel(chatId: "1", chatList: ChatList(chat: "1", source: "user1", chatcreated: "2024-07-22T16:03:44.798Z")),
-        isLoadingMoreMessages: .constant(false)
+        messagesViewModel: MessagesViewModel(chatId: "1"),
+        chatCreated: "2024-07-22T16:03:44.798Z"
     )
 }

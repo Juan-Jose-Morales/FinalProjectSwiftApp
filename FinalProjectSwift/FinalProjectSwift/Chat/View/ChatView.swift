@@ -5,6 +5,8 @@
 //  Created by Juan jose Morales on 18/7/24.
 //
 
+// ChatView.swift
+
 import SwiftUI
 
 struct ChatView: View {
@@ -17,7 +19,10 @@ struct ChatView: View {
             VStack(spacing: 0) {
                 ChatHeaderView(chatlist: chatViewModel.chatList)
                 
-                MessagesView(chatViewModel: chatViewModel, isLoadingMoreMessages: $isLoadingMoreMessages)
+                MessagesView(
+                    messagesViewModel: MessagesViewModel(chatId: chatViewModel.chatId),
+                    chatCreated: chatViewModel.chatList.chatcreated ?? ""
+                )
                 
                 Spacer()
                 

@@ -9,37 +9,29 @@ import Foundation
 import Combine
 
 class ChatViewModel: ObservableObject {
-    @Published var messages: [Message] = []
-    @Published var errorMessage: String?
     @Published var messageText: String = ""
     @Published var source: String = ""
+    @Published var errorMessage: String?
 
     private let userService = UserService()
     private var cancellables = Set<AnyCancellable>()
 
     var chatId: String
     var chatList: ChatList
-    private var offset: Int = 0
-    private let limit: Int = 20
-    private var timer: Timer?
+    @Published var messages: [Message] = []
 
     init(chatId: String, chatList: ChatList) {
         self.chatId = chatId
         self.chatList = chatList
         self.source = UserDefaults.standard.string(forKey: "id") ?? ""
-        startMessagePolling()
     }
 
     func loadMessages() {
-        userService.getMessageList(chatId: chatId, offset: offset, limit: limit) { [weak self] result in
+        userService.getMessageList(chatId: chatId, offset: 0, limit: 20) { [weak self] result in
             switch result {
             case .success(let messageListResponse):
                 DispatchQueue.main.async {
-                    let newMessages = messageListResponse.rows.filter { newMessage in
-                        !self!.messages.contains(where: { $0.id == newMessage.id })
-                    }
-                    self?.messages.append(contentsOf: newMessages)
-                    self?.offset += newMessages.count
+                    self?.messages = messageListResponse.rows
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -84,26 +76,7 @@ class ChatViewModel: ObservableObject {
         }
     }
 
-    func getNick(chatList: ChatList) -> String {
-        guard let id = UserDefaults.standard.string(forKey: "id") else {
-            print("Error: Missing id")
-            return ""
-        }
-        
-        return chatList.source == id ? chatList.targetnick! : chatList.sourceNick!
-    }
-
-    private func startMessagePolling() {
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
-            self?.loadMessages()
-        }
-    }
-
-    deinit {
-        timer?.invalidate()
-    }
-
     func attachFile() {
-        
+        // Implementación de adjuntar archivo
     }
 }
