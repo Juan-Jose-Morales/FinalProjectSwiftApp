@@ -9,14 +9,9 @@ import Foundation
 import Alamofire
 
 class UserService {
-    private var session: Session
+
     private let baseURL = "https://mock-movilidad.vass.es/chatvass/api"
     let USER_EXISTENCE_STATUS_CODE = 409
-    
-    init() {
-        let interceptor = AuthInterceptor()
-        session = Session(interceptor: interceptor)
-    }
     
     func login(username: String, password: String, completion: @escaping (Result<(String, User), AFError>) -> Void) {
         let parameters: [String: Any] = [
@@ -36,6 +31,7 @@ class UserService {
                 }
             }
     }
+    
     func loginWithBiometrics(completion: @escaping (Result<(String, User), AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -73,6 +69,7 @@ class UserService {
                 }
             }
     }
+    
     func register(user: User, completion: @escaping (Result<User, Error>) -> Void) {
         let url = "\(baseURL)/users/register"
         let parameters: [String: Any] = [
@@ -100,26 +97,31 @@ class UserService {
                 }
             }
     }
+    
     func updateOnlineStatus(isOnline: Bool, completion: @escaping (Result<Void, AFError>) -> Void) {
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             completion(.failure(AFError.explicitlyCancelled))
             return
         }
         
-        let url = "\(baseURL)/users/online/\(isOnline)"
+        let url = "\(baseURL)/users/online/\(isOnline ? "true" : "false")"
         let headers: HTTPHeaders = ["Authorization": token]
         
         AF.request(url, method: .put, headers: headers)
             .validate()
-            .response { response in
+            .responseDecodable(of: OnlineStatusResponse.self) { response in
                 switch response.result {
-                case .success:
+                case .success(let responseData):
+                    print("Server response message: \(responseData.message)")
                     completion(.success(()))
                 case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
                     completion(.failure(error))
                 }
             }
     }
+
+    
     func getUsers(completion: @escaping (Result<[User], Error>) -> Void) {
         let url = "\(baseURL)/users"
         
@@ -218,27 +220,6 @@ class UserService {
             print("sendMessage: Error received: \(error.localizedDescription)")
           }
           completion(response.result)
-        }
-    }
-    
-    func uploadProfilePhoto(userId: String, imageData: Data, completion: @escaping (Result<User, Error>) -> Void) {
-        let url = "\(baseURL)/users/upload?id=\(userId)"
-        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
-            completion(.failure(AFError.explicitlyCancelled))
-            return
-        }
-        
-        let headers: HTTPHeaders = ["Authorization": token]
-        
-        AF.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imageData, withName: "file", fileName: "profile.jpg", mimeType: "image/jpeg")
-        }, to: url, headers: headers).responseDecodable(of: User.self) { response in
-            switch response.result {
-            case .success(let user):
-                completion(.success(user))
-            case .failure(let error):
-                completion(.failure(error))
-            }
         }
     }
     

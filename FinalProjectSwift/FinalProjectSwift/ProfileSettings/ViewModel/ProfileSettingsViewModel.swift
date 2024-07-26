@@ -14,8 +14,7 @@ class ProfileSettingsViewModel: ObservableObject {
     @Published var user = User()
     @Published var profileImage: UIImage?
     @Published var navigateToProfile = false
-    
-    var userService = UserService()
+        var userService = UserService()
     
     var buttons: [ButtonInfo] {
         [

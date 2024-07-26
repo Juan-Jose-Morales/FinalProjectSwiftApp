@@ -26,7 +26,7 @@ struct ProfileView: View {
                 })
                 if viewModel.isLoading {
                     progressView
-                }else{
+                } else {
                     editProfile()
                 }
                 Spacer().frame(height: 40)
@@ -37,7 +37,6 @@ struct ProfileView: View {
                 }
                 .padding(.horizontal, 40)
                 Spacer().frame(height: 40)
-                
                 
                 Toggle(isOn: $viewModel.isOnline) {
                     Text("Mostrar estado en línea")
@@ -63,10 +62,9 @@ struct ProfileView: View {
             .navigationDestination(isPresented: $isNavigateToProfileSettings) {
                 ProfileSettingsView()
             }
-            
         }
-        
     }
+    
     
     private func editProfile() -> some View {
         VStack {
