@@ -238,7 +238,6 @@
 		9052E6D32C52FEF600670D9B /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				9052E6E02C53000D00670D9B /* Data */,
 				9052E6DF2C53000100670D9B /* Model */,
 				9052E6DE2C52FFF500670D9B /* ViewModel */,
 				9052E6DD2C52FFEF00670D9B /* View */,
@@ -333,13 +332,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		9052E6E02C53000D00670D9B /* Data */ = {
+		9052E6E02C53000D00670D9B /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				90CE611F2C5568F1002B70D3 /* ChatServiceProtocol.swift */,
 				90CE61272C556A44002B70D3 /* ChatService.swift */,
 			);
-			path = Data;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		9052E6E12C53004300670D9B /* View */ = {
@@ -568,6 +567,7 @@
 		90CE612A2C557130002B70D3 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
+				9052E6E02C53000D00670D9B /* Service */,
 				9052E6D22C52FEE200670D9B /* Home */,
 				9052E6EF2C5302A800670D9B /* Message */,
 				9052E6E52C5301CC00670D9B /* NewChat */,

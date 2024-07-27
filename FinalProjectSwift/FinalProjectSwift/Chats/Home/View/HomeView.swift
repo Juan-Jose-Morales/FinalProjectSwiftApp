@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
- 
+
 struct HomeView: View {
     @StateObject private var homeViewModel = HomeViewModel()
     @State private var isShowingChangeProfileView = false
@@ -33,24 +33,24 @@ struct HomeView: View {
                             ForEach(homeViewModel.filterChats) { chat in
                                 NavigationLink(destination: ChatView(chatViewModel: ChatViewModel(chatId: chat.chat, chatList: chat))) {
                                     VStack {
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 20)
-                                                    .fill(Color.white)
-                                                    .shadow(radius: 5, x: 5, y: 5)
-                                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                                HStack{
-                                                    ZStack {
-                                                        Circle()
-                                                            .foregroundColor(homeViewModel.randomColor())
-                                                            .frame(width: 40, height: 40)
-                                                        
-                                                        Text(homeViewModel.getNick(chatList: chat).prefix(1).capitalized)
-                                                            .foregroundStyle(.white)
-                                                    }.padding(.horizontal, 8)
-                                                    Text(homeViewModel.getNick(chatList: chat))
-                                                    Spacer()
-                                                }.padding(.vertical, 1)
-                                            }.padding(.vertical, 5)
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(Color.white)
+                                                .shadow(radius: 5, x: 5, y: 5)
+                                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                            HStack{
+                                                ZStack {
+                                                    Circle()
+                                                        .foregroundColor(homeViewModel.randomColor())
+                                                        .frame(width: 40, height: 40)
+                                                    
+                                                    Text(homeViewModel.getNick(chatList: chat).prefix(1).capitalized)
+                                                        .foregroundStyle(.white)
+                                                }.padding(.horizontal, 8)
+                                                Text(homeViewModel.getNick(chatList: chat))
+                                                Spacer()
+                                            }.padding(.vertical, 1)
+                                        }.padding(.vertical, 5)
                                     }
                                 }
                             }
@@ -83,7 +83,7 @@ struct HomeView: View {
         }
     }
 }
- 
+
 #Preview {
     HomeView()
 }
