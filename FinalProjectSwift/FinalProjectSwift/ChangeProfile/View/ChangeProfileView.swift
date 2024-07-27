@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-enum Origin {
-    case home
-    case profile
-}
-
 struct ChangeProfileView: View {
     @ObservedObject var viewModel = ChangeProfileViewModel()
     @State private var isNavigateBack = false

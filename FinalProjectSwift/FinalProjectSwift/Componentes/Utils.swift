@@ -30,3 +30,7 @@ func getTime(from dateTime: String) -> String {
     return ""
 }
 
+enum Origin {
+    case home
+    case profile
+}

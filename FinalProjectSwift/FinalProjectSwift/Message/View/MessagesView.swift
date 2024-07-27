@@ -10,10 +10,9 @@ import SwiftUI
 struct MessagesView: View {
     @ObservedObject var messagesViewModel: MessagesViewModel
     var chatCreated: String
-    
-    // Estado para controlar si estamos en el fondo del scroll
-    @State private var isAtBottom = true
-    
+
+    @State private var scrollOffset: CGPoint = .zero
+
     var body: some View {
         ScrollViewReader { scrollViewProxy in
             ScrollView {
@@ -23,7 +22,7 @@ struct MessagesView: View {
                         .foregroundColor(.gray)
                         .font(.caption)
                         .frame(maxWidth: .infinity, alignment: .center)
-                    
+
                     ForEach(messagesViewModel.messages.reversed(), id: \.id) { message in
                         MessageView(
                             message: message,
@@ -32,9 +31,13 @@ struct MessagesView: View {
                         .id(messagesViewModel.messageIdentifier(for: message, messageCount: messagesViewModel.messages.count))
                     }
                 }
-                .onChange(of: messagesViewModel.messages.count) { _ in
-                    withAnimation(.easeInOut(duration: 0.5)) {
-                        scrollViewProxy.scrollTo(messagesViewModel.messages.last?.id, anchor: .bottom)
+                .background(GeometryReader { geo in
+                    Color.clear.preference(key: ViewOffsetKey.self, value: geo.frame(in: .global).origin)
+                })
+                .onPreferenceChange(ViewOffsetKey.self) { value in
+                    self.scrollOffset = value
+                    if value.y < 50 {
+                        messagesViewModel.loadMoreMessages()
                     }
                 }
                 .onAppear {
@@ -42,25 +45,18 @@ struct MessagesView: View {
                         messagesViewModel.loadMessages()
                     }
                 }
-                .onReachBottom {
-                    if !messagesViewModel.isLoadingMoreMessages {
-                        messagesViewModel.loadMoreMessages()
+                .onChange(of: messagesViewModel.messages.count) { _ in
+                    // Restaurar la posición del scroll
+                    DispatchQueue.main.async {
+                        scrollViewProxy.scrollTo(messagesViewModel.messages.last?.id, anchor: .bottom)
                     }
                 }
-                .background(GeometryReader { geo in
-                    Color.clear
-                        .onChange(of: geo.frame(in: .global).maxY) { newValue in
-                            let offset = geo.frame(in: .global).maxY - geo.size.height
-                            isAtBottom = offset <= 50
-                        }
-                })
             }
             .padding(.top)
             .background(Color.white)
         }
     }
 }
-
 
 
 #Preview {

@@ -19,7 +19,7 @@ class MessagesViewModel: ObservableObject {
 
     var chatId: String
     private var offset: Int = 0
-    private let limit: Int = 20
+    private let limit: Int = 100
 
     init(chatId: String) {
         self.chatId = chatId
@@ -32,16 +32,14 @@ class MessagesViewModel: ObservableObject {
     }
 
     func loadMessages() {
-        userService.getMessageList(chatId: chatId, offset: offset, limit: limit) { [weak self] result in
+        userService.getMessageList(chatId: chatId, offset: 0, limit: limit) { [weak self] result in
             switch result {
             case .success(let messageListResponse):
                 DispatchQueue.main.async {
                     guard let self = self else { return }
-                    let newMessages = messageListResponse.rows.filter { newMessage in
-                        !self.messages.contains(where: { $0.id == newMessage.id })
-                    }
-                    self.messages.append(contentsOf: newMessages)
-                    self.offset += newMessages.count
+                    let newMessages = messageListResponse.rows
+                    self.messages = newMessages
+                    self.offset = newMessages.count
                     self.isRefreshingMessages = false
                 }
             case .failure(let error):
@@ -64,9 +62,7 @@ class MessagesViewModel: ObservableObject {
             case .success(let messageListResponse):
                 DispatchQueue.main.async {
                     guard let self = self else { return }
-                    let newMessages = messageListResponse.rows.filter { newMessage in
-                        !self.messages.contains(where: { $0.id == newMessage.id })
-                    }
+                    let newMessages = messageListResponse.rows
                     self.messages.append(contentsOf: newMessages)
                     self.offset += newMessages.count
                 }
@@ -79,8 +75,8 @@ class MessagesViewModel: ObservableObject {
     }
 
     private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] _ in
-            self?.refreshMessages()
+        timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            self?.checkForNewMessages()
         }
     }
 
@@ -89,7 +85,7 @@ class MessagesViewModel: ObservableObject {
         timer = nil
     }
 
-    private func refreshMessages() {
+    private func checkForNewMessages() {
         guard !isRefreshingMessages else { return }
         isRefreshingMessages = true
 
@@ -98,9 +94,7 @@ class MessagesViewModel: ObservableObject {
             case .success(let messageListResponse):
                 DispatchQueue.main.async {
                     guard let self = self else { return }
-                    let newMessages = messageListResponse.rows.filter { newMessage in
-                        !self.messages.contains(where: { $0.id == newMessage.id })
-                    }
+                    let newMessages = messageListResponse.rows
                     if !newMessages.isEmpty {
                         self.messages = newMessages + self.messages
                     }
@@ -109,11 +103,13 @@ class MessagesViewModel: ObservableObject {
             case .failure(let error):
                 DispatchQueue.main.async {
                     print("Error refreshing messages: \(error.localizedDescription)")
+                    self?.isRefreshingMessages = false
                 }
             }
         }
     }
+    
     func messageIdentifier(for message: Message, messageCount: Int) -> String {
-            return "\(message.id)-\(messageCount)"
-        }
+        return "\(message.id)-\(messageCount)"
+    }
 }

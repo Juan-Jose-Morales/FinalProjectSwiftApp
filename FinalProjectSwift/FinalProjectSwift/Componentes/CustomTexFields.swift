@@ -116,6 +116,9 @@ struct SearcField: View {
                 } else {
                     TextField(placeholder, text: $text)
                         .padding()
+                        .onTapGesture {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
                 }
             }
             .frame(height: 45)
