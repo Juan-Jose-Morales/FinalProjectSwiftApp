@@ -47,7 +47,7 @@ class NewChatViewModel: ObservableObject{
             print("Error: Missing id")
             return
         }
-        userService.CreatedChat(source: id , target: target, completion: response)
+        userService.CreatedChat(source: id , target: target)
     }
     
     func getChatFilter() {
@@ -101,5 +101,12 @@ class NewChatViewModel: ObservableObject{
         }else {
             return name.prefix(1).capitalized
         }
+    }
+    func chatId() -> String? {
+        guard let id = UserDefaults.standard.string(forKey: "chatId") else {
+            print("Error: Missing id")
+            return nil
+        }
+        return id
     }
 }

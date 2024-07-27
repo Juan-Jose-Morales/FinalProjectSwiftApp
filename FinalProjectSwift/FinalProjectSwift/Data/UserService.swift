@@ -301,7 +301,7 @@ class UserService {
                 }
             }
     }
-    func CreatedChat(source: String,target: String, completion: NewChatResponse?) {
+    func CreatedChat(source: String, target: String) {
         
         guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
             print("Error: Missing AuthToken")
@@ -319,10 +319,11 @@ class UserService {
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: NewChatResponse.self) { response in
                 switch response.result {
-                case .success(let completion):
-                    print(completion)
+                case .success(let newChatResponse):
+                    print(newChatResponse)
+                    UserDefaults.standard.set(newChatResponse.chat.id, forKey: "chatId")
                 case .failure(let error):
-                   print(error)
+                    print(error)
                 }
             }
     }

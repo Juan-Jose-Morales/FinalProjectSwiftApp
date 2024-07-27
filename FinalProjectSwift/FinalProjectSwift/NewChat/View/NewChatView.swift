@@ -66,6 +66,7 @@ struct NewChatView: View {
                                         Alert(title: Text("Quieres crear un nuevo chat con \(newChatViewModel.alertNewChat?.nick ?? "Usuario Desconocido")"), primaryButton: .default(Text("Sí"), action: {
                                             newChatViewModel.createdChat(target: newChatViewModel.alertNewChat?.id ?? "")
                                             onUpdate()
+                                            print(newChatViewModel.chatId())
                                             navigateNewChat = true
                                         }), secondaryButton: .cancel(Text("Cancelar")))
                                     }
@@ -82,7 +83,7 @@ struct NewChatView: View {
                                 .padding(.leading, 350)
                         }
                 }.navigationDestination(isPresented: $navigateNewChat) {
-                    ChatView(chatViewModel: ChatViewModel(chatId: newChatViewModel.response?.chat.id ?? "", chatList: newChatViewModel.convertToChatList(newChat: newChatViewModel.alertNewChat!)))
+                    ChatView(chatViewModel: ChatViewModel(chatId: newChatViewModel.chatId() ?? "", chatList: newChatViewModel.convertToChatList(newChat: newChatViewModel.alertNewChat!)))
                 }
                 .navigationDestination(isPresented: $navigateHome) {
                     HomeView()
