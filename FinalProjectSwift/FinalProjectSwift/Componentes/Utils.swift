@@ -34,3 +34,12 @@ enum Origin {
     case home
     case profile
 }
+
+struct ViewOffsetKey: PreferenceKey {
+    typealias Value = CGPoint
+    static var defaultValue: CGPoint = .zero
+
+    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
+        value = nextValue()
+    }
+}
