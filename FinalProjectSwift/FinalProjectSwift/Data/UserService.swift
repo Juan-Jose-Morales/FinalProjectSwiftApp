@@ -11,6 +11,7 @@ import Alamofire
 class UserService {
     private var session: Session
     private let baseURL = "https://mock-movilidad.vass.es/chatvass/api"
+    var chatResponse: NewChatResponse?
     let USER_EXISTENCE_STATUS_CODE = 409
     
     init() {
@@ -307,7 +308,6 @@ class UserService {
             print("Error: Missing AuthToken")
             return
         }
-        
         let headers: HTTPHeaders = ["Authorization": token]
         
         let url = "\(baseURL)/chats"
@@ -320,8 +320,8 @@ class UserService {
             .responseDecodable(of: NewChatResponse.self) { response in
                 switch response.result {
                 case .success(let newChatResponse):
-                    print(newChatResponse)
-                    UserDefaults.standard.set(newChatResponse.chat.id, forKey: "chatId")
+                    self.chatResponse = newChatResponse
+                    print(self.chatResponse)
                 case .failure(let error):
                     print(error)
                 }

@@ -19,6 +19,8 @@ class HomeViewModel: ObservableObject {
     @Published var filterChats: [ChatList] = []
     @Published var profileImage: UIImage?
     @Published var user = User()
+    @Published var color: Color?
+    private var colorManager = RandomColorManager.shared
     
     
     
@@ -100,5 +102,23 @@ class HomeViewModel: ObservableObject {
         } while (red > 0.9 && green > 0.9 && blue > 0.9)
         
         return Color(red: red, green: green, blue: blue)
+    }
+    func nameComprobation(user: ChatList) -> String {
+        if getNick(chatList: user) == ""{
+            return "Usuario Desconocido "
+            // \(user.id)
+        }else {
+            return getNick(chatList: user)
+        }
+    }
+    func capitalizedName(name: String) -> String {
+        if name == ""{
+            return "?"
+        }else {
+            return name.prefix(1).capitalized
+        }
+    }
+    func color(for chatId: UUID) -> Color {
+        return colorManager.color(for: chatId)
     }
 }

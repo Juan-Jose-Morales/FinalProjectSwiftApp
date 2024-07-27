@@ -20,6 +20,7 @@ class NewChatViewModel: ObservableObject{
         }
     }
     @Published var response: NewChatResponse?
+    private var colorManager = RandomColorManager.shared
     
     private var userService = UserService()
     
@@ -37,8 +38,8 @@ class NewChatViewModel: ObservableObject{
         userService.getNewChat { newChatList in
             self.newListChats = newChatList.filter { $0.id != id }
             self.chatFilter = self.newListChats.sorted {
-                       ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
-                   }
+                ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
+            }
         }
     }
     func createdChat(target: String){
@@ -53,8 +54,8 @@ class NewChatViewModel: ObservableObject{
     func getChatFilter() {
         if search.isEmpty {
             chatFilter = newListChats.sorted {
-                       ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
-                   }
+                ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
+            }
             
         } else {
             
@@ -103,10 +104,12 @@ class NewChatViewModel: ObservableObject{
         }
     }
     func chatId() -> String? {
-        guard let id = UserDefaults.standard.string(forKey: "chatId") else {
-            print("Error: Missing id")
-            return nil
-        }
-        return id
+        return userService.chatResponse?.chat.id
+    }
+    func checkSucces() -> Bool?{
+        return userService.chatResponse?.success
+    }
+    func color(for chatId: UUID) -> Color {
+        return colorManager.color(for: chatId)
     }
 }
