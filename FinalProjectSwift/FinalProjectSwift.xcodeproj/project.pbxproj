@@ -55,6 +55,7 @@
 		A93922E42C51AEA000533969 /* NewChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93922E32C51AEA000533969 /* NewChatView.swift */; };
 		A93922E62C51AFD300533969 /* NewChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93922E52C51AFD300533969 /* NewChatViewModel.swift */; };
 		A93922E82C51C03200533969 /* ChatHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93922E72C51C03200533969 /* ChatHeaderViewModel.swift */; };
+		A93923262C5544EF00533969 /* RamdomColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93923252C5544EF00533969 /* RamdomColorManager.swift */; };
 		A94EC23E2C46CAE500E85D63 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */; };
 		A94EC2822C48374C00E85D63 /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC2812C48374C00E85D63 /* ChatList.swift */; };
 		A95B842B2C38275200F12190 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B842A2C38275200F12190 /* LaunchScreen.swift */; };
@@ -119,6 +120,7 @@
 		A93922E32C51AEA000533969 /* NewChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChatView.swift; sourceTree = "<group>"; };
 		A93922E52C51AFD300533969 /* NewChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewChatViewModel.swift; sourceTree = "<group>"; };
 		A93922E72C51C03200533969 /* ChatHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeaderViewModel.swift; sourceTree = "<group>"; };
+		A93923252C5544EF00533969 /* RamdomColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamdomColorManager.swift; sourceTree = "<group>"; };
 		A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A94EC2812C48374C00E85D63 /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		A95B842A2C38275200F12190 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				90294B4C2C36EA620030E04C /* SessionManager.swift */,
+				A93923252C5544EF00533969 /* RamdomColorManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -800,6 +803,7 @@
 				A94EC2822C48374C00E85D63 /* ChatList.swift in Sources */,
 				90294B492C36D60C0030E04C /* LoginViewModel.swift in Sources */,
 				A93922E82C51C03200533969 /* ChatHeaderViewModel.swift in Sources */,
+				A93923262C5544EF00533969 /* RamdomColorManager.swift in Sources */,
 				9040AE7A2C32F6A200D550AD /* CustomTexFields.swift in Sources */,
 				A93922E02C51ADF700533969 /* NewChatResponse.swift in Sources */,
 				904A89B82C4692F9005F2DC8 /* ProfileSettingsView.swift in Sources */,

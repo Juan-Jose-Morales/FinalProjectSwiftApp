@@ -19,7 +19,8 @@ class NewChatViewModel: ObservableObject{
             getChatFilter()
         }
     }
-    
+    @Published var response: NewChatResponse?
+    private var colorManager = RandomColorManager.shared
     
     private var userService = UserService()
     
@@ -28,10 +29,17 @@ class NewChatViewModel: ObservableObject{
     }
     
     func getNewChats(){
+        
+        guard let id = UserDefaults.standard.string(forKey: "id") else {
+            print("Error: Missing id")
+            return
+        }
+        
         userService.getNewChat { newChatList in
-            self.newListChats = newChatList
-            self.chatFilter = newChatList
-            //self.chatFilter = self.newListChats.sorted { $0.nick ?? "" < $1.nick ?? "" }
+            self.newListChats = newChatList.filter { $0.id != id }
+            self.chatFilter = self.newListChats.sorted {
+                ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
+            }
         }
     }
     func createdChat(target: String){
@@ -45,7 +53,9 @@ class NewChatViewModel: ObservableObject{
     
     func getChatFilter() {
         if search.isEmpty {
-            chatFilter = newListChats
+            chatFilter = newListChats.sorted {
+                ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
+            }
             
         } else {
             
@@ -78,5 +88,28 @@ class NewChatViewModel: ObservableObject{
         } while (red > 0.9 && green > 0.9 && blue > 0.9)
         
         return Color(red: red, green: green, blue: blue)
+    }
+    func nameComprobation(newUser: NewChat) -> String {
+        if newUser.nick == ""{
+            return "Usuario Desconocido \(newUser.id)"
+        }else {
+            return newUser.nick ?? "Usuario Desconocido"
+        }
+    }
+    func capitalizedName(name: String) -> String {
+        if name == ""{
+            return "?"
+        }else {
+            return name.prefix(1).capitalized
+        }
+    }
+    func chatId() -> String? {
+        return userService.chatResponse?.chat.id
+    }
+    func checkSucces() -> Bool?{
+        return userService.chatResponse?.success
+    }
+    func color(for chatId: UUID) -> Color {
+        return colorManager.color(for: chatId)
     }
 }

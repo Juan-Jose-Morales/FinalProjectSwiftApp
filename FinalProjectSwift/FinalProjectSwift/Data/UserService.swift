@@ -11,6 +11,7 @@ import Alamofire
 class UserService {
 
     private let baseURL = "https://mock-movilidad.vass.es/chatvass/api"
+    var chatResponse: NewChatResponse?
     let USER_EXISTENCE_STATUS_CODE = 409
     
     func login(username: String, password: String, completion: @escaping (Result<(String, User), AFError>) -> Void) {
@@ -333,7 +334,7 @@ class UserService {
             return
         }
         
-        let headers: HTTPHeaders = ["Authorization": token]
+        let headers: HTTPHeaders = ["Authorization": token ]
         
         let parameters: [String: Any] = [
             "id": "\(id)"
@@ -389,7 +390,6 @@ class UserService {
             print("Error: Missing AuthToken")
             return
         }
-        
         let headers: HTTPHeaders = ["Authorization": token]
         
         let url = "\(baseURL)/chats"
@@ -401,17 +401,11 @@ class UserService {
         AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseDecodable(of: NewChatResponse.self) { response in
                 switch response.result {
-                case .success(let response):
-                    print("Created chat response: \(response)")
+                case .success(let newChatResponse):
+                    self.chatResponse = newChatResponse
+                    print(self.chatResponse)
                 case .failure(let error):
-                    if let data = response.data {
-                        if let jsonString = String(data: data, encoding: .utf8) {
-                            print("Created chat response data as string: \(jsonString)")
-                        } else {
-                            print("Created chat response data could not be converted to string")
-                        }
-                    }
-                    print("Created chat error: \(error.localizedDescription)")
+                    print(error)
                 }
             }
     }

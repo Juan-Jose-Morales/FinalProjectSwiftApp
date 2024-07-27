@@ -41,13 +41,13 @@ struct HomeView: View {
                                                 HStack{
                                                     ZStack {
                                                         Circle()
-                                                            .foregroundColor(homeViewModel.randomColor())
+                                                            .foregroundColor(homeViewModel.color(for: chat.id))
                                                             .frame(width: 40, height: 40)
                                                         
-                                                        Text(homeViewModel.getNick(chatList: chat).prefix(1).capitalized)
+                                                        Text(homeViewModel.capitalizedName(name: homeViewModel.getNick(chatList: chat)))
                                                             .foregroundStyle(.white)
                                                     }.padding(.horizontal, 8)
-                                                    Text(homeViewModel.getNick(chatList: chat))
+                                                    Text(homeViewModel.nameComprobation(user: chat))
                                                     Spacer()
                                                 }.padding(.vertical, 1)
                                             }.padding(.vertical, 5)
