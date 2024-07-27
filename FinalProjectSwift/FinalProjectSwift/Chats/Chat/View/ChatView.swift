@@ -27,8 +27,8 @@ struct ChatView: View {
                     sendAction: {
                         chatViewModel.sendMessage()
                         isScrolling = false
-                    },
-                    attachAction: { chatViewModel.attachFile() }
+                    }
+
                 )
                 .padding(.bottom, keyboardResponder.currentHeight)
                 .background(Color.white)

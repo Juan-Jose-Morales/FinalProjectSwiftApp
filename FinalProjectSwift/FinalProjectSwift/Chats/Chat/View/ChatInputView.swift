@@ -10,8 +10,7 @@ import SwiftUI
 struct ChatInputView: View {
     @Binding var messageText: String
     var sendAction: () -> Void
-    var attachAction: () -> Void
-
+    
     var body: some View {
         HStack {
             ZStack(alignment: .leading) {
@@ -47,6 +46,6 @@ struct ChatInputView: View {
 struct ChatInputView_Previews: PreviewProvider {
     @State static var messageText = ""
     static var previews: some View {
-        ChatInputView(messageText: $messageText, sendAction: {}, attachAction: {})
+        ChatInputView(messageText: $messageText, sendAction: {})
     }
 }

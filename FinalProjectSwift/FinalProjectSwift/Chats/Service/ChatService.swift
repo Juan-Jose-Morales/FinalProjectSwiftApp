@@ -11,7 +11,8 @@ import Alamofire
 class ChatService: ChatServiceProtocol {
     private let baseURL = "https://mock-movilidad.vass.es/chatvass/api"
     private let networkClient: NetworkClientProtocol
-
+    var chatResponse: NewChatResponse?
+    
     init(networkClient: NetworkClientProtocol = AlamofireNetworkClient()) {
         self.networkClient = networkClient
     }
@@ -97,7 +98,7 @@ class ChatService: ChatServiceProtocol {
         let headers: HTTPHeaders = ["Authorization": token]
         let url = "\(baseURL)/chats/\(id)"
         networkClient.request(url, method: .delete, parameters: nil, headers: headers, completion: { (response: Result<User, AFError>) in
-            // Handle response
+           
         })
     }
 
@@ -118,14 +119,21 @@ class ChatService: ChatServiceProtocol {
     }
 
     func createChat(source: String, target: String) {
-        guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
-            print("Error: Missing AuthToken")
-            return
+            guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
+                print("Error: Missing AuthToken")
+                return
+            }
+            let headers: HTTPHeaders = ["Authorization": token]
+            let parameters: [String: Any] = ["source": source, "target": target]
+            networkClient.request("\(baseURL)/chats", method: .post, parameters: parameters, headers: headers, completion: { (response: Result<NewChatResponse, AFError>) in
+                switch response {
+                case .success(let newChatResponse):
+                    self.chatResponse = newChatResponse
+                    print(newChatResponse)
+                case .failure(let error):
+                    print("Error creating chat: \(error)")
+                
+                }
+            })
         }
-        let headers: HTTPHeaders = ["Authorization": token]
-        let parameters: [String: Any] = ["source": source, "target": target]
-        networkClient.request("\(baseURL)/chats", method: .post, parameters: parameters, headers: headers, completion: { (response: Result<NewChatResponse, AFError>) in
-            // Handle response
-        })
-    }
 }

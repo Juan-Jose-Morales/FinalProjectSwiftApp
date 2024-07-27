@@ -44,7 +44,7 @@ class HomeViewModel: ObservableObject {
     func deleteItems(at offsets: IndexSet) {
         for index in offsets {
             let chat = listChats[index]
-            deleteChat(chatId: chat.chat)
+            deleteChat(id: chat.chat) 
         }
     }
     

@@ -65,8 +65,4 @@ class ChatViewModel: ObservableObject {
             }
         }
     }
-
-    func attachFile() {
-        
-    }
 }

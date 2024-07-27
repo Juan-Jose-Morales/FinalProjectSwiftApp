@@ -12,7 +12,8 @@ struct NewChatView: View {
     var onUpdate: () -> Void
     @State private var navigateNewChat = false
     @State private var navigateHome = false
-    
+    @State private var selectedChat: NewChat? = nil
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -21,7 +22,7 @@ struct NewChatView: View {
                     Text("Nuevo Chat")
                         .bold()
                         .padding(.leading, 60)
-                        .padding(.vertical ,16)
+                        .padding(.vertical, 16)
                     Spacer()
                     Button(action: {
                         navigateHome = true
@@ -61,6 +62,7 @@ struct NewChatView: View {
                             }.onTapGesture {
                                 newChatViewModel.showAlert = true
                                 newChatViewModel.alertNewChat = newChat
+                                selectedChat = newChat
                             }.alert(isPresented: $newChatViewModel.showAlert) {
                                 Alert(title: Text("Quieres crear un nuevo chat con \(newChatViewModel.alertNewChat?.nick ?? "Usuario Desconocido")"), primaryButton: .default(Text("Sí"), action: {
                                     newChatViewModel.createChat(target: newChatViewModel.alertNewChat?.id ?? "")
@@ -82,7 +84,9 @@ struct NewChatView: View {
                 }
             }
             .navigationDestination(isPresented: $navigateNewChat) {
-                ChatView(chatViewModel: ChatViewModel(chatId: newChatViewModel.alertNewChat?.id ?? "", chatList: newChatViewModel.convertToChatList(newChat: newChatViewModel.alertNewChat!)))
+                if let selectedChat = selectedChat {
+                    ChatView(chatViewModel: ChatViewModel(chatId: selectedChat.id, chatList: newChatViewModel.convertToChatList(newChat: selectedChat)))
+                }
             }
             .navigationDestination(isPresented: $navigateHome) {
                 HomeView()

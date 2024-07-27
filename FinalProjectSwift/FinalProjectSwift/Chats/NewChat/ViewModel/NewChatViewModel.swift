@@ -49,7 +49,6 @@ class NewChatViewModel: ObservableObject {
             chatFilter = newListChats.sorted {
                 ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
             }
-            
         } else {
             chatFilter = newListChats.filter { chat in
                 chat.nick!.lowercased().contains(search.lowercased())
@@ -83,26 +82,31 @@ class NewChatViewModel: ObservableObject {
         
         return Color(red: red, green: green, blue: blue)
     }
+    
     func nameComprobation(newUser: NewChat) -> String {
-        if newUser.nick == ""{
+        if newUser.nick == "" {
             return "Usuario Desconocido \(newUser.id)"
-        }else {
+        } else {
             return newUser.nick ?? "Usuario Desconocido"
         }
     }
+    
     func capitalizedName(name: String) -> String {
-        if name == ""{
+        if name == "" {
             return "?"
-        }else {
+        } else {
             return name.prefix(1).capitalized
         }
     }
+    
     func chatId() -> String? {
-        return userService.chatResponse?.chat.id
+        return chatService.chatResponse?.chat.id
     }
-    func checkSucces() -> Bool?{
-        return userService.chatResponse?.success
+    
+    func checkSucces() -> Bool? {
+        return chatService.chatResponse?.success
     }
+    
     func color(for chatId: UUID) -> Color {
         return colorManager.color(for: chatId)
     }
