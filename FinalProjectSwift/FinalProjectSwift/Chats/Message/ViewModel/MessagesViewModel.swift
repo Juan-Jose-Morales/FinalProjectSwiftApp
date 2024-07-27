@@ -19,29 +19,28 @@ class MessagesViewModel: ObservableObject {
 
     var chatId: String
     private var offset: Int = 0
-    private let limit: Int = 100
+    private let limit: Int = 20
 
     init(chatService: ChatServiceProtocol = ChatService(), chatId: String) {
         self.chatService = chatService
         self.chatId = chatId
         loadMessages()
-        startTimer()
-    }
-
-    deinit {
-        stopTimer()
+        startRefreshingMessages()
     }
 
     func loadMessages() {
         guard !isLoadingMoreMessages else { return }
         isLoadingMoreMessages = true
+
         chatService.getMessageList(chatId: chatId, offset: offset, limit: limit) { [weak self] result in
             DispatchQueue.main.async {
-                guard let self = self else { return }
-                self.isLoadingMoreMessages = false
+                self?.isLoadingMoreMessages = false
                 switch result {
                 case .success(let messageListResponse):
-                    let newMessages = messageListResponse.rows
+                    guard let self = self else { return }
+                    let newMessages = messageListResponse.rows.filter { newMessage in
+                        !self.messages.contains(where: { $0.id == newMessage.id })
+                    }
                     self.messages.append(contentsOf: newMessages)
                     self.offset += newMessages.count
                 case .failure(let error):
@@ -54,35 +53,33 @@ class MessagesViewModel: ObservableObject {
     func refreshMessages() {
         guard !isRefreshingMessages else { return }
         isRefreshingMessages = true
-        chatService.getMessageList(chatId: chatId, offset: 0, limit: limit) { [weak self] result in
+
+        chatService.getMessageList(chatId: chatId, offset: 0, limit: offset + limit) { [weak self] result in
             DispatchQueue.main.async {
-                guard let self = self else { return }
+                self?.isRefreshingMessages = false
                 switch result {
                 case .success(let messageListResponse):
-                    let newMessages = messageListResponse.rows
+                    guard let self = self else { return }
+                    let newMessages = messageListResponse.rows.filter { newMessage in
+                        !self.messages.contains(where: { $0.id == newMessage.id })
+                    }
                     if !newMessages.isEmpty {
-                        self.messages = newMessages + self.messages
+                        self.messages.insert(contentsOf: newMessages, at: 0)
                     }
                 case .failure(let error):
                     print("Error refreshing messages: \(error.localizedDescription)")
                 }
-                self.isRefreshingMessages = false
             }
         }
     }
 
-    private func startTimer() {
+    private func startRefreshingMessages() {
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
             self?.refreshMessages()
         }
     }
 
-    private func stopTimer() {
+    deinit {
         timer?.invalidate()
-        timer = nil
-    }
-    
-    func messageIdentifier(for message: Message, messageCount: Int) -> String {
-        return "\(message.id)-\(messageCount)"
     }
 }

@@ -10,32 +10,24 @@ import SwiftUI
 struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
     @StateObject private var keyboardResponder = KeyboardResponder()
-    @State private var scrollOffset: CGPoint = .zero
     @State private var isScrolling = false
-
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 ChatHeaderView(chatlist: chatViewModel.chatList)
                 
-                ZStack {
-                    MessagesView(
-                        messagesViewModel: MessagesViewModel(chatId: chatViewModel.chatId),
-                        chatCreated: chatViewModel.chatList.chatcreated ?? ""
-                    )
-
-                    if chatViewModel.isRefreshing {
-                        ProgressView("Loading...")
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .padding()
-                    }
-                }
-
-                Spacer()
+                MessagesView(
+                    messagesViewModel: MessagesViewModel(chatId: chatViewModel.chatId),
+                    chatCreated: chatViewModel.chatList.chatcreated ?? ""
+                )
                 
                 ChatInputView(
                     messageText: $chatViewModel.messageText,
-                    sendAction: { chatViewModel.sendMessage() },
+                    sendAction: {
+                        chatViewModel.sendMessage()
+                        isScrolling = false
+                    },
                     attachAction: { chatViewModel.attachFile() }
                 )
                 .padding(.bottom, keyboardResponder.currentHeight)
@@ -67,3 +59,4 @@ struct ChatView_Previews: PreviewProvider {
         .previewLayout(.sizeThatFits)
     }
 }
+

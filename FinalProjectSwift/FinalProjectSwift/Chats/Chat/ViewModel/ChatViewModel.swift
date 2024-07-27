@@ -17,7 +17,6 @@ class ChatViewModel: ObservableObject {
 
     private let chatService: ChatServiceProtocol
     private var cancellables = Set<AnyCancellable>()
-    private var timer: Timer?
 
     var chatId: String
     var chatList: ChatList
@@ -28,11 +27,6 @@ class ChatViewModel: ObservableObject {
         self.chatService = chatService
         self.source = UserDefaults.standard.string(forKey: "id") ?? ""
         loadMessages()
-        startListeningForMessages()
-    }
-
-    deinit {
-        stopListeningForMessages()
     }
 
     func loadMessages() {
@@ -73,37 +67,6 @@ class ChatViewModel: ObservableObject {
     }
 
     func attachFile() {
-        // Implement attach file functionality
-    }
-
-    func startListeningForMessages() {
-        timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
-            self?.fetchNewMessages()
-        }
-    }
-
-    func stopListeningForMessages() {
-        timer?.invalidate()
-        timer = nil
-    }
-
-    private func fetchNewMessages() {
-        guard !isRefreshing else { return }
-        isRefreshing = true
-        chatService.getMessageList(chatId: chatId, offset: 0, limit: 20) { [weak self] result in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                switch result {
-                case .success(let messageListResponse):
-                    let newMessages = messageListResponse.rows.filter { newMessage in
-                        !self.messages.contains(where: { $0.id == newMessage.id })
-                    }
-                    self.messages.append(contentsOf: newMessages)
-                case .failure(let error):
-                    self.errorMessage = "Error fetching new messages: \(error.localizedDescription)"
-                }
-                self.isRefreshing = false
-            }
-        }
+        
     }
 }

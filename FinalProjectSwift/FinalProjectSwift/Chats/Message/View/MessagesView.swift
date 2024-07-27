@@ -11,7 +11,6 @@ struct MessagesView: View {
     @ObservedObject var messagesViewModel: MessagesViewModel
     var chatCreated: String
 
-    @State private var scrollOffset: CGPoint = .zero
     @State private var isScrolling = false
 
     var body: some View {
@@ -33,39 +32,33 @@ struct MessagesView: View {
                             .id(message.id)
                         }
                     }
-                }
-                .background(GeometryReader { geo in
-                    Color.clear.preference(key: ViewOffsetKey.self, value: geo.frame(in: .global).origin)
-                })
-                .onPreferenceChange(ViewOffsetKey.self) { value in
-                    if !isScrolling {
-                        self.scrollOffset = value
-                        if value.y < 50 {
+                    .onAppear {
+                        if messagesViewModel.messages.isEmpty {
                             messagesViewModel.loadMessages()
                         }
                     }
-                }
-                .onAppear {
-                    if messagesViewModel.messages.isEmpty {
-                        messagesViewModel.loadMessages()
-                    }
-                }
-                .onChange(of: messagesViewModel.messages.count) { _ in
-                    DispatchQueue.main.async {
-                        if !isScrolling {
-                            scrollViewProxy.scrollTo(messagesViewModel.messages.last?.id, anchor: .bottom)
+                    .onChange(of: messagesViewModel.messages.count) { _ in
+                        DispatchQueue.main.async {
+                            if !isScrolling {
+                                scrollViewProxy.scrollTo(messagesViewModel.messages.last?.id, anchor: .bottom)
+                            }
                         }
                     }
                 }
             }
+            .overlay(
+                VStack {
+                    if messagesViewModel.isRefreshingMessages {
+                        ProgressView("Loading...")
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .padding()
+                    }
+                }
+                .background(Color.white.opacity(0.8))
+            )
         }
         .padding(.top)
         .background(Color.white)
-        .onReceive(messagesViewModel.$isRefreshingMessages) { isRefreshing in
-            if !isRefreshing {
-                isScrolling = false
-            }
-        }
         .gesture(
             DragGesture()
                 .onChanged { _ in
@@ -74,4 +67,3 @@ struct MessagesView: View {
         )
     }
 }
-
