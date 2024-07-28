@@ -14,6 +14,7 @@ class NewChatViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var alertNewChat: NewChat?
     @Published var chatFilter: [NewChat] = []
+    @Published var navigationChat = false
     @Published var search = "" {
         didSet {
             getChatFilter()
@@ -41,7 +42,14 @@ class NewChatViewModel: ObservableObject {
             print("Error: Missing id")
             return
         }
-        chatService.createChat(source: id, target: target)
+        chatService.createChat(source: id, target: target) { result in
+            switch result {
+            case .success(let success):
+                self.navigationChat = true
+            case .failure(let failure):
+                print(failure)
+            }
+        }
     }
     
     func getChatFilter() {

@@ -72,6 +72,7 @@ struct HomeView: View {
                     homeViewModel.getChatlist()
                 })
             }
+            .ignoresSafeArea(.keyboard, edges: .all)
             .navigationDestination(isPresented: $isShowingChangeProfileView) {
                 ChangeProfileView(origin: .home)
             }
