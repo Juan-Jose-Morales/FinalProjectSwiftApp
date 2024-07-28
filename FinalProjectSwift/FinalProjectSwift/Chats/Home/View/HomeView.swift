@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var homeViewModel = HomeViewModel()
+    @ObservedObject private var homeViewModel = HomeViewModel()
     @State private var isShowingChangeProfileView = false
     @State private var isShowingProfileSettingsView = false
     @State private var isNavigationToChatView = false
@@ -26,7 +26,7 @@ struct HomeView: View {
                             homeViewModel.chatFilter()
                         }
                         .padding(.top, 0)
-                    if homeViewModel.listChats.isEmpty {
+                    if homeViewModel.filterChats.isEmpty {
                         CustomListChat()
                     } else {
                         List {
