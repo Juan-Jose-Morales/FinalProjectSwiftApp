@@ -65,6 +65,7 @@
 		A93923262C5544EF00533969 /* RamdomColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93923252C5544EF00533969 /* RamdomColorManager.swift */; };
 		A94B052B2C55A5D10093EA8E /* ChatDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94B052A2C55A5D10093EA8E /* ChatDetailView.swift */; };
 		A94B052F2C55A67C0093EA8E /* ChatDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94B052E2C55A67C0093EA8E /* ChatDetailViewModel.swift */; };
+		A94B05312C564BE90093EA8E /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = A94B05302C564BE90093EA8E /* GoogleService-Info-2.plist */; };
 		A94EC23E2C46CAE500E85D63 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */; };
 		A94EC2822C48374C00E85D63 /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EC2812C48374C00E85D63 /* ChatList.swift */; };
 		A95B842B2C38275200F12190 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B842A2C38275200F12190 /* LaunchScreen.swift */; };
@@ -139,6 +140,7 @@
 		A93923252C5544EF00533969 /* RamdomColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RamdomColorManager.swift; sourceTree = "<group>"; };
 		A94B052A2C55A5D10093EA8E /* ChatDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailView.swift; sourceTree = "<group>"; };
 		A94B052E2C55A67C0093EA8E /* ChatDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailViewModel.swift; sourceTree = "<group>"; };
+		A94B05302C564BE90093EA8E /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-2.plist"; sourceTree = "<group>"; };
 		A94EC23D2C46CAE500E85D63 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A94EC2812C48374C00E85D63 /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		A95B842A2C38275200F12190 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -680,6 +682,7 @@
 				90E79ED52C2B39C600133583 /* Preview Content */,
 				9040AEA42C345F8700D550AD /* Common */,
 				90CE61082C53E3A3002B70D3 /* Info.plist */,
+				A94B05302C564BE90093EA8E /* GoogleService-Info-2.plist */,
 				90E79ECF2C2B39C400133583 /* FinalProjectSwiftApp.swift */,
 			);
 			path = FinalProjectSwift;
@@ -784,6 +787,7 @@
 			packageReferences = (
 				9040AEA92C34608200D550AD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A95B84272C38270D00F12190 /* XCRemoteSwiftPackageReference "dotlottie-ios" */,
+				A94B05322C564C340093EA8E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 90E79ECD2C2B39C400133583 /* Products */;
 			projectDirPath = "";
@@ -799,6 +803,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A94B05312C564BE90093EA8E /* GoogleService-Info-2.plist in Resources */,
 				90E79ED72C2B39C600133583 /* Preview Assets.xcassets in Resources */,
 				90E79ED42C2B39C600133583 /* Assets.xcassets in Resources */,
 				A9A4497F2C3C32BB0085838B /* Launch Screen.storyboard in Resources */,
@@ -1099,6 +1104,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
+			};
+		};
+		A94B05322C564C340093EA8E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.29.0;
 			};
 		};
 		A95B84272C38270D00F12190 /* XCRemoteSwiftPackageReference "dotlottie-ios" */ = {
