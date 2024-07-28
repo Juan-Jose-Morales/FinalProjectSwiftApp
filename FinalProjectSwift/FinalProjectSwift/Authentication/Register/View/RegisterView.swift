@@ -10,6 +10,7 @@ import SwiftUI
 struct RegisterView: View {
     @StateObject private var viewModel = RegisterViewModel()
     @Environment(\.presentationMode) var presentationMode
+    @State private var offset: CGFloat = 0
     
     var body: some View {
         NavigationView {
@@ -46,8 +47,14 @@ struct RegisterView: View {
                     }))
                 }
             }
-            .background(Color.white)
-            .edgesIgnoringSafeArea(.all)
+            .background(
+                Color.white
+                    .edgesIgnoringSafeArea(.all)
+                    .overlay(
+                        DismissKeyboardGesture()
+                    )
+            )
+    
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -72,7 +79,6 @@ struct RegisterView: View {
             
         }
     }
-    
 }
 
 

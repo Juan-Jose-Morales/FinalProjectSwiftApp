@@ -4,6 +4,7 @@
 //
 //  Created by Juan jose Morales on 18/7/24.
 //
+
 import SwiftUI
 struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
@@ -25,6 +26,8 @@ struct ChatView: View {
                     sendAction: {
                         chatViewModel.sendMessage()
                         isScrolling = false
+                    }, attachAction: {
+                        
                     }
                 )
                 .padding(.bottom, keyboardResponder.currentHeight)
