@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var homeViewModel = HomeViewModel()
+    @ObservedObject private var homeViewModel = HomeViewModel()
     @State private var isShowingChangeProfileView = false
     @State private var isShowingProfileSettingsView = false
     @State private var isNavigationToChatView = false
@@ -26,7 +26,7 @@ struct HomeView: View {
                             homeViewModel.chatFilter()
                         }
                         .padding(.top, 0)
-                    if homeViewModel.listChats.isEmpty {
+                    if homeViewModel.filterChats.isEmpty {
                         CustomListChat()
                     } else {
                         List {
@@ -44,10 +44,10 @@ struct HomeView: View {
                                                             .foregroundColor(homeViewModel.color(for: chat.id))
                                                             .frame(width: 40, height: 40)
                                                         
-                                                        Text(homeViewModel.capitalizedName(name: homeViewModel.getNick(chatList: chat)))
+                                                        Text(homeViewModel.capitalizedName(chatList: chat))
                                                             .foregroundStyle(.white)
                                                     }.padding(.horizontal, 8)
-                                                    Text(homeViewModel.nameComprobation(user: chat))
+                                                    Text(homeViewModel.getNick(chatList: chat))
                                                     Spacer()
                                                 }.padding(.vertical, 1)
                                             }.padding(.vertical, 5)
@@ -72,6 +72,7 @@ struct HomeView: View {
                     homeViewModel.getChatlist()
                 })
             }
+            .ignoresSafeArea(.keyboard, edges: .all)
             .navigationDestination(isPresented: $isShowingChangeProfileView) {
                 ChangeProfileView(origin: .home)
             }

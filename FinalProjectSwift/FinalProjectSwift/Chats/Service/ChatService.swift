@@ -118,7 +118,7 @@ class ChatService: ChatServiceProtocol {
         })
     }
 
-    func createChat(source: String, target: String) {
+    func createChat(source: String, target: String, completion: @escaping (Result<Bool, AFError>) -> Void) {
             guard let token = UserDefaults.standard.string(forKey: "AuthToken") else {
                 print("Error: Missing AuthToken")
                 return
@@ -129,9 +129,11 @@ class ChatService: ChatServiceProtocol {
                 switch response {
                 case .success(let newChatResponse):
                     self.chatResponse = newChatResponse
+                    completion(.success(true))
                     print(newChatResponse)
                 case .failure(let error):
                     print("Error creating chat: \(error)")
+                    completion(.failure(error))
                 
                 }
             })

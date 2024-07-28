@@ -16,7 +16,7 @@ protocol ChatServiceProtocol {
     func getChatList(completion: @escaping (_ chatList: [ChatList]) -> Void)
     func deleteChat(id: String)
     func getNewChat(completion: @escaping (_ newChatList: [NewChat]) -> Void)
-    func createChat(source: String, target: String)
+    func createChat(source: String, target: String, completion: @escaping (Result<Bool, AFError>) -> Void)
     var chatResponse: NewChatResponse? { get }
 }
 

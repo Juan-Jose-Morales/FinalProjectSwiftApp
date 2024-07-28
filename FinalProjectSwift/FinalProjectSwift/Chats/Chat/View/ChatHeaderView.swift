@@ -10,35 +10,44 @@ import SwiftUI
 struct ChatHeaderView: View {
     let chatlist: ChatList
     @StateObject private var viewModel = ChatHeaderViewModel()
+    @State private var isShowingDetailProfileView = false
     
     var body: some View {
-        HStack {
-              NavigationLink(destination: HomeView()) { 
-                Image("ArrowLeft")
-                  .resizable()
-                  .frame(width: 35, height: 25)
-                  .foregroundColor(.black)
-              }
-            Spacer()
-            VStack {
-                Text(viewModel.getNick(chatList: chatlist))
-                    .font(.headline)
-                    .foregroundColor(.white)
-                Text(chatlist.sourceonline == true ? "En línea" : "Desconectado")
-                    .font(.subheadline)
-                    .foregroundColor(.white)
+        NavigationStack {
+            HStack {
+                NavigationLink(destination: HomeView()) {
+                    Image("ArrowLeft")
+                        .resizable()
+                        .frame(width: 35, height: 25)
+                        .foregroundColor(.black)
+                }
+                Spacer()
+                VStack {
+                    Text(viewModel.getNick(chatList: chatlist))
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    Text(chatlist.sourceonline == true ? "En línea" : "Desconectado")
+                        .font(.subheadline)
+                        .foregroundColor(.white)
+                }
+                Spacer()
+                Button(action: {
+                    isShowingDetailProfileView = true
+                }) {
+                    NavigationLink(destination: ChatDetailView(chatDetailModel: ChatDetailViewModel(name: viewModel.getNick(chatList: chatlist), id: chatlist.targetnick ?? "", color: viewModel.color(for: chatlist.id), capitalizedName: viewModel.capitalizedName(chatList: chatlist), chatId: chatlist.chat, chat: chatlist))){
+                            ZStack{
+                                Circle()
+                                    .fill((viewModel.color(for: chatlist.id)))
+                                    .frame(width: 45, height: 45)
+                                Text(viewModel.capitalizedName(chatList: chatlist))
+                                    .foregroundStyle(.white)
+                            }
+                        }
+                }
             }
-            Spacer()
-            Button(action: {
-                
-            }) {
-                Circle()
-                    .fill(Color.gray)
-                    .frame(width: 45, height: 45)
-            }
+            .padding()
+            .background(Color("Blue"))
         }
-        .padding()
-        .background(Color("Blue"))
     }
 }
 
