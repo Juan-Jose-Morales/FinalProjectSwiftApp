@@ -127,28 +127,28 @@ struct HomeView: View {
     
     @ViewBuilder
     private func ChatRow(chatList: ChatList) -> some View {
-        VStack {
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.white)
-                    .shadow(radius: 5, x: 5, y: 5)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                HStack {
-                    ZStack {
-                        Circle()
-                            .foregroundColor(homeViewModel.color(for: chatList.id))
-                            .frame(width: 40, height: 40)
-                        
-                        Text(homeViewModel.capitalizedName(name: homeViewModel.getNick(chatList: chatList)))
-                            .foregroundStyle(.white)
-                    }.padding(.horizontal, 8)
-                    Text(homeViewModel.nameComprobation(user: chatList))
-                    Spacer()
-                }.padding(.vertical, 1)
-            }.padding(.vertical, 5)
+            VStack {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.white)
+                        .shadow(radius: 5, x: 5, y: 5)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    HStack {
+                        ZStack {
+                            Circle()
+                                .foregroundColor(homeViewModel.color(for: chatList.id))
+                                .frame(width: 40, height: 40)
+
+                            Text(homeViewModel.capitalizedName(chatList: chatList))
+                                .foregroundStyle(.white)
+                        }.padding(.horizontal, 8)
+                        Text(homeViewModel.getNick(chatList: chatList))
+                        Spacer()
+                    }.padding(.vertical, 1)
+                }.padding(.vertical, 5)
+            }
         }
     }
-}
 
 #Preview {
     HomeView()
