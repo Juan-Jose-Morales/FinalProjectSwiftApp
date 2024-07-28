@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ChatHeaderViewModel: ObservableObject {
+    
+    private var colorManager = RandomColorManager.shared
     
     func getNick(chatList: ChatList) -> String {
         guard let id = UserDefaults.standard.string(forKey: "id") else {
@@ -16,5 +19,8 @@ class ChatHeaderViewModel: ObservableObject {
         }
         
         return chatList.source == id ? chatList.targetnick! : chatList.sourceNick!
+    }
+    func color(for chatId: UUID) -> Color {
+        return colorManager.color(for: chatId)
     }
 }
