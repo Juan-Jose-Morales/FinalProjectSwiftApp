@@ -33,7 +33,7 @@ struct ChatDetailView: View {
                                 }
                                 Spacer()
                             }
-
+                            
                             VStack {
                                 ZStack {
                                     Circle()
@@ -47,14 +47,13 @@ struct ChatDetailView: View {
                                 }
                                 .padding(16)
                                 
-                                    Text(chatDetailModel.name)
-                                        .bold()
-                                        .foregroundColor(.white)
-                                        .font(.title)
+                                Text(chatDetailModel.name)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .font(.title)
                             }
-                        }
-                        .padding(.bottom, 20)
-                        
+                        }.padding(.bottom, 20)
+                        VStack{
                         HStack {
                             Image(systemName: "photo.on.rectangle.angled")
                                 .frame(width: 20, height: 20)
@@ -92,6 +91,7 @@ struct ChatDetailView: View {
                             .padding(.horizontal)
                             .padding(.vertical, 8)
                         blocked
+                        }.background(.white)
                     }
                     .onAppear {
                         UINavigationBar.appearance().backgroundColor = UIColor(named: "Blue")
@@ -105,7 +105,7 @@ struct ChatDetailView: View {
                     }
                 }
                 .navigationBarBackButtonHidden()
-            }
+            }.background(Color("Blue"))
         }
     }
     private var blocked: some View {
@@ -122,9 +122,11 @@ struct ChatDetailView: View {
             .background(Color.white)
             .cornerRadius(10)
             .shadow(radius: 2)
+
         }
         .padding(.horizontal)
         .padding(.top, 16)
+        .padding(.bottom, 40)
         .shadow(radius: 5)
     }
 }
