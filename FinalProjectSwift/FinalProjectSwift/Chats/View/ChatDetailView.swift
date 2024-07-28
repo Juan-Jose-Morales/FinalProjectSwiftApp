@@ -39,6 +39,16 @@ struct ChatDetailView: View {
                                         }
                                         Spacer()
                                     }
+                                    Spacer()
+                                }
+                                Spacer()
+                            }
+                            
+                            VStack {
+                                ZStack {
+                                    Circle()
+                                        .foregroundColor(chatDetailModel.color)
+                                        .frame(width: 170, height: 170)
                                     
                                     VStack {
                                         ZStack {
@@ -60,11 +70,13 @@ struct ChatDetailView: View {
                                     }
                                 }
                                 
+                                Text(chatDetailModel.name)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .font(.title)
                             }
-                        }
-                        .background(Color.white)
-                        .padding(.bottom, 20)
-                        
+                        }.padding(.bottom, 20)
+                        VStack{
                         HStack {
                             Image(systemName: "photo.on.rectangle.angled")
                                 .frame(width: 20, height: 20)
@@ -102,7 +114,7 @@ struct ChatDetailView: View {
                             .padding(.horizontal)
                             .padding(.vertical, 8)
                         blocked
-                            
+                        }.background(.white)
                     }
                     .background(Color.white)
                      
@@ -115,10 +127,8 @@ struct ChatDetailView: View {
                     }
                     .background(Color.white)
                 }
-            }
-            .background(Color("Blue"))
-            
-            .navigationBarBackButtonHidden(true)
+                .navigationBarBackButtonHidden()
+            }.background(Color("Blue"))
         }
     }
     
@@ -136,9 +146,11 @@ struct ChatDetailView: View {
             .background(Color.white)
             .cornerRadius(10)
             .shadow(radius: 2)
+
         }
         .padding(.horizontal)
         .padding(.top, 16)
+        .padding(.bottom, 40)
         .shadow(radius: 5)
     }
 }
