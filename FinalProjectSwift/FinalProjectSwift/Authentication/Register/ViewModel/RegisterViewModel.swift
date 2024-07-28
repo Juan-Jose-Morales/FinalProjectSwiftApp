@@ -46,10 +46,9 @@ class RegisterViewModel: ObservableObject {
                 case .success(let user):
                     print("Usuario registrado correctamente: \(user)")
                     self?.showSuccessAlert = true
-                    self?.hideSuccessAlertWithDelay()
                 case .failure(let error):
                     print("Error al registrar usuario: \(error.localizedDescription)")
-                    self?.errorMessage = "Error al registrar usuario"
+                    self?.errorMessage = "Error al registrar usuario: \(error.localizedDescription)"
                     self?.showAlert = true
                 }
             }
@@ -60,11 +59,5 @@ class RegisterViewModel: ObservableObject {
         errorMessage = nil
         showAlert = false
         showSuccessAlert = false
-    }
-    
-    private func hideSuccessAlertWithDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.showSuccessAlert = false
-        }
     }
 }

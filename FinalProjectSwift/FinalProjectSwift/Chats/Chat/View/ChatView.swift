@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
     @StateObject private var keyboardResponder = KeyboardResponder()
@@ -27,8 +26,9 @@ struct ChatView: View {
                     sendAction: {
                         chatViewModel.sendMessage()
                         isScrolling = false
+                    }, attachAction: {
+                        
                     }
-
                 )
                 .padding(.bottom, keyboardResponder.currentHeight)
                 .background(Color.white)
@@ -59,4 +59,3 @@ struct ChatView_Previews: PreviewProvider {
         .previewLayout(.sizeThatFits)
     }
 }
-

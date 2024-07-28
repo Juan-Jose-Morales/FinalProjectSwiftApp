@@ -11,42 +11,35 @@ import LocalAuthentication
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
     @State private var isNavigationToRegister = false
-    @State private var isShowingProgress = false
     
     var body: some View {
         NavigationStack {
-            ZStack{
-                ScrollView {
-                    VStack {
-                        CustomLogo(width: 240, height: 220)
-                            .padding(.top, 50)
-                        Spacer().frame(height: 45)
-                        
-                        CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
-                            .padding(.bottom, 36)
-                        
-                        SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "padlock")
-                            .padding(.bottom, 36)
-                        
-                        BiometricButton(action: {
-                            viewModel.authenticateWithBiometrics()
-                        }, imageName: "faceid")
+            ScrollView {
+                VStack {
+                    CustomLogo(width: 240, height: 220)
+                        .padding(.top, 30)
+                    Spacer().frame(height: 45)
+                    
+                    CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
                         .padding(.bottom, 36)
-                        
-                        CustomButton(title: "Iniciar Sesión") {
-                            viewModel.login()
-                        }
-                        .padding(.bottom, 55)
-                        
-                        navigateToRegister()
+                    
+                    SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "padlock")
+                        .padding(.bottom, 36)
+                    
+                    BiometricButton(action: {
+                        viewModel.authenticateWithBiometrics()
+                    }, imageName: "faceid")
+                    .padding(.bottom, 36)
+                    
+                    CustomButton(title: "Iniciar Sesión") {
+                        viewModel.login()
                     }
-                    .padding(.horizontal, 40)
-                    .frame(maxWidth: .infinity)
+                    .padding(.bottom, 55)
+                    
+                    navigateToRegister()
                 }
-                .disabled(isShowingProgress)
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-                    .opacity(isShowingProgress ? 1 : 0)
+                .padding(.horizontal, 40)
+                .frame(maxWidth: .infinity)
             }
             .background(
                 Color.white
@@ -88,8 +81,6 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
+#Preview{
+    LoginView()
 }

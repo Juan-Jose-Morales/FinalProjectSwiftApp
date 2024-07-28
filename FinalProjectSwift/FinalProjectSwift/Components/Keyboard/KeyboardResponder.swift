@@ -11,7 +11,6 @@ import Combine
 
 final class KeyboardResponder: ObservableObject {
     @Published var currentHeight: CGFloat = 0
-
     private var cancellableSet: Set<AnyCancellable> = []
 
     init() {
@@ -19,18 +18,14 @@ final class KeyboardResponder: ObservableObject {
             .merge(with: NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification))
             .sink { notification in
                 if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-                    withAnimation {
-                        self.currentHeight = keyboardFrame.height
-                    }
+                    self.currentHeight = keyboardFrame.height
                 }
             }
             .store(in: &cancellableSet)
 
         NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
             .sink { _ in
-                withAnimation {
-                    self.currentHeight = 0
-                }
+                self.currentHeight = 0
             }
             .store(in: &cancellableSet)
     }

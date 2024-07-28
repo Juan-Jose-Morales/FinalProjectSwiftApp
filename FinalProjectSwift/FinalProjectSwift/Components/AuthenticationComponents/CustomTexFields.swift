@@ -41,6 +41,7 @@ struct CustomTextField: View {
     }
 }
 
+
 struct SecureFields: View {
     var title: String
     @Binding var text: String
@@ -91,9 +92,9 @@ struct SecureFields: View {
                 .stroke(Color.black, lineWidth: 1)
                 .shadow(radius: 5))
         }
-        .background(DismissKeyboardGesture())
     }
 }
+
 
 struct SearcField: View {
     var imageName: String

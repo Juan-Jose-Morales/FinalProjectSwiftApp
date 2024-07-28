@@ -108,7 +108,7 @@ struct ProfileView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Ingresa tu nombre y añade una foto de perfil (Opcional)")
+                    Text("Añade una foto de perfil")
                         .foregroundColor(.black)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
@@ -126,25 +126,13 @@ struct ProfileView: View {
                 .padding(.vertical, 8)
             
             HStack {
-                if isEditingUserName {
-                    TextField("Usuario", text: $viewModel.userName, onCommit: {
-                        isEditingUserName = false
-                        viewModel.saveUserName()
-                    })
+                
+                Text(viewModel.userName.isEmpty ? "Usuario" : viewModel.userName)
                     .foregroundColor(.black)
-                } else {
-                    Text(viewModel.userName.isEmpty ? "Usuario" : viewModel.userName)
-                        .foregroundColor(.black)
-                }
+                
                 
                 Spacer()
                 
-                Button(action: {
-                    isEditingUserName.toggle()
-                }) {
-                    Text(isEditingUserName ? "Guardar" : "Editar")
-                        .foregroundColor(Color("Blue"))
-                }
             }
             .padding(.horizontal, 16)
             
