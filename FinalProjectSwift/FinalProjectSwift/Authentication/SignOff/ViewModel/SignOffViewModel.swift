@@ -15,31 +15,19 @@ class SignOffViewModel: ObservableObject {
     @Published var isSignOffSuccessful: Bool = false
     
     private var authService: AuthServiceProtocol
-    private var userService: UserService
     
-    init(authService: AuthServiceProtocol = AuthService(), userService: UserService = UserService()) {
+    init(authService: AuthServiceProtocol = AuthService()) {
         self.authService = authService
-        self.userService = userService
     }
     
     func signOff() {
-        userService.updateOnlineStatus(isOnline: false) { [weak self] result in
+        authService.logout { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self?.authService.logout { result in
-                        DispatchQueue.main.async {
-                            switch result {
-                            case .success:
-                                self?.isSignOffSuccessful = true
-                            case .failure(let error):
-                                self?.errorMessage = "Error al cerrar sesión \(error.localizedDescription)"
-                                self?.showAlert = true
-                            }
-                        }
-                    }
+                    self?.isSignOffSuccessful = true
                 case .failure(let error):
-                    self?.errorMessage = "Error al actualizar estado en línea \(error.localizedDescription)"
+                    self?.errorMessage = "Error al cerrar sesión \(error.localizedDescription)"
                     self?.showAlert = true
                 }
             }

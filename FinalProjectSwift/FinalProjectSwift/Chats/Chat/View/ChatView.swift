@@ -6,32 +6,46 @@
 //
 
 import SwiftUI
+
 struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
     @StateObject private var keyboardResponder = KeyboardResponder()
     @State private var isScrolling = false
-    
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 ChatHeaderView(chatlist: chatViewModel.chatList)
-                
-                MessagesView(
-                    messagesViewModel: MessagesViewModel(chatId: chatViewModel.chatId),
-                    chatCreated: chatViewModel.chatList.chatcreated ?? ""
-                )
-                
+
+                ScrollViewReader { scrollViewProxy in
+                    ScrollView {
+                        VStack {
+                            MessagesView(
+                                messagesViewModel: MessagesViewModel(chatId: chatViewModel.chatId),
+                                chatCreated: chatViewModel.chatList.chatcreated ?? ""
+                            )
+                            .id("messages")
+                        }
+                    }
+                    .onChange(of: chatViewModel.messages) { _ in
+                        withAnimation {
+                            scrollViewProxy.scrollTo("messages", anchor: .bottom)
+                        }
+                    }
+                }
+
                 ChatInputView(
                     messageText: $chatViewModel.messageText,
                     sendAction: {
                         chatViewModel.sendMessage()
                         isScrolling = false
-                    }, attachAction: {
-                        
+                    },
+                    attachAction: {
+                        // Implement attach action if needed
                     }
                 )
-                .padding(.bottom, keyboardResponder.currentHeight)
                 .background(Color.white)
+                .padding(.bottom, keyboardResponder.currentHeight)
                 .animation(.easeOut(duration: 0.3), value: keyboardResponder.currentHeight)
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)

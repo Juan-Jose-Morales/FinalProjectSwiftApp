@@ -10,49 +10,59 @@ import SwiftUI
 struct ChatDetailView: View {
     @StateObject var chatDetailModel: ChatDetailViewModel
     @State private var showBlockedFunctionalityAlert = false
-
+    
     var body: some View {
         NavigationStack {
-            ScrollView {
-                ZStack {
+            ZStack{
+                ScrollView {
                     VStack(spacing: 0) {
-                        ZStack {
+                        ZStack(alignment: .top) {
+                            
                             Color("Blue")
                                 .edgesIgnoringSafeArea(.top)
-                                .frame(height: 310)
-                            VStack {
-                                HStack {
-                                    NavigationLink(destination: ChatView(chatViewModel: ChatViewModel(chatId: chatDetailModel.chatId, chatList: chatDetailModel.chat))) {
-                                        Image("ArrowLeft")
-                                            .resizable()
-                                            .frame(width: 35, height: 25)
-                                            .foregroundColor(.black)
-                                            .padding()
-                                    }
-                                    Spacer()
-                                }
-                                Spacer()
-                            }
-
-                            VStack {
+                                .frame(height: 88)
+                            
+                            VStack(spacing: 0) {
                                 ZStack {
-                                    Circle()
-                                        .foregroundColor(chatDetailModel.color)
-                                        .frame(width: 170, height: 170)
+                                    Color("Blue")
+                                        .frame(height: 266)
+                                    VStack {
+                                        HStack {
+                                            NavigationLink(destination: ChatView(chatViewModel: ChatViewModel(chatId: chatDetailModel.chatId, chatList: chatDetailModel.chat))) {
+                                                Image("ArrowLeft")
+                                                    .resizable()
+                                                    .frame(width: 35, height: 25)
+                                                    .foregroundColor(.black)
+                                                    .padding()
+                                            }
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }
                                     
-                                    Text(chatDetailModel.capitalizedName)
-                                        .bold()
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 150))
+                                    VStack {
+                                        ZStack {
+                                            Circle()
+                                                .foregroundColor(chatDetailModel.color)
+                                                .frame(width: 170, height: 170)
+                                            
+                                            Text(chatDetailModel.capitalizedName)
+                                                .bold()
+                                                .foregroundColor(.white)
+                                                .font(.system(size: 150))
+                                        }
+                                        .padding(16)
+                                        
+                                        Text(chatDetailModel.name)
+                                            .bold()
+                                            .foregroundColor(.white)
+                                            .font(.title)
+                                    }
                                 }
-                                .padding(16)
                                 
-                                    Text(chatDetailModel.name)
-                                        .bold()
-                                        .foregroundColor(.white)
-                                        .font(.title)
                             }
                         }
+                        .background(Color.white)
                         .padding(.bottom, 20)
                         
                         HStack {
@@ -92,10 +102,10 @@ struct ChatDetailView: View {
                             .padding(.horizontal)
                             .padding(.vertical, 8)
                         blocked
+                            
                     }
-                    .onAppear {
-                        UINavigationBar.appearance().backgroundColor = UIColor(named: "Blue")
-                    }
+                    .background(Color.white)
+                     
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .alert(isPresented: $showBlockedFunctionalityAlert) {
                         Alert(
@@ -103,11 +113,15 @@ struct ChatDetailView: View {
                             message: Text("Disculpe las molestias."),
                             dismissButton: .default(Text("Aceptar")))
                     }
+                    .background(Color.white)
                 }
-                .navigationBarBackButtonHidden()
             }
+            .background(Color("Blue"))
+            
+            .navigationBarBackButtonHidden(true)
         }
     }
+    
     private var blocked: some View {
         Button(action: {
             showBlockedFunctionalityAlert.toggle()
@@ -128,8 +142,3 @@ struct ChatDetailView: View {
         .shadow(radius: 5)
     }
 }
-
-
-
-
-
