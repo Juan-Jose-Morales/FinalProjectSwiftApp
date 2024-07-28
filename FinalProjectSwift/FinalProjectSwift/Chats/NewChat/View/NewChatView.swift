@@ -49,7 +49,7 @@ struct NewChatView: View {
                                         HStack {
                                             ZStack {
                                                 Circle()
-                                                    .foregroundColor(newChatViewModel.randomColor())
+                                                    .foregroundColor(newChatViewModel.color(for: newChat.numberId))
                                                     .frame(width: 40, height: 40)
                                                 
                                                 Text(newChatViewModel.capitalizedName(name: newChat.nick ?? ""))

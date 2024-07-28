@@ -8,6 +8,7 @@
 import Foundation
 
 struct NewChat: Identifiable, Codable{
+    var numberId = UUID()
     var id: String
     var login: String?
     var nick: String?
@@ -18,4 +19,17 @@ struct NewChat: Identifiable, Codable{
     var online: Bool
     var created: String?
     var updated: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case login
+        case nick
+        case avatar
+        case platform
+        case uuid
+        case token
+        case online
+        case created
+        case updated
+    }
 }
