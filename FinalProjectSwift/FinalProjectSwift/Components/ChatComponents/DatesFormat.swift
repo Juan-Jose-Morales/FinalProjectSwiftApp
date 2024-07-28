@@ -1,8 +1,8 @@
 //
-//  Utils.swift
+//  DatesFormat.swift
 //  FinalProjectSwift
 //
-//  Created by Juan jose Morales on 24/7/24.
+//  Created by Juan jose Morales on 28/7/24.
 //
 
 import Foundation
@@ -28,18 +28,4 @@ func getTime(from dateTime: String) -> String {
         return timeFormatter.string(from: date)
     }
     return ""
-}
-
-enum Origin {
-    case home
-    case profile
-}
-
-struct ViewOffsetKey: PreferenceKey {
-    typealias Value = CGPoint
-    static var defaultValue: CGPoint = .zero
-
-    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
-        value = nextValue()
-    }
 }

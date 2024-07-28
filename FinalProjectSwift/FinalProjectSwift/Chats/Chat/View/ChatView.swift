@@ -9,7 +9,7 @@ import SwiftUI
 struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
     @StateObject private var keyboardResponder = KeyboardResponder()
-    @State private var isScrolling = false 
+    @State private var isScrolling = false
     
     var body: some View {
         NavigationStack {

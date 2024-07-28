@@ -12,7 +12,7 @@ struct ChatInputView: View {
     @State private var showBlockedFunctionalityAlert = false
     var sendAction: () -> Void
     var attachAction: () -> Void
-    
+
     var body: some View {
         HStack {
             Button(action: {
@@ -30,7 +30,7 @@ struct ChatInputView: View {
                 )
             }
             .padding(.leading, 15)
-            
+
             ZStack(alignment: .leading) {
                 if messageText.isEmpty {
                     Text("Envia un mensaje")
@@ -43,13 +43,10 @@ struct ChatInputView: View {
                     .background(Color.white)
                     .cornerRadius(15)
                     .foregroundColor(.black)
-                    .onTapGesture {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    }
             }
             .frame(height: 36)
             .padding(.horizontal, 15)
-            
+
             Button(action: sendAction) {
                 Image("Send")
                     .resizable()
@@ -61,7 +58,6 @@ struct ChatInputView: View {
         .frame(height: 56)
         .background(Color("Blue"))
         .padding(.top, 5)
-        
     }
 }
 

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct RegisterView: View {
     @StateObject private var viewModel = RegisterViewModel()
-    @Environment(\.presentationMode) var presentationMode
     @State private var offset: CGFloat = 0
+    @State private var isNavigationToLogin = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack {
                     CustomLogo(width: 240, height: 220)
@@ -43,7 +43,7 @@ struct RegisterView: View {
                 .alert(isPresented: $viewModel.showSuccessAlert) {
                     Alert(title: Text("Registro Exitoso"), message: Text("El registro fue exitoso"), dismissButton: .default(Text("OK"), action: {
                         viewModel.resetAlerts()
-                        presentationMode.wrappedValue.dismiss()
+                        isNavigationToLogin = true
                     }))
                 }
             }
@@ -54,7 +54,9 @@ struct RegisterView: View {
                         DismissKeyboardGesture()
                     )
             )
-    
+            .navigationDestination(isPresented: $isNavigationToLogin) {
+                LoginView()
+            }
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -71,7 +73,7 @@ struct RegisterView: View {
                 .foregroundColor(.black)
                 .padding(.horizontal, 10)
             Button(action: {
-                presentationMode.wrappedValue.dismiss()
+                isNavigationToLogin = true
             }) {
                 Text("Iniciar Sesión")
                     .foregroundColor(Color("Blue"))
