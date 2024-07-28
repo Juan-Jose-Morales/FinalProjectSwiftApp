@@ -20,11 +20,10 @@ class ProfileViewModel: ObservableObject {
     
     init(userService: UserService) {
         self.userService = userService
-        self.isOnline = UserDefaults.standard.bool(forKey: onlineStatusKey)
         if UserDefaults.standard.object(forKey: onlineStatusKey) == nil {
             UserDefaults.standard.set(true, forKey: onlineStatusKey)
-            self.isOnline = true
         }
+        self.isOnline = UserDefaults.standard.bool(forKey: onlineStatusKey)
         fetchUserName()
         fetchProfilePhoto()
         NotificationCenter.default.addObserver(self, selector: #selector(fetchUserName), name: UserDefaults.didChangeNotification, object: nil)
@@ -62,7 +61,6 @@ class ProfileViewModel: ObservableObject {
                 self?.isLoading = false
                 switch result {
                 case .success:
-                    self?.isOnline = isOnline
                     UserDefaults.standard.set(isOnline, forKey: "onlineStatusKey")
                 case .failure(let error):
                     print("Error updating online status: \(error.localizedDescription)")

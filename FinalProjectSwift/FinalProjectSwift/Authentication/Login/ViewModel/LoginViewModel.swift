@@ -104,6 +104,7 @@ class LoginViewModel: ObservableObject {
         if let token = token ?? user.token {
             self.authToken = token
             UserDefaults.standard.set(token, forKey: "AuthToken")
+            UserDefaults.standard.set(true, forKey: "onlineStatusKey")
             UserDefaults.standard.synchronize()
             self.user = user
             self.isLoginSuccessful = true

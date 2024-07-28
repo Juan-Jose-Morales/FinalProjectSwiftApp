@@ -25,6 +25,7 @@ class SignOffViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
+                    UserDefaults.standard.set(false, forKey: "onlineStatusKey")
                     self?.isSignOffSuccessful = true
                 case .failure(let error):
                     self?.errorMessage = "Error al cerrar sesión \(error.localizedDescription)"
@@ -33,4 +34,5 @@ class SignOffViewModel: ObservableObject {
             }
         }
     }
+
 }
