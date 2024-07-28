@@ -26,7 +26,7 @@ struct ChatHeaderView: View {
                     .foregroundColor(.white)
                 Text(chatlist.sourceonline == true ? "En línea" : "Desconectado")
                     .font(.subheadline)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.white)
             }
             Spacer()
             Button(action: {

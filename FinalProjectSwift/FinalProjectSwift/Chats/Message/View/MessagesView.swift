@@ -33,6 +33,9 @@ struct MessagesView: View {
                         }
                     }
                     .onAppear {
+                        if let lastMessageId = messagesViewModel.messages.last?.id {
+                            scrollViewProxy.scrollTo(lastMessageId, anchor: .bottom)
+                        }
                         if messagesViewModel.messages.isEmpty {
                             messagesViewModel.loadMessages()
                         }
@@ -40,7 +43,9 @@ struct MessagesView: View {
                     .onChange(of: messagesViewModel.messages.count) { _ in
                         DispatchQueue.main.async {
                             if !isScrolling {
-                                scrollViewProxy.scrollTo(messagesViewModel.messages.last?.id, anchor: .bottom)
+                                if let lastMessageId = messagesViewModel.messages.last?.id {
+                                    scrollViewProxy.scrollTo(lastMessageId, anchor: .bottom)
+                                }
                             }
                         }
                     }
@@ -63,6 +68,9 @@ struct MessagesView: View {
             DragGesture()
                 .onChanged { _ in
                     isScrolling = true
+                }
+                .onEnded { _ in
+                    isScrolling = false
                 }
         )
     }

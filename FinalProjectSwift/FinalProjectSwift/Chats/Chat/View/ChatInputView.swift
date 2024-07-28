@@ -16,7 +16,7 @@ struct ChatInputView: View {
             ZStack(alignment: .leading) {
                 if messageText.isEmpty {
                     Text("Envia un mensaje")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.black)
                         .padding(.leading, 10)
                         .padding(.vertical, 8)
                 }
@@ -28,7 +28,7 @@ struct ChatInputView: View {
             }
             .frame(height: 36)
             .padding(.horizontal, 15)
-
+            
             Button(action: sendAction) {
                 Image("Send")
                     .resizable()

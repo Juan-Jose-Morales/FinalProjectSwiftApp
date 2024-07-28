@@ -300,7 +300,6 @@
 		9052E6DC2C52FFDB00670D9B /* SignOff */ = {
 			isa = PBXGroup;
 			children = (
-				9052E6E42C53005800670D9B /* Data */,
 				9052E6E32C53005200670D9B /* Model */,
 				9052E6E22C53004B00670D9B /* ViewModel */,
 				9052E6E12C53004300670D9B /* View */,
@@ -366,13 +365,6 @@
 				90A76BA52C5082A300AC2D6A /* LogoutResponse.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		9052E6E42C53005800670D9B /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		9052E6E52C5301CC00670D9B /* NewChat */ = {
@@ -664,13 +656,13 @@
 		90E79ECE2C2B39C400133583 /* FinalProjectSwift */ = {
 			isa = PBXGroup;
 			children = (
+				90294B4E2C36EAB90030E04C /* Managers */,
 				90CE61322C5575A0002B70D3 /* Client */,
 				90CE61312C557582002B70D3 /* Protocols */,
 				90CE612C2C557187002B70D3 /* Authentication */,
 				90CE612A2C557130002B70D3 /* Chats */,
 				90CE612B2C55714C002B70D3 /* UserProfile */,
 				90CE61132C5551EE002B70D3 /* LaunchScreen */,
-				90294B4E2C36EAB90030E04C /* Managers */,
 				9040AE752C32F5C000D550AD /* Componentes */,
 				90E79ED52C2B39C600133583 /* Preview Content */,
 				9040AEA42C345F8700D550AD /* Common */,

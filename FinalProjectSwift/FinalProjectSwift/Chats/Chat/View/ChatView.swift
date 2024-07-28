@@ -4,13 +4,11 @@
 //
 //  Created by Juan jose Morales on 18/7/24.
 //
-
 import SwiftUI
-
 struct ChatView: View {
     @StateObject var chatViewModel: ChatViewModel
     @StateObject private var keyboardResponder = KeyboardResponder()
-    @State private var isScrolling = false
+    @State private var isScrolling = false 
     
     var body: some View {
         NavigationStack {
@@ -28,7 +26,6 @@ struct ChatView: View {
                         chatViewModel.sendMessage()
                         isScrolling = false
                     }
-
                 )
                 .padding(.bottom, keyboardResponder.currentHeight)
                 .background(Color.white)
@@ -59,4 +56,3 @@ struct ChatView_Previews: PreviewProvider {
         .previewLayout(.sizeThatFits)
     }
 }
-
