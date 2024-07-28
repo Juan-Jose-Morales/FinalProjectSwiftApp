@@ -5,6 +5,7 @@
 //  Created by Juan jose Morales on 19/7/24.
 //
 
+
 import SwiftUI
 
 struct ChatInputView: View {
@@ -12,9 +13,9 @@ struct ChatInputView: View {
     @State private var showBlockedFunctionalityAlert = false
     var sendAction: () -> Void
     var attachAction: () -> Void
-
+    
     var body: some View {
-        HStack {
+        HStack{
             Button(action: {
                 showBlockedFunctionalityAlert = true
             }) {
@@ -29,35 +30,58 @@ struct ChatInputView: View {
                     dismissButton: .default(Text("Aceptar"))
                 )
             }
-            .padding(.leading, 15)
-
-            ZStack(alignment: .leading) {
-                if messageText.isEmpty {
-                    Text("Envia un mensaje")
-                        .foregroundColor(.gray)
-                        .padding(.horizontal, 15)
+            .padding(.leading, 5)
+            .padding(.trailing, 5)
+            
+            HStack(spacing: 10) {
+                withAnimation(.easeInOut) {
+                    TextField("", text: $messageText, axis: .vertical)
+                        .placeholder(when: messageText.isEmpty) {
+                            Text("Envia un mensaje...")
+                                .foregroundColor(.secondary)
+                        }
+                        .lineLimit(...7)
+                        .onTapGesture {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
                 }
-                TextField("", text: $messageText)
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 10)
-                    .background(Color.white)
-                    .cornerRadius(15)
-                    .foregroundColor(.black)
             }
-            .frame(height: 36)
-            .padding(.horizontal, 15)
-
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
+            .background(Color.white)
+            .cornerRadius(10)
+            
+            
             Button(action: sendAction) {
                 Image("Send")
-                    .resizable()
-                    .frame(width: 24, height: 24)
+                .resizable()
+                .frame(width: 24, height: 24)
             }
-            .padding(.trailing, 15)
+            
         }
+        .padding(.leading , 10)
+        .padding(.trailing, 10)
+        .padding(.vertical, 7)
         .frame(maxWidth: .infinity)
-        .frame(height: 56)
+        .frame(minHeight: 55)
         .background(Color("Blue"))
-        .padding(.top, 5)
+        .ignoresSafeArea()
+        .animation(.easeInOut(duration: 0.3), value: messageText)
+    }
+}
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content
+    ) -> some View {
+        ZStack(alignment: alignment) {
+            if shouldShow {
+                placeholder()
+            }
+            self
+        }
     }
 }
 
