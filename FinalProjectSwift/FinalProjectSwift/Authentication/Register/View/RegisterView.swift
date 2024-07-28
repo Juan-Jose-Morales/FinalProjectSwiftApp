@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RegisterView: View {
     @StateObject private var viewModel = RegisterViewModel()
-    @State private var offset: CGFloat = 0
     @State private var isNavigationToLogin = false
     
     var body: some View {
@@ -17,7 +16,7 @@ struct RegisterView: View {
             ScrollView {
                 VStack {
                     CustomLogo(width: 240, height: 220)
-                        .padding(.top, 50)
+                        .padding(.top, 30)
                     Spacer().frame(height: 45)
                     CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
                         .padding(.bottom, 25)
@@ -32,20 +31,13 @@ struct RegisterView: View {
                         viewModel.register()
                     }
                     .padding(.bottom, 30)
+                    
                     navigateToLogin()
+                    
                     Spacer()
                 }
                 .padding(.horizontal, 40)
                 .frame(maxWidth: .infinity)
-                .alert(isPresented: $viewModel.showAlert) {
-                    Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: { viewModel.resetAlerts() }))
-                }
-                .alert(isPresented: $viewModel.showSuccessAlert) {
-                    Alert(title: Text("Registro Exitoso"), message: Text("El registro fue exitoso"), dismissButton: .default(Text("OK"), action: {
-                        viewModel.resetAlerts()
-                        isNavigationToLogin = true
-                    }))
-                }
             }
             .background(
                 Color.white
@@ -54,6 +46,8 @@ struct RegisterView: View {
                         DismissKeyboardGesture()
                     )
             )
+            .navigationBarHidden(true)
+            .alert(isPresented: $viewModel.showAlert, content: alert)
             .navigationDestination(isPresented: $isNavigationToLogin) {
                 LoginView()
             }
@@ -61,12 +55,12 @@ struct RegisterView: View {
         .navigationBarBackButtonHidden(true)
     }
     
-    
     private func alert() -> Alert {
         Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: {
             viewModel.resetAlerts()
         }))
     }
+    
     private func navigateToLogin() -> some View {
         HStack {
             Text("¿Ya tienes cuenta?")
@@ -78,11 +72,9 @@ struct RegisterView: View {
                 Text("Iniciar Sesión")
                     .foregroundColor(Color("Blue"))
             }
-            
         }
     }
 }
-
 
 #Preview{
     RegisterView()
