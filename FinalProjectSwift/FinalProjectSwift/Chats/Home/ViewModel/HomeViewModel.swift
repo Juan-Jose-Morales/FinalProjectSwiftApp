@@ -77,7 +77,14 @@ class HomeViewModel: ObservableObject {
             return ""
         }
         
-        return chatList.source == id ? chatList.targetnick! : chatList.sourceNick!
+        let nick = chatList.source == id ? chatList.targetnick! : chatList.sourceNick!
+        let otherUserId = chatList.source == id ? chatList.target! : chatList.source!
+        if nick == ""{
+            return "Usuario Desconocido \(otherUserId)"
+        }else {
+            return nick
+        }
+        
     }
     
     func randomColor() -> Color {
@@ -93,21 +100,21 @@ class HomeViewModel: ObservableObject {
         
         return Color(red: red, green: green, blue: blue)
     }
-    func nameComprobation(user: ChatList) -> String {
-        if getNick(chatList: user) == ""{
-            return "Usuario Desconocido "
-            // \(user.id)
-        }else {
-            return getNick(chatList: user)
+    
+    func capitalizedName(chatList : ChatList) -> String {
+        guard let id = UserDefaults.standard.string(forKey: "id") else {
+            print("Error: Missing id")
+            return ""
         }
-    }
-    func capitalizedName(name: String) -> String {
-        if name == ""{
+        
+        let nick = chatList.source == id ? chatList.targetnick! : chatList.sourceNick!
+        if nick == ""{
             return "?"
         }else {
-            return name.prefix(1).capitalized
+            return nick.prefix(1).capitalized
         }
     }
+
     func color(for chatId: UUID) -> Color {
         return colorManager.color(for: chatId)
     }

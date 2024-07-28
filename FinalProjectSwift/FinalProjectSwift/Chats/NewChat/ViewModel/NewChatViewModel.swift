@@ -31,9 +31,15 @@ class NewChatViewModel: ObservableObject {
     }
     
     func getNewChats() {
+        guard let id = UserDefaults.standard.string(forKey: "id") else {
+            print("Error: Missing id")
+            return
+        }
         chatService.getNewChat { newChatList in
-            self.newListChats = newChatList
-            self.chatFilter = newChatList
+            self.newListChats = newChatList.filter {$0.id != id}
+            self.chatFilter = self.newListChats.sorted {
+                ($0.nick ?? "").localizedCaseInsensitiveCompare($1.nick ?? "") == .orderedAscending
+            }
         }
     }
     

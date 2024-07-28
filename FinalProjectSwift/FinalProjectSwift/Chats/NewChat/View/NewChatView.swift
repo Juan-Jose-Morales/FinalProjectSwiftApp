@@ -52,10 +52,10 @@ struct NewChatView: View {
                                                     .foregroundColor(newChatViewModel.randomColor())
                                                     .frame(width: 40, height: 40)
                                                 
-                                                Text(newChat.nick?.prefix(1).capitalized ?? "")
+                                                Text(newChatViewModel.capitalizedName(name: newChat.nick ?? ""))
                                                     .foregroundStyle(.white)
                                             }.padding(.horizontal, 8)
-                                            Text(newChat.nick ?? "Usuario desconocido")
+                                            Text(newChatViewModel.nameComprobation(newUser: newChat))
                                             Spacer()
                                         }.padding(.vertical, 1)
                                     }.padding(.vertical, 5)

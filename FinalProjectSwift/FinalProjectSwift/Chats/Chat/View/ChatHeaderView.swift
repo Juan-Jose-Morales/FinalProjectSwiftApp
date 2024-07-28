@@ -34,12 +34,12 @@ struct ChatHeaderView: View {
                 Button(action: {
                     isShowingDetailProfileView = true
                 }) {
-                        NavigationLink(destination: ChatDetailView(chatDetailModel: ChatDetailViewModel(name: viewModel.getNick(chatList: chatlist), id: chatlist.targetnick ?? "", color: viewModel.color(for: chatlist.id)))){
+                    NavigationLink(destination: ChatDetailView(chatDetailModel: ChatDetailViewModel(name: viewModel.getNick(chatList: chatlist), id: chatlist.targetnick ?? "", color: viewModel.color(for: chatlist.id), capitalizedName: viewModel.capitalizedName(chatList: chatlist), chatId: chatlist.chat, chat: chatlist))){
                             ZStack{
                                 Circle()
                                     .fill((viewModel.color(for: chatlist.id)))
                                     .frame(width: 45, height: 45)
-                                Text(viewModel.getNick(chatList: chatlist).prefix(1).capitalized)
+                                Text(viewModel.capitalizedName(chatList: chatlist))
                                     .foregroundStyle(.white)
                             }
                         }

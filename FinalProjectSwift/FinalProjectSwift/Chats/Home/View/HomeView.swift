@@ -44,10 +44,10 @@ struct HomeView: View {
                                                             .foregroundColor(homeViewModel.color(for: chat.id))
                                                             .frame(width: 40, height: 40)
                                                         
-                                                        Text(homeViewModel.capitalizedName(name: homeViewModel.getNick(chatList: chat)))
+                                                        Text(homeViewModel.capitalizedName(chatList: chat))
                                                             .foregroundStyle(.white)
                                                     }.padding(.horizontal, 8)
-                                                    Text(homeViewModel.nameComprobation(user: chat))
+                                                    Text(homeViewModel.getNick(chatList: chat))
                                                     Spacer()
                                                 }.padding(.vertical, 1)
                                             }.padding(.vertical, 5)
