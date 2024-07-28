@@ -34,24 +34,24 @@ struct HomeView: View {
                             ForEach(homeViewModel.filterChats) { chat in
                                 NavigationLink(destination: ChatView(chatViewModel: ChatViewModel(chatId: chat.chat, chatList: chat))) {
                                     VStack {
-                                            ZStack {
-                                                RoundedRectangle(cornerRadius: 20)
-                                                    .fill(Color.white)
-                                                    .shadow(radius: 5, x: 5, y: 5)
-                                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                                HStack{
-                                                    ZStack {
-                                                        Circle()
-                                                            .foregroundColor(homeViewModel.color(for: chat.id))
-                                                            .frame(width: 40, height: 40)
-                                                        
-                                                        Text(homeViewModel.capitalizedName(chatList: chat))
-                                                            .foregroundStyle(.white)
-                                                    }.padding(.horizontal, 8)
-                                                    Text(homeViewModel.getNick(chatList: chat))
-                                                    Spacer()
-                                                }.padding(.vertical, 1)
-                                            }.padding(.vertical, 5)
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .fill(Color.white)
+                                                .shadow(radius: 5, x: 5, y: 5)
+                                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                            HStack{
+                                                ZStack {
+                                                    Circle()
+                                                        .foregroundColor(homeViewModel.color(for: chat.id))
+                                                        .frame(width: 40, height: 40)
+                                                    
+                                                    Text(homeViewModel.capitalizedName(chatList: chat))
+                                                        .foregroundStyle(.white)
+                                                }.padding(.horizontal, 8)
+                                                Text(homeViewModel.getNick(chatList: chat))
+                                                Spacer()
+                                            }.padding(.vertical, 1)
+                                        }.padding(.vertical, 5)
                                     }
                                 }
                             }
@@ -139,10 +139,10 @@ struct HomeView: View {
                             .foregroundColor(homeViewModel.color(for: chatList.id))
                             .frame(width: 40, height: 40)
                         
-                        Text(homeViewModel.capitalizedName(name: homeViewModel.getNick(chatList: chatList)))
+                        Text(homeViewModel.capitalizedName(chatList: chatList))
                             .foregroundStyle(.white)
                     }.padding(.horizontal, 8)
-                    Text(homeViewModel.nameComprobation(user: chatList))
+                    Text(homeViewModel.getNick(chatList: chatList))
                     Spacer()
                 }.padding(.vertical, 1)
             }.padding(.vertical, 5)
