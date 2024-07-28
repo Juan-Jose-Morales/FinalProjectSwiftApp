@@ -20,7 +20,7 @@ class ProfileViewModel: ObservableObject {
     
     init(userService: UserService) {
         self.userService = userService
-        self.isOnline = UserDefaults.standard.bool(forKey: onlineStatusKey) 
+        self.isOnline = UserDefaults.standard.bool(forKey: onlineStatusKey)
         if UserDefaults.standard.object(forKey: onlineStatusKey) == nil {
             UserDefaults.standard.set(true, forKey: onlineStatusKey)
             self.isOnline = true
