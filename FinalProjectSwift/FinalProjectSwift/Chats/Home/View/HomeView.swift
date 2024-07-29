@@ -27,7 +27,7 @@ struct HomeView: View {
                             homeViewModel.chatFilter()
                         }
                         .padding(.top, 0)
-                    if homeViewModel.filterChats.isEmpty {
+                    if homeViewModel.listChats.isEmpty {
                         CustomListChat()
                     } else {
                         List {

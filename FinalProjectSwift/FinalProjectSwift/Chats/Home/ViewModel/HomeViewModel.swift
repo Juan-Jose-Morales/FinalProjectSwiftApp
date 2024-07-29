@@ -45,7 +45,13 @@ class HomeViewModel: ObservableObject {
         for index in offsets {
             let chat = filterChats[index]
             deleteChat(id: chat.chat)
+            
             filterChats.remove(at: index)
+            
+            if let index = listChats.firstIndex(where: { $0.chat == chat.chat }) {
+                        listChats.remove(at: index)
+                    }
+            
         }
     }
     
