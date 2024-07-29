@@ -18,16 +18,12 @@ struct ChatView: View {
                 ChatHeaderView(chatlist: chatViewModel.chatList)
 
                 ScrollViewReader { scrollViewProxy in
-                    ScrollView {
-                        VStack {
-                            MessagesView(
-                                messagesViewModel: MessagesViewModel(chatId: chatViewModel.chatId),
-                                chatCreated: chatViewModel.chatList.chatcreated ?? ""
-                            )
-                            .id("messages")
-                        }
-                    }
-                    .onChange(of: chatViewModel.messages) { _ in
+                    MessagesView(
+                        messagesViewModel: chatViewModel.messagesViewModel,
+                        chatCreated: chatViewModel.chatList.chatcreated ?? ""
+                    )
+                    .id("messages")
+                    .onChange(of: chatViewModel.messagesViewModel.messages) { _ in
                         withAnimation {
                             scrollViewProxy.scrollTo("messages", anchor: .bottom)
                         }
@@ -41,7 +37,7 @@ struct ChatView: View {
                         isScrolling = false
                     },
                     attachAction: {
-                       
+                        
                     }
                 )
                 .background(Color.white)
@@ -51,7 +47,7 @@ struct ChatView: View {
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Color.white)
             .onAppear {
-                chatViewModel.loadMessages()
+                chatViewModel.messagesViewModel.loadMessages()
             }
             .navigationBarBackButtonHidden(true)
             .gesture(

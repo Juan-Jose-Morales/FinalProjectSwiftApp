@@ -12,8 +12,8 @@ class ChatViewModel: ObservableObject {
     @Published var messageText: String = ""
     @Published var source: String = ""
     @Published var errorMessage: String?
-    @Published var messages: [Message] = []
-    @Published var isRefreshing: Bool = false
+
+    var messagesViewModel: MessagesViewModel
 
     private let chatService: ChatServiceProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -26,22 +26,7 @@ class ChatViewModel: ObservableObject {
         self.chatList = chatList
         self.chatService = chatService
         self.source = UserDefaults.standard.string(forKey: "id") ?? ""
-        loadMessages()
-    }
-
-    func loadMessages() {
-        chatService.getMessageList(chatId: chatId, offset: 0, limit: 20) { [weak self] result in
-            switch result {
-            case .success(let messageListResponse):
-                DispatchQueue.main.async {
-                    self?.messages = messageListResponse.rows
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self?.errorMessage = "Error loading messages: \(error.localizedDescription)"
-                }
-            }
-        }
+        self.messagesViewModel = MessagesViewModel(chatService: chatService, chatId: chatId)
     }
 
     func sendMessage() {
@@ -54,7 +39,7 @@ class ChatViewModel: ObservableObject {
                 switch result {
                 case .success(let sendMessageResponse):
                     if sendMessageResponse.success {
-                        self?.messages.insert(newMessage, at: 0)
+                        self?.messagesViewModel.messages.insert(newMessage, at: 0)
                         self?.messageText = ""
                     } else {
                         self?.errorMessage = "Error sending message: Failed to send message."
