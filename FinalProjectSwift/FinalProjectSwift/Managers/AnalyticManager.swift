@@ -10,7 +10,9 @@ import FirebaseAnalytics
 import SwiftUI
 
 final class AnalyticManager {
-    private init() {}
+    private init() {
+        
+    }
     
     static let shared = AnalyticManager()
     public func logEvent(_ event: AnalyticsEvent) {

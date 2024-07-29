@@ -15,7 +15,6 @@ class NewChatViewModel: ObservableObject {
     @Published var alertNewChat: NewChat?
     @Published var chatFilter: [NewChat] = []
     @Published var navigationChat = false
-    @Published var errorAlertNewChat = false
     @Published var search = "" {
         didSet {
             getChatFilter()
@@ -55,7 +54,6 @@ class NewChatViewModel: ObservableObject {
                 self.navigationChat = true
             case .failure(let failure):
                 print(failure)
-                self.errorAlertNewChat = true
             }
         }
     }
