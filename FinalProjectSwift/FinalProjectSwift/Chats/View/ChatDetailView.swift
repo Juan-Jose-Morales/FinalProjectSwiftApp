@@ -10,7 +10,7 @@ import SwiftUI
 struct ChatDetailView: View {
     @StateObject var chatDetailModel: ChatDetailViewModel
     @State private var showBlockedFunctionalityAlert = false
-
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -54,43 +54,43 @@ struct ChatDetailView: View {
                             }
                         }.padding(.bottom, 20)
                         VStack{
-                        HStack {
-                            Image(systemName: "photo.on.rectangle.angled")
-                                .frame(width: 20, height: 20)
-                                .bold()
-                                .padding(.leading, 20)
-                            
-                            Text("Fotos recientes")
-                                .bold()
-                                .padding(.leading, 20)
-                            
-                            Spacer()
-                        }
-                        .padding(.vertical, 8)
-                        
-                        Divider()
-                            .background(Color.gray)
-                            .padding(.horizontal)
-                            .padding(.vertical, 8)
-                        
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 3), spacing: 16) {
-                            ForEach(0..<9) { _ in
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 65, height: 65)
-                                    .background(Color.gray.opacity(0.2))
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    .shadow(radius: 5)
+                            HStack {
+                                Image(systemName: "photo.on.rectangle.angled")
+                                    .frame(width: 20, height: 20)
+                                    .bold()
+                                    .padding(.leading, 20)
+                                
+                                Text("Fotos recientes")
+                                    .bold()
+                                    .padding(.leading, 20)
+                                
+                                Spacer()
                             }
-                        }
-                        .padding()
-                        
-                        Divider()
-                            .background(Color.gray)
-                            .padding(.horizontal)
                             .padding(.vertical, 8)
-                        blocked
+                            
+                            Divider()
+                                .background(Color.gray)
+                                .padding(.horizontal)
+                                .padding(.vertical, 8)
+                            
+                            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 3), spacing: 16) {
+                                ForEach(0..<9) { _ in
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 65, height: 65)
+                                        .background(Color.gray.opacity(0.2))
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .shadow(radius: 5)
+                                }
+                            }
+                            .padding()
+                            
+                            Divider()
+                                .background(Color.gray)
+                                .padding(.horizontal)
+                                .padding(.vertical, 8)
+                            blocked
                         }.background(.white)
                     }
                     .onAppear {
@@ -122,7 +122,7 @@ struct ChatDetailView: View {
             .background(Color.white)
             .cornerRadius(10)
             .shadow(radius: 2)
-
+            
         }
         .padding(.horizontal)
         .padding(.top, 16)

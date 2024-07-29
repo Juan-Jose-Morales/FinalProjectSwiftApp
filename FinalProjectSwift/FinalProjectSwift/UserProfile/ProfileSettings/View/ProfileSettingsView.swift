@@ -30,12 +30,14 @@ struct ProfileSettingsView: View {
                         }
                         buttons()
                             .padding(.top, 30)
+                        
+                        Spacer()
+                        
+                        signOffButton
+                            .padding(.top, 40)
+                        
                     }
                 }
-                Spacer()
-                
-                signOffButton
-                    .padding(.bottom, 60)
             }
             .edgesIgnoringSafeArea(.top)
             .navigationBarBackButtonHidden(true)
@@ -49,12 +51,12 @@ struct ProfileSettingsView: View {
                 SignOffView()
             }
             .alert(isPresented: $showBlockedFunctionalityAlert) {
-                  Alert(
+                Alert(
                     title: Text("Funcionalidad aun no disponible"),
                     message: Text("Estamos trabajando en ello..."),
                     dismissButton: .default(Text("Aceptar"))
-                  )
-                }
+                )
+            }
         }
     }
     
@@ -63,7 +65,7 @@ struct ProfileSettingsView: View {
             .frame(height: 310)
             .edgesIgnoringSafeArea(.top)
     }
-
+    
     private var goToHome: some View {
         HStack {
             Button(action: {
@@ -79,7 +81,7 @@ struct ProfileSettingsView: View {
             Spacer()
         }
     }
-
+    
     private func buttons() -> some View {
         VStack(spacing: 45) {
             ForEach(viewModel.buttons) { button in

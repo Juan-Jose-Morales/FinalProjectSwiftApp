@@ -41,7 +41,7 @@ struct ChatView: View {
                         isScrolling = false
                     },
                     attachAction: {
-                        // Implement attach action if needed
+                       
                     }
                 )
                 .background(Color.white)

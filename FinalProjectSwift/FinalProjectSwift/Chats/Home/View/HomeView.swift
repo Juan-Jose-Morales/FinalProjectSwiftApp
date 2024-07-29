@@ -28,7 +28,11 @@ struct HomeView: View {
                         }
                         .padding(.top, 0)
                     if homeViewModel.filterChats.isEmpty {
-                        CustomListChat()
+                        VStack {
+                            CustomListChat()
+                        }
+                        .padding(.bottom, 50)
+                        
                     } else {
                         List {
                             ForEach(homeViewModel.filterChats) { chat in

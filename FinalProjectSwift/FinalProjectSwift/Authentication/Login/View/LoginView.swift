@@ -17,7 +17,7 @@ struct LoginView: View {
             ScrollView {
                 VStack {
                     CustomLogo(width: 240, height: 220)
-                        .padding(.top, 30)
+                        .padding(.top, 20)
                     Spacer().frame(height: 45)
                     
                     CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
@@ -78,6 +78,7 @@ struct LoginView: View {
             }
             .padding(.horizontal, 10)
         }
+        .padding(.bottom,40)
     }
 }
 

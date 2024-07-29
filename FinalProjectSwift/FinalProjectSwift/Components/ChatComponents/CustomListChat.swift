@@ -14,10 +14,14 @@ struct CustomListChat: View {
                 .resizable()
                 .frame(width: 160, height: 160)
                 .padding(10)
+                
             Text("Empieza un nuevo chat")
                 .foregroundColor(.black)
                 .bold()
-        } .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        
     }
 }
 
