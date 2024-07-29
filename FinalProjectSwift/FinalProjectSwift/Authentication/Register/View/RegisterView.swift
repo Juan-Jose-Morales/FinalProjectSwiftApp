@@ -10,6 +10,7 @@ import SwiftUI
 struct RegisterView: View {
     @StateObject private var viewModel = RegisterViewModel()
     @State private var isNavigationToLogin = false
+    @State private var isNavigationToOnboarding = false
     
     var body: some View {
         NavigationStack {
@@ -17,13 +18,18 @@ struct RegisterView: View {
                 VStack {
                     CustomLogo(width: 240, height: 220)
                         .padding(.top, 20)
+                    
                     Spacer().frame(height: 45)
+                    
                     CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
                         .padding(.bottom, 25)
+                    
                     CustomTextField(imageName: "avatar", placeholder: "Nick", text: $viewModel.nickname)
                         .padding(.bottom, 25)
+                    
                     SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "padlock")
                         .padding(.bottom, 25)
+                    
                     SecureFields(title: "Repetir Contraseña", text: $viewModel.confirmPassword, imageName: "padlock")
                         .padding(.bottom, 25)
                     
@@ -48,8 +54,17 @@ struct RegisterView: View {
             )
             .navigationBarHidden(true)
             .alert(isPresented: $viewModel.showAlert, content: alert)
+            .alert(isPresented: $viewModel.showSuccessAlert) {
+                Alert(title: Text("Registro Exitoso"), message: Text("El registro fue exitoso"), dismissButton: .default(Text("OK"), action: {
+                    viewModel.resetAlerts()
+                    isNavigationToOnboarding = true
+                }))
+            }
             .navigationDestination(isPresented: $isNavigationToLogin) {
                 LoginView()
+            }
+            .navigationDestination(isPresented: $isNavigationToOnboarding) {
+                OnboardingView()
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -77,6 +92,6 @@ struct RegisterView: View {
     }
 }
 
-#Preview{
+#Preview {
     RegisterView()
 }
