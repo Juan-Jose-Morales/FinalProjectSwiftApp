@@ -103,6 +103,7 @@
 		A9A449902C3C34620085838B /* DotLottie in Frameworks */ = {isa = PBXBuildFile; productRef = A9A4498F2C3C34620085838B /* DotLottie */; };
 		A9A449922C3C35A60085838B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A9A449912C3C35A60085838B /* Alamofire */; };
 		A9A449962C3C44750085838B /* CustomListChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A449952C3C44750085838B /* CustomListChat.swift */; };
+		A9D411672C57A8120077F55A /* AnalyticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D411662C57A8120077F55A /* AnalyticManager.swift */; };
 		A9D9E5E52C330F2E0039843A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D9E5E42C330F2E0039843A /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -179,6 +180,7 @@
 		A9A4497A2C3C31AB0085838B /* main_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = main_splash.json; sourceTree = "<group>"; };
 		A9A4497E2C3C32BB0085838B /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A9A449952C3C44750085838B /* CustomListChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListChat.swift; sourceTree = "<group>"; };
+		A9D411662C57A8120077F55A /* AnalyticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticManager.swift; sourceTree = "<group>"; };
 		A9D9E5E42C330F2E0039843A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -233,6 +235,7 @@
 			children = (
 				90294B4C2C36EA620030E04C /* SessionManager.swift */,
 				A93923252C5544EF00533969 /* RamdomColorManager.swift */,
+				A9D411662C57A8120077F55A /* AnalyticManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1003,6 +1006,7 @@
 				90E79ED02C2B39C400133583 /* FinalProjectSwiftApp.swift in Sources */,
 				905E057D2C56763600DE9331 /* NavigationObjects.swift in Sources */,
 				905E057A2C56759400DE9331 /* DatesFormat.swift in Sources */,
+				A9D411672C57A8120077F55A /* AnalyticManager.swift in Sources */,
 				9040AEA62C345FB400D550AD /* User.swift in Sources */,
 				90CE61072C53D3C5002B70D3 /* MessagesViewModel.swift in Sources */,
 				904A89BC2C46CD2C005F2DC8 /* ProfileView.swift in Sources */,
