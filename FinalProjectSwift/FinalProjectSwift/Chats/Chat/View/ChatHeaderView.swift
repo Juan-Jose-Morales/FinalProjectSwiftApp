@@ -5,6 +5,7 @@
 //  Created by Juan jose Morales on 18/7/24.
 //
 
+import Foundation
 import SwiftUI
 
 struct ChatHeaderView: View {
@@ -26,7 +27,7 @@ struct ChatHeaderView: View {
                     Text(viewModel.getNick(chatList: chatlist))
                         .font(.headline)
                         .foregroundColor(.white)
-                    Text(chatlist.sourceonline == true ? "En línea" : "Desconectado")
+                    Text(viewModel.isOnline ? "En línea" : "Desconectado")
                         .font(.subheadline)
                         .foregroundColor(.white)
                 }
@@ -37,7 +38,7 @@ struct ChatHeaderView: View {
                     NavigationLink(destination: ChatDetailView(chatDetailModel: ChatDetailViewModel(name: viewModel.getNick(chatList: chatlist), id: chatlist.targetnick ?? "", color: viewModel.color(for: chatlist.id), capitalizedName: viewModel.capitalizedName(chatList: chatlist), chatId: chatlist.chat, chat: chatlist))){
                             ZStack{
                                 Circle()
-                                    .fill((viewModel.color(for: chatlist.id)))
+                                    .fill(viewModel.color(for: chatlist.id))
                                     .frame(width: 45, height: 45)
                                 Text(viewModel.capitalizedName(chatList: chatlist))
                                     .foregroundStyle(.white)
@@ -47,9 +48,13 @@ struct ChatHeaderView: View {
             }
             .padding()
             .background(Color("Blue"))
+            .onAppear {
+                viewModel.updateOnlineStatus(chatList: chatlist)
+            }
         }
     }
 }
+
 
 #Preview("ChatHeaderView Preview") {
     let chatList = ChatList(id: UUID(), chat: "123", source: "1", sourceonline: true, target: "2", targetnick: "Pepe", targetonline: true)
