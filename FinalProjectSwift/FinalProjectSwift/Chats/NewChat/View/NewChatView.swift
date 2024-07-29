@@ -68,7 +68,10 @@ struct NewChatView: View {
                                         newChatViewModel.createChat(target: newChatViewModel.alertNewChat?.id ?? "")
                                         onUpdate()
                                     }), secondaryButton: .cancel(Text("Cancelar")))
+                                }.alert(isPresented: $newChatViewModel.errorAlertNewChat) {
+                                    Alert(title: Text("Error al crear el chat"), dismissButton: .default(Text("Okey")))
                                 }
+                                    
                             }.listRowSeparator(.hidden)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }.scrollContentBackground(.hidden)
