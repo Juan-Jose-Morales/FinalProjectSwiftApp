@@ -8,10 +8,11 @@
 import Foundation
 import FirebaseAnalytics
 import SwiftUI
+import Firebase
 
 final class AnalyticManager {
     private init() {
-        
+        FirebaseApp.configure()
     }
     
     static let shared = AnalyticManager()
