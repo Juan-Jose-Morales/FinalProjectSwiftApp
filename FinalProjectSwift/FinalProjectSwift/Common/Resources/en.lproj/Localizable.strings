@@ -1,0 +1,52 @@
+/* 
+  Localizable.strings
+  FinalProjectSwift
+
+  Created by Alejandro Vidal Gómez Alves on 29/7/24.
+  
+*/
+"login-User" = "User";
+"login-Password" = "Password";
+"login-Biometry" = "Login with Biometry";
+"login-login" = "Login";
+"login-No account" = "Don't have an account?";
+"login-Register"  = "Sign up";
+"login-alert-title" = "Error";
+"login-alert-message" = "Fill in all the fields";
+"login-alert-accept" = "OK";
+"register-User" = "User";
+"register-Nick" = "Nick";
+"register-password" = "Password";
+"register-confirm-paswword" = "Confirm Password";
+"register-button" = "Register";
+"register-dou you have account" = "Already have an account?";
+"register-log-in" = "Log In";
+"Home-search" = "Search";
+"photo-photoprofile" = "Profile Photo";
+"photo-take-photo" = "Take Photo";
+"photo-select-photo" = "Select Photo";
+"photo-delete-photo" = "Delete Photo";
+"newchat-newchat" = "New Chat";
+"profile-settings-profile" = "Profile Settings";
+"profile-storage" = "Storage";
+"profile-languages-settings" = "Language Settings";
+"profile-log-out" = "Log Out";
+"profile-settings-button-title" = "Feature Not Available";
+"profile-settings-button-message" = "We are working on it";
+"profile-settings-button-primary" = "Accept";
+"logout" = "Log Out";
+"logout-question" = "Do you want to log out of this device?";
+"logout-button" = "Log Out";
+"logout-alert-title" = "Confirmation";
+"logout-alert-message" = "Are you sure you want to log out?";
+"logout-alert-cancel" = "No";
+"logout-alert-acept" = "Yes";
+"settings-profile2" = "Profile Settings";
+"settings-profile2-photo" = "Add a Profile Photo";
+"settings-profile2-button-edit" = "Edit";
+"settings-profile2-sesion" = "Keep Me Logged In";
+"settings-profile2-online" = "Show Online Status";
+"settings-profile2-blocked" = "Blocked";
+"blocked-button-alert-title" = "We are currently developing this feature";
+"blocked-button-alert-message" = "We apologize for the inconvenience";
+"blocked-button-alert-primary-button" = "Accept";

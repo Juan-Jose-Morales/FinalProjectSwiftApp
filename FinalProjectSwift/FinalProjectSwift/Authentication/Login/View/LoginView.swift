@@ -20,7 +20,7 @@ struct LoginView: View {
                         .padding(.top, 20)
                     Spacer().frame(height: 45)
                     
-                    CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
+                    CustomTextField(imageName: "avatar", placeholder: "login-User", text: $viewModel.username)
                         .padding(.bottom, 36)
                     
                     SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "padlock")
