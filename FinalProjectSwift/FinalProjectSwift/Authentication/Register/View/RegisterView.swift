@@ -16,7 +16,7 @@ struct RegisterView: View {
             ScrollView {
                 VStack {
                     CustomLogo(width: 240, height: 220)
-                        .padding(.top, 30)
+                        .padding(.top, 20)
                     Spacer().frame(height: 45)
                     CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
                         .padding(.bottom, 25)
@@ -73,6 +73,7 @@ struct RegisterView: View {
                     .foregroundColor(Color("Blue"))
             }
         }
+        .padding(.bottom, 40)
     }
 }
 

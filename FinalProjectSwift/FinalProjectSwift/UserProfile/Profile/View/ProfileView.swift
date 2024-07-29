@@ -21,40 +21,48 @@ struct ProfileView: View {
     
     var body: some View {
         NavigationStack {
-            VStack{
-                CustomNavigationBar(title: "Ajustes de perfil", titleColor: .black, buttonColor: .black, onBack: {
-                    isNavigateToProfileSettings = true
-                })
-                if viewModel.isLoading {
-                    progressView
-                } else {
-                    editProfile()
+            ScrollView{
+                VStack{
+                    CustomNavigationBar(title: "Ajustes de perfil", titleColor: .black, buttonColor: .black, onBack: {
+                        isNavigateToProfileSettings = true
+                    })
+                    if viewModel.isLoading {
+                        progressView
+                    } else {
+                        editProfile()
+                    }
+                    Spacer().frame(height: 40)
+                    
+                    Toggle(isOn: $keepSessionActive) {
+                        Text("Mantener sesión iniciada")
+                            .foregroundColor(.black)
+                    }
+                    .padding(.horizontal, 40)
+                    .onChange(of: keepSessionActive) { value in
+                        if value {
+                            keepSessionActive = false
+                            showBlockedFunctionalityAlert = true
+                        }
+                    }
+                    Spacer().frame(height: 40)
+                    
+                    Toggle(isOn: $viewModel.isOnline) {
+                        Text("Mostrar estado en línea")
+                            .foregroundColor(.black)
+                    }
+                    .padding(.horizontal, 40)
+                    .onChange(of: viewModel.isOnline) { isOnline in
+                        viewModel.updateOnlineStatus(isOnline: isOnline)
+                    }
+                    Spacer().frame(height: 40)
+                    
+                    Divider()
+                        .padding(.horizontal)
+                    
+                    Spacer().frame(height: 40)
+                    blocked
+                    Spacer()
                 }
-                Spacer().frame(height: 40)
-                
-                Toggle(isOn: $keepSessionActive) {
-                    Text("Mantener sesión iniciada")
-                        .foregroundColor(.black)
-                }
-                .padding(.horizontal, 40)
-                Spacer().frame(height: 40)
-                
-                Toggle(isOn: $viewModel.isOnline) {
-                    Text("Mostrar estado en línea")
-                        .foregroundColor(.black)
-                }
-                .padding(.horizontal, 40)
-                .onChange(of: viewModel.isOnline) { isOnline in
-                    viewModel.updateOnlineStatus(isOnline: isOnline)
-                }
-                Spacer().frame(height: 40)
-                
-                Divider()
-                    .padding(.horizontal)
-                
-                Spacer().frame(height: 40)
-                blocked
-                Spacer()
             }
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $isNavigateToChangeProfile) {

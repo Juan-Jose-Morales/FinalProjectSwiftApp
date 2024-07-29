@@ -35,6 +35,9 @@
 		905E05802C5676BA00DE9331 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905E057F2C5676BA00DE9331 /* Enums.swift */; };
 		905E05822C5676F300DE9331 /* ViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905E05812C5676F300DE9331 /* ViewComponents.swift */; };
 		905E05852C5677F300DE9331 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905E05842C5677F300DE9331 /* KeyboardResponder.swift */; };
+		9078462C2C57D21E00B6267C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9078462B2C57D21E00B6267C /* OnboardingView.swift */; };
+		9078462F2C57E58400B6267C /* FinalOnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9078462E2C57E58400B6267C /* FinalOnboardingPageView.swift */; };
+		907846312C57E5C000B6267C /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907846302C57E5C000B6267C /* OnboardingPageView.swift */; };
 		90A76BA62C5082A300AC2D6A /* LogoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A76BA52C5082A300AC2D6A /* LogoutResponse.swift */; };
 		90A76BA82C512CCB00AC2D6A /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A76BA72C512CCB00AC2D6A /* MessagesView.swift */; };
 		90A76BAA2C512D2D00AC2D6A /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A76BA92C512D2D00AC2D6A /* MessageView.swift */; };
@@ -136,6 +139,9 @@
 		905E057F2C5676BA00DE9331 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		905E05812C5676F300DE9331 /* ViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewComponents.swift; sourceTree = "<group>"; };
 		905E05842C5677F300DE9331 /* KeyboardResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
+		9078462B2C57D21E00B6267C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		9078462E2C57E58400B6267C /* FinalOnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalOnboardingPageView.swift; sourceTree = "<group>"; };
+		907846302C57E5C000B6267C /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		90A76BA52C5082A300AC2D6A /* LogoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutResponse.swift; sourceTree = "<group>"; };
 		90A76BA72C512CCB00AC2D6A /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		90A76BA92C512D2D00AC2D6A /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
@@ -655,6 +661,16 @@
 			path = Others;
 			sourceTree = "<group>";
 		};
+		9078462D2C57E55600B6267C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				9078462B2C57D21E00B6267C /* OnboardingView.swift */,
+				9078462E2C57E58400B6267C /* FinalOnboardingPageView.swift */,
+				907846302C57E5C000B6267C /* OnboardingPageView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		90CE61132C5551EE002B70D3 /* LaunchScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -695,6 +711,7 @@
 				90CE612D2C557449002B70D3 /* Protocol */,
 				9052E6DC2C52FFDB00670D9B /* SignOff */,
 				9052E6D12C52FEDC00670D9B /* Register */,
+				9078462D2C57E55600B6267C /* Onboarding */,
 				9052E6D02C52FED500670D9B /* Login */,
 			);
 			path = Authentication;
@@ -978,13 +995,16 @@
 				904A89BE2C46D114005F2DC8 /* ProfileSettingsViewModel.swift in Sources */,
 				904A89C62C47DEC9005F2DC8 /* ImagePicker.swift in Sources */,
 				90CE61032C53CEE3002B70D3 /* GetMessage.swift in Sources */,
+				9078462F2C57E58400B6267C /* FinalOnboardingPageView.swift in Sources */,
 				904A89C22C47D719005F2DC8 /* ChangeProfileViewModel.swift in Sources */,
 				90CE61202C5568F1002B70D3 /* ChatServiceProtocol.swift in Sources */,
 				904A89BA2C4695C9005F2DC8 /* ProfileViewModel.swift in Sources */,
 				A94B052F2C55A67C0093EA8E /* ChatDetailViewModel.swift in Sources */,
+				9078462C2C57D21E00B6267C /* OnboardingView.swift in Sources */,
 				A93922E22C51AE0E00533969 /* Chat.swift in Sources */,
 				90FFDB042C4C26BC00FFE3FE /* ChatHeaderView.swift in Sources */,
 				905E05852C5677F300DE9331 /* KeyboardResponder.swift in Sources */,
+				907846312C57E5C000B6267C /* OnboardingPageView.swift in Sources */,
 				90A76BA82C512CCB00AC2D6A /* MessagesView.swift in Sources */,
 				904A89C42C47DA3E005F2DC8 /* ChangeProfileView.swift in Sources */,
 				A93922E42C51AEA000533969 /* NewChatView.swift in Sources */,
@@ -1065,7 +1085,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

@@ -38,8 +38,11 @@ struct BiometricButton: View {
                     .foregroundColor(.black)
                     .padding(.leading, 8)
                 Text("Inicia Sesion con Biometria")
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(.black)
-                    .padding(.leading, 15)
+                    .padding(.leading, 5)
                 Spacer()
             }
             .padding(.horizontal,20)
@@ -88,7 +91,6 @@ struct NavBarModifier: ViewModifier {
         let navigationBar = UINavigationBar()
         
         navigationBar.sizeToFit()
-        //navigationBar.frame.size.height(sizeHeight)
     }
     
     func body(content: Content) -> some View {
