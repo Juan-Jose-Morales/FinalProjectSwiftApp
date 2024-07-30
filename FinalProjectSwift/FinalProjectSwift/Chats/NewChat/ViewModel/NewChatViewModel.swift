@@ -83,19 +83,6 @@ class NewChatViewModel: ObservableObject {
         )
     }
     
-    func randomColor() -> Color {
-        var red: Double
-        var green: Double
-        var blue: Double
-        
-        repeat {
-            red = Double.random(in: 0...1)
-            green = Double.random(in: 0...1)
-            blue = Double.random(in: 0...1)
-        } while (red > 0.9 && green > 0.9 && blue > 0.9)
-        
-        return Color(red: red, green: green, blue: blue)
-    }
     
     func nameComprobation(newUser: NewChat) -> String {
         if newUser.nick == "" {
