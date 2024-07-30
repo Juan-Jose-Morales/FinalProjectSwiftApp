@@ -37,7 +37,7 @@ struct BiometricButton: View {
                     .frame(width: 20, height: 20)
                     .foregroundColor(.black)
                     .padding(.leading, 8)
-                Text("Inicia Sesion con Biometria")
+                Text("login-Biometry")
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)

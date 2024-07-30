@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CustomTextField: View {
     var imageName: String
-    var placeholder: String
+    var placeholder: LocalizedStringKey
     @Binding var text: String
     
     var body: some View {
