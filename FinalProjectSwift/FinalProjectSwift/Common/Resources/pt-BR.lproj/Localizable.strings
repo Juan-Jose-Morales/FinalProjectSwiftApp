@@ -1,0 +1,86 @@
+/* 
+  Localizable.strings
+  FinalProjectSwift
+
+  Created by Alejandro Vidal Gómez Alves on 29/7/24.
+  
+*/
+"login-User" = "Usuário";
+"login-Password" = "Senha";
+"login-Biometry" = "Entrar com Biometria";
+"login-login" = "Entrar";
+"login-No account" = "Não tem uma conta?";
+"login-Register"  = "Registrar";
+"login-error-comprobation" = "Por favor, preencha todos os campos";
+"login-error-server %@" = "Erro ao fazer login:";
+"login-alert-error-not-found" = "Erro Desconhecido";
+"lofin-alert-error" = "Erro";
+"login-alert-error-button" = "Ok";
+"login-alert-title" = "Erro";
+"login-alert-message" = "Por favor, preencha todos os campos";
+"login-alert-accept" = "OK";
+"register-User" = "Usuário";
+"register-Nick" = "Apelido";
+"register-password" = "Senha";
+"register-confirm-password" = "Repetir Senha";
+"register-button" = "Registrar";
+"register-do-you-have-account" = "Já tem uma conta?";
+"register-log-in" = "Entrar";
+"Home-search" = "Buscar";
+"photo-photoprofile" = "Foto de Perfil";
+"photo-take-photo" = "Tirar Foto";
+"photo-select-photo" = "Selecionar Foto";
+"photo-delete-photo" = "Excluir Foto";
+"newchat-newchat" = "Nova Conversa";
+"newchat-search" = "Buscar";
+"profile-settings-profile" = "Configurações do Perfil";
+"profile-storage" = "Armazenamento";
+"profile-languages-settings" = "Configurações de Idioma";
+"profile-log-out" = "Sair";
+"profile-settings-button-title" = "Funcionalidade não disponível";
+"profile-settings-button-message" = "Estamos trabalhando nisso";
+"profile-settings-button-primary" = "Aceitar";
+"logout" = "Sair";
+"logout-question" = "Deseja sair deste dispositivo?";
+"logout-button" = "Sair";
+"logout-alert-title" = "Confirmação";
+"logout-alert-message" = "Tem certeza de que deseja sair?";
+"logout-alert-cancel" = "Não";
+"logout-alert-accept" = "Sim";
+"settings-profile2" = "Configurações do Perfil";
+"settings-profile2-photo" = "Adicionar uma foto de perfil";
+"settings-profile2-button-edit" = "Editar";
+"settings-profile2-session" = "Manter sessão ativa";
+"settings-profile2-online" = "Mostrar status online";
+"settings-profile2-blocked" = "Bloqueados";
+"blocked-button-alert-title" = "Estamos atualmente desenvolvendo esta seção";
+"blocked-button-alert-message" = "Desculpe pelo transtorno";
+"blocked-button-alert-primary-button" = "Aceitar";
+"chatheader-online" = "Online";
+"chatheader-disconect" = "Desconectado";
+"chatdetailview-photo" = "Fotos Recentes";
+"chatdetailview-blocked" = "Bloquear";
+"onboarding_page_0_title" = "Bem-vindo ao EasyChat";
+"onboarding_page_0_description" = "É um app onde você pode se comunicar com seus melhores amigos enviando mensagens online e criando conversas com usuários que têm o app.";
+"onboarding_page_1_title" = "Envie Mensagens";
+"onboarding_page_1_description" = "Comunique-se com seus amigos em tempo real.";
+"onboarding_page_2_title" = "Veja o Status Atual dos Seus Amigos";
+"onboarding_page_2_description" = "Você pode ver se seus amigos estão online ou não.";
+"onboarding_page_3_title" = "Excluir Conversas";
+"onboarding_page_3_description" = "Exclua uma conversa, mas você só pode excluir conversas que você criou.";
+"onboarding_page_4_title" = "Perfil Personalizado";
+"onboarding_page_4_description" = "Selecione uma foto de perfil local e personalize sua experiência.";
+"start_now" = "Hora de Começar";
+"welcome_message" = "Obrigado por escolher o EasyChat! Pressione o botão abaixo para começar a usar o aplicativo e se comunicar com seus amigos.";
+"start_button" = "Começar";
+"unknown_error" = "Erro Desconhecido";
+"ok_button" = "OK";
+"register-alert-title" = "Erro";
+"register-alert-message" = "Por favor, preencha todos os campos";
+"register-password-mismatch" = "As senhas não coincidem";
+"register-success-title" = "Registro Bem-Sucedido";
+"register-success-message" = "O registro foi bem-sucedido";
+"register-error-message" = "Erro ao registrar usuário: %@";
+"bio-error1" = "Autentique-se para fazer login";
+"bio-error2" = "Erro de autenticação biométrica";
+"bio-error3" = "Autenticação não disponível";

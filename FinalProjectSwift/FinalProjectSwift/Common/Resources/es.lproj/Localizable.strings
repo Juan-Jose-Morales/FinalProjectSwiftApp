@@ -13,7 +13,7 @@
 "login-No account" = "¿No tienes cuenta?";
 "login-Register"  = "Regístrate";
 "login-error-comprobation" = "Rellene todos los campos";
-"login-error-server" = "Error al iniciar sesión:";
+"login-error-server %@" = "Error al iniciar sesión:";
 "login-alert-error-not-found" = "Error Desconocido";
 "lofin-alert-error" = "Error";
 "login-alert-error-button" = "Ok";
@@ -61,7 +61,30 @@
 "chatheader-disconect" = "Desconectado";
 "chatdetailview-photo" = "Fotos recientes";
 "chatdetailview-blocked" = "Bloquear";
-
+"onboarding_page_0_title" = "Bienvenidos a EasyChat";
+"onboarding_page_0_description" = "Es una app en la cual puedes comunicarte con tus mejores amigos, enviando mensajes en línea, creando chats con usuarios que tengan la app.";
+"onboarding_page_1_title" = "Envía Mensajes";
+"onboarding_page_1_description" = "Comunícate con tus amigos en tiempo real.";
+"onboarding_page_2_title" = "Observa el estado actual de tus amigos";
+"onboarding_page_2_description" = "Puedes ver si tus amigos están conectados o no.";
+"onboarding_page_3_title" = "Eliminar Chats";
+"onboarding_page_3_description" = "Elimina un chat, pero solo podrás eliminar un chat que has creado tú.";
+"onboarding_page_4_title" = "Perfil Personalizado";
+"onboarding_page_4_description" = "Selecciona una foto de perfil en local y personaliza tu experiencia.";
+"start_now" = "Es hora de comenzar";
+"welcome_message" = "¡Gracias por elegir EasyChat! Presiona el botón a continuación para empezar a usar la aplicación y comunicarte con tus amigos.";
+"start_button" = "Empezar";
+"unknown_error" = "Error desconocido";
+"ok_button" = "OK";
+"register-alert-title" = "Error";
+"register-alert-message" = "Rellena todos los campos";
+"register-password-mismatch" = "Las contraseñas no coinciden";
+"register-success-title" = "Registro Exitoso";
+"register-success-message" = "El registro fue exitoso";
+"register-error-message" = "Error al registrar usuario: %@";
+"bio-error1" = "Autenticate para iniciar sesión";
+"bio-error2" = "Error de auntenticación biometrica";
+"bio-error3" = "La autenticación no está disponible";
 
 
 

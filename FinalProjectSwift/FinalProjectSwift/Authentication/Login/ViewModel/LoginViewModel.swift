@@ -45,7 +45,7 @@ class LoginViewModel: ObservableObject {
                     UserDefaults.standard.synchronize()
                     self?.handleLoggedInUser(user, token: token)
                 case .failure(let error):
-                    self?.errorMessage = "login-error-server \(error.localizedDescription)"
+                    self?.errorMessage = "\(error.localizedDescription)"
                     self?.showAlert = true
                 }
             }
@@ -59,20 +59,20 @@ class LoginViewModel: ObservableObject {
         var error: NSError?
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Autenticate para iniciar sesión"
+            let reason = "bio-error1"
             
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                 DispatchQueue.main.async {
                     if success {
                         self.loginWithBiometrics()
                     } else {
-                        self.errorMessage = "Error de autenticación biométrica"
+                        self.errorMessage = "bio-error2"
                         self.showAlert = true
                     }
                 }
             }
         } else {
-            self.errorMessage = "La autenticación no está disponible"
+            self.errorMessage = "bio-error3"
             self.showAlert = true
         }
         isShowingProgress = false
