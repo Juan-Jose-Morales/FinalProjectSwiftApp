@@ -1,0 +1,87 @@
+/* 
+  Localizable.strings
+  FinalProjectSwift
+
+  Created by Alejandro Vidal Gómez Alves on 29/7/24.
+  
+*/
+"login-User" = "ユーザー";
+"login-Password" = "パスワード";
+"login-Biometry" = "生体認証でログイン";
+"login-login" = "ログイン";
+"login-No account" = "アカウントをお持ちでないですか？";
+"login-Register"  = "登録";
+"login-error-comprobation" = "すべてのフィールドに入力してください";
+"login-error-server %@" = "ログインエラー：";
+"login-alert-error-not-found" = "不明なエラー";
+"lofin-alert-error" = "エラー";
+"login-alert-error-button" = "OK";
+"login-alert-title" = "エラー";
+"login-alert-message" = "すべてのフィールドに入力してください";
+"login-alert-accept" = "OK";
+"register-User" = "ユーザー";
+"register-Nick" = "ニックネーム";
+"register-password" = "パスワード";
+"register-confirm-password" = "パスワードを再入力";
+"register-button" = "登録";
+"register-do-you-have-account" = "すでにアカウントをお持ちですか？";
+"register-log-in" = "ログイン";
+"Home-search" = "検索";
+"photo-photoprofile" = "プロフィール写真";
+"photo-take-photo" = "写真を撮る";
+"photo-select-photo" = "写真を選択";
+"photo-delete-photo" = "写真を削除";
+"newchat-newchat" = "新しいチャット";
+"newchat-search" = "検索";
+"profile-settings-profile" = "プロフィール設定";
+"profile-storage" = "ストレージ";
+"profile-languages-settings" = "言語設定";
+"profile-log-out" = "ログアウト";
+"profile-settings-button-title" = "機能が利用できません";
+"profile-settings-button-message" = "作業中です";
+"profile-settings-button-primary" = "承認";
+"logout" = "ログアウト";
+"logout-question" = "このデバイスでログアウトしますか？";
+"logout-button" = "ログアウト";
+"logout-alert-title" = "確認";
+"logout-alert-message" = "ログアウトしてもよろしいですか？";
+"logout-alert-cancel" = "いいえ";
+"logout-alert-accept" = "はい";
+"settings-profile2" = "プロフィール設定";
+"settings-profile2-photo" = "プロフィール写真を追加";
+"settings-profile2-button-edit" = "編集";
+"settings-profile2-session" = "セッションをアクティブに保つ";
+"settings-profile2-online" = "オンラインステータスを表示";
+"settings-profile2-blocked" = "ブロック済み";
+"blocked-button-alert-title" = "現在、このセクションを開発中です";
+"blocked-button-alert-message" = "ご不便をおかけして申し訳ありません";
+"blocked-button-alert-primary-button" = "承認";
+"chatheader-online" = "オンライン";
+"chatheader-disconect" = "接続解除";
+"chatdetailview-photo" = "最近の写真";
+"chatdetailview-blocked" = "ブロック";
+"onboarding_page_0_title" = "EasyChatへようこそ";
+"onboarding_page_0_description" = "このアプリでは、オンラインメッセージを送信したり、アプリを持っているユーザーとチャットを作成したりして、親友とコミュニケーションを取ることができます。";
+"onboarding_page_1_title" = "メッセージを送信";
+"onboarding_page_1_description" = "友達とリアルタイムでコミュニケーションを取ります。";
+"onboarding_page_2_title" = "友達の現在のステータスを見る";
+"onboarding_page_2_description" = "友達がオンラインかどうかを見ることができます。";
+"onboarding_page_3_title" = "チャットを削除";
+"onboarding_page_3_description" = "チャットを削除できますが、自分が作成したチャットのみ削除できます。";
+"onboarding_page_4_title" = "カスタムプロフィール";
+"onboarding_page_4_description" = "ローカルのプロフィール写真を選択し、体験をカスタマイズします。";
+"start_now" = "今すぐ開始";
+"welcome_message" = "EasyChatを選んでいただきありがとうございます！下のボタンを押してアプリの使用を開始し、友達とコミュニケーションを取りましょう。";
+"start_button" = "開始";
+"unknown_error" = "不明なエラー";
+"ok_button" = "OK";
+"register-alert-title" = "エラー";
+"register-alert-message" = "すべてのフィールドに入力してください";
+"register-password-mismatch" = "パスワードが一致しません";
+"register-success-title" = "登録成功";
+"register-success-message" = "登録が成功しました";
+"register-error-message" = "ユーザー登録エラー：%@";
+"bio-error1" = "ログインするには認証が必要です";
+"bio-error2" = "生体認証エラー";
+"bio-error3" = "認証が利用できません";
+"chat-placeholder" = "メッセージを入力...";

@@ -1,0 +1,87 @@
+/* 
+  Localizable.strings
+  FinalProjectSwift
+
+  Created by Alejandro Vidal Gómez Alves on 29/7/24.
+  
+*/
+"login-User" = "Người dùng";
+"login-Password" = "Mật khẩu";
+"login-Biometry" = "Đăng nhập bằng sinh trắc học";
+"login-login" = "Đăng nhập";
+"login-No account" = "Bạn không có tài khoản?";
+"login-Register"  = "Đăng ký";
+"login-error-comprobation" = "Vui lòng điền đầy đủ thông tin";
+"login-error-server %@" = "Lỗi đăng nhập:";
+"login-alert-error-not-found" = "Lỗi không xác định";
+"lofin-alert-error" = "Lỗi";
+"login-alert-error-button" = "Đồng ý";
+"login-alert-title" = "Lỗi";
+"login-alert-message" = "Vui lòng điền đầy đủ thông tin";
+"login-alert-accept" = "Đồng ý";
+"register-User" = "Người dùng";
+"register-Nick" = "Biệt danh";
+"register-password" = "Mật khẩu";
+"register-confirm-password" = "Nhập lại mật khẩu";
+"register-button" = "Đăng ký";
+"register-do-you-have-account" = "Bạn đã có tài khoản?";
+"register-log-in" = "Đăng nhập";
+"Home-search" = "Tìm kiếm";
+"photo-photoprofile" = "Ảnh đại diện";
+"photo-take-photo" = "Chụp ảnh";
+"photo-select-photo" = "Chọn ảnh";
+"photo-delete-photo" = "Xóa ảnh";
+"newchat-newchat" = "Trò chuyện mới";
+"newchat-search" = "Tìm kiếm";
+"profile-settings-profile" = "Cài đặt hồ sơ";
+"profile-storage" = "Lưu trữ";
+"profile-languages-settings" = "Cài đặt ngôn ngữ";
+"profile-log-out" = "Đăng xuất";
+"profile-settings-button-title" = "Tính năng không có sẵn";
+"profile-settings-button-message" = "Chúng tôi đang làm việc trên đó";
+"profile-settings-button-primary" = "Đồng ý";
+"logout" = "Đăng xuất";
+"logout-question" = "Bạn có muốn đăng xuất trên thiết bị này không?";
+"logout-button" = "Đăng xuất";
+"logout-alert-title" = "Xác nhận";
+"logout-alert-message" = "Bạn có chắc chắn muốn đăng xuất không?";
+"logout-alert-cancel" = "Không";
+"logout-alert-accept" = "Có";
+"settings-profile2" = "Cài đặt hồ sơ";
+"settings-profile2-photo" = "Thêm ảnh hồ sơ";
+"settings-profile2-button-edit" = "Chỉnh sửa";
+"settings-profile2-session" = "Giữ phiên làm việc hoạt động";
+"settings-profile2-online" = "Hiển thị trạng thái trực tuyến";
+"settings-profile2-blocked" = "Đã bị chặn";
+"blocked-button-alert-title" = "Chúng tôi đang phát triển phần này";
+"blocked-button-alert-message" = "Xin lỗi vì sự bất tiện";
+"blocked-button-alert-primary-button" = "Đồng ý";
+"chatheader-online" = "Trực tuyến";
+"chatheader-disconect" = "Ngắt kết nối";
+"chatdetailview-photo" = "Ảnh gần đây";
+"chatdetailview-blocked" = "Chặn";
+"onboarding_page_0_title" = "Chào mừng đến với EasyChat";
+"onboarding_page_0_description" = "Đây là một ứng dụng nơi bạn có thể giao tiếp với những người bạn tốt nhất của mình bằng cách gửi tin nhắn trực tuyến và tạo trò chuyện với các người dùng khác đã cài đặt ứng dụng.";
+"onboarding_page_1_title" = "Gửi tin nhắn";
+"onboarding_page_1_description" = "Giao tiếp với bạn bè của bạn theo thời gian thực.";
+"onboarding_page_2_title" = "Xem trạng thái hiện tại của bạn bè";
+"onboarding_page_2_description" = "Bạn có thể xem bạn bè của bạn có đang trực tuyến hay không.";
+"onboarding_page_3_title" = "Xóa trò chuyện";
+"onboarding_page_3_description" = "Xóa một trò chuyện, nhưng bạn chỉ có thể xóa các trò chuyện bạn đã tạo.";
+"onboarding_page_4_title" = "Hồ sơ tùy chỉnh";
+"onboarding_page_4_description" = "Chọn ảnh hồ sơ địa phương và tùy chỉnh trải nghiệm của bạn.";
+"start_now" = "Thời gian bắt đầu";
+"welcome_message" = "Cảm ơn bạn đã chọn EasyChat! Nhấn nút bên dưới để bắt đầu sử dụng ứng dụng và giao tiếp với bạn bè của bạn.";
+"start_button" = "Bắt đầu";
+"unknown_error" = "Lỗi không xác định";
+"ok_button" = "Đồng ý";
+"register-alert-title" = "Lỗi";
+"register-alert-message" = "Vui lòng điền đầy đủ thông tin";
+"register-password-mismatch" = "Mật khẩu không khớp";
+"register-success-title" = "Đăng ký thành công";
+"register-success-message" = "Đăng ký đã thành công";
+"register-error-message" = "Lỗi khi đăng ký người dùng: %@";
+"bio-error1" = "Xác thực để đăng nhập";
+"bio-error2" = "Lỗi xác thực sinh trắc học";
+"bio-error3" = "Xác thực không khả dụng";
+"chat-placeholder" = "Gõ tin nhắn...";

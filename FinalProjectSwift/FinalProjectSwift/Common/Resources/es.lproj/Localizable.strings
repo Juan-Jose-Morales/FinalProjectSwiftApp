@@ -1,0 +1,93 @@
+/* 
+  Localizable.strings
+  FinalProjectSwift
+
+  Created by Alejandro Vidal Gómez Alves on 29/7/24.
+  
+*/
+
+"login-User" = "Usuario";
+"login-Password" = "Contraseña";
+"login-Biometry" = "Iniciar Sesión con Biometría";
+"login-login" = "Iniciar Sesión";
+"login-No account" = "¿No tienes cuenta?";
+"login-Register"  = "Regístrate";
+"login-error-comprobation" = "Rellene todos los campos";
+"login-error-server %@" = "Error al iniciar sesión:";
+"login-alert-error-not-found" = "Error Desconocido";
+"lofin-alert-error" = "Error";
+"login-alert-error-button" = "Ok";
+"login-alert-title" = "Error";
+"login-alert-message" = "Rellena todos los campos";
+"login-alert-accept" = "OK";
+"register-User" = "Usuario";
+"register-Nick" = "Nick";
+"register-password" = "Contraseña";
+"register-confirm-password" = "Repetir Contraseña";
+"register-button" = "Registrar";
+"register-do-you-have-account" = "¿Ya tienes cuenta?";
+"register-log-in" = "Iniciar Sesión";
+"Home-search" = "Buscar";
+"photo-photoprofile" = "Foto de perfil";
+"photo-take-photo" = "Tomar foto";
+"photo-select-photo" = "Seleccionar foto";
+"photo-delete-photo" = "Eliminar foto";
+"newchat-newchat" = "Nuevo chat";
+"newchat-search" = "Buscar";
+"profile-settings-profile" = "Ajustes de perfil";
+"profile-storage" = "Almacenamiento";
+"profile-languages-settings" = "Ajustes de idioma";
+"profile-log-out" = "Cerrar Sesión";
+"profile-settings-button-title" = "Funcionalidad no disponible";
+"profile-settings-button-message" = "Estamos trabajando en ello";
+"profile-settings-button-primary" = "Aceptar";
+"logout" = "Cerrar sesión";
+"logout-question" = "¿Deseas cerrar sesión en este dispositivo?";
+"logout-button" = "Cerrar sesión";
+"logout-alert-title" = "Confirmación";
+"logout-alert-message" = "¿Estás seguro que quieres cerrar sesión?";
+"logout-alert-cancel" = "No";
+"logout-alert-accept" = "Sí";
+"settings-profile2" = "Ajustes de perfil";
+"settings-profile2-photo" = "Añade una foto de perfil";
+"settings-profile2-button-edit" = "Editar";
+"settings-profile2-session" = "Mantener sesión iniciada";
+"settings-profile2-online" = "Mostrar estado en línea";
+"settings-profile2-blocked" = "Bloqueados";
+"blocked-button-alert-title" = "En este preciso instante estamos en la fase de desarrollo de este apartado en concreto";
+"blocked-button-alert-message" = "Disculpe las molestias.";
+"blocked-button-alert-primary-button" = "Aceptar";
+"chatheader-online" = "En linea";
+"chatheader-disconect" = "Desconectado";
+"chatdetailview-photo" = "Fotos recientes";
+"chatdetailview-blocked" = "Bloquear";
+"onboarding_page_0_title" = "Bienvenidos a EasyChat";
+"onboarding_page_0_description" = "Es una app en la cual puedes comunicarte con tus mejores amigos, enviando mensajes en línea, creando chats con usuarios que tengan la app.";
+"onboarding_page_1_title" = "Envía Mensajes";
+"onboarding_page_1_description" = "Comunícate con tus amigos en tiempo real.";
+"onboarding_page_2_title" = "Observa el estado actual de tus amigos";
+"onboarding_page_2_description" = "Puedes ver si tus amigos están conectados o no.";
+"onboarding_page_3_title" = "Eliminar Chats";
+"onboarding_page_3_description" = "Elimina un chat, pero solo podrás eliminar un chat que has creado tú.";
+"onboarding_page_4_title" = "Perfil Personalizado";
+"onboarding_page_4_description" = "Selecciona una foto de perfil en local y personaliza tu experiencia.";
+"start_now" = "Es hora de comenzar";
+"welcome_message" = "¡Gracias por elegir EasyChat! Presiona el botón a continuación para empezar a usar la aplicación y comunicarte con tus amigos.";
+"start_button" = "Empezar";
+"unknown_error" = "Error desconocido";
+"ok_button" = "OK";
+"register-alert-title" = "Error";
+"register-alert-message" = "Rellena todos los campos";
+"register-password-mismatch" = "Las contraseñas no coinciden";
+"register-success-title" = "Registro Exitoso";
+"register-success-message" = "El registro fue exitoso";
+"register-error-message" = "Error al registrar usuario: %@";
+"bio-error1" = "Autenticate para iniciar sesión";
+"bio-error2" = "Error de auntenticación biometrica";
+"bio-error3" = "La autenticación no está disponible";
+"chat-placeholder" = "Escribe un mensaje...";
+
+
+
+
+
