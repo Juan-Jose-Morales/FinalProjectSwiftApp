@@ -30,7 +30,7 @@ struct RegisterView: View {
                     SecureFields(title: "register-password", text: $viewModel.password, imageName: "padlock")
                         .padding(.bottom, 25)
                     
-                    SecureFields(title: "register-confirm-paswword", text: $viewModel.confirmPassword, imageName: "padlock")
+                    SecureFields(title: "register-confirm-password", text: $viewModel.confirmPassword, imageName: "padlock")
                         .padding(.bottom, 25)
                     
                     CustomButton(title: "register-button") {
@@ -78,7 +78,7 @@ struct RegisterView: View {
     
     private func navigateToLogin() -> some View {
         HStack {
-            Text("register-dou you have account")
+            Text("register-do-you-have-account")
                 .foregroundColor(.black)
                 .padding(.horizontal, 10)
             Button(action: {

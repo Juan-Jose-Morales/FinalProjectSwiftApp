@@ -34,7 +34,7 @@ struct ProfileView: View {
                     Spacer().frame(height: 40)
                     
                     Toggle(isOn: $keepSessionActive) {
-                        Text("settings-profile2-sesion")
+                        Text("settings-profile2-session")
                             .foregroundColor(.black)
                     }
                     .padding(.horizontal, 40)
@@ -74,9 +74,9 @@ struct ProfileView: View {
             }
             .alert(isPresented: $showBlockedFunctionalityAlert) {
                 Alert(
-                    title: Text("En este preciso instante estamos en la fase de desarrollo de este apartado en concreto."),
-                    message: Text("Disculpe las molestias."),
-                    dismissButton: .default(Text("Aceptar")) {
+                    title: Text("blocked-button-alert-title"),
+                    message: Text("blocked-button-alert-message"),
+                    dismissButton: .default(Text("blocked-button-alert-primary-button")) {
                         
                     }
                 )
@@ -107,7 +107,7 @@ struct ProfileView: View {
                     Button(action: {
                         isNavigateToChangeProfile = true
                     }) {
-                        Text("Editar")
+                        Text("settings-profile2-button-edit")
                             .foregroundColor(Color("Blue"))
                         
                     }
@@ -116,7 +116,7 @@ struct ProfileView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Añade una foto de perfil")
+                    Text("settings-profile2-photo")
                         .foregroundColor(.black)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)

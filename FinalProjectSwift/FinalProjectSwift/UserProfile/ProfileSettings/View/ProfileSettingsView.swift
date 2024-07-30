@@ -88,9 +88,10 @@ struct ProfileSettingsView: View {
                 CustomProfileButton(title: button.title, iconName: button.iconName) {
                     if button.title == "profile-settings-profile" {
                         isNavigatingToProfile = true
-                    }
-                    else if button.title == "profile-storage" || button.title == "profile-languages-settings" {
-                        showBlockedFunctionalityAlert.toggle()
+                    } else if button.title == "profile-storage" {
+                        showBlockedFunctionalityAlert = true
+                    } else if button.title == "profile-languages-settings" {
+                        viewModel.openSettings()
                     }
                 }
             }

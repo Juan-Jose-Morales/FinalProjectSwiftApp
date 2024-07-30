@@ -12,15 +12,20 @@
 "login-login" = "Iniciar Sesión";
 "login-No account" = "¿No tienes cuenta?";
 "login-Register"  = "Regístrate";
+"login-error-comprobation" = "Rellene todos los campos";
+"login-error-server" = "Error al iniciar sesión:";
+"login-alert-error-not-found" = "Error Desconocido";
+"lofin-alert-error" = "Error";
+"login-alert-error-button" = "Ok";
 "login-alert-title" = "Error";
 "login-alert-message" = "Rellena todos los campos";
 "login-alert-accept" = "OK";
 "register-User" = "Usuario";
 "register-Nick" = "Nick";
 "register-password" = "Contraseña";
-"register-confirm-paswword" = "Repetir Contraseña";
+"register-confirm-password" = "Repetir Contraseña";
 "register-button" = "Registrar";
-"register-dou you have account" = "¿Ya tienes cuenta?";
+"register-do-you-have-account" = "¿Ya tienes cuenta?";
 "register-log-in" = "Iniciar Sesión";
 "Home-search" = "Buscar";
 "photo-photoprofile" = "Foto de perfil";
@@ -32,26 +37,31 @@
 "profile-settings-profile" = "Ajustes de perfil";
 "profile-storage" = "Almacenamiento";
 "profile-languages-settings" = "Ajustes de idioma";
-"profile-log-out" = "Cerrar Sesion";
+"profile-log-out" = "Cerrar Sesión";
 "profile-settings-button-title" = "Funcionalidad no disponible";
 "profile-settings-button-message" = "Estamos trabajando en ello";
 "profile-settings-button-primary" = "Aceptar";
 "logout" = "Cerrar sesión";
-"logout-question" = "Deseas cerrar sesión en este dispositivo";
+"logout-question" = "¿Deseas cerrar sesión en este dispositivo?";
 "logout-button" = "Cerrar sesión";
-"logout-alert-title" = "Confirmacion";
-"logout-alert-message" = "¿Estas seguro que quieres cerrar sesión?";
+"logout-alert-title" = "Confirmación";
+"logout-alert-message" = "¿Estás seguro que quieres cerrar sesión?";
 "logout-alert-cancel" = "No";
-"logout-alert-acept" = "Sí";
+"logout-alert-accept" = "Sí";
 "settings-profile2" = "Ajustes de perfil";
 "settings-profile2-photo" = "Añade una foto de perfil";
 "settings-profile2-button-edit" = "Editar";
-"settings-profile2-sesion" = "Mantener sesión iniciada";
+"settings-profile2-session" = "Mantener sesión iniciada";
 "settings-profile2-online" = "Mostrar estado en línea";
 "settings-profile2-blocked" = "Bloqueados";
-"blocked-button-alert-title" = "En este preciso instante estamos en la fase de desarollo de este apartado en concreto";
-"blocked-button-alert-message" = "Disculpe las molestias";
+"blocked-button-alert-title" = "En este preciso instante estamos en la fase de desarrollo de este apartado en concreto";
+"blocked-button-alert-message" = "Disculpe las molestias.";
 "blocked-button-alert-primary-button" = "Aceptar";
+"chatheader-online" = "En linea";
+"chatheader-disconect" = "Desconectado";
+"chatdetailview-photo" = "Fotos recientes";
+"chatdetailview-blocked" = "Bloquear";
+
 
 
 

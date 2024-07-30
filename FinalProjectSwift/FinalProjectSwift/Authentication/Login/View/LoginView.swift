@@ -61,7 +61,7 @@ struct LoginView: View {
     }
     
     private func alert() -> Alert {
-        Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: {
+        Alert(title: Text("login-alert-title"), message: Text(viewModel.errorMessage ?? "login-alert-error-not-found"), dismissButton: .default(Text("login-alert-error-button"), action: {
             viewModel.resetAlerts()
         }))
     }

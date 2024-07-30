@@ -10,6 +10,7 @@ import Combine
 import Alamofire
 import SwiftUI
 
+
 class ProfileSettingsViewModel: ObservableObject {
     @Published var user = User()
     @Published var profileImage: UIImage?
@@ -29,7 +30,13 @@ class ProfileSettingsViewModel: ObservableObject {
         loadUserNick()
         loadProfileImage()
     }
-    
+    func openSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
     
     private func loadProfileImage() {
         if let data = UserDefaults.standard.data(forKey: "profileImageKey"),
@@ -54,3 +61,4 @@ struct ButtonInfo: Identifiable {
     var iconName: String
     var action: () -> Void
 }
+
