@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		558EF1712C58E54200C59D60 /* *.vass.es.cer in Resources */ = {isa = PBXBuildFile; fileRef = 558EF1702C58E54200C59D60 /* *.vass.es.cer */; };
 		9003E10D2C3EAAC7006CD269 /* CustomObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003E10C2C3EAAC7006CD269 /* CustomObjects.swift */; };
 		9003E10F2C3EB142006CD269 /* LoginUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003E10E2C3EB142006CD269 /* LoginUserResponse.swift */; };
 		90294B472C34AD150030E04C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90294B462C34AD150030E04C /* CustomButton.swift */; };
@@ -111,6 +112,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		558EF1702C58E54200C59D60 /* *.vass.es.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "*.vass.es.cer"; sourceTree = "<group>"; };
 		9003E10C2C3EAAC7006CD269 /* CustomObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomObjects.swift; sourceTree = "<group>"; };
 		9003E10E2C3EB142006CD269 /* LoginUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserResponse.swift; sourceTree = "<group>"; };
 		90294B462C34AD150030E04C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -228,6 +230,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		558EF16F2C58E53800C59D60 /* Certificates */ = {
+			isa = PBXGroup;
+			children = (
+				558EF1702C58E54200C59D60 /* *.vass.es.cer */,
+			);
+			path = Certificates;
+			sourceTree = "<group>";
+		};
 		9003E1112C420549006CD269 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -782,6 +792,7 @@
 		90E79ECE2C2B39C400133583 /* FinalProjectSwift */ = {
 			isa = PBXGroup;
 			children = (
+				558EF16F2C58E53800C59D60 /* Certificates */,
 				90294B4E2C36EAB90030E04C /* Managers */,
 				90CE61322C5575A0002B70D3 /* Client */,
 				90CE61312C557582002B70D3 /* Protocols */,
@@ -942,6 +953,7 @@
 			files = (
 				A94B05312C564BE90093EA8E /* GoogleService-Info.plist in Resources */,
 				90E79ED72C2B39C600133583 /* Preview Assets.xcassets in Resources */,
+				558EF1712C58E54200C59D60 /* *.vass.es.cer in Resources */,
 				90E79ED42C2B39C600133583 /* Assets.xcassets in Resources */,
 				A9A4497F2C3C32BB0085838B /* Launch Screen.storyboard in Resources */,
 				A9A4497B2C3C31AB0085838B /* main_splash.json in Resources */,
