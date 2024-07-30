@@ -13,7 +13,7 @@
 "login-No account" = "¿No tienes cuenta?";
 "login-Register"  = "Regístrate";
 "login-error-comprobation" = "Rellene todos los campos";
-"login-error-server" = "Error al iniciar sesión:";
+"login-error-server %@" = "Error al iniciar sesión:";
 "login-alert-error-not-found" = "Error Desconocido";
 "lofin-alert-error" = "Error";
 "login-alert-error-button" = "Ok";
@@ -76,7 +76,15 @@
 "start_button" = "Empezar";
 "unknown_error" = "Error desconocido";
 "ok_button" = "OK";
-
+"register-alert-title" = "Error";
+"register-alert-message" = "Rellena todos los campos";
+"register-password-mismatch" = "Las contraseñas no coinciden";
+"register-success-title" = "Registro Exitoso";
+"register-success-message" = "El registro fue exitoso";
+"register-error-message" = "Error al registrar usuario: %@";
+"bio-error1" = "Autenticate para iniciar sesión";
+"bio-error2" = "Error de auntenticación biometrica";
+"bio-error3" = "La autenticación no está disponible";
 
 
 

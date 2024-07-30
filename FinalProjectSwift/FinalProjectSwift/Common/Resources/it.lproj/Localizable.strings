@@ -1,0 +1,87 @@
+/* 
+  Localizable.strings
+  FinalProjectSwift
+
+  Created by Alejandro Vidal Gómez Alves on 29/7/24.
+  
+*/
+"login-User" = "Utente";
+"login-Password" = "Password";
+"login-Biometry" = "Accedi con la biometria";
+"login-login" = "Accedi";
+"login-No account" = "Non hai un account?";
+"login-Register"  = "Registrati";
+"login-error-comprobation" = "Per favore, compila tutti i campi";
+"login-error-server %@" = "Errore di accesso:";
+"login-alert-error-not-found" = "Errore sconosciuto";
+"lofin-alert-error" = "Errore";
+"login-alert-error-button" = "Ok";
+"login-alert-title" = "Errore";
+"login-alert-message" = "Per favore, compila tutti i campi";
+"login-alert-accept" = "OK";
+"register-User" = "Utente";
+"register-Nick" = "Soprannome";
+"register-password" = "Password";
+"register-confirm-password" = "Ripeti Password";
+"register-button" = "Registrati";
+"register-do-you-have-account" = "Hai già un account?";
+"register-log-in" = "Accedi";
+"Home-search" = "Cerca";
+"photo-photoprofile" = "Foto del profilo";
+"photo-take-photo" = "Scatta foto";
+"photo-select-photo" = "Seleziona foto";
+"photo-delete-photo" = "Elimina foto";
+"newchat-newchat" = "Nuova chat";
+"newchat-search" = "Cerca";
+"profile-settings-profile" = "Impostazioni profilo";
+"profile-storage" = "Archiviazione";
+"profile-languages-settings" = "Impostazioni lingua";
+"profile-log-out" = "Esci";
+"profile-settings-button-title" = "Funzionalità non disponibile";
+"profile-settings-button-message" = "Stiamo lavorando su questo";
+"profile-settings-button-primary" = "Accetta";
+"logout" = "Esci";
+"logout-question" = "Vuoi disconnetterti da questo dispositivo?";
+"logout-button" = "Esci";
+"logout-alert-title" = "Conferma";
+"logout-alert-message" = "Sei sicuro di voler uscire?";
+"logout-alert-cancel" = "No";
+"logout-alert-accept" = "Sì";
+"settings-profile2" = "Impostazioni profilo";
+"settings-profile2-photo" = "Aggiungi una foto del profilo";
+"settings-profile2-button-edit" = "Modifica";
+"settings-profile2-session" = "Mantieni sessione attiva";
+"settings-profile2-online" = "Mostra stato online";
+"settings-profile2-blocked" = "Bloccati";
+"blocked-button-alert-title" = "Stiamo attualmente sviluppando questa sezione";
+"blocked-button-alert-message" = "Ci scusiamo per l'inconveniente";
+"blocked-button-alert-primary-button" = "Accetta";
+"chatheader-online" = "Online";
+"chatheader-disconect" = "Disconnesso";
+"chatdetailview-photo" = "Foto recenti";
+"chatdetailview-blocked" = "Blocca";
+"onboarding_page_0_title" = "Benvenuto su EasyChat";
+"onboarding_page_0_description" = "È un'app in cui puoi comunicare con i tuoi migliori amici inviando messaggi online e creando chat con utenti che hanno l'app.";
+"onboarding_page_1_title" = "Invia Messaggi";
+"onboarding_page_1_description" = "Comunica con i tuoi amici in tempo reale.";
+"onboarding_page_2_title" = "Visualizza lo Stato Attuale dei Tuoi Amici";
+"onboarding_page_2_description" = "Puoi vedere se i tuoi amici sono online o meno.";
+"onboarding_page_3_title" = "Elimina Chat";
+"onboarding_page_3_description" = "Elimina una chat, ma puoi eliminare solo le chat che hai creato.";
+"onboarding_page_4_title" = "Profilo Personalizzato";
+"onboarding_page_4_description" = "Seleziona una foto del profilo locale e personalizza la tua esperienza.";
+"start_now" = "È il momento di iniziare";
+"welcome_message" = "Grazie per aver scelto EasyChat! Premi il pulsante qui sotto per iniziare a usare l'app e comunicare con i tuoi amici.";
+"start_button" = "Inizia";
+"unknown_error" = "Errore sconosciuto";
+"ok_button" = "OK";
+"register-alert-title" = "Errore";
+"register-alert-message" = "Per favore, compila tutti i campi";
+"register-password-mismatch" = "Le password non corrispondono";
+"register-success-title" = "Registrazione riuscita";
+"register-success-message" = "La registrazione è stata completata con successo";
+"register-error-message" = "Errore durante la registrazione dell'utente: %@";
+"bio-error1" = "Autenticati per accedere";
+"bio-error2" = "Errore di autenticazione biometrica";
+"bio-error3" = "Autenticazione non disponibile";
+

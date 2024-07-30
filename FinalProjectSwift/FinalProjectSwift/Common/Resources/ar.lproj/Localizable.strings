@@ -1,0 +1,86 @@
+/* 
+  Localizable.strings
+  FinalProjectSwift
+
+  Created by Alejandro Vidal Gómez Alves on 29/7/24.
+  
+*/
+"login-User" = "المستخدم";
+"login-Password" = "كلمة المرور";
+"login-Biometry" = "تسجيل الدخول باستخدام البصمة";
+"login-login" = "تسجيل الدخول";
+"login-No account" = "ليس لديك حساب؟";
+"login-Register"  = "تسجيل";
+"login-error-comprobation" = "يرجى ملء جميع الحقول";
+"login-error-server %@" = "خطأ في تسجيل الدخول:";
+"login-alert-error-not-found" = "خطأ غير معروف";
+"lofin-alert-error" = "خطأ";
+"login-alert-error-button" = "موافق";
+"login-alert-title" = "خطأ";
+"login-alert-message" = "يرجى ملء جميع الحقول";
+"login-alert-accept" = "موافق";
+"register-User" = "المستخدم";
+"register-Nick" = "اللقب";
+"register-password" = "كلمة المرور";
+"register-confirm-password" = "تكرار كلمة المرور";
+"register-button" = "تسجيل";
+"register-do-you-have-account" = "هل لديك حساب بالفعل؟";
+"register-log-in" = "تسجيل الدخول";
+"Home-search" = "بحث";
+"photo-photoprofile" = "صورة الملف الشخصي";
+"photo-take-photo" = "التقاط صورة";
+"photo-select-photo" = "اختيار صورة";
+"photo-delete-photo" = "حذف الصورة";
+"newchat-newchat" = "دردشة جديدة";
+"newchat-search" = "بحث";
+"profile-settings-profile" = "إعدادات الملف الشخصي";
+"profile-storage" = "التخزين";
+"profile-languages-settings" = "إعدادات اللغة";
+"profile-log-out" = "تسجيل الخروج";
+"profile-settings-button-title" = "الوظيفة غير متوفرة";
+"profile-settings-button-message" = "نحن نعمل على ذلك";
+"profile-settings-button-primary" = "موافق";
+"logout" = "تسجيل الخروج";
+"logout-question" = "هل تريد تسجيل الخروج من هذا الجهاز؟";
+"logout-button" = "تسجيل الخروج";
+"logout-alert-title" = "تأكيد";
+"logout-alert-message" = "هل أنت متأكد أنك تريد تسجيل الخروج؟";
+"logout-alert-cancel" = "لا";
+"logout-alert-accept" = "نعم";
+"settings-profile2" = "إعدادات الملف الشخصي";
+"settings-profile2-photo" = "أضف صورة للملف الشخصي";
+"settings-profile2-button-edit" = "تعديل";
+"settings-profile2-session" = "ابقِ الجلسة نشطة";
+"settings-profile2-online" = "عرض الحالة عبر الإنترنت";
+"settings-profile2-blocked" = "محظور";
+"blocked-button-alert-title" = "نحن نعمل على تطوير هذا القسم";
+"blocked-button-alert-message" = "نعتذر عن الإزعاج";
+"blocked-button-alert-primary-button" = "موافق";
+"chatheader-online" = "متصل";
+"chatheader-disconect" = "غير متصل";
+"chatdetailview-photo" = "الصور الأخيرة";
+"chatdetailview-blocked" = "حظر";
+"onboarding_page_0_title" = "مرحبا بك في EasyChat";
+"onboarding_page_0_description" = "إنه تطبيق يمكنك من التواصل مع أفضل أصدقائك من خلال إرسال الرسائل عبر الإنترنت وإنشاء الدردشات مع المستخدمين الذين لديهم التطبيق.";
+"onboarding_page_1_title" = "إرسال الرسائل";
+"onboarding_page_1_description" = "تواصل مع أصدقائك في الوقت الحقيقي.";
+"onboarding_page_2_title" = "عرض حالة أصدقائك الحالية";
+"onboarding_page_2_description" = "يمكنك رؤية ما إذا كان أصدقاؤك متصلين أو لا.";
+"onboarding_page_3_title" = "حذف الدردشات";
+"onboarding_page_3_description" = "احذف دردشة، ولكن يمكنك فقط حذف الدردشات التي أنشأتها.";
+"onboarding_page_4_title" = "ملف شخصي مخصص";
+"onboarding_page_4_description" = "حدد صورة شخصية محلية وقم بتخصيص تجربتك.";
+"start_now" = "حان الوقت للبدء";
+"welcome_message" = "شكراً لاختيارك EasyChat! اضغط على الزر أدناه لبدء استخدام التطبيق والتواصل مع أصدقائك.";
+"start_button" = "ابدأ";
+"unknown_error" = "خطأ غير معروف";
+"ok_button" = "موافق";
+"register-alert-title" = "خطأ";
+"register-alert-message" = "يرجى ملء جميع الحقول";
+"register-password-mismatch" = "كلمات المرور لا تتطابق";
+"register-success-title" = "التسجيل ناجح";
+"register-success-message" = "تم التسجيل بنجاح";
+"register-error-message" = "خطأ في تسجيل المستخدم: %@";
+"bio-error1" = "تحقق من تسجيل الدخول";
+"bio-error2" = "خطأ في التحقق البيومتري";
+"bio-error3" = "التحقق غير متوفر";

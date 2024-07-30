@@ -1,0 +1,87 @@
+/* 
+  Localizable.strings
+  FinalProjectSwift
+
+  Created by Alejandro Vidal Gómez Alves on 29/7/24.
+  
+*/
+"login-User" = "Utilisateur";
+"login-Password" = "Mot de passe";
+"login-Biometry" = "Se connecter avec la biométrie";
+"login-login" = "Se connecter";
+"login-No account" = "Vous n'avez pas de compte ?";
+"login-Register"  = "S'inscrire";
+"login-error-comprobation" = "Veuillez remplir tous les champs";
+"login-error-server %@" = "Erreur de connexion :";
+"login-alert-error-not-found" = "Erreur inconnue";
+"lofin-alert-error" = "Erreur";
+"login-alert-error-button" = "Ok";
+"login-alert-title" = "Erreur";
+"login-alert-message" = "Veuillez remplir tous les champs";
+"login-alert-accept" = "OK";
+"register-User" = "Utilisateur";
+"register-Nick" = "Pseudo";
+"register-password" = "Mot de passe";
+"register-confirm-password" = "Répéter le mot de passe";
+"register-button" = "S'inscrire";
+"register-do-you-have-account" = "Vous avez déjà un compte ?";
+"register-log-in" = "Se connecter";
+"Home-search" = "Rechercher";
+"photo-photoprofile" = "Photo de profil";
+"photo-take-photo" = "Prendre une photo";
+"photo-select-photo" = "Sélectionner une photo";
+"photo-delete-photo" = "Supprimer la photo";
+"newchat-newchat" = "Nouvelle conversation";
+"newchat-search" = "Rechercher";
+"profile-settings-profile" = "Paramètres du profil";
+"profile-storage" = "Stockage";
+"profile-languages-settings" = "Paramètres de langue";
+"profile-log-out" = "Se déconnecter";
+"profile-settings-button-title" = "Fonctionnalité non disponible";
+"profile-settings-button-message" = "Nous travaillons dessus";
+"profile-settings-button-primary" = "Accepter";
+"logout" = "Se déconnecter";
+"logout-question" = "Voulez-vous vous déconnecter de cet appareil ?";
+"logout-button" = "Se déconnecter";
+"logout-alert-title" = "Confirmation";
+"logout-alert-message" = "Êtes-vous sûr de vouloir vous déconnecter ?";
+"logout-alert-cancel" = "Non";
+"logout-alert-accept" = "Oui";
+"settings-profile2" = "Paramètres du profil";
+"settings-profile2-photo" = "Ajouter une photo de profil";
+"settings-profile2-button-edit" = "Modifier";
+"settings-profile2-session" = "Garder la session active";
+"settings-profile2-online" = "Afficher le statut en ligne";
+"settings-profile2-blocked" = "Bloqués";
+"blocked-button-alert-title" = "Nous développons actuellement cette section";
+"blocked-button-alert-message" = "Désolé pour le désagrément";
+"blocked-button-alert-primary-button" = "Accepter";
+"chatheader-online" = "En ligne";
+"chatheader-disconect" = "Déconnecté";
+"chatdetailview-photo" = "Photos récentes";
+"chatdetailview-blocked" = "Bloquer";
+"onboarding_page_0_title" = "Bienvenue sur EasyChat";
+"onboarding_page_0_description" = "C'est une application où vous pouvez communiquer avec vos meilleurs amis en envoyant des messages en ligne et en créant des discussions avec des utilisateurs ayant l'application.";
+"onboarding_page_1_title" = "Envoyer des Messages";
+"onboarding_page_1_description" = "Communiquez avec vos amis en temps réel.";
+"onboarding_page_2_title" = "Voir le Statut Actuel de Vos Amis";
+"onboarding_page_2_description" = "Vous pouvez voir si vos amis sont en ligne ou non.";
+"onboarding_page_3_title" = "Supprimer des Discussions";
+"onboarding_page_3_description" = "Supprimez une discussion, mais vous ne pouvez supprimer que les discussions que vous avez créées.";
+"onboarding_page_4_title" = "Profil Personnalisé";
+"onboarding_page_4_description" = "Sélectionnez une photo de profil locale et personnalisez votre expérience.";
+"start_now" = "Il est temps de commencer";
+"welcome_message" = "Merci d'avoir choisi EasyChat ! Appuyez sur le bouton ci-dessous pour commencer à utiliser l'application et communiquer avec vos amis.";
+"start_button" = "Commencer";
+"unknown_error" = "Erreur inconnue";
+"ok_button" = "OK";
+"register-alert-title" = "Erreur";
+"register-alert-message" = "Veuillez remplir tous les champs";
+"register-password-mismatch" = "Les mots de passe ne correspondent pas";
+"register-success-title" = "Inscription réussie";
+"register-success-message" = "L'inscription a été réussie";
+"register-error-message" = "Erreur lors de l'enregistrement de l'utilisateur : %@";
+"bio-error1" = "Authentifiez-vous pour vous connecter";
+"bio-error2" = "Erreur d'authentification biométrique";
+"bio-error3" = "Authentification non disponible";
+
