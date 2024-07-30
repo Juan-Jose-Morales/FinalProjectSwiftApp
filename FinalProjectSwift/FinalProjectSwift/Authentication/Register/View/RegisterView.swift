@@ -54,7 +54,7 @@ struct RegisterView: View {
             )
             .navigationBarHidden(true)
             .alert(isPresented: $viewModel.showAlert) {
-                Alert(title: Text(viewModel.alertTitle), message: Text(viewModel.alertMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: {
+                Alert(title: Text(viewModel.alertTitle), message: Text(viewModel.alertMessage ?? "unknown_error"), dismissButton: .default(Text("ok_button"), action: {
                     viewModel.resetAlerts()
                     if viewModel.isSuccess {
                         isNavigationToOnboarding = true

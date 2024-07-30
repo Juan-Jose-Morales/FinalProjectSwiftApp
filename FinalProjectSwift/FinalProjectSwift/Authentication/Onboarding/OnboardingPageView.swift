@@ -10,8 +10,8 @@ import SwiftUI
 
 struct OnboardingPageView: View {
     var imageName: String
-    var title: String
-    var description: String
+    var title: LocalizedStringKey
+    var description: LocalizedStringKey
 
     var body: some View {
         ScrollView {
