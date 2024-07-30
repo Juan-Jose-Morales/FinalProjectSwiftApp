@@ -15,9 +15,11 @@ class RegisterViewModel: ObservableObject {
     @Published var confirmPassword: String = ""
     @Published var nickname: String = ""
     @Published var avatar: String?
-    @Published var errorMessage: String?
+    
     @Published var showAlert: Bool = false
-    @Published var showSuccessAlert: Bool = false
+    @Published var alertMessage: String? = nil
+    @Published var alertTitle: String = ""
+    @Published var isSuccess: Bool = false
     
     private var userService: UserServiceProtocol
     
@@ -26,38 +28,54 @@ class RegisterViewModel: ObservableObject {
     }
     
     func register() {
-        guard !username.isEmpty, !password.isEmpty, !confirmPassword.isEmpty, !nickname.isEmpty else {
-            errorMessage = "Rellena todos los campos"
-            showAlert = true
+        if self.username.isEmpty || self.password.isEmpty || self.confirmPassword.isEmpty || self.nickname.isEmpty {
+            DispatchQueue.main.async {
+                self.alertTitle = "Error"
+                self.alertMessage = "Rellena todos los campos"
+                self.showAlert = true
+                self.isSuccess = false
+                print("ShowAlert: \(self.showAlert), AlertMessage: \(self.alertMessage ?? "None")")
+            }
             return
         }
         
-        guard password.trimmingCharacters(in: .whitespacesAndNewlines) == confirmPassword.trimmingCharacters(in: .whitespacesAndNewlines) else {
-            errorMessage = "Las contraseñas no coinciden"
-            showAlert = true
+        if self.password.trimmingCharacters(in: .whitespacesAndNewlines) != self.confirmPassword.trimmingCharacters(in: .whitespacesAndNewlines) {
+            DispatchQueue.main.async {
+                self.alertTitle = "Error"
+                self.alertMessage = "Las contraseñas no coinciden"
+                self.showAlert = true
+                self.isSuccess = false
+                print("ShowAlert: \(self.showAlert), AlertMessage: \(self.alertMessage ?? "None")")
+            }
             return
         }
-
-        let user = User(login: username, password: password, nick: nickname, avatar: avatar, uuid: UUID().uuidString, online: true)
         
-        userService.register(user: user) { [weak self] result in
+        let user = User(login: self.username, password: self.password, nick: self.nickname, avatar: self.avatar, uuid: UUID().uuidString, online: true)
+        
+        self.userService.register(user: user) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let user):
                     print("Usuario registrado correctamente: \(user)")
-                    self?.showSuccessAlert = true
+                    self?.alertTitle = "Registro Exitoso"
+                    self?.alertMessage = "El registro fue exitoso"
+                    self?.isSuccess = true
                 case .failure(let error):
                     print("Error al registrar usuario: \(error.localizedDescription)")
-                    self?.errorMessage = "Error al registrar usuario: \(error.localizedDescription)"
-                    self?.showAlert = true
+                    self?.alertTitle = "Error"
+                    self?.alertMessage = "Error al registrar usuario: \(error.localizedDescription)"
+                    self?.isSuccess = false
                 }
+                self?.showAlert = true
             }
         }
     }
     
     func resetAlerts() {
-        errorMessage = nil
-        showAlert = false
-        showSuccessAlert = false
+        DispatchQueue.main.async {
+            print("Reseteando alertas")
+            self.alertMessage = nil
+            self.showAlert = false
+        }
     }
 }

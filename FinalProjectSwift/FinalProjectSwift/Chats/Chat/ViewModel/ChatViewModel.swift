@@ -34,12 +34,14 @@ class ChatViewModel: ObservableObject {
         source = UserDefaults.standard.string(forKey: "id") ?? ""
         let newMessage = Message(id: UUID().uuidString, chat: chatId, source: source, message: messageText, date: ISO8601DateFormatter().string(from: Date()))
 
+        // Enviamos el mensaje al servidor
         chatService.sendMessage(chatId: chatId, message: messageText) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let sendMessageResponse):
                     if sendMessageResponse.success {
-                        self?.messagesViewModel.messages.insert(newMessage, at: 0)
+                        // Sincronizamos con el servidor después del envío exitoso
+                        self?.messagesViewModel.loadMessages()
                         self?.messageText = ""
                     } else {
                         self?.errorMessage = "Error sending message: Failed to send message."
