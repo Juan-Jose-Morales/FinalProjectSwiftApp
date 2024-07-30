@@ -84,3 +84,4 @@
 "bio-error1" = "Xác thực để đăng nhập";
 "bio-error2" = "Lỗi xác thực sinh trắc học";
 "bio-error3" = "Xác thực không khả dụng";
+"chat-placeholder" = "Gõ tin nhắn...";

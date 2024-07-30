@@ -77,3 +77,4 @@
 "bio-error1" = "请进行身份验证以登录";
 "bio-error2" = "生物识别认证错误";
 "bio-error3" = "认证不可用";
+"chat-placeholder" = "输入消息...";

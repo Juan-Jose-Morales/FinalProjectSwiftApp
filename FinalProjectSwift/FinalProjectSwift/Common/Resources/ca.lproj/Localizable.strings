@@ -84,3 +84,4 @@
 "bio-error1" = "Autentica't per iniciar sessió";
 "bio-error2" = "Error d'autenticació biomètrica";
 "bio-error3" = "Autenticació no disponible";
+"chat-placeholder" = "Escriu un missatge...";

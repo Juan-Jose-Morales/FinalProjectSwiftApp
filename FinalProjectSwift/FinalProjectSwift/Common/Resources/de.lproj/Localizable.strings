@@ -84,4 +84,4 @@
 "bio-error1" = "Authentifizieren, um sich anzumelden";
 "bio-error2" = "Fehler bei der biometrischen Authentifizierung";
 "bio-error3" = "Authentifizierung nicht verfügbar";
-
+"chat-placeholder" = "Nachricht eingeben...";

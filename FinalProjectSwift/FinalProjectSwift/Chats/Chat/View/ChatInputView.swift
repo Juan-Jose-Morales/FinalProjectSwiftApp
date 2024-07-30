@@ -23,7 +23,7 @@ struct ChatInputView: View {
             .padding(.leading, 5)
             .padding(.trailing, 5)
             
-            TextField("Envia un mensaje...", text: $messageText)
+            TextField("chat-placeholder", text: $messageText)
                 .padding(10)
                 .background(Color.white)
                 .cornerRadius(15)

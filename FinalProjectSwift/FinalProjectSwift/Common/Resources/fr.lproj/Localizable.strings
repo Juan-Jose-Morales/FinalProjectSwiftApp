@@ -84,4 +84,4 @@
 "bio-error1" = "Authentifiez-vous pour vous connecter";
 "bio-error2" = "Erreur d'authentification biométrique";
 "bio-error3" = "Authentification non disponible";
-
+"chat-placeholder" = "Tapez un message...";

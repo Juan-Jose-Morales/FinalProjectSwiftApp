@@ -84,3 +84,4 @@
 "bio-error1" = "ログインするには認証が必要です";
 "bio-error2" = "生体認証エラー";
 "bio-error3" = "認証が利用できません";
+"chat-placeholder" = "メッセージを入力...";
