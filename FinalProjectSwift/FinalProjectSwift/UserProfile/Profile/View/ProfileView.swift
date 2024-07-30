@@ -23,7 +23,7 @@ struct ProfileView: View {
         NavigationStack {
             ScrollView{
                 VStack{
-                    CustomNavigationBar(title: "Ajustes de perfil", titleColor: .black, buttonColor: .black, onBack: {
+                    CustomNavigationBar(title: "settings-profile2", titleColor: .black, buttonColor: .black, onBack: {
                         isNavigateToProfileSettings = true
                     })
                     if viewModel.isLoading {
@@ -34,7 +34,7 @@ struct ProfileView: View {
                     Spacer().frame(height: 40)
                     
                     Toggle(isOn: $keepSessionActive) {
-                        Text("Mantener sesión iniciada")
+                        Text("settings-profile2-sesion")
                             .foregroundColor(.black)
                     }
                     .padding(.horizontal, 40)
@@ -47,7 +47,7 @@ struct ProfileView: View {
                     Spacer().frame(height: 40)
                     
                     Toggle(isOn: $viewModel.isOnline) {
-                        Text("Mostrar estado en línea")
+                        Text("settings-profile2-online")
                             .foregroundColor(.black)
                     }
                     .padding(.horizontal, 40)
@@ -167,7 +167,7 @@ struct ProfileView: View {
             showBlockedFunctionalityAlert.toggle()
         }) {
             HStack {
-                Text("Bloqueados")
+                Text("settings-profile2-blocked")
                     .foregroundColor(.red)
                 Spacer()
                 Image(systemName: "chevron.right")

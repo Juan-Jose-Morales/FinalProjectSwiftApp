@@ -43,7 +43,7 @@ struct CustomTextField: View {
 
 
 struct SecureFields: View {
-    var title: String
+    var title: LocalizedStringKey
     @Binding var text: String
     @State private var visible = false
     var imageName: String
@@ -98,7 +98,7 @@ struct SecureFields: View {
 
 struct SearcField: View {
     var imageName: String
-    var placeholder: String
+    var placeholder: LocalizedStringKey
     @Binding var text: String
     var isSecure: Bool = false
     

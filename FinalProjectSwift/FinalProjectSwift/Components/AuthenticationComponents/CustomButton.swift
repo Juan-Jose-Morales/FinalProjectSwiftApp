@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct CustomButton: View {
-    var title: String
+    var title: LocalizedStringKey
     var action: () -> Void
     
     var body: some View {
@@ -98,7 +98,7 @@ struct NavBarModifier: ViewModifier {
     }
 }
 struct CustomProfileButton: View {
-    var title: String
+    var title: LocalizedStringKey
     var iconName: String
     var action: () -> Void
     
@@ -129,7 +129,7 @@ struct CustomProfileButton: View {
 }
 
 struct CustomButtonProfileImage: View {
-    var title: String
+    var title: LocalizedStringKey
     var action: () -> Void
     var iconName: String
     var textColor: Color

@@ -63,7 +63,7 @@ struct CustomToolbar: View {
 }
 
 struct CustomNavigationBar: View {
-    var title: String
+    var title: LocalizedStringKey
     var titleColor: Color
     var buttonColor: Color
     var onBack: () -> Void

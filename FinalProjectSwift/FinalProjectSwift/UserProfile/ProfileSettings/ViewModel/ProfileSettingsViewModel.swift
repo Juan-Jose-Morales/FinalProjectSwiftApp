@@ -18,10 +18,10 @@ class ProfileSettingsViewModel: ObservableObject {
     
     var buttons: [ButtonInfo] {
         [
-            ButtonInfo(title: "Ajustes de perfil", iconName: "ProfileSettings"){
+            ButtonInfo(title: "profile-settings-profile", iconName: "ProfileSettings"){
                 self.navigateToProfile = true
             },
-            ButtonInfo(title: "Almacenamiento", iconName: "Storage", action: {}),ButtonInfo(title: "Ajustes de idioma", iconName: "LanguageSettings", action: {})
+            ButtonInfo(title: "profile-storage", iconName: "Storage", action: {}),ButtonInfo(title: "profile-languages-settings", iconName: "LanguageSettings", action: {})
             
         ]
     }
@@ -50,7 +50,7 @@ class ProfileSettingsViewModel: ObservableObject {
 
 struct ButtonInfo: Identifiable {
     var id = UUID()
-    var title: String
+    var title: LocalizedStringKey
     var iconName: String
     var action: () -> Void
 }

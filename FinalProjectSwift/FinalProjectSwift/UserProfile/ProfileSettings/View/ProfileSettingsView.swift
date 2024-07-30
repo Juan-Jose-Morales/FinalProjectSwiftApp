@@ -52,9 +52,9 @@ struct ProfileSettingsView: View {
             }
             .alert(isPresented: $showBlockedFunctionalityAlert) {
                 Alert(
-                    title: Text("Funcionalidad aun no disponible"),
-                    message: Text("Estamos trabajando en ello..."),
-                    dismissButton: .default(Text("Aceptar"))
+                    title: Text("profile-settings-button-title"),
+                    message: Text("profile-settings-button-message"),
+                    dismissButton: .default(Text("profile-settings-button-primary"))
                 )
             }
         }
@@ -86,10 +86,10 @@ struct ProfileSettingsView: View {
         VStack(spacing: 45) {
             ForEach(viewModel.buttons) { button in
                 CustomProfileButton(title: button.title, iconName: button.iconName) {
-                    if button.title == "Ajustes de perfil" {
+                    if button.title == "profile-settings-profile" {
                         isNavigatingToProfile = true
                     }
-                    else if button.title == "Almacenamiento" || button.title == "Ajustes de idioma" {
+                    else if button.title == "profile-storage" || button.title == "profile-languages-settings" {
                         showBlockedFunctionalityAlert.toggle()
                     }
                 }
@@ -123,7 +123,7 @@ struct ProfileSettingsView: View {
         Button(action: {
             isNavigationToSignOff = true
         }) {
-            Text("Cerrar Sesion")
+            Text("profile-log-out")
                 .foregroundColor(Color("Red"))
                 .frame(width: 305, height: 30)
                 .background(RoundedRectangle(cornerRadius: 15)
