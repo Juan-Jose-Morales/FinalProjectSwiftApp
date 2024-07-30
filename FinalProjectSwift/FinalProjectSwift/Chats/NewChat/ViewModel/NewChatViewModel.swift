@@ -50,7 +50,7 @@ class NewChatViewModel: ObservableObject {
         }
         chatService.createChat(source: id, target: target) { result in
             switch result {
-            case .success(let success):
+            case .success(_):
                 self.navigationChat = true
             case .failure(let failure):
                 print(failure)
