@@ -21,19 +21,19 @@ struct RegisterView: View {
                     
                     Spacer().frame(height: 45)
                     
-                    CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
+                    CustomTextField(imageName: "avatar", placeholder: "register-User", text: $viewModel.username)
                         .padding(.bottom, 25)
                     
-                    CustomTextField(imageName: "avatar", placeholder: "Nick", text: $viewModel.nickname)
+                    CustomTextField(imageName: "avatar", placeholder: "register-Nick", text: $viewModel.nickname)
                         .padding(.bottom, 25)
                     
-                    SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "padlock")
+                    SecureFields(title: "register-password", text: $viewModel.password, imageName: "padlock")
                         .padding(.bottom, 25)
                     
-                    SecureFields(title: "Repetir Contraseña", text: $viewModel.confirmPassword, imageName: "padlock")
+                    SecureFields(title: "register-confirm-password", text: $viewModel.confirmPassword, imageName: "padlock")
                         .padding(.bottom, 25)
                     
-                    CustomButton(title: "Registrar") {
+                    CustomButton(title: "register-button") {
                         viewModel.register()
                     }
                     .padding(.bottom, 30)
@@ -73,13 +73,13 @@ struct RegisterView: View {
     
     private func navigateToLogin() -> some View {
         HStack {
-            Text("¿Ya tienes cuenta?")
+            Text("register-do-you-have-account")
                 .foregroundColor(.black)
                 .padding(.horizontal, 10)
             Button(action: {
                 isNavigationToLogin = true
             }) {
-                Text("Iniciar Sesión")
+                Text("register-log-in")
                     .foregroundColor(Color("Blue"))
             }
         }

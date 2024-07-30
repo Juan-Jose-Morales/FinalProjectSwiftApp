@@ -18,7 +18,7 @@ struct SignOffView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                CustomNavigationBar(title: "Cerrar Sesión", titleColor: .red, buttonColor: .red, onBack: {
+                CustomNavigationBar(title: "logout", titleColor: .red, buttonColor: .red, onBack: {
                     isNavigateToProfileSettingsView = true
                 })
                 messageToUser
@@ -31,12 +31,12 @@ struct SignOffView: View {
             }
             .alert(isPresented: $showConfirmationAlert) {
                 Alert(
-                    title: Text("Confirmación"),
-                    message: Text("¿Estás seguro que quieres cerrar sesión?"),
-                    primaryButton: .default(Text("Sí"), action: {
+                    title: Text("logout-alert-title"),
+                    message: Text("logout-alert-message"),
+                    primaryButton: .default(Text("logout-alert-accept"), action: {
                         viewModel.signOff()
                     }),
-                    secondaryButton: .cancel(Text("No"))
+                    secondaryButton: .cancel(Text("logout-alert-cancel"))
                 )
             }
             .onChange(of: viewModel.isSignOffSuccessful) { isSignOff in
@@ -61,7 +61,7 @@ struct SignOffView: View {
                 .frame(width: 20, height: 20)
                 .padding(.leading)
             
-            Text("¿Deseas cerrar sesión en este dispositivo?")
+            Text("logout-question")
                 .font(.headline)
                 .multilineTextAlignment(.center)
                 .padding(.top, 4)
@@ -79,7 +79,7 @@ struct SignOffView: View {
         Button(action: {
             showConfirmationAlert = true
         }) {
-            Text("Cerrar sesión")
+            Text("logout-button")
                 .foregroundColor(.red)
                 .frame(width: 305, height: 30)
                 .background(Color("GrayText"))

@@ -8,11 +8,12 @@
 import Foundation
 import Combine
 import LocalAuthentication
+import SwiftUI
 
 class LoginViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
-    @Published var errorMessage: String?
+    @Published var errorMessage: LocalizedStringKey?
     @Published var showAlert: Bool = false
     @Published var isLoginSuccessful: Bool = false
     @Published var authToken: String?
@@ -28,7 +29,7 @@ class LoginViewModel: ObservableObject {
     func login() {
         isShowingProgress = true
         guard !username.isEmpty, !password.isEmpty else {
-            self.errorMessage = "Rellena todos los campos"
+            self.errorMessage = "login-error-comprobation"
             self.showAlert = true
             return
         }
@@ -44,7 +45,7 @@ class LoginViewModel: ObservableObject {
                     UserDefaults.standard.synchronize()
                     self?.handleLoggedInUser(user, token: token)
                 case .failure(let error):
-                    self?.errorMessage = "Error al iniciar sesión: \(error.localizedDescription)"
+                    self?.errorMessage = "login-error-server \(error.localizedDescription)"
                     self?.showAlert = true
                 }
             }

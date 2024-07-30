@@ -11,6 +11,7 @@ import LocalAuthentication
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
     @State private var isNavigationToRegister = false
+    @AppStorage("language") private var language = "en"
     
     var body: some View {
         NavigationStack {
@@ -20,10 +21,10 @@ struct LoginView: View {
                         .padding(.top, 20)
                     Spacer().frame(height: 45)
                     
-                    CustomTextField(imageName: "avatar", placeholder: "Usuario", text: $viewModel.username)
+                    CustomTextField(imageName: "avatar", placeholder: "login-User", text: $viewModel.username)
                         .padding(.bottom, 36)
                     
-                    SecureFields(title: "Contraseña", text: $viewModel.password, imageName: "padlock")
+                    SecureFields(title: "login-Password", text: $viewModel.password, imageName: "padlock")
                         .padding(.bottom, 36)
                     
                     BiometricButton(action: {
@@ -31,7 +32,7 @@ struct LoginView: View {
                     }, imageName: "faceid")
                     .padding(.bottom, 36)
                     
-                    CustomButton(title: "Iniciar Sesión") {
+                    CustomButton(title: "login-login") {
                         viewModel.login()
                     }
                     .padding(.bottom, 55)
@@ -60,20 +61,20 @@ struct LoginView: View {
     }
     
     private func alert() -> Alert {
-        Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: {
+        Alert(title: Text("login-alert-title"), message: Text(viewModel.errorMessage ?? "login-alert-error-not-found"), dismissButton: .default(Text("login-alert-error-button"), action: {
             viewModel.resetAlerts()
         }))
     }
     
     private func navigateToRegister() -> some View {
         HStack {
-            Text("¿No tienes cuenta?")
+            Text("login-No account")
                 .foregroundColor(.black)
                 .padding(.horizontal, 10)
             Button(action: {
                 isNavigationToRegister = true
             }) {
-                Text("Regístrate")
+                Text("login-Register")
                     .foregroundColor(Color("Blue"))
             }
             .padding(.horizontal, 10)

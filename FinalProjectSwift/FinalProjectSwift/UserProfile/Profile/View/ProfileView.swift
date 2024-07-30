@@ -23,7 +23,7 @@ struct ProfileView: View {
         NavigationStack {
             ScrollView{
                 VStack{
-                    CustomNavigationBar(title: "Ajustes de perfil", titleColor: .black, buttonColor: .black, onBack: {
+                    CustomNavigationBar(title: "settings-profile2", titleColor: .black, buttonColor: .black, onBack: {
                         isNavigateToProfileSettings = true
                     })
                     if viewModel.isLoading {
@@ -34,7 +34,7 @@ struct ProfileView: View {
                     Spacer().frame(height: 40)
                     
                     Toggle(isOn: $keepSessionActive) {
-                        Text("Mantener sesión iniciada")
+                        Text("settings-profile2-session")
                             .foregroundColor(.black)
                     }
                     .padding(.horizontal, 40)
@@ -47,7 +47,7 @@ struct ProfileView: View {
                     Spacer().frame(height: 40)
                     
                     Toggle(isOn: $viewModel.isOnline) {
-                        Text("Mostrar estado en línea")
+                        Text("settings-profile2-online")
                             .foregroundColor(.black)
                     }
                     .padding(.horizontal, 40)
@@ -74,9 +74,9 @@ struct ProfileView: View {
             }
             .alert(isPresented: $showBlockedFunctionalityAlert) {
                 Alert(
-                    title: Text("En este preciso instante estamos en la fase de desarrollo de este apartado en concreto."),
-                    message: Text("Disculpe las molestias."),
-                    dismissButton: .default(Text("Aceptar")) {
+                    title: Text("blocked-button-alert-title"),
+                    message: Text("blocked-button-alert-message"),
+                    dismissButton: .default(Text("blocked-button-alert-primary-button")) {
                         
                     }
                 )
@@ -107,7 +107,7 @@ struct ProfileView: View {
                     Button(action: {
                         isNavigateToChangeProfile = true
                     }) {
-                        Text("Editar")
+                        Text("settings-profile2-button-edit")
                             .foregroundColor(Color("Blue"))
                         
                     }
@@ -116,7 +116,7 @@ struct ProfileView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Añade una foto de perfil")
+                    Text("settings-profile2-photo")
                         .foregroundColor(.black)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
@@ -167,7 +167,7 @@ struct ProfileView: View {
             showBlockedFunctionalityAlert.toggle()
         }) {
             HStack {
-                Text("Bloqueados")
+                Text("settings-profile2-blocked")
                     .foregroundColor(.red)
                 Spacer()
                 Image(systemName: "chevron.right")

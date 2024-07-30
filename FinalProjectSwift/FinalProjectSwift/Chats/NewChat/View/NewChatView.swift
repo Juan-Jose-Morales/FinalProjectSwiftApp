@@ -19,7 +19,7 @@ struct NewChatView: View {
                 VStack {
                     HStack {
                         Spacer()
-                        Text("Nuevo Chat")
+                        Text("newchat-newchat")
                             .bold()
                             .padding(.leading, 60)
                             .padding(.vertical, 16)
@@ -34,7 +34,7 @@ struct NewChatView: View {
                                 .clipShape(Circle())
                         }).padding(.horizontal, 20)
                     }
-                    SearcField(imageName: "magnifyingglass", placeholder: "Buscar", text: $newChatViewModel.search).onChange(of: newChatViewModel.search) { newValue in
+                    SearcField(imageName: "magnifyingglass", placeholder: "newchat-search", text: $newChatViewModel.search).onChange(of: newChatViewModel.search) { newValue in
                         newChatViewModel.getChatFilter()
                     }
                     ZStack {

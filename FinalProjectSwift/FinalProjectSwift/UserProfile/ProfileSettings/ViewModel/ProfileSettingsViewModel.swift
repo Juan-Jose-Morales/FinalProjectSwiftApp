@@ -10,6 +10,7 @@ import Combine
 import Alamofire
 import SwiftUI
 
+
 class ProfileSettingsViewModel: ObservableObject {
     @Published var user = User()
     @Published var profileImage: UIImage?
@@ -18,10 +19,10 @@ class ProfileSettingsViewModel: ObservableObject {
     
     var buttons: [ButtonInfo] {
         [
-            ButtonInfo(title: "Ajustes de perfil", iconName: "ProfileSettings"){
+            ButtonInfo(title: "profile-settings-profile", iconName: "ProfileSettings"){
                 self.navigateToProfile = true
             },
-            ButtonInfo(title: "Almacenamiento", iconName: "Storage", action: {}),ButtonInfo(title: "Ajustes de idioma", iconName: "LanguageSettings", action: {})
+            ButtonInfo(title: "profile-storage", iconName: "Storage", action: {}),ButtonInfo(title: "profile-languages-settings", iconName: "LanguageSettings", action: {})
             
         ]
     }
@@ -29,7 +30,13 @@ class ProfileSettingsViewModel: ObservableObject {
         loadUserNick()
         loadProfileImage()
     }
-    
+    func openSettings() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
     
     private func loadProfileImage() {
         if let data = UserDefaults.standard.data(forKey: "profileImageKey"),
@@ -50,7 +57,8 @@ class ProfileSettingsViewModel: ObservableObject {
 
 struct ButtonInfo: Identifiable {
     var id = UUID()
-    var title: String
+    var title: LocalizedStringKey
     var iconName: String
     var action: () -> Void
 }
+

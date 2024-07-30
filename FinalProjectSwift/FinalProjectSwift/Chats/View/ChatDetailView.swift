@@ -60,7 +60,7 @@ struct ChatDetailView: View {
                                     .bold()
                                     .padding(.leading, 20)
                                 
-                                Text("Fotos recientes")
+                                Text("chatdetailview-photo")
                                     .bold()
                                     .padding(.leading, 20)
                                 
@@ -99,9 +99,9 @@ struct ChatDetailView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .alert(isPresented: $showBlockedFunctionalityAlert) {
                         Alert(
-                            title: Text("En este preciso instante estamos en la fase de desarrollo de este apartado en concreto."),
-                            message: Text("Disculpe las molestias."),
-                            dismissButton: .default(Text("Aceptar")))
+                            title: Text("blocked-button-alert-title"),
+                            message: Text("blocked-button-alert-message"),
+                            dismissButton: .default(Text("blocked-button-alert-primary-button")))
                     }
                 }
                 .navigationBarBackButtonHidden()
@@ -113,7 +113,7 @@ struct ChatDetailView: View {
             showBlockedFunctionalityAlert.toggle()
         }) {
             HStack {
-                Text("Bloquear")
+                Text("chatdetailview-blocked")
                     .foregroundColor(.red)
             }
             

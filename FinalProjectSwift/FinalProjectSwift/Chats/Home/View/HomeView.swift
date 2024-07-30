@@ -22,7 +22,7 @@ struct HomeView: View {
                         isShowingProfileSettingsView: $isShowingProfileSettingsView,
                         homeViewModel: homeViewModel
                     )
-                    SearcField(imageName: "magnifyingglass", placeholder: "Buscar", text: $homeViewModel.search)
+                    SearcField(imageName: "magnifyingglass", placeholder: "Home-search", text: $homeViewModel.search)
                         .onChange(of: homeViewModel.search) { newValue in
                             homeViewModel.chatFilter()
                         }
@@ -97,7 +97,7 @@ struct HomeView: View {
     
     @ViewBuilder
     private func SearchFieldSection() -> some View {
-        SearcField(imageName: "magnifyingglass", placeholder: "Buscar", text: $homeViewModel.search)
+        SearcField(imageName: "magnifyingglass", placeholder: "Home-search", text: $homeViewModel.search)
             .onChange(of: homeViewModel.search) { newValue in
                 homeViewModel.chatFilter()
             }

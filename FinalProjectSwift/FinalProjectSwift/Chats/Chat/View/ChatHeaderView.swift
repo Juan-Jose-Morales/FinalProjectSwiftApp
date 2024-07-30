@@ -27,7 +27,7 @@ struct ChatHeaderView: View {
                     Text(viewModel.getNick(chatList: chatlist))
                         .font(.headline)
                         .foregroundColor(.white)
-                    Text(viewModel.isOnline ? "En línea" : "Desconectado")
+                    Text(viewModel.isOnline ? "chatheader-online" : "chatheader-disconect")
                         .font(.subheadline)
                         .foregroundColor(.white)
                 }

@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  FinalProjectSwift
+
+  Created by Alejandro Vidal Gómez Alves on 29/7/24.
+  
+*/
+"login-User" = "User";
+"login-Password" = "Password";
+"login-Biometry" = "Log in with Biometrics";
+"login-login" = "Log In";
+"login-No account" = "Don't have an account?";
+"login-Register"  = "Register";
+"login-error-comprobation" = "Please fill in all fields";
+"login-error-server" = "Error logging in:";
+"login-alert-error-not-found" = "Unknown Error";
+"login-alert-error" = "Error";
+"login-alert-error-button" = "Ok";
+"login-alert-title" = "Error";
+"login-alert-message" = "Please fill in all fields";
+"login-alert-accept" = "OK";
+"register-User" = "User";
+"register-Nick" = "Nick";
+"register-password" = "Password";
+"register-confirm-password" = "Repeat Password";
+"register-button" = "Register";
+"register-do-you-have-account" = "Already have an account?";
+"register-log-in" = "Log In";
+"Home-search" = "Search";
+"photo-photoprofile" = "Profile Photo";
+"photo-take-photo" = "Take Photo";
+"photo-select-photo" = "Select Photo";
+"photo-delete-photo" = "Delete Photo";
+"newchat-newchat" = "New Chat";
+"newchat-search" = "Search";
+"profile-settings-profile" = "Profile Settings";
+"profile-storage" = "Storage";
+"profile-languages-settings" = "Language Settings";
+"profile-log-out" = "Log Out";
+"profile-settings-button-title" = "Functionality not available";
+"profile-settings-button-message" = "We are working on it";
+"profile-settings-button-primary" = "Accept";
+"logout" = "Log Out";
+"logout-question" = "Do you want to log out on this device?";
+"logout-button" = "Log Out";
+"logout-alert-title" = "Confirmation";
+"logout-alert-message" = "Are you sure you want to log out?";
+"logout-alert-cancel" = "No";
+"logout-alert-accept" = "Yes";
+"settings-profile2" = "Profile Settings";
+"settings-profile2-photo" = "Add a profile photo";
+"settings-profile2-button-edit" = "Edit";
+"settings-profile2-session" = "Keep session active";
+"settings-profile2-online" = "Show online status";
+"settings-profile2-blocked" = "Blocked";
+"blocked-button-alert-title" = "We are currently developing this section";
+"blocked-button-alert-message" = "Sorry for the inconvenience";
+"blocked-button-alert-primary-button" = "Accept";
+"chatheader-online" = "Online";
+"chatheader-disconect" = "Disconnected";
+"chatdetailview-photo" = "Recent Photos";
+"chatdetailview-blocked" = "Block";

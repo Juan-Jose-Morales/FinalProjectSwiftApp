@@ -16,7 +16,7 @@ struct ChangeProfileView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                CustomNavigationBar(title: "Foto de perfil", titleColor: .black, buttonColor: .black, onBack: {
+                CustomNavigationBar(title: "photo-photoprofile", titleColor: .black, buttonColor: .black, onBack: {
                     isNavigateBack = true
                 })
                 userAvatar
@@ -71,7 +71,7 @@ struct ChangeProfileView: View {
         VStack(spacing: 25) {
             Spacer().frame(height: 25)
             CustomButtonProfileImage(
-                title: "Tomar foto",
+                title: "photo-take-photo",
                 action: { viewModel.takePhoto() },
                 iconName: "camera",
                 textColor: .black,
@@ -79,7 +79,7 @@ struct ChangeProfileView: View {
             )
             
             CustomButtonProfileImage(
-                title: "Seleccionar foto",
+                title: "photo-select-photo",
                 action: { viewModel.selectPhoto() },
                 iconName: "photo",
                 textColor: .black,
@@ -87,7 +87,7 @@ struct ChangeProfileView: View {
             )
             
             CustomButtonProfileImage(
-                title: "Eliminar foto",
+                title: "photo-delete-photo",
                 action: { viewModel.deletePhoto() },
                 iconName: "trash",
                 textColor: .red,

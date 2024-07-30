@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct CustomButton: View {
-    var title: String
+    var title: LocalizedStringKey
     var action: () -> Void
     
     var body: some View {
@@ -37,7 +37,7 @@ struct BiometricButton: View {
                     .frame(width: 20, height: 20)
                     .foregroundColor(.black)
                     .padding(.leading, 8)
-                Text("Inicia Sesion con Biometria")
+                Text("login-Biometry")
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -98,7 +98,7 @@ struct NavBarModifier: ViewModifier {
     }
 }
 struct CustomProfileButton: View {
-    var title: String
+    var title: LocalizedStringKey
     var iconName: String
     var action: () -> Void
     
@@ -129,7 +129,7 @@ struct CustomProfileButton: View {
 }
 
 struct CustomButtonProfileImage: View {
-    var title: String
+    var title: LocalizedStringKey
     var action: () -> Void
     var iconName: String
     var textColor: Color
