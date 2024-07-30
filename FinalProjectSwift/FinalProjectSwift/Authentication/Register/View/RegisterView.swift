@@ -53,11 +53,12 @@ struct RegisterView: View {
                     )
             )
             .navigationBarHidden(true)
-            .alert(isPresented: $viewModel.showAlert, content: alert)
-            .alert(isPresented: $viewModel.showSuccessAlert) {
-                Alert(title: Text("Registro Exitoso"), message: Text("El registro fue exitoso"), dismissButton: .default(Text("OK"), action: {
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text(viewModel.alertTitle), message: Text(viewModel.alertMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: {
                     viewModel.resetAlerts()
-                    isNavigationToOnboarding = true
+                    if viewModel.isSuccess {
+                        isNavigationToOnboarding = true
+                    }
                 }))
             }
             .navigationDestination(isPresented: $isNavigationToLogin) {
@@ -68,12 +69,6 @@ struct RegisterView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-    }
-    
-    private func alert() -> Alert {
-        Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? "Error desconocido"), dismissButton: .default(Text("OK"), action: {
-            viewModel.resetAlerts()
-        }))
     }
     
     private func navigateToLogin() -> some View {
